@@ -17,23 +17,30 @@ class ManagePage
     switch ($this->Modo) {
 
       case 'AccesDenied':
-
+        echo "acceso denegado";
         break;
 
       case 'Sesion Caducada':
-        # code...
+        echo "sesion caducada";
         break;
 
       case 'ErrUserInexitente':
-
+        echo "usuario inexistente";
         break;
 
       case 'ErrPass':
-
+        echo "error en contrasena";
         break;
 
       case 'CampLlenos':
-
+        if (isset($_POST['datos']))
+        {
+          include 'model/';
+        }
+        else
+        {
+          echo "llene el formulario";
+        }
         break;
 
       case 'salir':

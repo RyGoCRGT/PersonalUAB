@@ -49,7 +49,10 @@
                         <a href="#about">Mision Vision</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#contact">Login</a>
+                        <a href="#contact">Contactos</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#login" data-toggle="modal">Login</a>
                     </li>
                 </ul>
             </div>
@@ -63,7 +66,7 @@
         <div class="container" id="maincontent" tabindex="-1">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="img/profile.png" alt="">
+                    <img class="img-responsive" src="view/img/disegner/businessman.png" alt="" width="250" height="250">
                     <div class="intro-text">
                         <h1 class="name">UNIVERSIDAD ADVENTISTA DE BOLIVIA</h1>
                         <hr class="star-light">
@@ -152,23 +155,29 @@
     <section class="success" id="about">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                <div class="col-lg-6 text-center">
+                    <h2>Mision</h2>
+                    <hr class="star-light">
+                </div>
+                <div class="col-lg-6 text-center">
+                    <h2>Vision</h2>
                     <hr class="star-light">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                    <p>
+
+Somos una institución Adventista comprometida con la formación integral de profesionales y el desarrollo de ciencia y tecnología, fundamentada en la cosmovisión bíblica, para brindar un servicio de calidad a Dios y la Sociedad.
+</p>
                 </div>
                 <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                    <p>
+
+Ser la institución líder en la formación integral de profesionales; que educa para esta vida y la eternidad, desarrollando armoniosamente las potencialidades físicas, mentales, sociales y espirituales para una vida de servicio.
+</p>
                 </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
-                    </a>
-                </div>
+
             </div>
         </div>
     </section>
@@ -178,7 +187,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Contact Me</h2>
+                    <h2>Contactos</h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -189,28 +198,28 @@
                     <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="name">Name</label>
+                                <label for="name">Nombre</label>
                                 <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="email">Email Address</label>
+                                <label for="email">Email</label>
                                 <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="phone">Phone Number</label>
+                                <label for="phone">Numero Telefonico</label>
                                 <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="message">Message</label>
+                                <label for="message">Mensage</label>
                                 <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -219,7 +228,7 @@
                         <div id="success"></div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Send</button>
+                                <button type="submit" class="btn btn-success btn-lg">Enviar</button>
                             </div>
                         </div>
                     </form>
@@ -234,12 +243,12 @@
             <div class="container">
                 <div class="row">
                     <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>3481 Melrose Place
-                            <br>Beverly Hills, CA 90210</p>
+                        <h3>Direccion</h3>
+                        <p>
+                            <br>Av. Pairumani y Calle 1</p>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
+                        <h3>Sitios UAB</h3>
                         <ul class="list-inline">
                             <li>
                                 <a href="#" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
@@ -259,8 +268,8 @@
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                        <h3>About</h3>
+                        <p>Creado por Rodrigo Poma y Gustavo Cerezo</p>
                     </div>
                 </div>
             </div>
@@ -269,7 +278,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; Your Website 2016
+                        Copyright &copy; RyGoCRGT 2017
                     </div>
                 </div>
             </div>
@@ -505,6 +514,46 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="login">
+      <div class="modal-dialog">
+        <div class="modal-content" style="background:rgb(51, 130, 150)">
+
+          <form action="index.php?modo=CampLlenos" method="post">
+
+            <div class="modal-header">
+                <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" style="color:white">Ingresar al Sistema <i class="fa fa-arrow-right"></i> Personal-UAB</h3>
+                <center><img src="view/img/disegner/user-6.png" alt="login" width="100" height="100"></center>
+              </div>
+
+              <div class="modal-body">
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" placeholder="Usuario: " aria-describedby="sizing-addon2" name="usuario" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-lock"></i></span>
+                    <input type="text" class="form-control" placeholder="Contraseña: " aria-describedby="sizing-addon2" name="contrasena" required>
+                  </div>
+                </div>
+                <input type="hidden" name="datos" value="1">
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancelar <i class="fa fa-times"></i></button>
+                <button type="submit" class="btn btn-success">Ingresar <i class="fa fa-check"></i></button>
+              </div>
+
+          </form>
+
+        </div>
+      </div>
     </div>
 
     <!-- jQuery -->
