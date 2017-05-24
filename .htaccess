@@ -1,0 +1,6 @@
+options -Indexes
+ErrorDocument 404 /PersonalUAB/view/error/err.html
+ErrorDocument 401 /PersonalUAB/view/error/err.html
+ErrorDocument 400 /PersonalUAB/view/error/err.html
+ErrorDocument 403 /PersonalUAB/view/error/err.html
+ErrorDocument 504 /PersonalUAB/view/error/err.html
