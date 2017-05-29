@@ -42,9 +42,9 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li class="page-scroll">
+                    <!--<li class="page-scroll">
                         <a href="#noticias">Noticias</a>
-                    </li>
+                    </li>-->
                     <li class="page-scroll">
                         <a href="#about">Mision Vision</a>
                     </li>
@@ -66,7 +66,7 @@
         <div class="container" id="maincontent" tabindex="-1">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="view/img/disegner/businessman.png" alt="" width="250" height="250">
+                    <img class="img-responsive" src="view/img/disegner/uab.png" alt="" width="250" height="250">
                     <div class="intro-text">
                         <h1 class="name">UNIVERSIDAD ADVENTISTA DE BOLIVIA</h1>
                         <hr class="star-light">
@@ -77,7 +77,7 @@
         </div>
     </header>
 
-    <!-- Portfolio Grid Section -->
+    <!-- Portfolio Grid Section
     <section id="noticias">
         <div class="container">
             <div class="row">
@@ -150,7 +150,7 @@
             </div>
         </div>
     </section>
-
+    -->
     <!-- About Section -->
     <section class="success" id="about">
         <div class="container">
@@ -518,9 +518,9 @@ Ser la institución líder en la formación integral de profesionales; que educa
 
     <div class="modal fade" id="login">
       <div class="modal-dialog">
-        <div class="modal-content" style="background:rgb(51, 130, 150)">
+        <div class="modal-content" style="background:rgb(51, 130, 150); opacity:0.85;">
 
-          <form action="index.php?modo=CampLlenos" method="post">
+          <form id="LoginPersonal" method="post">
 
             <div class="modal-header">
                 <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -539,11 +539,13 @@ Ser la institución líder en la formación integral de profesionales; que educa
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-lock"></i></span>
-                    <input type="text" class="form-control" placeholder="Contraseña: " aria-describedby="sizing-addon2" name="contrasena" required>
+                    <input type="password" class="form-control" placeholder="Contraseña: " aria-describedby="sizing-addon2" name="contrasena" required>
                   </div>
                 </div>
                 <input type="hidden" name="datos" value="1">
               </div>
+
+              <div id="mensaje" style="color:red"></div>
 
               <div class="modal-footer">
                 <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancelar <i class="fa fa-times"></i></button>
@@ -564,6 +566,8 @@ Ser la institución líder en la formación integral de profesionales; que educa
     <script src="view/libs/js/freelancer.min.js"></script>
 
     <script src="view/libs/js/jquery.easing.min.js"></script>
+
+    <script src="view/libs/js/login.js"></script>
 
 </body>
 

@@ -1,6 +1,6 @@
 <?php
 
-  class Usuarios
+  class Usuario
   {
 
     private $IdUsuario;
@@ -8,9 +8,9 @@
     private $Contrasena;
     private $Estado;
     private $Borrado;
+    private $TipoUsuario;
 
     private $C_Persona;
-    private $C_TipoUsuario;
 
     function __construct($user, $pass)
     {

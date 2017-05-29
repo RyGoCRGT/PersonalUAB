@@ -35,11 +35,19 @@ class ManagePage
       case 'CampLlenos':
         if (isset($_POST['datos']))
         {
-          include 'model/';
+          include 'model/usuario.php';
+          include 'model/usuarioConsulta.php';
+          include 'model/sesion.php';
+          include 'model/conexion.php';
+          include 'controller/ctrUsuario.php';
+          $usuario  = new Usuario($_POST['usuario'], $_POST['contrasena']);
+          $conexion = new Conexion();
+          $manageUser = new ManagamentUsuario($conexion);
+          $manageUser->ingresar($usuario);
         }
         else
         {
-          echo "llene el formulario";
+          echo "Llene el formulario";
         }
         break;
 
