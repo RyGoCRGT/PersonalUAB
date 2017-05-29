@@ -18,7 +18,7 @@ CREATE TABLE persona(
 	lugarExpedicion varchar(30) not null,
 	fechaNacimiento date not null,
 	sexo enum('F','M') not null,
-	idEstadoCivil int not null
+	idEstadoCivil int not null,
 	FOREIGN KEY (idEstadoCivil) REFERENCES estadoCivil (idEstadoCivil) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
