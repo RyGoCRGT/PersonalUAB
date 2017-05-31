@@ -6,10 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Dashboard</title>
+    <title>Admin</title>
 
     <link href="../libs/css/bootstrap.min.css" rel="stylesheet">
     <link href="../libs/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../libs/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="../libs/css/bootstrap-select.min.css" rel="stylesheet">
 
     <!-- Toastr style -->
     <link href="../libs/css/toastr.min.css" rel="stylesheet">
@@ -29,7 +31,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element"> <span>
-                            <img alt="avatar" class="img-circle img-responsive" height="150" width="150" src="../libs/multimedia/img/avatar.png" />
+                            <img alt="avatar" class="img-circle img-responsive" height="90" width="90" src="../libs/multimedia/img/avatar.png" />
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo ucwords($_SESSION['usuario']); ?></strong>
@@ -38,7 +40,7 @@
                                 <li><a href="#">Perfil</a></li>
                                 <li><a href="#">Editar</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Salir</a></li>
+                                <li><a href="index.php?modo=salir">Salir</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -48,7 +50,7 @@
                     <li>
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Personal</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="active"><a href="#">Nuevo</a></li>
+                            <li class="active"><a href="index.php?modo=regPersonal">Nuevo</a></li>
                             <li ><a href="#">Lista</a></li>
                         </ul>
                     </li>
@@ -71,16 +73,17 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+            <!-- <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                 <div class="form-group">
                     <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
                 </div>
-            </form>
+            </form> -->
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                    <span class="m-r-sm text-muted welcome-message">Personal UAB APP.</span>
                 </li>
+                <!--
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
@@ -176,62 +179,14 @@
                         </li>
                     </ul>
                 </li>
-
+                -->
 
                 <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
+                    <a href="index.php?modo=salir">
+                        <i class="fa fa-sign-out"></i> Cerrar Secion
                     </a>
                 </li>
             </ul>
 
         </nav>
         </div>
-
-          <div id="contenidoAll">
-
-            <div class="row  border-bottom white-bg dashboard-header">
-
-                <div class="col-sm-3">
-                    <h2>Bienvenido </h2>
-                    <small>Al sistema de control de personal UAB.</small>
-
-                </div>
-
-            </div>
-
-          </div>
-
-        </div>
-        </div>
-        </div>
-
-    </div>
-
-    <!-- Mainly scripts -->
-    <script src="../libs/js/jquery.min.js"></script>
-    <script src="../libs/js/bootstrap.min.js"></script>
-    <script src="../libs/js/jquery.metisMenu.js"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="../libs/js/inspinia.js"></script>
-    <script src="../libs/js/pace.min.js"></script>
-
-
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');
-
-            }, 1300);
-
-        });
-    </script>
-</body>
-</html>
