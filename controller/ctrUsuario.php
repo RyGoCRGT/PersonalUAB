@@ -45,12 +45,12 @@ class ManagamentUsuario
       }
       else
       {
-        echo "contrasena incorrecta";
+        echo "contraseña incorrecta";
       }
     }
     else
     {
-      echo "no existe";
+      echo "usuario inexistente";
     }
   }
 

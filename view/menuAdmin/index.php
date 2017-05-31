@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h2>Bienvenido</h2>
-  </body>
-</html>
+<?php
+session_start();
+include 'header.php';
+include 'body.php';
+include 'footer.php';
+?>
