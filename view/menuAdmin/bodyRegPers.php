@@ -99,13 +99,6 @@
                                             </div>
                                           </div>
 
-                                          <script type="text/javascript">
-                                          $('.input-group.date').datepicker({
-                                            format: "yyyy/mm/dd"
-                                          });
-                                          </script>
-
-
 
                                         </div>
                                         <div class="col-sm-2 col-md-2"></div>
