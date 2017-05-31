@@ -41,7 +41,7 @@ CREATE TABLE usuario(
 
 CREATE TABLE nacion(
 	idNacion int not null auto_increment primary key,
-	nombreNAcion varchar(50) not null
+	nombreNacion varchar(50) not null
 );
 
 CREATE TABLE seguro(
@@ -54,7 +54,7 @@ CREATE TABLE afp(
 	nombreAfp varchar(50) not null
 );
 
-CREATE TABLE tipoPerosnal(
+CREATE TABLE tipoPersonal(
 	idTipoPersonal int not null auto_increment primary key,
 	nombreTipoPersonal varchar(80) not null
 );
@@ -96,7 +96,7 @@ CREATE TABLE personal(
 	FOREIGN KEY (idNacion) REFERENCES nacion (idNacion) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idSeguro) REFERENCES seguro (idSeguro) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idAfp) REFERENCES afp (idAfp) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (idTipoPersonal) REFERENCES tipoPerosnal (idTipoPersonal) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idTipoPersonal) REFERENCES tipoPersonal (idTipoPersonal) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idCarerra) REFERENCES carrera (idCarerra) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
