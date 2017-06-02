@@ -7,6 +7,15 @@ CREATE TABLE estadoCivil(
 	nombreEstadoCivil varchar(35) not null
 );
 
+CREATE TABLE nacion(
+	idNacion int not null auto_increment primary key,
+	nombreNacion varchar(50) not null
+);
+
+CREATE TABLE lugarExpedicion(
+	idLugarExpedicion int not null auto_increment primary key,
+	nombreLugarExpedicion varchar(80) not null
+);
 
 CREATE TABLE persona(
 	idPersona int not null auto_increment primary key,
@@ -15,11 +24,12 @@ CREATE TABLE persona(
 	apellidoPaterno varchar(15) not null,
 	segundoApellido varchar(15) not null,
 	CI varchar(15) not null,
-	lugarExpedicion varchar(30) not null,
+	idLugarExpedicion int not null,
 	fechaNacimiento date not null,
 	sexo enum('F','M') not null,
 	idEstadoCivil int not null,
-	FOREIGN KEY (idEstadoCivil) REFERENCES estadoCivil (idEstadoCivil) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idEstadoCivil) REFERENCES estadoCivil (idEstadoCivil) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idLugarExpedicion) REFERENCES lugarExpedicion (idLugarExpedicion) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE tipoUsuario(
@@ -37,11 +47,6 @@ CREATE TABLE usuario(
 	borrado bool not null,
 	FOREIGN KEY (idPersona) REFERENCES persona (idPersona) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idTipoUsuario) REFERENCES tipoUsuario (idTipoUsuario) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE nacion(
-	idNacion int not null auto_increment primary key,
-	nombreNacion varchar(50) not null
 );
 
 CREATE TABLE seguro(
@@ -174,7 +179,7 @@ CREATE TABLE tituloProfesional(
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE cusrsoEstudiado(
+CREATE TABLE cursoEstudiado(
 	idCursoEstudiado int not null auto_increment primary key,
 	idPersonal int not null,
 	nombreInstitucion varchar(100) not null,

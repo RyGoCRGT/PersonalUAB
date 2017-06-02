@@ -32,6 +32,10 @@ $(document).ready(function() {
     }, 1300);
 
 });
+$('.datepicker').datepicker({
+  clearBtn: true,
+  language: "ES"
+});
 </script>
 </body>
 </html>

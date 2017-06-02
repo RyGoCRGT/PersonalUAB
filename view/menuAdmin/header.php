@@ -182,10 +182,16 @@
                 -->
 
                 <li>
+                  <a href="index.php">
+                    <i class="fa fa-home"></i>Home
+                  </a>
+                </li>
+                <li>
                     <a href="index.php?modo=salir">
                         <i class="fa fa-sign-out"></i> Cerrar Secion
                     </a>
                 </li>
+
             </ul>
 
         </nav>
