@@ -163,8 +163,8 @@
                                         <input type="hidden" name="datos" value="1">
 
                                         <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
-                                        <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Limpiar</button>
-                                        <button type="submit" name="guardar" class="btn btn-success btn-lg">Siguiente</button>
+                                        <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Editar</button>
+                                        <button type="submit" name="guardar" class="btn btn-success btn-lg">Listo</button>
 
                                         <br><br>
 
