@@ -51,7 +51,7 @@ CREATE TABLE usuario(
 
 CREATE TABLE seguro(
 	idSeguro int not null auto_increment primary key,
-	nombreSeguro varchar(50) not null
+	nombreSeguro varchar(70) not null
 );
 
 CREATE TABLE afp(
