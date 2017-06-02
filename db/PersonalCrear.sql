@@ -107,6 +107,7 @@ CREATE TABLE personal(
 	hobby varchar(70) null,
 	lecturaPreferencial varchar(100) null,
 	fechaIngreso date not null,
+	rutaFoto varchar(200) null,
 	FOREIGN KEY (idPersona) REFERENCES persona (idPersona) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idNacion) REFERENCES nacion (idNacion) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idSeguro) REFERENCES seguro (idSeguro) ON UPDATE CASCADE ON DELETE CASCADE,

@@ -17,3 +17,9 @@ INSERT INTO tipoUsuario VALUE(null, "Administrador");
 
 INSERT INTO usuario VALUE(null, 1, 1, "rodrigo", "rodrigo", 1, 0);
 INSERT INTO usuario VALUE(null, 2, 1, "gustavo", "gustavo", 1, 0);
+
+
+INSERT INTO nacion VALUE(null, "Bolivia");
+INSERT INTO nacion VALUE(null, "Chile");
+INSERT INTO nacion VALUE(null, "Brasil");
+INSERT INTO nacion VALUE(null, "Ecuador");
