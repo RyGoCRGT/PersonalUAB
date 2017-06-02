@@ -14,12 +14,16 @@ class CtrEstadoCivil
   {
     $consulta = new EstadoCivilConsulta($this->Conexion);
     $ListaEstadoCivil = $consulta->listaEstadoCivil();
-    $listArrayProd = array();
+    $listArrayEC = array();
     $i = 0;
     foreach ($ListaEstadoCivil as $ListaEC) {
       $estadoCi = new EstadoCivil();
-      $estadoCi->IdEstadoCivil = $ListaEC[''];
+      $estadoCi->IdEstadoCivil = $ListaEC['idEstadoCivil'];
+      $estadoCi->NombreEstadoCivil = $ListaEC['nombreEstadoCivil'];
+      $listArrayEC[$i] = $estadoCi;
+      $i++;
     }
+    return $listArrayEC;
   }
 
 }

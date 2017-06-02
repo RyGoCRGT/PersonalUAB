@@ -3,8 +3,15 @@ INSERT INTO estadoCivil VALUE( null, "Casado(a)" );
 INSERT INTO estadoCivil VALUE( null, "Viudo(a)" );
 INSERT INTO estadoCivil VALUE( null, "Divorciado(a)" );
 
-INSERT INTO persona VALUE(null, "Rodrigo", "Luis", "Poma", "Mollo", "447457451", "La Paz", "1995-03-20", 'M', 1);
-INSERT INTO persona VALUE(null, "Gustavo", "Angel", "Cerezo", "Mamani", "7417215", "Oruro", "1995-03-30", 'M', 1);
+INSERT INTO lugarExpedicion VALUE( null, "Oruro" );
+INSERT INTO lugarExpedicion VALUE( null, "La Paz" );
+INSERT INTO lugarExpedicion VALUE( null, "Cochabamba" );
+INSERT INTO lugarExpedicion VALUE( null, "Santa Cruz" );
+INSERT INTO lugarExpedicion VALUE( null, "Tarija" );
+INSERT INTO lugarExpedicion VALUE( null, "Beni" );
+
+INSERT INTO persona VALUE(null, "Rodrigo", "Luis", "Poma", "Mollo", "447457451", 2, "1995-03-20", 'M', 1);
+INSERT INTO persona VALUE(null, "Gustavo", "Angel", "Cerezo", "Mamani", "7417215", 1, "1995-03-30", 'M', 1);
 
 INSERT INTO tipoUsuario VALUE(null, "Administrador");
 

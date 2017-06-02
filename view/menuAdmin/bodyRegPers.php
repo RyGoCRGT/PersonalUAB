@@ -1,3 +1,20 @@
+<?php
+include '../../model/conexion.php';
+include '../../model/EstadoCivil.php';
+include '../../model/EstadoCivilConsulta.php';
+include '../../model/LugarExpedicion.php';
+include '../../model/LugarExpedicionConsulta.php';
+include '../../controller/CtrEstadoCivil.php';
+include '../../controller/CtrLugarExpedicion.php';
+$conexion = new Conexion();
+
+$estadoCivil = new CtrEstadoCivil($conexion);
+$listaEstadoCivil = $estadoCivil->listar();
+
+$lugarExpedicion = new CtrLugarExpedicion($conexion);
+$listaLugarExpedicion = $lugarExpedicion->listar();
+
+?>
 <div id="contenidoAll">
 
   <div class="row  border-bottom white-bg dashboard-header">
@@ -85,8 +102,10 @@
                                             <label>Lugar de Expedicion CI/NIT</label>
                                             <div class="input-group">
                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                                              <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion">
-                                                <option value="">cargar LugarExpediom</option>
+                                              <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI">
+                                                <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                                                  <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                                                <?php endforeach; ?>
                                               </select>
                                             </div>
                                           </div>
@@ -113,8 +132,10 @@
                                            <label>Estado Civil</label>
                                            <div class="input-group">
                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
-                                             <select class="selectpicker form-control" style="background-color: #fff" name="estadoCivil" id="estadoCivil">
-                                               <option value="">cargar Estado Ci</option>
+                                             <select class="selectpicker form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil">
+                                               <?php foreach ($listaEstadoCivil as $listaEC): ?>
+                                                 <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
+                                               <?php endforeach; ?>
                                              </select>
                                            </div>
                                          </div>
@@ -387,7 +408,9 @@
                                               <div class="input-group">
                                                 <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
                                                 <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion">
-                                                  <option value="">cargar LugarExpediom</option>
+                                                  <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                                                    <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                                                  <?php endforeach; ?>
                                                 </select>
                                               </div>
                                             </div>
@@ -415,7 +438,9 @@
                                              <div class="input-group">
                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
                                                <select class="selectpicker form-control" style="background-color: #fff" name="estadoCivil" id="estadoCivil">
-                                                 <option value="">cargar Estado Ci</option>
+                                                 <?php foreach ($listaEstadoCivil as $listaEC): ?>
+                                                   <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
+                                                 <?php endforeach; ?>
                                                </select>
                                              </div>
                                            </div>
@@ -491,7 +516,9 @@
                                               <div class="input-group">
                                                 <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
                                                 <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion">
-                                                  <option value="">cargar LugarExpediom</option>
+                                                  <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                                                    <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                                                  <?php endforeach; ?>
                                                 </select>
                                               </div>
                                             </div>
@@ -519,7 +546,9 @@
                                              <div class="input-group">
                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
                                                <select class="selectpicker form-control" style="background-color: #fff" name="estadoCivil" id="estadoCivil">
-                                                 <option value="">cargar Estado Ci</option>
+                                                 <?php foreach ($listaEstadoCivil as $listaEC): ?>
+                                                   <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
+                                                 <?php endforeach; ?>
                                                </select>
                                              </div>
                                            </div>
@@ -596,7 +625,9 @@
                                               <div class="input-group">
                                                 <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
                                                 <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion">
-                                                  <option value="">cargar LugarExpediom</option>
+                                                  <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                                                    <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                                                  <?php endforeach; ?>
                                                 </select>
                                               </div>
                                             </div>
@@ -624,7 +655,9 @@
                                              <div class="input-group">
                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
                                                <select class="selectpicker form-control" style="background-color: #fff" name="estadoCivil" id="estadoCivil">
-                                                 <option value="">cargar Estado Ci</option>
+                                                 <?php foreach ($listaEstadoCivil as $listaEC): ?>
+                                                   <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
+                                                 <?php endforeach; ?>
                                                </select>
                                              </div>
                                            </div>
