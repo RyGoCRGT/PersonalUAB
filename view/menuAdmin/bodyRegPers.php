@@ -140,6 +140,14 @@ $listaLugarExpedicion = $lugarExpedicion->listar();
                                            </div>
                                          </div>
 
+                                         <div class="form-group">
+                                           <label>Telefono</label>
+                                           <div class="input-group">
+                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
+                                             <input id="telefono" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefono">
+                                           </div>
+                                         </div>
+
                                          <input type="hidden" name="datos" value="1">
 
                                          <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
@@ -167,6 +175,25 @@ $listaLugarExpedicion = $lugarExpedicion->listar();
                                       <div class="col-sm-1 col-md-2"></div>
                                       <div class="col-sm-10 col-md-8">
 
+                                        <div class="row">
+
+                                          <div class="col-sm-6 col-md-6 ">
+                                            <center>
+                                              <div class="imgFoto">
+                                                <input id="fotoPersonal" type="file" style="opacity:0" class="form-control" name="fotoPersonal">
+                                              </div>
+                                            </center>
+                                            <h3 class="text-center"> Examinar Imagen</h3>
+                                          </div>
+                                          <div class="col-sm-6 col-md-6">
+                                            <center>
+                                              <div class="repuesta" id="repuesta">
+                                                <center><img id="repuestaFoto" class="img-responsive img-circle" width="200" height="200"></center>
+                                              </div>
+                                            </center>
+                                          </div>
+
+                                        </div>
                                         <div class="form-group">
                                           <label>Nacionalidad</label>
                                           <div class="input-group">
@@ -659,6 +686,14 @@ $listaLugarExpedicion = $lugarExpedicion->listar();
                                                    <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
                                                  <?php endforeach; ?>
                                                </select>
+                                             </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                             <label>Telefono</label>
+                                             <div class="input-group">
+                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
+                                               <input id="telefonoReferencia" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefonoReferencia">
                                              </div>
                                            </div>
 

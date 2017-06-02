@@ -19,23 +19,25 @@
 
 
 <script>
-$(document).ready(function() {
-    setTimeout(function() {
-        toastr.options = {
-            closeButton: true,
-            progressBar: true,
-            showMethod: 'slideDown',
-            timeOut: 4000
-        };
-        toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');
-
-    }, 1300);
-
-});
 $('.datepicker').datepicker({
   clearBtn: true,
   language: "ES"
 });
+</script>
+<script>
+  $(function () {
+    $('#fotoPersonal').change( function(){
+      console.log(this.files);
+      var reader = new FileReader();
+
+      reader.onload = function (image) {
+        $('#repuestaFoto').attr('src', image.target.result);
+        $('#repuesta').addClass('well');
+      }
+
+      reader.readAsDataURL(this.files[0]);
+    });
+  });
 </script>
 </body>
 </html>
