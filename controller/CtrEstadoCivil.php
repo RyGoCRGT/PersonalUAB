@@ -17,7 +17,8 @@ class CtrEstadoCivil
     $listArrayProd = array();
     $i = 0;
     foreach ($ListaEstadoCivil as $ListaEC) {
-      # code...
+      $estadoCi = new EstadoCivil();
+      $estadoCi->IdEstadoCivil = $ListaEC[''];
     }
   }
 
