@@ -54,6 +54,13 @@
                             <li ><a href="#">Lista</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="glyphicon glyphicon-user"></i> <span class="nav-label">Usuario</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="index.php?modo=regUsuario">Nuevo</a></li>
+                            <li ><a href="#">Lista</a></li>
+                        </ul>
+                    </li>
 
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span><span class="fa arrow"></span></a>

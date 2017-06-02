@@ -22,6 +22,12 @@ class CtrMenuAdmin
         include 'footer.php';
         break;
 
+      case 'regUsuario':
+        include 'header.php';
+        include 'bodyRegUsuario.php';
+        include 'footer.php';
+        break;
+
       case 'salir':
           session_start();
           session_destroy();
