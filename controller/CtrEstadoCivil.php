@@ -13,7 +13,12 @@ class CtrEstadoCivil
   public function listar()
   {
     $consulta = new EstadoCivilConsulta($this->Conexion);
-    $estadCivil = $consulta->listaEstadoCivil();
+    $ListaEstadoCivil = $consulta->listaEstadoCivil();
+    $listArrayProd = array();
+    $i = 0;
+    foreach ($ListaEstadoCivil as $ListaEC) {
+      # code...
+    }
   }
 
 }

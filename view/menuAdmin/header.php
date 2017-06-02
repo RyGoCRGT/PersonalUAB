@@ -188,7 +188,7 @@
                 </li>
                 <li>
                     <a href="index.php?modo=salir">
-                        <i class="fa fa-sign-out"></i> Cerrar Secion
+                        <i class="fa fa-sign-out"></i> Cerrar Sesion
                     </a>
                 </li>
 
