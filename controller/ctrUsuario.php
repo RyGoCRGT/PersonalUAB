@@ -35,22 +35,22 @@ class ManagamentUsuario
           }
           else
           {
-            echo "usuario inactivo";
+            echo "Usuario Inactivo";
           }
         }
         else
         {
-          echo "usuario inexistente";
+          echo "Usuario Inexistente";
         }
       }
       else
       {
-        echo "contraseña incorrecta";
+        echo "Contraseña Incorrecta";
       }
     }
     else
     {
-      echo "usuario inexistente";
+      echo "Usuario Inexistente";
     }
   }
 

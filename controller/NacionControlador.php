@@ -13,7 +13,7 @@ class NacionControlador
   public function listar()
   {
     $consulta = new NacionConsulta($this->Conexion);
-    $listaNaciones = $consultas->listaNaciones();
+    $listaNaciones = $consulta->listaNaciones();
     $listArrayLN = array();
     $i = 0;
     foreach ($listaNaciones as $listaN) {

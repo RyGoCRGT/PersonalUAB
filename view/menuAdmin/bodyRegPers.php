@@ -4,6 +4,9 @@ include '../../model/EstadoCivil.php';
 include '../../model/EstadoCivilConsulta.php';
 include '../../model/LugarExpedicion.php';
 include '../../model/LugarExpedicionConsulta.php';
+include '../../model/Nacion.php';
+include '../../model/NacionConsulta.php';
+include '../../controller/NacionControlador.php';
 include '../../controller/CtrEstadoCivil.php';
 include '../../controller/CtrLugarExpedicion.php';
 $conexion = new Conexion();
@@ -13,6 +16,9 @@ $listaEstadoCivil = $estadoCivil->listar();
 
 $lugarExpedicion = new CtrLugarExpedicion($conexion);
 $listaLugarExpedicion = $lugarExpedicion->listar();
+
+$nacionalidad = new NacionControlador($conexion);
+$listaNaciones = $nacionalidad->listar();
 
 ?>
 <div id="contenidoAll">
@@ -188,7 +194,7 @@ $listaLugarExpedicion = $lugarExpedicion->listar();
                                           <div class="col-sm-6 col-md-6">
                                             <center>
                                               <div class="repuesta" id="repuesta">
-                                                <center><img id="repuestaFoto" class="img-responsive img-circle" width="200" height="200"></center>
+                                                <center><img id="repuestaFoto" class="img-responsive img-rounded" width="200" height="150"></center>
                                               </div>
                                             </center>
                                           </div>
@@ -199,7 +205,9 @@ $listaLugarExpedicion = $lugarExpedicion->listar();
                                           <div class="input-group">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="selectpicker form-control" name="nacionalidad" id="nacionalidad">
-                                              <option value="">cargar Naciones</option>
+                                              <?php foreach ($listaNaciones as $listaN): ?>
+                                                <option value="<?php echo $listaN->IdNacion; ?>"><?php echo $listaN->NombreNacion; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>

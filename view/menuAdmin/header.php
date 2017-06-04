@@ -31,7 +31,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element"> <span>
-                            <img alt="avatar" class="img-circle img-responsive" height="90" width="90" src="../libs/multimedia/img/avatar.png" />
+                            <img alt="avatar" class="img-circle img-responsive" height="90" width="90" src="../libs/multimedia/img/design/avatar.png" />
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo ucwords($_SESSION['usuario']); ?></strong>
@@ -44,7 +44,7 @@
                             </ul>
                         </div>
                         <div class="logo-element">
-                          <img class="img-responsive img-circle" src="../img/disegner/uab.png" alt="uab" width="80" height="80">
+                          <img class="img-responsive img-circle" src="../libs/multimedia/img/design/uab.png" alt="uab" width="80" height="80">
                         </div>
                     </li>
                     <li>

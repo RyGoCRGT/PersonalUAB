@@ -19,7 +19,7 @@
                 </div>
                 <div class="media" style="background:rgb(235, 247, 247)">
                     <a class="forum-avatar" href="#">
-                        <img src="../img/disegner/uab.png" class="img-circle img-responsive" alt="image">
+                        <img src="../libs/multimedia/img/design/uab.png" class="img-circle img-responsive" alt="image">
                         <div class="author-info">
                             <strong>Posts:</strong> 542<br/>
                             <strong>Fecha:</strong> April 11.2017<br/>

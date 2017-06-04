@@ -1,13 +1,24 @@
 <?php
 
-class ClassName extends AnotherClass
+class ReligionConsulta
 {
 
-  function __construct(argument)
+  private $Conexion;
+
+  function __construct($con)
   {
-    # code...
+    $this->Conexion = $con;
   }
-  
+
+  public function listaReligion()
+  {
+    $query = "SELECT * FROM religion";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    return $registro;
+  }
+
 }
 
 ?>
