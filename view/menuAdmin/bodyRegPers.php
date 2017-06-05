@@ -8,10 +8,15 @@ include '../../model/Nacion.php';
 include '../../model/NacionConsulta.php';
 include '../../model/TipoPersonal.php';
 include '../../model/TipoPersonalConsulta.php';
+include '../../model/Carrera.php';
+include '../../model/CarreraConsulta.php';
+include '../../model/Facultad.php';
+include '../../model/FacultadConsulta.php';
 include '../../controller/NacionControlador.php';
 include '../../controller/CtrEstadoCivil.php';
 include '../../controller/CtrLugarExpedicion.php';
 include '../../controller/TipoPersonalControlador.php';
+include '../../controller/FacultadControlador.php';
 $conexion = new Conexion();
 
 $estadoCivil = new CtrEstadoCivil($conexion);
@@ -25,6 +30,9 @@ $listaNaciones = $nacionalidad->listar();
 
 $tipoPersonal = new TipoPersonalControlador($conexion);
 $listaTipoPersonal = $tipoPersonal->listar();
+
+$faultadCarrera = new FacultadControlador($conexion);
+$listaFacultadCarrera = $faultadCarrera->listar();
 
 ?>
 <div id="contenidoAll">
@@ -267,13 +275,21 @@ $listaTipoPersonal = $tipoPersonal->listar();
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="selectpicker form-control" name="carrera" id="carrera">
-                                              <option value="">cargar Carrera de Facultad</option>
+                                              <?php foreach ($listaFacultadCarrera as $listaFC): ?>
+                                                <?php foreach ($listaFC->getListaCarreras() as $listaCa): ?>
+                                                  <option value="<?php echo $listaCa->IdCarrera; ?>"><?php echo $listaFC->NombreFacultad." - ".$listaCa->NombreCarrera; ?></option>
+                                                <?php endforeach; ?>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="form-control" name="carrera" id="carrera">
-                                              <option value="">cargar Carrera de Facultad</option>
+                                              <?php foreach ($listaFacultadCarrera as $listaFC): ?>
+                                                <?php foreach ($listaFC->getListaCarreras() as $listaCa): ?>
+                                                  <option value="<?php echo $listaCa->IdCarrera; ?>"><?php echo $listaFC->NombreFacultad." - ".$listaCa->NombreCarrera; ?></option>
+                                                <?php endforeach; ?>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>

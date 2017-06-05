@@ -70,7 +70,7 @@ CREATE TABLE facultad(
 );
 
 CREATE TABLE carrera(
-	idCarerra int not null auto_increment primary key,
+	idCarrera int not null auto_increment primary key,
 	idFacultad int not null,
 	nombreCarrera varchar(100) not null,
 	FOREIGN KEY (idFacultad) REFERENCES facultad (idFacultad) ON UPDATE CASCADE ON DELETE CASCADE
@@ -91,7 +91,7 @@ CREATE TABLE personal(
 	idPersona int not null,
 	idNacion int not null,
 	idTipoPersonal int null,
-	idCarerra int null,
+	idCarrera int null,
 	direccion varchar(100) not null,
 	email varchar(50) null,
 	idCiudad int not null,
@@ -113,7 +113,7 @@ CREATE TABLE personal(
 	FOREIGN KEY (idSeguro) REFERENCES seguro (idSeguro) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idAfp) REFERENCES afp (idAfp) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idTipoPersonal) REFERENCES tipoPersonal (idTipoPersonal) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (idCarerra) REFERENCES carrera (idCarerra) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idCarrera) REFERENCES carrera (idCarrera) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idCiudad) REFERENCES ciudad (idCiudad) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idReligion) REFERENCES religion (idReligion) ON UPDATE CASCADE ON DELETE CASCADE
 );

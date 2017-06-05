@@ -183,9 +183,11 @@ Ser la institución líder en la formación integral de profesionales; que educa
               <label style="color: white">Contraseña:</label>
               <div class="input-group">
                 <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" placeholder="Contraseña: " aria-describedby="sizing-addon2" name="contrasena" required>
+                <input type="password" id="contrasena" class="form-control" placeholder="Contraseña: " aria-describedby="sizing-addon2" name="contrasena" required>
+                <span class="input-group-addon" style="background: white"><a href="#" id="verPass" style="background: transparent; border: 0;"><i class="fa fa-eye"></i></a></span>
               </div>
             </div>
+
             <input type="hidden" name="datos" value="1">
           </div>
 
