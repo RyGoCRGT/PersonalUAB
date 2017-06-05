@@ -15,7 +15,7 @@
                 <div class="forum-post-info">
                     <h4><span class="text-navy"><i class="fa fa-globe"></i> Registro </span> /<span class="text-muted">Usuario</span></h4>
                 </div>
-                <div class="media">
+                <div>
 
 
                     <div class="panel with-nav-tabs panel-info">

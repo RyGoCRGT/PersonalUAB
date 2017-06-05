@@ -6,9 +6,12 @@ include '../../model/LugarExpedicion.php';
 include '../../model/LugarExpedicionConsulta.php';
 include '../../model/Nacion.php';
 include '../../model/NacionConsulta.php';
+include '../../model/TipoPersonal.php';
+include '../../model/TipoPersonalConsulta.php';
 include '../../controller/NacionControlador.php';
 include '../../controller/CtrEstadoCivil.php';
 include '../../controller/CtrLugarExpedicion.php';
+include '../../controller/TipoPersonalControlador.php';
 $conexion = new Conexion();
 
 $estadoCivil = new CtrEstadoCivil($conexion);
@@ -19,6 +22,9 @@ $listaLugarExpedicion = $lugarExpedicion->listar();
 
 $nacionalidad = new NacionControlador($conexion);
 $listaNaciones = $nacionalidad->listar();
+
+$tipoPersonal = new TipoPersonalControlador($conexion);
+$listaTipoPersonal = $tipoPersonal->listar();
 
 ?>
 <div id="contenidoAll">
@@ -38,7 +44,7 @@ $listaNaciones = $nacionalidad->listar();
                 <div class="forum-post-info">
                     <h4><span class="text-navy"><i class="fa fa-globe"></i> Registro </span> /<span class="text-muted">Personal</span></h4>
                 </div>
-                <div class="media">
+                <div>
 
 
                     <div class="panel with-nav-tabs panel-info">
@@ -106,9 +112,17 @@ $listaNaciones = $nacionalidad->listar();
 
                                           <div class="form-group">
                                             <label>Lugar de Expedicion CI/NIT</label>
-                                            <div class="input-group">
+                                            <div class="input-group selector">
                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
                                               <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI">
+                                                <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                                                  <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                                                <?php endforeach; ?>
+                                              </select>
+                                            </div>
+                                            <div class="input-group selector-mobile">
+                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                                              <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI">
                                                 <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                                                   <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
                                                 <?php endforeach; ?>
@@ -136,9 +150,17 @@ $listaNaciones = $nacionalidad->listar();
 
                                          <div class="form-group">
                                            <label>Estado Civil</label>
-                                           <div class="input-group">
+                                           <div class="input-group selector">
                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
                                              <select class="selectpicker form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil">
+                                               <?php foreach ($listaEstadoCivil as $listaEC): ?>
+                                                 <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
+                                               <?php endforeach; ?>
+                                             </select>
+                                           </div>
+                                           <div class="input-group selector-mobile">
+                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
+                                             <select class="form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil">
                                                <?php foreach ($listaEstadoCivil as $listaEC): ?>
                                                  <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
                                                <?php endforeach; ?>
@@ -202,9 +224,17 @@ $listaNaciones = $nacionalidad->listar();
                                         </div>
                                         <div class="form-group">
                                           <label>Nacionalidad</label>
-                                          <div class="input-group">
+                                          <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="selectpicker form-control" name="nacionalidad" id="nacionalidad">
+                                              <?php foreach ($listaNaciones as $listaN): ?>
+                                                <option value="<?php echo $listaN->IdNacion; ?>"><?php echo $listaN->NombreNacion; ?></option>
+                                              <?php endforeach; ?>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                            <select class="form-control" name="nacionalidad" id="nacionalidad">
                                               <?php foreach ($listaNaciones as $listaN): ?>
                                                 <option value="<?php echo $listaN->IdNacion; ?>"><?php echo $listaN->NombreNacion; ?></option>
                                               <?php endforeach; ?>
@@ -214,19 +244,35 @@ $listaNaciones = $nacionalidad->listar();
 
                                         <div class="form-group">
                                           <label>Tipo Personal</label>
-                                          <div class="input-group">
+                                          <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal">
-                                              <option value="">cargar Tipo Personal</option>
+                                              <?php foreach ($listaTipoPersonal as $listaTP): ?>
+                                                <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
+                                              <?php endforeach; ?>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <select class="form-control" name="tipoPersonal" id="tipoPersonal">
+                                              <?php foreach ($listaTipoPersonal as $listaTP): ?>
+                                                <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>
 
                                         <div class="form-group">
                                           <label>Facultad Carrera</label>
-                                          <div class="input-group">
+                                          <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="selectpicker form-control" name="carrera" id="carrera">
+                                              <option value="">cargar Carrera de Facultad</option>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <select class="form-control" name="carrera" id="carrera">
                                               <option value="">cargar Carrera de Facultad</option>
                                             </select>
                                           </div>
@@ -250,9 +296,15 @@ $listaNaciones = $nacionalidad->listar();
 
                                         <div class="form-group">
                                           <label>Ciudad Nacimiento</label>
-                                          <div class="input-group">
+                                          <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="selectpicker form-control" name="ciudad" id="ciudad">
+                                              <option value="">cargar Tabla Ciudad</option>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                            <select class="form-control" name="ciudad" id="ciudad">
                                               <option value="">cargar Tabla Ciudad</option>
                                             </select>
                                           </div>
@@ -260,9 +312,15 @@ $listaNaciones = $nacionalidad->listar();
 
                                         <div class="form-group">
                                           <label>Religion</label>
-                                          <div class="input-group">
+                                          <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="selectpicker form-control" name="religion" id="religion">
+                                              <option value="">cargar Tabla Religion</option>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
+                                            <select class="form-control" name="religion" id="religion">
                                               <option value="">cargar Tabla Religion</option>
                                             </select>
                                           </div>
@@ -278,9 +336,15 @@ $listaNaciones = $nacionalidad->listar();
 
                                         <div class="form-group">
                                           <label>Seguro</label>
-                                          <div class="input-group">
+                                          <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="selectpicker form-control" name="seguro" id="seguro">
+                                              <option value="">cargar Tabla Seguro</option>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
+                                            <select class="form-control" name="seguro" id="seguro">
                                               <option value="">cargar Tabla Seguro</option>
                                             </select>
                                           </div>

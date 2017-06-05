@@ -23,6 +23,7 @@ class TipoPersonalControlador
         $listArrayTP[$i] = $tipoPersonal;
         $i++;
       }
+      return $listArrayTP;
   }
 
 }
