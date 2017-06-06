@@ -9,6 +9,15 @@
 
 <script src="view/libs/js/login.js"></script>
 
+<script>
+  $('#verPass').click(function() {
+    $('#contrasena').removeAttr("type");
+  });
+  $('#verPass').dblclick(function() {
+    $('#contrasena').attr("type","password");
+  });
+</script>
+
 </body>
 
 </html>

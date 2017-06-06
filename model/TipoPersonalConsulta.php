@@ -3,7 +3,7 @@
 class TipoPersonalConsulta
 {
 
-  private $Conexion
+  private $Conexion;
 
   function __construct($con)
   {

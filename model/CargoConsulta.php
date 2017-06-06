@@ -1,6 +1,6 @@
 <?php
 
-class ReligionConsulta
+class CargoConsulta
 {
 
   private $Conexion;
@@ -10,9 +10,9 @@ class ReligionConsulta
     $this->Conexion = $con;
   }
 
-  public function listaReligion()
+  public function listaCargos()
   {
-    $query = "SELECT * FROM religion";
+    $query = "SELECT * FROM cargo";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

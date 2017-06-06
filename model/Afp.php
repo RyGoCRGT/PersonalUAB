@@ -1,17 +1,12 @@
 <?php
 
-class Facultad
+class Afp
 {
 
-  private $IdFacultad;
-  private $NombreFacultad;
+  private $IdAfp;
+  private $NombreAfp;
 
-  private $ListaCarreras;
-
-  function __construct()
-  {
-    $ListaCarreras = array();
-  }
+  function __construct(){}
 
   public function __set($atributo, $value)
   {
@@ -37,9 +32,6 @@ class Facultad
     }
 
   }
-
-  public function getListaCarreras(){ return $this->ListaCarreras; }
-  public function setListaCarreras( $value ){ $this->ListaCarreras[] = $value; }
 
 }
 

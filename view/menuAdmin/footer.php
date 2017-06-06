@@ -39,5 +39,20 @@ $('.datepicker').datepicker({
     });
   });
 </script>
+<script>
+$(document).ready(function($){
+  $('.selector-mobile').hide("slow");
+  var ventana_ancho = $(window).width();
+  if (ventana_ancho < '1000')
+  {
+      $('.selector').remove();
+      $('.selector-mobile').show("slow");
+  }
+  else
+  {
+    $('.selector-mobile').remove();
+  }
+});
+</script>
 </body>
 </html>

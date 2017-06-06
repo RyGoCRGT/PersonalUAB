@@ -1,6 +1,6 @@
 <?php
 
-class TipoPersonalController
+class TipoPersonalControlador
 {
 
   private $Conexion;
@@ -23,6 +23,7 @@ class TipoPersonalController
         $listArrayTP[$i] = $tipoPersonal;
         $i++;
       }
+      return $listArrayTP;
   }
 
 }
