@@ -10,13 +10,35 @@ include '../../model/TipoPersonal.php';
 include '../../model/TipoPersonalConsulta.php';
 include '../../model/Carrera.php';
 include '../../model/CarreraConsulta.php';
+include '../../model/Ciudad.php';
+include '../../model/CiudadConsulta.php';
 include '../../model/Facultad.php';
 include '../../model/FacultadConsulta.php';
+include '../../model/Religion.php';
+include '../../model/ReligionConsulta.php';
+include '../../model/Seguro.php';
+include '../../model/SeguroConsulta.php';
+include '../../model/Afp.php';
+include '../../model/AfpConsulta.php';
+include '../../model/Cargo.php';
+include '../../model/CargoConsulta.php';
+include '../../model/Deporte.php';
+include '../../model/DeporteConsulta.php';
+include '../../model/Enfermedad.php';
+include '../../model/EnfermedadConsulta.php';
 include '../../controller/NacionControlador.php';
 include '../../controller/CtrEstadoCivil.php';
 include '../../controller/CtrLugarExpedicion.php';
 include '../../controller/TipoPersonalControlador.php';
 include '../../controller/FacultadControlador.php';
+include '../../controller/CiudadControlador.php';
+include '../../controller/ReligionControlador.php';
+include '../../controller/SeguroControlador.php';
+include '../../controller/AfpControlador.php';
+include '../../controller/CargoControlador.php';
+include '../../controller/DeporteControlador.php';
+include '../../controller/EnfermedadControlador.php';
+
 $conexion = new Conexion();
 
 $estadoCivil = new CtrEstadoCivil($conexion);
@@ -33,6 +55,27 @@ $listaTipoPersonal = $tipoPersonal->listar();
 
 $faultadCarrera = new FacultadControlador($conexion);
 $listaFacultadCarrera = $faultadCarrera->listar();
+
+$ciudad = new CiudadControlador($conexion);
+$listaCiudades = $ciudad->listar();
+
+$religion = new ReligionControlador($conexion);
+$listaReligion = $religion->listar();
+
+$seguro = new SeguroControlador($conexion);
+$listaSeguros = $seguro->listar();
+
+$afp = new AfpControlador($conexion);
+$listaAfps = $afp->listar();
+
+$cargo = new CargoControlador($conexion);
+$listaCargos = $cargo->listar();
+
+$deporte = new DeporteControlador($conexion);
+$listaDeportes = $deporte->listar();
+
+$enfermedad = new EnfermedadControlador($conexion);
+$listaEnfermedades = $enfermedad->listar();
 
 ?>
 <div id="contenidoAll">
@@ -315,13 +358,17 @@ $listaFacultadCarrera = $faultadCarrera->listar();
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="selectpicker form-control" name="ciudad" id="ciudad">
-                                              <option value="">cargar Tabla Ciudad</option>
+                                              <?php foreach ($listaCiudades as $listaC): ?>
+                                                <option value="<?php echo $listaC->IdCiudad; ?>"><?php echo $listaC->NombreCiudad; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="form-control" name="ciudad" id="ciudad">
-                                              <option value="">cargar Tabla Ciudad</option>
+                                              <?php foreach ($listaCiudades as $listaC): ?>
+                                                <option value="<?php echo $listaC->IdCiudad; ?>"><?php echo $listaC->NombreCiudad; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>
@@ -331,13 +378,17 @@ $listaFacultadCarrera = $faultadCarrera->listar();
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="selectpicker form-control" name="religion" id="religion">
-                                              <option value="">cargar Tabla Religion</option>
+                                              <?php foreach ($listaReligion as $listaR): ?>
+                                                <option value="<?php echo $listaR->IdReligion; ?>"><?php echo $listaR->NombreReligion; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="form-control" name="religion" id="religion">
-                                              <option value="">cargar Tabla Religion</option>
+                                              <?php foreach ($listaReligion as $listaR): ?>
+                                                <option value="<?php echo $listaR->IdReligion; ?>"><?php echo $listaR->NombreReligion; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>
@@ -355,13 +406,17 @@ $listaFacultadCarrera = $faultadCarrera->listar();
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="selectpicker form-control" name="seguro" id="seguro">
-                                              <option value="">cargar Tabla Seguro</option>
+                                              <?php foreach ($listaSeguros as $listaS): ?>
+                                                <option value="<?php echo $listaS->IdSeguro; ?>"><?php echo $listaS->NombreSeguro; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="form-control" name="seguro" id="seguro">
-                                              <option value="">cargar Tabla Seguro</option>
+                                              <?php foreach ($listaSeguros as $listaS): ?>
+                                                <option value="<?php echo $listaS->IdSeguro; ?>"><?php echo $listaS->NombreSeguro; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>
@@ -376,10 +431,20 @@ $listaFacultadCarrera = $faultadCarrera->listar();
 
                                         <div class="form-group">
                                           <label>AFP</label>
-                                          <div class="input-group">
+                                          <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="selectpicker form-control" name="afp" id="afp">
-                                              <option value="">cargar Tabla afp</option>
+                                              <?php foreach ($listaAfps as $listaA): ?>
+                                                <option value="<?php echo $listaA->IdAfp; ?>"><?php echo $listaA->NombreAfp; ?></option>
+                                              <?php endforeach; ?>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
+                                            <select class="form-control" name="afp" id="afp">
+                                              <?php foreach ($listaAfps as $listaA): ?>
+                                                <option value="<?php echo $listaA->IdAfp; ?>"><?php echo $listaA->NombreAfp; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>
@@ -820,8 +885,10 @@ $listaFacultadCarrera = $faultadCarrera->listar();
                                           <label>Cargos</label>
                                           <div class="input-group">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
-                                            <select class="selectpicker form-control" name="cargos" id="cargos">
-                                              <option value="">cargar Cargos</option>
+                                            <select class="selectpicker form-control" data-width="150px" multiple name="cargos" id="cargos">
+                                              <?php foreach ($listaCargos as $listaC): ?>
+                                                <option value="<?php echo $listaC->IdCargo; ?>"><?php echo $listaC->NombreCargo; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>
@@ -830,8 +897,10 @@ $listaFacultadCarrera = $faultadCarrera->listar();
                                           <label>Alergias / Enfermedades</label>
                                           <div class="input-group">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-medkit"></i></span>
-                                            <select class="selectpicker form-control" name="enfermedades" id="enfermedades">
-                                              <option value="">cargar Enfermedades</option>
+                                            <select class="selectpicker form-control" data-width="150px" multiple name="enfermedades" id="enfermedades">
+                                              <?php foreach ($listaEnfermedades as $listaE): ?>
+                                                <option value="<?php echo $listaE->IdEnfermedad; ?>"><?php echo $listaE->NombreEnfermedad; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>
@@ -840,8 +909,10 @@ $listaFacultadCarrera = $faultadCarrera->listar();
                                           <label>Deportes</label>
                                           <div class="input-group">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-star"></i></span>
-                                            <select class="selectpicker form-control" name="deportes" id="deportes">
-                                              <option value="">cargar Deportes</option>
+                                            <select class="selectpicker form-control" data-width="150px" multiple name="deportes" id="deportes">
+                                              <?php foreach ($listaDeportes as $listaD): ?>
+                                                <option value="<?php echo $listaD->IdDeporte; ?>"><?php echo $listaD->NombreDeporte; ?></option>
+                                              <?php endforeach; ?>
                                             </select>
                                           </div>
                                         </div>
