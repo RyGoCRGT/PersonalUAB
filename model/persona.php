@@ -14,18 +14,12 @@ class Persona
   private $Sexo;
   private $EstadoCivil;
 
-  function __construct($primerName, $segundoName, $apellidoPaterno, $apellidoMaterno, $ci, $lugarExp, $fechaNac, $sexo, $estadoCivil)
+  private $ListaTelefonos;
+
+  function __construct()
   {
     $this->IdPersona = null;
-    $this->PrimerNombre = $primerName;
-    $this->SegundoNombre = $segundoName;
-    $this->ApellidoPaterno = $apellidoPaterno;
-    $this->ApellidoMaterno = $apellidoMaterno;
-    $this->CI = $ci;
-    $this->LugarExpedicion = $lugarExp;
-    $this->FechaNacimiento = $fechaNac;
-    $this->Sexo = $sexo;
-    $this->EstadoCivil = $estadoCivil;
+    $this->ListaTelefonos = array();
   }
 
   public function __set($atributo, $value)
@@ -52,6 +46,9 @@ class Persona
     }
 
   }
+
+  public function getListaTelefonos(){ return $this->ListaTelefonos; }
+  public function setListaTelefonos($value){ $this->ListaTelefonos[] = $value; }
 
 }
 

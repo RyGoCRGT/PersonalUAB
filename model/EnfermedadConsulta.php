@@ -12,7 +12,7 @@ class EnfermedadConsulta
 
   public function listaEnfermedades()
   {
-    $query = "SELECT * FROM enfermedad";
+    $query = "SELECT * FROM enfermedad ORDER BY nombreEnfermedad";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

@@ -12,7 +12,7 @@ class CiudadConsulta
 
   public function listaCiudad()
   {
-    $query = "SELECT * FROM ciudad ";
+    $query = "SELECT * FROM ciudad ORDER BY nombreCiudad";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

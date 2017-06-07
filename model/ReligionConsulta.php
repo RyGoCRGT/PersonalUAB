@@ -12,7 +12,7 @@ class ReligionConsulta
 
   public function listaReligion()
   {
-    $query = "SELECT * FROM religion";
+    $query = "SELECT * FROM religion ORDER BY nombreReligion";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

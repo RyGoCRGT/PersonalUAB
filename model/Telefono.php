@@ -9,6 +9,7 @@ class Telefono
 
   function __construct()
   {
+    $this->IdTelefono = null;
   }
 
   public function __set($atributo, $value)

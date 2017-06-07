@@ -12,7 +12,7 @@ class CargoConsulta
 
   public function listaCargos()
   {
-    $query = "SELECT * FROM cargo";
+    $query = "SELECT * FROM cargo ORDER BY nombreCargo";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

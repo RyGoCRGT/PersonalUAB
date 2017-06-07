@@ -12,7 +12,7 @@ class FacultadConsulta
 
   public function listaFacultad()
   {
-    $query = "SELECT * FROM facultad";
+    $query = "SELECT * FROM facultad ORDER BY nombreFacultad";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

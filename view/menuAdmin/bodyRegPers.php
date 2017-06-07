@@ -101,10 +101,10 @@ $listaEnfermedades = $enfermedad->listar();
                     <div class="panel with-nav-tabs panel-info">
                       <div class="panel-heading" style="background:rgb(26, 74, 101)">
                         <ul class="nav nav-tabs" >
-                            <li class="active"class="efe"><a style="color:white" href="#General" data-toggle="tab" >Generales</a></li>
-                            <li class="efe"><a style="color:white" href="#Personal" data-toggle="tab">Personal-UAB</a></li>
-                            <li class="efe"><a style="color:white" href="#Familiares" data-toggle="tab">Familiares</a></li>
-                            <li class="efe"><a style="color:white" href="#Otros" data-toggle="tab">Otros</a></li>
+                            <li class="active" id="GeneralLI"><a style="color:white" href="#General" data-toggle="tab" >Generales</a></li>
+                            <li id="PersonalLI"><a style="color:white" href="#Personal" data-toggle="tab">Personal-UAB</a></li>
+                            <li id="FamiliaresLI"><a style="color:white" href="#Familiares" data-toggle="tab">Familiares</a></li>
+                            <li id="OtrosLI"><a style="color:white" href="#Otros" data-toggle="tab">Otros</a></li>
                         </ul>
                       </div>
                       <div class="panel-body" style="display: block;">
@@ -124,7 +124,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="form-group">
                                             <label>Primer Nombre</label>
                                             <div class="input-group">
-                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
                                               <input id="primerNombre" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombre" required>
                                             </div>
                                           </div>
@@ -140,7 +140,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="form-group">
                                             <label>Apellido Paterno</label>
                                             <div class="input-group">
-                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
                                               <input id="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaterno" required>
                                             </div>
                                           </div>
@@ -156,7 +156,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="form-group">
                                             <label>CI/NIT</label>
                                             <div class="input-group">
-                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
                                               <input id="ciNit" type="text" class="form-control" placeholder="CI/NIT: " aria-describedby="sizing-addon2" name="ciNit" required>
                                             </div>
                                           </div>
@@ -164,7 +164,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="form-group">
                                             <label>Lugar de Expedicion CI/NIT</label>
                                             <div class="input-group selector">
-                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
                                               <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI">
                                                 <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                                                   <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
@@ -172,7 +172,7 @@ $listaEnfermedades = $enfermedad->listar();
                                               </select>
                                             </div>
                                             <div class="input-group selector-mobile">
-                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
                                               <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI">
                                                 <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                                                   <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
@@ -184,13 +184,13 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="form-group">
                                             <label>Fecha de Nacimiento</label>
                                             <div class="input-group" >
-                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
                                               <input id="fechaNac" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNac" required>
                                             </div>
                                           </div>
 
                                           <div class="form-group" data-toggle="buttons">
-                                            <label class="btn btn-primary"> <i class="fa fa-venus-mars"></i> Sexo: </label>
+                                            <label class="btn btn-danger"> <i class="fa fa-venus-mars"></i> Sexo: </label>
                                             <label class="btn btn-info btn-outline">
                                                 <input type="radio" name="sexo" value="F"><i class="fa fa-female">  Femenino</i>
                                             </label>
@@ -202,7 +202,7 @@ $listaEnfermedades = $enfermedad->listar();
                                          <div class="form-group">
                                            <label>Estado Civil</label>
                                            <div class="input-group selector">
-                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
+                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
                                              <select class="selectpicker form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil">
                                                <?php foreach ($listaEstadoCivil as $listaEC): ?>
                                                  <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
@@ -210,7 +210,7 @@ $listaEnfermedades = $enfermedad->listar();
                                              </select>
                                            </div>
                                            <div class="input-group selector-mobile">
-                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
+                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
                                              <select class="form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil">
                                                <?php foreach ($listaEstadoCivil as $listaEC): ?>
                                                  <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
@@ -229,9 +229,13 @@ $listaEnfermedades = $enfermedad->listar();
 
                                          <input type="hidden" name="datos" value="1">
 
-                                         <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
-                                         <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Limpiar</button>
-                                         <button type="submit" name="guardar" class="btn btn-success btn-lg">Siguiente</button>
+                                         <div id="mesajePersona"></div>
+
+                                         <div class="pull-right">
+                                           <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
+                                           <button type="reset" name="limpiar" class="btn btn-warning">Limpiar</button>
+                                           <button type="submit" name="guardar" class="btn btn-success"><a style="color:white" href="#Personal" data-toggle="tab">Siguiente</a></button>
+                                         </div>
 
                                          <br><br>
 

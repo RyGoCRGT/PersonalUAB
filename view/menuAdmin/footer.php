@@ -16,6 +16,7 @@
 <!-- Custom and plugin javascript -->
 <script src="../libs/js/inspinia.js"></script>
 <script src="../libs/js/pace.min.js"></script>
+<script src="../libs/js/enviarPersona.js"></script>
 
 
 <script>
@@ -45,8 +46,9 @@ $(document).ready(function($){
   var ventana_ancho = $(window).width();
   if (ventana_ancho < '1000')
   {
-      $('.selector').remove();
-      $('.selector-mobile').show("slow");
+    //alert(ventana_ancho);
+    $('.selector').remove();
+    $('.selector-mobile').show("slow");
   }
   else
   {

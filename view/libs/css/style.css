@@ -4723,3 +4723,9 @@ body.skin-3 {
   cursor: pointer;
   position: absolute;
 }
+
+/*.nav-side-menu {
+  position: fixed;
+  top: 0px;
+  height: 100%;
+}*/

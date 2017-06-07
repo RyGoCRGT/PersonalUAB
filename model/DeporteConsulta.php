@@ -12,7 +12,7 @@ class DeporteConsulta
 
   public function listaDeportes()
   {
-    $query = "SELECT * FROM deporte";
+    $query = "SELECT * FROM deporte ORDER BY nombreDeporte";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();
