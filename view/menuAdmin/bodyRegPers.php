@@ -104,7 +104,6 @@ $listaEnfermedades = $enfermedad->listar();
                             <li class="active" id="GeneralLI"><a style="color:white" href="#General" data-toggle="tab" >Generales</a></li>
                             <li id="PersonalLI"><a style="color:white" href="#Personal" data-toggle="tab">Personal-UAB</a></li>
                             <li id="FamiliaresLI"><a style="color:white" href="#Familiares" data-toggle="tab">Familiares</a></li>
-                            <li id="OtrosLI"><a style="color:white" href="#Otros" data-toggle="tab">Otros</a></li>
                         </ul>
                       </div>
                       <div class="panel-body" style="display: block;">
@@ -191,11 +190,11 @@ $listaEnfermedades = $enfermedad->listar();
 
                                           <div class="form-group" data-toggle="buttons">
                                             <label class="btn btn-danger"> <i class="fa fa-venus-mars"></i> Sexo: </label>
-                                            <label class="btn btn-info btn-outline">
-                                                <input type="radio" name="sexo" value="F"><i class="fa fa-female">  Femenino</i>
+                                            <label class="btn btn-info btn-outline sexo">
+                                                <input type="radio" class="sexo" name="sexo" value="F"><i class="fa fa-female">  Femenino</i>
                                             </label>
-                                            <label class="btn btn-info btn-outline">
-                                                <input type="radio" name="sexo" value="M"><i class="fa fa-male">  Masculino</i>
+                                            <label class="btn btn-info btn-outline sexo">
+                                                <input type="radio" class="sexo" name="sexo" value="M"><i class="fa fa-male">  Masculino</i>
                                             </label>
                                          </div>
 
@@ -234,7 +233,7 @@ $listaEnfermedades = $enfermedad->listar();
                                          <div class="pull-right">
                                            <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
                                            <button type="reset" name="limpiar" class="btn btn-warning">Limpiar</button>
-                                           <button type="submit" name="guardar" class="btn btn-success"><a style="color:white" href="#Personal" data-toggle="tab">Siguiente</a></button>
+                                           <button type="submit" name="guardarPersona" id="guardarPersona" class="btn btn-success">Siguiente</button>
                                          </div>
 
                                          <br><br>
@@ -321,11 +320,13 @@ $listaEnfermedades = $enfermedad->listar();
                                           <label>Facultad Carrera</label>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="selectpicker form-control" name="carrera" id="carrera">
+                                            <select class="selectpicker form-control show-tick" name="carrera" id="carrera" data-container="body">
                                               <?php foreach ($listaFacultadCarrera as $listaFC): ?>
+                                                <optgroup label="<?php echo $listaFC->NombreFacultad ?>">
                                                 <?php foreach ($listaFC->getListaCarreras() as $listaCa): ?>
-                                                  <option value="<?php echo $listaCa->IdCarrera; ?>"><?php echo $listaFC->NombreFacultad." - ".$listaCa->NombreCarrera; ?></option>
+                                                  <option value="<?php echo $listaCa->IdCarrera; ?>"><?php echo $listaCa->NombreCarrera; ?></option>
                                                 <?php endforeach; ?>
+                                                </optgroup>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
@@ -333,9 +334,11 @@ $listaEnfermedades = $enfermedad->listar();
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="form-control" name="carrera" id="carrera">
                                               <?php foreach ($listaFacultadCarrera as $listaFC): ?>
+                                                <optgroup label="<?php echo $listaFC->NombreFacultad ?>">
                                                 <?php foreach ($listaFC->getListaCarreras() as $listaCa): ?>
-                                                  <option value="<?php echo $listaCa->IdCarrera; ?>"><?php echo $listaFC->NombreFacultad." - ".$listaCa->NombreCarrera; ?></option>
+                                                  <option value="<?php echo $listaCa->IdCarrera; ?>"><?php echo $listaCa->NombreCarrera; ?></option>
                                                 <?php endforeach; ?>
+                                                </optgroup>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
@@ -482,7 +485,10 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
                                             <select class="selectpicker form-control" name="tipoSangre" id="tipoSangre">
-                                              <option value="">Tipos de sangre</option>
+                                              <option value="ORH+">ORH+</option>
+                                              <option value="ORH-">ORH-</option>
+                                              <option value="AB+">AB+</option>
+                                              <option value="AB-">AB-</option>
                                             </select>
                                           </div>
                                         </div>
@@ -511,11 +517,56 @@ $listaEnfermedades = $enfermedad->listar();
                                           </div>
                                         </div>
 
-                                        <input type="hidden" name="datos" value="1">
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                              <label>Cargos</label>
+                                              <div class="input-group">
+                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
+                                                <select class="selectpicker form-control" data-width="150px" multiple name="cargos[]" id="cargos">
+                                                  <?php foreach ($listaCargos as $listaC): ?>
+                                                    <option value="<?php echo $listaC->IdCargo; ?>"><?php echo $listaC->NombreCargo; ?></option>
+                                                  <?php endforeach; ?>
+                                                </select>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-xs-12 col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                              <label>Alergias / Enfermedades</label>
+                                              <div class="input-group">
+                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-medkit"></i></span>
+                                                <select class="selectpicker form-control" data-width="150px" multiple name="enfermedades[]" id="enfermedades">
+                                                  <?php foreach ($listaEnfermedades as $listaE): ?>
+                                                    <option value="<?php echo $listaE->IdEnfermedad; ?>"><?php echo $listaE->NombreEnfermedad; ?></option>
+                                                  <?php endforeach; ?>
+                                                </select>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-xs-12 col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                              <label>Deportes</label>
+                                              <div class="input-group">
+                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-star"></i></span>
+                                                <select class="selectpicker form-control" data-width="150px" multiple name="deportes[]" id="deportes">
+                                                  <?php foreach ($listaDeportes as $listaD): ?>
+                                                    <option value="<?php echo $listaD->IdDeporte; ?>"><?php echo $listaD->NombreDeporte; ?></option>
+                                                  <?php endforeach; ?>
+                                                </select>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
 
-                                        <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
-                                        <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Limpiar</button>
-                                        <button type="submit" name="guardar" class="btn btn-success btn-lg">Siguiente</button>
+                                        <input type="hidden" name="datos" value="1">
+                                        <input type="hidden" name="ciPersona" id="ciPerson" value="1">
+
+                                        <div id="mensajePersonal"></div>
+
+                                        <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
+                                        <button type="reset" name="limpiar" class="btn btn-warning">Limpiar</button>
+                                        <button type="submit" name="guardar" class="btn btn-success">Siguiente</button>
 
                                         <br><br>
 
@@ -873,75 +924,7 @@ $listaEnfermedades = $enfermedad->listar();
 
                                 </div>
                               </div>
-                              <div class="tab-pane fade" id="Otros">
-                                <div class="thumbnail">
 
-                                  <div class="text-center">
-                                    <h3>Registro de Personal</h3>
-                                  </div>
-                                  <form id="frmPersonalOtros">
-
-                                    <div class="row">
-                                      <div class="col-sm-1 col-md-2"></div>
-                                      <div class="col-sm-10 col-md-8">
-
-                                        <div class="form-group">
-                                          <label>Cargos</label>
-                                          <div class="input-group">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
-                                            <select class="selectpicker form-control" data-width="150px" multiple name="cargos" id="cargos">
-                                              <?php foreach ($listaCargos as $listaC): ?>
-                                                <option value="<?php echo $listaC->IdCargo; ?>"><?php echo $listaC->NombreCargo; ?></option>
-                                              <?php endforeach; ?>
-                                            </select>
-                                          </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                          <label>Alergias / Enfermedades</label>
-                                          <div class="input-group">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-medkit"></i></span>
-                                            <select class="selectpicker form-control" data-width="150px" multiple name="enfermedades" id="enfermedades">
-                                              <?php foreach ($listaEnfermedades as $listaE): ?>
-                                                <option value="<?php echo $listaE->IdEnfermedad; ?>"><?php echo $listaE->NombreEnfermedad; ?></option>
-                                              <?php endforeach; ?>
-                                            </select>
-                                          </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                          <label>Deportes</label>
-                                          <div class="input-group">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-star"></i></span>
-                                            <select class="selectpicker form-control" data-width="150px" multiple name="deportes" id="deportes">
-                                              <?php foreach ($listaDeportes as $listaD): ?>
-                                                <option value="<?php echo $listaD->IdDeporte; ?>"><?php echo $listaD->NombreDeporte; ?></option>
-                                              <?php endforeach; ?>
-                                            </select>
-                                          </div>
-                                        </div>
-
-                                        <input type="hidden" name="datos" value="1">
-
-                                        <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
-                                        <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Limpiar</button>
-                                        <button type="submit" name="guardar" class="btn btn-success btn-lg">Siguiente</button>
-
-                                        <br><br>
-
-                                      </div>
-                                      <div class="col-sm-1 col-md-2">
-
-                                      </div>
-                                    </div>
-
-                                  </form>
-                                  <div class="text-center">
-                                    <a href="#Listo" class="btn btn-primary btn-lg">LISTO</a>
-                                  </div>
-
-                                </div>
-                              </div>
                           </div>
                       </div>
                   </div>

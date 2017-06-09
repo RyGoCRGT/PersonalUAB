@@ -17,6 +17,7 @@
 <script src="../libs/js/inspinia.js"></script>
 <script src="../libs/js/pace.min.js"></script>
 <script src="../libs/js/enviarPersona.js"></script>
+<script src="../libs/js/enviarPersonal.js"></script>
 
 
 <script>
