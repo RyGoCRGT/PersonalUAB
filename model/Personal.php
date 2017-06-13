@@ -25,6 +25,10 @@ class Personal
   private $FechaIngreso;
   private $Ruta;
 
+  private $ListaEnfermedades;
+  private $ListaDeportes;
+  private $ListaCargos;
+
   function __construct()
   {
     $this->IdPersonal = null;

@@ -21,6 +21,7 @@
 
     <link href="../libs/css/animate.css" rel="stylesheet">
     <link href="../libs/css/style.css" rel="stylesheet">
+    <link href="../libs/css/estiloDatosPersonal.css" rel="stylesheet">
 
 </head>
 
