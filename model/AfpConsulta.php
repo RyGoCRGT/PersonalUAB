@@ -12,7 +12,7 @@ class AfpConsulta
 
   public function listaAfp()
   {
-    $query = "SELECT * FROM afp";
+    $query = "SELECT * FROM afp ORDER BY nombreAfp";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

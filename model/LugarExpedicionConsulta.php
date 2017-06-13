@@ -12,7 +12,7 @@ class LugarExpedicionConsulta
 
   public function listaLugarExpedicion()
   {
-    $query = "SELECT * FROM lugarExpedicion";
+    $query = "SELECT * FROM lugarExpedicion ORDER BY nombreLugarExpedicion";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

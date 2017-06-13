@@ -19,15 +19,15 @@ CREATE TABLE lugarExpedicion(
 
 CREATE TABLE persona(
 	idPersona int not null auto_increment primary key,
-	primerNombre varchar(15) not null,
-	segundoNombre varchar(15) null,
-	apellidoPaterno varchar(15) not null,
-	segundoApellido varchar(15) not null,
-	CI varchar(15) not null,
-	idLugarExpedicion int not null,
-	fechaNacimiento date not null,
-	sexo enum('F','M') not null,
-	idEstadoCivil int not null,
+	primerNombre varchar(20) not null,
+	segundoNombre varchar(20) null,
+	apellidoPaterno varchar(20) not null,
+	apellidoMaterno varchar(20) null,
+	CI varchar(40) not null,
+	idLugarExpedicion int null,
+	fechaNacimiento date null,
+	sexo enum('F','M') null,
+	idEstadoCivil int null,
 	FOREIGN KEY (idEstadoCivil) REFERENCES estadoCivil (idEstadoCivil) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idLugarExpedicion) REFERENCES lugarExpedicion (idLugarExpedicion) ON UPDATE CASCADE ON DELETE CASCADE
 );

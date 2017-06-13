@@ -18,13 +18,23 @@
 <!-- Custom and plugin javascript -->
 <script src="../libs/js/inspinia.js"></script>
 <script src="../libs/js/pace.min.js"></script>
+
 <script src="../libs/js/table.js"></script>
+
+<script src="../libs/js/enviarPersona.js"></script>
+<script src="../libs/js/enviarPersonal.js"></script>
+<script src="../libs/js/enviarConyugue.js"></script>
+<script src="../libs/js/enviarHijo.js"></script>
+<script src="../libs/js/enviarReferencia.js"></script>
+<script src="../libs/js/detallePersonal.js"></script>
+
 
 <script>
 $('.datepicker').datepicker({
   clearBtn: true,
   language: "ES"
 });
+$('#listoAll').hide();
 </script>
 <script>
   $(function () {
@@ -47,13 +57,23 @@ $(document).ready(function($){
   var ventana_ancho = $(window).width();
   if (ventana_ancho < '1000')
   {
-      $('.selector').remove();
-      $('.selector-mobile').show("slow");
+    //alert(ventana_ancho);
+    $('.selector').remove();
+    $('.selector-mobile').show("slow");
   }
   else
   {
     $('.selector-mobile').remove();
   }
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function($) {
+$(".btn-pref .btn").click(function () {
+  $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+  // $(".tab").addClass("active"); // instead of this do the below
+  $(this).removeClass("btn-default").addClass("btn-primary");
+});
 });
 </script>
 </body>

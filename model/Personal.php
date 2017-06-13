@@ -8,23 +8,36 @@ class Personal
   private $IdNacion;
   private $IdTipoPersonal;
   private $IdCarrera;
-  private $IdDireccion;
+  private $Direccion;
   private $Email;
-  private $CiudadNacimiento;
-  private $Religion;
+  private $IdCiudadNacimiento;
+  private $IdReligion;
   private $FechaBautizmo;
+  private $IdSeguro;
   private $NumeroSeguro;
   private $IdAfp;
+  private $NumeroAfp;
   private $NumeroLibretaMilitar;
   private $NumeroPasaporte;
   private $TipoSangre;
   private $Hobby;
   private $LecturaPreferencial;
   private $FechaIngreso;
+  private $Ruta;
 
+  private $ListaEnfermedades;
+  private $ListaDeportes;
+  private $ListaCargos;
 
   function __construct()
   {
+    $this->IdPersonal = null;
+    $this->IdCarrera = null;
+    $this->IdReligion = null;
+    $this->FechaBautizmo = null;
+    $this->NumeroLibretaMilitar = null;
+    $this->NumeroPasaporte = null;
+    $this->Ruta =  null;
   }
 
   public function __set($atributo, $value)

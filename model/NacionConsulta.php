@@ -12,7 +12,7 @@ class NacionConsulta
 
   public function listaNaciones()
   {
-    $query = "SELECT * FROM nacion";
+    $query = "SELECT * FROM nacion ORDER BY nombreNacion";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();
