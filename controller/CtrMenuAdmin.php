@@ -22,6 +22,34 @@ class CtrMenuAdmin
         include 'footer.php';
         break;
 
+      case 'verPersonal':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/ReferenciaPersonal.php';
+          include '../../model/ConyuguePersonal.php';
+          include '../../model/HijosPersonal.php';
+          include '../../model/Telefono.php';
+          include '../../model/TelefonoConsulta.php';
+          include '../../controller/PersonaControlador.php';
+          include '../../controller/ReferenciaPersonalControlador.php';
+          include '../../controller/TelefonoControlador.php';
+
+          $conexion = new Conexion();
+
+
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario</p>";
+        }
+        break;
+
       case 'personaReferenciaInsertar':
         if (isset($_POST['datos']))
         {

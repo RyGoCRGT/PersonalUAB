@@ -94,9 +94,16 @@ $listaEnfermedades = $enfermedad->listar();
             <div class="ibox-content forum-post-container">
                 <div class="forum-post-info">
                     <h4><span class="text-navy"><i class="fa fa-globe"></i> Registro </span> /<span class="text-muted">Personal</span></h4>
+                    <div class="pull-right" id="listoAll">
+                      <form id="detallePersonal">
+                        <input type="hidden" name="datos" value="1">
+                        <input type="hidden" name="ciPersonalDetalle" id="ciPersonalDetalle" value="1">
+                        <button type="submit" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-send">LISTO</i></button>
+                      </form>
+                    </div>
                 </div>
-                <div>
 
+                <div>
 
                     <div class="panel with-nav-tabs panel-info">
                       <div class="panel-heading" style="background:rgb(26, 74, 101)">
@@ -104,6 +111,7 @@ $listaEnfermedades = $enfermedad->listar();
                             <li class="active" id="GeneralLI"><a style="color:white" href="#General" data-toggle="tab" >Generales</a></li>
                             <li id="PersonalLI"><a style="color:white" href="#Personal" data-toggle="tab">Personal-UAB</a></li>
                             <li id="FamiliaresLI"><a style="color:white" href="#Familiares" data-toggle="tab">Familiares</a></li>
+                            <li id="HojaVidaLI"><a style="color:white" href="#HojaVida" data-toggle="tab">Hoja de Vida</a></li>
                         </ul>
                       </div>
                       <div class="panel-body" style="display: block;">
@@ -231,8 +239,6 @@ $listaEnfermedades = $enfermedad->listar();
                                          <div id="mesajePersona"></div>
 
                                          <div class="pull-right">
-                                           <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
-                                           <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
                                            <button type="submit" name="guardarPersona" id="guardarPersona" class="btn btn-primary">Siguiente</button>
                                          </div>
 
@@ -489,6 +495,10 @@ $listaEnfermedades = $enfermedad->listar();
                                               <option value="ORH-">ORH-</option>
                                               <option value="AB+">AB+</option>
                                               <option value="AB-">AB-</option>
+                                              <option value="A+">A+</option>
+                                              <option value="A-">A-</option>
+                                              <option value="B+">B+</option>
+                                              <option value="B-">B-</option>
                                             </select>
                                           </div>
                                         </div>
@@ -565,8 +575,6 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div id="mensajePersonal"></div>
 
                                         <div class="pull-right">
-                                          <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
-                                          <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
                                           <button type="submit" name="guardar" class="btn btn-primary">Siguiente</button>
                                         </div>
 
@@ -669,9 +677,7 @@ $listaEnfermedades = $enfermedad->listar();
                                            <input type="hidden" name="ciPersonConyu" id="ciPersonConyu" value="1">
 
                                            <div class="pull-right">
-                                             <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
-                                             <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
-                                             <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
+                                             <button type="submit" name="guardar" class="btn btn-primary">Grabar</button>
                                            </div>
 
                                            <br><br>
@@ -752,11 +758,9 @@ $listaEnfermedades = $enfermedad->listar();
                                             <input type="hidden" name="ciPersonHijo" id="ciPersonHijo" value="1">
 
                                            <div class="pull-right">
-                                             <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
-                                             <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
-                                             <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
+                                             <button type="submit" name="guardar" class="btn btn-primary">Grabar</button>
                                            </div>
-                                           <a href="#NuevoHijo" class="btn btn-primary">Nuevo Hijo (a)</a>
+                                           <a href="#NuevoHijo" class="btn btn-warning">Nuevo Hijo (a)</a>
 
                                           </div>
                                         </div>
@@ -834,9 +838,7 @@ $listaEnfermedades = $enfermedad->listar();
                                            <input type="hidden" name="ciPersonReferencia" id="ciPersonReferencia" value="1">
 
                                            <div class="pull-right">
-                                             <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
-                                             <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
-                                             <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
+                                             <button type="submit" name="guardar" class="btn btn-primary">Grabar</button>
                                            </div>
 
                                            <br><br>
@@ -854,7 +856,48 @@ $listaEnfermedades = $enfermedad->listar();
 
                                 </div>
                               </div>
+                              <div class="tab-pane fade" id="HojaVida">
+                                <div class="thumbnail">
 
+                                  <div class="panel with-nav-tabs panel-info">
+                                    <div class="panel-heading" >
+                                      <ul class="nav nav-tabs" >
+                                          <li class="active" id="CursosLI"><a style="color:white" href="#Cursos" data-toggle="tab" >Cursos</a></li>
+                                          <li id="TitulosLI"><a style="color:white" href="#Titulos" data-toggle="tab">Titulos</a></li>
+                                    </div>
+                                  </div>
+                                  <div class="panel-body" style="display: block;">
+                                    <div class="tab-content">
+                                      <div class="tab-pane fade in active" id="Cursos">
+                                        <form id="CursosFrm">
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Nombre Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <input type="text" class="form-control" name="nombreInstitucionCursos" id="nombreInstitucionCursos">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Nombre Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <input type="text" class="form-control" name="nombreInstitucionCursos" id="nombreInstitucionCursos">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4"></div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                      <div class="tab-pane fade" id="Titulos"></div>
+                                    </div>
+                                  </div>
+
+                              </div>
                           </div>
                       </div>
                   </div>
@@ -868,3 +911,5 @@ $listaEnfermedades = $enfermedad->listar();
 </div>
 
 </div>
+
+<?php include 'modalDetallePersonal.php'; ?>

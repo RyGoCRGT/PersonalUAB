@@ -32,6 +32,8 @@ function enviarDatosPersonal() {
         scrollTop: $("#wrapper").offset().top
       }, 1000);
 
+      $('#listoAll').show();
+
     });
 
   });
