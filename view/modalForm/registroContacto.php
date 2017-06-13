@@ -10,46 +10,48 @@
         </div>
         <div class="modal-body">
 
-          <div class="form-group">
-            <label>Primer Nombre</label>
-            <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon2" style="background:#2b79d4; color:white"><i class="fa fa-user"></i></span>
-              <input id="primerNombre" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombre" required>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>Primer Nombre</label>
+                <div class="input-group">
+                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                  <input id="primerNombreRef" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreRef" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>Segundo Nombre</label>
+                <div class="input-group">
+                  <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                  <input id="segundoNombreRef" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreRef">
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Segundo Nombre</label>
-            <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon2" style="background:#2b79d4; color:white"><i class="fa fa-user"></i></span>
-              <input id="segundoNombre" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombre">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>Apellido Paterno</label>
+                <div class="input-group">
+                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                  <input id="apellidoPaternoRef" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoRef" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>Apellido Materno</label>
+                <div class="input-group">
+                  <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                  <input id="apellidoMaternoRef" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoRef">
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="form-group">
-            <label>Apellido Paterno</label>
-            <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon2" style="background:#2b79d4; color:white"><i class="fa fa-user"></i></span>
-              <input id="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaterno" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Apellido Materno</label>
-            <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon2" style="background:#2b79d4; color:white"><i class="fa fa-user"></i></span>
-              <input id="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaterno">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Telefono</label>
-            <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon2" style="background:green; color:white"><i class="fa fa-phone"></i></span>
-              <input id="telefono" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefono">
-            </div>
-          </div>
-
+          
           <input type="hidden" name="datos" value="1">
 
         </div>
