@@ -13,15 +13,21 @@
 <script src="../libs/js/bootstrap-datepicker.min.js"></script>
 <script src="../libs/js/jquery.metisMenu.js"></script>
 
+
+
 <!-- Custom and plugin javascript -->
 <script src="../libs/js/inspinia.js"></script>
 <script src="../libs/js/pace.min.js"></script>
+
+<script src="../libs/js/table.js"></script>
+
 <script src="../libs/js/enviarPersona.js"></script>
 <script src="../libs/js/enviarPersonal.js"></script>
 <script src="../libs/js/enviarConyugue.js"></script>
 <script src="../libs/js/enviarHijo.js"></script>
 <script src="../libs/js/enviarReferencia.js"></script>
 <script src="../libs/js/detallePersonal.js"></script>
+
 
 <script>
 $('.datepicker').datepicker({

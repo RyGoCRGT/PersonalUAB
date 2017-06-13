@@ -36,6 +36,7 @@ function enviarDatosPersona() {
         scrollTop: $("#wrapper").offset().top
       }, 1000);
 
+
     });
 
   });

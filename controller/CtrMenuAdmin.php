@@ -334,6 +334,30 @@ class CtrMenuAdmin
         include 'footer.php';
         break;
 
+      case 'directorio':
+        include 'header.php';
+        include 'bodyDirectorio.php';
+        include 'footer.php';
+        break;
+
+      case 'cumplePersonal':
+        include 'header.php';
+        include 'bodyCumple.php';
+        include 'footer.php';
+        break;
+
+      case 'registrarContacto':
+      if (isset($_POST['datos'])) {
+        include '../model/conexion.php';
+        include '../model/persona.php';
+        $con = new Conexion();
+      }else {
+        echo "Campos Vacios";
+      }
+      break;
+
+        break;
+
       case 'salir':
           session_start();
           session_destroy();

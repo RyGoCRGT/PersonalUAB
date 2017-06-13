@@ -4,7 +4,10 @@ include '../../model/EstadoCivil.php';
 include '../../model/EstadoCivilConsulta.php';
 include '../../model/LugarExpedicion.php';
 include '../../model/LugarExpedicionConsulta.php';
+include '../../model/TipoUsuario.php';
+include '../../model/TipoUsuarioConsulta.php';
 include '../../controller/CtrEstadoCivil.php';
+include '../../controller/TipoUsuarioControlador.php';
 include '../../controller/CtrLugarExpedicion.php';
 $conexion = new Conexion();
 
@@ -13,6 +16,9 @@ $listaEstadoCivil = $estadoCivil->listar();
 
 $lugarExpedicion = new CtrLugarExpedicion($conexion);
 $listaLugarExpedicion = $lugarExpedicion->listar();
+
+$tipoUsuario = new TipoUsuarioControlador($conexion);
+$listaTipoUsuario = $tipoUsuario->listar();
 
 ?>
 <div id="contenidoAll">
@@ -172,6 +178,26 @@ $listaLugarExpedicion = $lugarExpedicion->listar();
                                     <div class="row">
                                       <div class="col-sm-1 col-md-2"></div>
                                       <div class="col-sm-10 col-md-8">
+
+                                        <div class="form-group">
+                                          <label>Tipo Usuario</label>
+                                          <div class="input-group selector">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal">
+                                              <?php foreach ($listaTipoUsuario as $listaTU): ?>
+                                                <option value="<?php echo $listaTU->IdTipoUsuario; ?>"><?php echo $listaTU->NombreTipoUsuario; ?></option>
+                                              <?php endforeach; ?>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <select class="form-control" name="tipoPersonal" id="tipoPersonal">
+                                              <?php foreach ($listaTipoUsuario as $listaTU): ?>
+                                                <option value="<?php echo $listaTU->IdTipoUsuario; ?>"><?php echo $listaTU->NombreTipoUsuario; ?></option>
+                                              <?php endforeach; ?>
+                                            </select>
+                                          </div>
+                                        </div>
 
                                         <div class="form-group">
                                           <label>Nombre de Usuario</label>
