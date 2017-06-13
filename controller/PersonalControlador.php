@@ -29,7 +29,7 @@ class PersonalControlador
       $stmtPersonal->bindValue(':idCarrera', $personal->IdCarrera);
       $stmtPersonal->bindValue(':direccion', $personal->Direccion);
       $stmtPersonal->bindValue(':email', $personal->Email);
-      $stmtPersonal->bindValue(':idCiudad', $personal->IdCiudad);
+      $stmtPersonal->bindValue(':idCiudad', $personal->IdCiudadNacimiento);
       $stmtPersonal->bindValue(':idReligion', $personal->IdReligion);
       $stmtPersonal->bindValue(':fechaBautizmo', $personal->FechaBautizmo);
       $stmtPersonal->bindValue(':idSeguro', $personal->IdSeguro);
@@ -48,13 +48,98 @@ class PersonalControlador
 
       $this->Conexion->commit();
 
-      echo "Listo Personal {$personal->IdPersona}";
+    }
+    catch (PDOException $e)
+    {
+
+      $this->Conexion->rollBack();
+
+      echo "Error al Registrar";
+
+    }
+  }
+
+  public function agregarCargo($personal, $cargo)
+  {
+    try
+    {
+
+      $this->Conexion->beginTransaction();
+
+      $query = "INSERT INTO cargoPersonal (idCargo, idPersonal) VALUES (:cargo, :personal)";
+
+      $stmtPersonalCargo = $this->Conexion->prepare($query);
+
+      $stmtPersonalCargo->bindValue(":cargo", $cargo);
+      $stmtPersonalCargo->bindValue(":personal", $personal);
+
+      $stmtPersonalCargo->execute();
+
+      $this->Conexion->commit();
 
     }
     catch (PDOException $e)
     {
 
-      //$this->Conexion->rollBack();
+      $this->Conexion->rollBack();
+
+      echo "Error al Registrar";
+
+    }
+  }
+
+  public function agregarDeporte($personal, $deporte)
+  {
+    try
+    {
+
+      $this->Conexion->beginTransaction();
+
+      $query = "INSERT INTO deportePersonal (idDeporte, idPersonal) VALUES (:deporte, :personal)";
+
+      $stmtPersonalDeporte = $this->Conexion->prepare($query);
+
+      $stmtPersonalDeporte->bindValue(":deporte", $deporte);
+      $stmtPersonalDeporte->bindValue(":personal", $personal);
+
+      $stmtPersonalDeporte->execute();
+
+      $this->Conexion->commit();
+
+    }
+    catch (PDOException $e)
+    {
+
+      $this->Conexion->rollBack();
+
+      echo "Error al Registrar";
+
+    }
+  }
+
+  public function agregarEnfermedad($personal, $enfermedad)
+  {
+    try
+    {
+
+      $this->Conexion->beginTransaction();
+
+      $query = "INSERT INTO enfermedadPersonal (idEnfermedad, idPersonal) VALUES (:enfermedad, :personal)";
+
+      $stmtPersonalEnfermedad = $this->Conexion->prepare($query);
+
+      $stmtPersonalEnfermedad->bindValue(":enfermedad", $enfermedad);
+      $stmtPersonalEnfermedad->bindValue(":personal", $personal);
+
+      $stmtPersonalEnfermedad->execute();
+
+      $this->Conexion->commit();
+
+    }
+    catch (PDOException $e)
+    {
+
+      $this->Conexion->rollBack();
 
       echo "Error al Registrar";
 

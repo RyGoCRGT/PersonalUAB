@@ -23,7 +23,7 @@ CREATE TABLE persona(
 	segundoNombre varchar(20) null,
 	apellidoPaterno varchar(20) not null,
 	apellidoMaterno varchar(20) null,
-	CI varchar(15) null,
+	CI varchar(40) not null,
 	idLugarExpedicion int null,
 	fechaNacimiento date null,
 	sexo enum('F','M') null,

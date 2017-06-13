@@ -232,8 +232,8 @@ $listaEnfermedades = $enfermedad->listar();
 
                                          <div class="pull-right">
                                            <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
-                                           <button type="reset" name="limpiar" class="btn btn-warning">Limpiar</button>
-                                           <button type="submit" name="guardarPersona" id="guardarPersona" class="btn btn-success">Siguiente</button>
+                                           <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
+                                           <button type="submit" name="guardarPersona" id="guardarPersona" class="btn btn-primary">Siguiente</button>
                                          </div>
 
                                          <br><br>
@@ -279,7 +279,7 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div class="form-group">
                                           <label>Nacionalidad</label>
                                           <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="selectpicker form-control" name="nacionalidad" id="nacionalidad">
                                               <?php foreach ($listaNaciones as $listaN): ?>
                                                 <option value="<?php echo $listaN->IdNacion; ?>"><?php echo $listaN->NombreNacion; ?></option>
@@ -299,7 +299,7 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div class="form-group">
                                           <label>Tipo Personal</label>
                                           <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal">
                                               <?php foreach ($listaTipoPersonal as $listaTP): ?>
                                                 <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
@@ -319,7 +319,7 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div class="form-group">
                                           <label>Facultad Carrera</label>
                                           <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="selectpicker form-control show-tick" name="carrera" id="carrera" data-container="body">
                                               <?php foreach ($listaFacultadCarrera as $listaFC): ?>
                                                 <optgroup label="<?php echo $listaFC->NombreFacultad ?>">
@@ -347,7 +347,7 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div class="form-group">
                                           <label>Direccion</label>
                                           <div class="input-group">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-map-marker"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-map-marker"></i></span>
                                             <input type="text" class="form-control" placeholder="Direccion: " aria-describedby="sizing-addon2" id="direccion" name="direccion" required>
                                           </div>
                                         </div>
@@ -363,7 +363,7 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div class="form-group">
                                           <label>Ciudad Nacimiento</label>
                                           <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="selectpicker form-control" name="ciudad" id="ciudad">
                                               <?php foreach ($listaCiudades as $listaC): ?>
                                                 <option value="<?php echo $listaC->IdCiudad; ?>"><?php echo $listaC->NombreCiudad; ?></option>
@@ -483,7 +483,7 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div class="form-group">
                                           <label>Tipo Sangre</label>
                                           <div class="input-group" >
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
                                             <select class="selectpicker form-control" name="tipoSangre" id="tipoSangre">
                                               <option value="ORH+">ORH+</option>
                                               <option value="ORH-">ORH-</option>
@@ -512,7 +512,7 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div class="form-group">
                                           <label>Fecha de Ingreso UAB</label>
                                           <div class="input-group" >
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
                                             <input id="fechaIngres" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Ingreso UAB:  AAAA/MM/DD" name="fechaIngres" >
                                           </div>
                                         </div>
@@ -564,9 +564,11 @@ $listaEnfermedades = $enfermedad->listar();
 
                                         <div id="mensajePersonal"></div>
 
-                                        <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
-                                        <button type="reset" name="limpiar" class="btn btn-warning">Limpiar</button>
-                                        <button type="submit" name="guardar" class="btn btn-success">Siguiente</button>
+                                        <div class="pull-right">
+                                          <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
+                                          <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
+                                          <button type="submit" name="guardar" class="btn btn-primary">Siguiente</button>
+                                        </div>
 
                                         <br><br>
 
@@ -596,95 +598,83 @@ $listaEnfermedades = $enfermedad->listar();
                                                   </a>
                                               </div>
                                           </div>
-                                          <div class="ibox-content" style="background: rgba(234, 245, 245, 1);">
+                                          <div class="ibox-content" style="background: rgba(234, 237, 245, 0.69);">
 
-                                            <div class="form-group">
-                                              <label>Primer Nombre</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="primerNombre" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombre" required>
+                                            <div class="row">
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Primer Nombre</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="primerNombreCon" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreCon" required>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Segundo Nombre</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="segundoNombreCon" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreCon">
+                                                  </div>
+                                                </div>
                                               </div>
                                             </div>
 
-                                            <div class="form-group">
-                                              <label>Segundo Nombre</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="segundoNombre" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombre">
+                                            <div class="row">
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Apellido Paterno</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="apellidoPaternoCon" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoCon" required>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Apellido Materno</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="apellidoMaternoCon" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoCon">
+                                                  </div>
+                                                </div>
                                               </div>
                                             </div>
 
-                                            <div class="form-group">
-                                              <label>Apellido Paterno</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaterno" required>
+                                            <div class="row">
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Fecha de Nacimiento</label>
+                                                  <div class="input-group" >
+                                                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                                    <input id="fechaNacimientoCon" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" name="fechaNacimientoCon" required>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Fecha de Matrimanio</label>
+                                                  <div class="input-group" >
+                                                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                                    <input id="fechaBautizmoCon" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Matrimonio:  AAAA/MM/DD" name="fechaBautizmoCon" required>
+                                                  </div>
+                                                </div>
                                               </div>
                                             </div>
 
-                                            <div class="form-group">
-                                              <label>Apellido Materno</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaterno">
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>CI/NIT</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="ciNit" type="text" class="form-control" placeholder="CI/NIT: " aria-describedby="sizing-addon2" name="ciNit" required>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>Lugar de Expedicion CI/NIT</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                                                <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion">
-                                                  <?php foreach ($listaLugarExpedicion as $listaLE): ?>
-                                                    <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
-                                                  <?php endforeach; ?>
-                                                </select>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>Fecha de Nacimiento</label>
-                                              <div class="input-group" >
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                <input id="fechaNac" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNac" required>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group" data-toggle="buttons">
-                                              <label class="btn btn-primary"> <i class="fa fa-venus-mars"></i> Sexo: </label>
-                                              <label class="btn btn-info btn-outline">
-                                                  <input type="radio" name="sexo" value="F"><i class="fa fa-female">  Femenino</i>
-                                              </label>
-                                              <label class="btn btn-info btn-outline">
-                                                  <input type="radio" name="sexo" value="M"><i class="fa fa-male">  Masculino</i>
-                                              </label>
-                                           </div>
-
-                                           <div class="form-group">
-                                             <label>Estado Civil</label>
-                                             <div class="input-group">
-                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
-                                               <select class="selectpicker form-control" style="background-color: #fff" name="estadoCivil" id="estadoCivil">
-                                                 <?php foreach ($listaEstadoCivil as $listaEC): ?>
-                                                   <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
-                                                 <?php endforeach; ?>
-                                               </select>
-                                             </div>
-                                           </div>
+                                           <div id="mensajeFrmCon"></div><br><br>
 
                                            <input type="hidden" name="datos" value="1">
+                                           <input type="hidden" name="ciPersonConyu" id="ciPersonConyu" value="1">
 
-                                           <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
-                                           <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Limpiar</button>
-                                           <button type="submit" name="guardar" class="btn btn-success btn-lg">Guardar</button>
+                                           <div class="pull-right">
+                                             <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
+                                             <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
+                                             <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
+                                           </div>
+
+                                           <br><br>
 
                                           </div>
                                         </div>
@@ -704,96 +694,69 @@ $listaEnfermedades = $enfermedad->listar();
                                               </div>
 
                                           </div>
-                                          <div class="ibox-content" style="background: rgba(234, 245, 245, 1);">
+                                          <div class="ibox-content" style="background: rgba(234, 237, 245, 0.69);">
 
-                                            <div class="form-group">
-                                              <label>Primer Nombre</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="primerNombre" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombre" required>
+                                            <div class="row">
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Primer Nombre</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="primerNombreHij" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreHij" required>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Segundo Nombre</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="segundoNombreHij" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreHij">
+                                                  </div>
+                                                </div>
                                               </div>
                                             </div>
 
-                                            <div class="form-group">
-                                              <label>Segundo Nombre</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="segundoNombre" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombre">
+                                            <div class="row">
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Apellido Paterno</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="apellidoPaternoHij" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoHij" required>
+                                                  </div>
+                                                </div>
                                               </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>Apellido Paterno</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaterno" required>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>Apellido Materno</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaterno">
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>CI/NIT</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="ciNit" type="text" class="form-control" placeholder="CI/NIT: " aria-describedby="sizing-addon2" name="ciNit" required>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>Lugar de Expedicion CI/NIT</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                                                <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion">
-                                                  <?php foreach ($listaLugarExpedicion as $listaLE): ?>
-                                                    <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
-                                                  <?php endforeach; ?>
-                                                </select>
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Apellido Materno</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="apellidoMaternoHij" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoHij">
+                                                  </div>
+                                                </div>
                                               </div>
                                             </div>
 
                                             <div class="form-group">
                                               <label>Fecha de Nacimiento</label>
                                               <div class="input-group" >
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                <input id="fechaNac" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNac" required>
+                                                <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                                <input id="fechaNacimientoHij" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNacimientoHij" required>
                                               </div>
                                             </div>
 
-                                            <div class="form-group" data-toggle="buttons">
-                                              <label class="btn btn-primary"> <i class="fa fa-venus-mars"></i> Sexo: </label>
-                                              <label class="btn btn-info btn-outline">
-                                                  <input type="radio" name="sexo" value="F"><i class="fa fa-female">  Femenino</i>
-                                              </label>
-                                              <label class="btn btn-info btn-outline">
-                                                  <input type="radio" name="sexo" value="M"><i class="fa fa-male">  Masculino</i>
-                                              </label>
+                                            <div id="mensajeFrmHijo"></div><br><br>
+
+                                            <input type="hidden" name="datos" value="1">
+                                            <input type="hidden" name="ciPersonHijo" id="ciPersonHijo" value="1">
+
+                                           <div class="pull-right">
+                                             <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
+                                             <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
+                                             <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
                                            </div>
-
-                                           <div class="form-group">
-                                             <label>Estado Civil</label>
-                                             <div class="input-group">
-                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
-                                               <select class="selectpicker form-control" style="background-color: #fff" name="estadoCivil" id="estadoCivil">
-                                                 <?php foreach ($listaEstadoCivil as $listaEC): ?>
-                                                   <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
-                                                 <?php endforeach; ?>
-                                               </select>
-                                             </div>
-                                           </div>
-
-                                           <input type="hidden" name="datos" value="1">
-
-                                           <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
-                                           <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Limpiar</button>
-                                           <button type="submit" name="guardar" class="btn btn-success btn-lg">Guardar</button>
-                                           <a href="#NuevoHijo" class="btn btn-primary btn-lg">Nuevo Hijo (a)</a>
+                                           <a href="#NuevoHijo" class="btn btn-primary">Nuevo Hijo (a)</a>
 
                                           </div>
                                         </div>
@@ -813,89 +776,49 @@ $listaEnfermedades = $enfermedad->listar();
                                               </div>
 
                                           </div>
-                                          <div class="ibox-content" style="background: rgba(234, 245, 245, 1);">
+                                          <div class="ibox-content" style="background: rgba(234, 237, 245, 0.69);">
 
-                                            <div class="form-group">
-                                              <label>Primer Nombre</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="primerNombre" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombre" required>
+                                            <div class="row">
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Primer Nombre</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="primerNombreRef" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreRef" required>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Segundo Nombre</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="segundoNombreRef" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreRef">
+                                                  </div>
+                                                </div>
                                               </div>
                                             </div>
 
-                                            <div class="form-group">
-                                              <label>Segundo Nombre</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="segundoNombre" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombre">
+                                            <div class="row">
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Apellido Paterno</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="apellidoPaternoRef" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoRef" required>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-xs-12 col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label>Apellido Materno</label>
+                                                  <div class="input-group">
+                                                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                                    <input id="apellidoMaternoRef" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoRef">
+                                                  </div>
+                                                </div>
                                               </div>
                                             </div>
-
-                                            <div class="form-group">
-                                              <label>Apellido Paterno</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaterno" required>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>Apellido Materno</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaterno">
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>CI/NIT</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                <input id="ciNit" type="text" class="form-control" placeholder="CI/NIT: " aria-describedby="sizing-addon2" name="ciNit" required>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>Lugar de Expedicion CI/NIT</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                                                <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion">
-                                                  <?php foreach ($listaLugarExpedicion as $listaLE): ?>
-                                                    <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
-                                                  <?php endforeach; ?>
-                                                </select>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                              <label>Fecha de Nacimiento</label>
-                                              <div class="input-group" >
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                <input id="fechaNac" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNac" required>
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group" data-toggle="buttons">
-                                              <label class="btn btn-primary"> <i class="fa fa-venus-mars"></i> Sexo: </label>
-                                              <label class="btn btn-info btn-outline">
-                                                  <input type="radio" name="sexo" value="F"><i class="fa fa-female">  Femenino</i>
-                                              </label>
-                                              <label class="btn btn-info btn-outline">
-                                                  <input type="radio" name="sexo" value="M"><i class="fa fa-male">  Masculino</i>
-                                              </label>
-                                           </div>
-
-                                           <div class="form-group">
-                                             <label>Estado Civil</label>
-                                             <div class="input-group">
-                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
-                                               <select class="selectpicker form-control" style="background-color: #fff" name="estadoCivil" id="estadoCivil">
-                                                 <?php foreach ($listaEstadoCivil as $listaEC): ?>
-                                                   <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
-                                                 <?php endforeach; ?>
-                                               </select>
-                                             </div>
-                                           </div>
 
                                            <div class="form-group">
                                              <label>Telefono</label>
@@ -905,11 +828,18 @@ $listaEnfermedades = $enfermedad->listar();
                                              </div>
                                            </div>
 
-                                           <input type="hidden" name="datos" value="1">
+                                           <div id="mensajeFrmReferencia"></div><br><br>
 
-                                           <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
-                                           <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Limpiar</button>
-                                           <button type="submit" name="guardar" class="btn btn-success btn-lg">Guardar</button>
+                                           <input type="hidden" name="datos" value="1">
+                                           <input type="hidden" name="ciPersonReferencia" id="ciPersonReferencia" value="1">
+
+                                           <div class="pull-right">
+                                             <button type="button" name="cancelar" class="btn btn-default">Cancelar</button>
+                                             <button type="reset" name="limpiar" class="btn btn-info">Limpiar</button>
+                                             <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
+                                           </div>
+
+                                           <br><br>
 
                                           </div>
                                         </div>

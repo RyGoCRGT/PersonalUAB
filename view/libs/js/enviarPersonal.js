@@ -7,21 +7,30 @@ function enviarDatosPersonal() {
     e.preventDefault();
     var ci = $("#ciNit").val();
     $("#ciPerson").val(ci);
-    var img = $("#fotoPersonal").val();
+    var img = new FormData($("#frmPersonal")[0]);
     var frm = $(this).serialize();
     console.log( frm );
     console.log( img );
     $.ajax({
       "method" : "POST",
       "url" : "index.php?modo=personalInsertar",
-      "data" : frm+'&fotoPersonal='+encodeURIComponent(img)
+      "data" : img,
+      contentType: false,
+      processData: false
+
     }).done( function(info) {
 
       $("#mensajePersonal").html(info);
 
+      $("#PersonalLI").removeClass('active');
+      $("#FamiliaresLI").addClass('active');
+
+      $("#Personal").removeClass('active in');
+      $("#Familiares").addClass('active in');
+
       $('html,body').animate({
         scrollTop: $("#wrapper").offset().top
-      }, 2000);
+      }, 1000);
 
     });
 

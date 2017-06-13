@@ -49,7 +49,7 @@ class PersonaControlador
 
         $this->Conexion->commit();
 
-        
+
 
       } catch (PDOException $e) {
 

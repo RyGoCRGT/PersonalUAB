@@ -19,6 +19,11 @@ class Persona
   function __construct()
   {
     $this->IdPersona = null;
+    $this->CI = null;
+    $this->LugarExpedicion = null;
+    $this->FechaNacimiento = null;
+    $this->Sexo = null;
+    $this->EstadoCivil = null;
     $this->ListaTelefonos = array();
   }
 

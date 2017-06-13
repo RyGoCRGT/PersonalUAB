@@ -18,7 +18,9 @@
 <script src="../libs/js/pace.min.js"></script>
 <script src="../libs/js/enviarPersona.js"></script>
 <script src="../libs/js/enviarPersonal.js"></script>
-
+<script src="../libs/js/enviarConyugue.js"></script>
+<script src="../libs/js/enviarHijo.js"></script>
+<script src="../libs/js/enviarReferencia.js"></script>
 
 <script>
 $('.datepicker').datepicker({
