@@ -40,6 +40,18 @@ class CtrMenuAdmin
         include 'footer.php';
         break;
 
+      case 'registrarContacto':
+      if (isset($_POST['datos'])) {
+        include '../model/conexion.php';
+        include '../model/persona.php';
+        $con = new Conexion();
+      }else {
+        echo "Campos Vacios";
+      }
+      break;
+
+        break;
+
       case 'salir':
           session_start();
           session_destroy();

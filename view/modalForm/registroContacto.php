@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <form action="#" method="post">
+      <form action="index.php?modo=registrarContacto" method="post">
 
         <div class="modal-header">
           <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -51,7 +51,7 @@
               </div>
             </div>
           </div>
-          
+
           <input type="hidden" name="datos" value="1">
 
         </div>
