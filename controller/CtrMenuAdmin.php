@@ -28,6 +28,18 @@ class CtrMenuAdmin
         include 'footer.php';
         break;
 
+      case 'directorio':
+        include 'header.php';
+        include 'bodyDirectorio.php';
+        include 'footer.php';
+        break;
+
+      case 'cumplePersonal':
+        include 'header.php';
+        include 'bodyCumple.php';
+        include 'footer.php';
+        break;
+
       case 'salir':
           session_start();
           session_destroy();

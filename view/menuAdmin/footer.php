@@ -13,10 +13,12 @@
 <script src="../libs/js/bootstrap-datepicker.min.js"></script>
 <script src="../libs/js/jquery.metisMenu.js"></script>
 
+
+
 <!-- Custom and plugin javascript -->
 <script src="../libs/js/inspinia.js"></script>
 <script src="../libs/js/pace.min.js"></script>
-
+<script src="../libs/js/table.js"></script>
 
 <script>
 $('.datepicker').datepicker({

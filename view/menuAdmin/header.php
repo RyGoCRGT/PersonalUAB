@@ -21,6 +21,8 @@
 
     <link href="../libs/css/animate.css" rel="stylesheet">
     <link href="../libs/css/style.css" rel="stylesheet">
+    <link href="../libs/css/style.css" rel="stylesheet">
+
 
 </head>
 
@@ -59,6 +61,17 @@
                         <ul class="nav nav-second-level">
                             <li class="active"><a href="index.php?modo=regUsuario">Nuevo</a></li>
                             <li ><a href="#">Lista</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="index.php?modo=directorio"><i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span> <span class="fa arrow"></span></a>
+
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label">Otros</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="index.php?modo=cumplePersonal">Cumpleañeros</a></li>
+                            <li ><a href="#">Calendario</a></li>
                         </ul>
                     </li>
 
