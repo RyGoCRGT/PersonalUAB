@@ -22,6 +22,141 @@ class CtrMenuAdmin
         include 'footer.php';
         break;
 
+      case 'personalCursos':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/CursoEstudiado.php';
+          include '../../model/CursoEstudiadoConsulta.php';
+          include '../../controller/CursoEstudiadoControlador.php';
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonaCurso']);
+
+          $consul = new PersonalConsulta($conexion);
+
+          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+
+          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
+          $target_path = $target_path . basename( $_FILES["respaldoCursos"]["name"]);
+
+          $a=move_uploaded_file($_FILES["respaldoCursos"]["tmp_name"], $target_path);
+
+          $cursoEstudiado = new CursoEstudiado();
+
+          $cursoEstudiado->IdPersonal = $idPersonal['idPersonal'];
+          $cursoEstudiado->NombreInstitucion = $_POST['nombreInstitucionCursos'];
+          $cursoEstudiado->CursoEstudiado = $_POST['cursoEstudiado'];
+          $cursoEstudiado->AnhoEstudio = $_POST['anhoEstudioCuso'];
+          $cursoEstudiado->ReligionInstitucion = $_POST['religionInstCurso'];
+          $cursoEstudiado->RespaldoTituloPDF = $target_path;
+
+          $cursoEstudiadoManejador = new CursoEstudiadoControlador($conexion);
+          $cursoEstudiadoManejador->crear($cursoEstudiado);
+
+          $listaCursoEstudiado = $cursoEstudiadoManejador->listarPer($cursoEstudiado->IdPersonal);
+          $i = 0;
+          ?>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Curso</th>
+                  <th>Institucion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($listaCursoEstudiado as $listaCE): $i++;?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $listaCE->CursoEstudiado; ?></td>
+                    <td><?php echo $listaCE->NombreInstitucion; ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+          <?php
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario</p>";
+        }
+        break;
+
+      case 'personalTitulos':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/TituloProfesional.php';
+          include '../../model/TituloProfesionalConsulta.php';
+          include '../../controller/TituloProfesionalControlador.php';
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonaTitulo']);
+
+          $consul = new PersonalConsulta($conexion);
+
+          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+
+          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
+          $target_path = $target_path . basename( $_FILES["respaldoTitulo"]["name"]);
+
+          $a=move_uploaded_file($_FILES["respaldoTitulo"]["tmp_name"], $target_path);
+
+          $tituloProfesional = new TituloProfesional();
+
+          $tituloProfesional->IdTipoTituloProfesional = $_POST['tipoTituloProfesional'];
+          $tituloProfesional->IdPersonal = $idPersonal['idPersonal'];
+          $tituloProfesional->NombreInstitucion = $_POST['nombreInstitucionTitulos'];
+          $tituloProfesional->CursoProfesionalEstudiado = $_POST['cursoProfesionalEstudiado'];
+          $tituloProfesional->TiempoEstudio = $_POST['anhoEstudioTitulo'];
+          $tituloProfesional->ReligionInstitucion = $_POST['religionInstTitulo'];
+          $tituloProfesional->RespaldoTituloPDF = $target_path;
+
+          $tituloProfesionalManejador = new TituloProfesionalControlador($conexion);
+          $tituloProfesionalManejador->crear($tituloProfesional);
+
+          $listaTituloProfesional = $tituloProfesionalManejador->listarPer($tituloProfesional->IdPersonal);
+          $i = 0;
+          ?>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Curso</th>
+                  <th>Institucion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($listaTituloProfesional as $listaTP): $i++;?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $listaTP->CursoProfesionalEstudiado; ?></td>
+                    <td><?php echo $listaTP->NombreInstitucion; ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+          <?php
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario</p>";
+        }
+        break;
+
       case 'verPersonal':
         if (isset($_POST['datos']))
         {
