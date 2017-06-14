@@ -61,7 +61,8 @@ class PersonalControlador
 
   public function ver($id)
   {
-    
+    $consulta = new PersonaConsulta($this->Conexion);
+    //$consulta->    
   }
 
   public function agregarCargo($personal, $cargo)

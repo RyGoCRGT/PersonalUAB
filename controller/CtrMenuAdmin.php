@@ -171,17 +171,28 @@ class CtrMenuAdmin
           include '../../model/Telefono.php';
           include '../../model/TelefonoConsulta.php';
           include '../../controller/PersonaControlador.php';
+          include '../../controller/PersonalControlador.php';
           include '../../controller/ReferenciaPersonalControlador.php';
           include '../../controller/TelefonoControlador.php';
 
           $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
 
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonalDetalle']);
 
+          $consul = new PersonalConsulta($conexion);
+
+          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+          $personaManejador = new PersonalControlador($conexion);
+
+          $persona = $personaManejador->ver($idPersonal['idPersonal']);
+
+          include 'modalDetallePersonal.php';
 
         }
         else
         {
-          echo "<p style='color:red'>Error al ver Formulario</p>";
+          echo "<p style='color:red'>Error al ver Formulario Detalle</p>";
         }
         break;
 

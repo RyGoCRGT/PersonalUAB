@@ -1035,4 +1035,21 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
 
 </div>
 
-<?php include 'modalDetallePersonal.php'; ?>
+<div class="modal fade bs-example-modal-lg in"  aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title text-center"> <i class="fa fa-user"></i> Personal-UAB</h3>
+      </div>
+      <div class="modal-body">
+        <div class="contenidoDetalle" id="contenidoDetalle">
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,67 +1,22 @@
-<div class="modal fade bs-example-modal-lg in"  aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 class="modal-title text-center"> <i class="fa fa-user"></i> Personal-UAB</h3>
-      </div>
-      <div class="modal-body">
-        <div class="contenidoDetalle" id="contenidoDetalle">
-          <div class="row">
-
-            <div class="col-lg-12 col-sm-12">
-
-              <div class="card hovercard">
-                  <div class="card-background">
-                      <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
-                  </div>
-                  <div class="useravatar">
-                      <img alt="" src="http://lorempixel.com/100/100/people/9/">
-                  </div>
-                  <div class="card-info">
-                    <span class="card-title">Pamela Anderson</span>
-                  </div>
-              </div>
-              <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                      <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                          <div class="hidden-xs">Stars</div>
-                      </button>
-                  </div>
-                  <div class="btn-group" role="group">
-                      <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                          <div class="hidden-xs">Favorites</div>
-                      </button>
-                  </div>
-                  <div class="btn-group" role="group">
-                      <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                          <div class="hidden-xs">Following</div>
-                      </button>
-                  </div>
-              </div>
-
-              <div class="well">
-                <div class="tab-content">
-                  <div class="tab-pane fade in active" id="tab1">
-                    <h3>This is tab 1</h3>
-                  </div>
-                  <div class="tab-pane fade in" id="tab2">
-                    <h3>This is tab 2</h3>
-                  </div>
-                  <div class="tab-pane fade in" id="tab3">
-                    <h3>This is tab 3</h3>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-
-      </div>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-4">
+    <center><img src="../libs/multimedia/img/design/uab.png" alt="uab-logo" width="80" height="80" class="img img-responsive img-rounded"></center>
+    <div class="text-center">
+      <h5>UNIVERSIDAD</h5>
+      <h3>ADVENTISTA</h3>
+      <h5>DE BOLIVIA</h5>
     </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-4">
+    <div class="text-center">
+      <h4>UNIVERSIDAD ADVENTISTA DE BOLIVIA</h4>
+      <br>
+      <h4>JEFATURA PERSONAL</h4>
+      <br><br>
+      <h1>FICHA PERSONAL</h1>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-4">
+    
   </div>
 </div>
