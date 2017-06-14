@@ -59,6 +59,11 @@ class PersonalControlador
     }
   }
 
+  public function ver($id)
+  {
+    
+  }
+
   public function agregarCargo($personal, $cargo)
   {
     try

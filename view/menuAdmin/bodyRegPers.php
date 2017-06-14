@@ -26,6 +26,8 @@ include '../../model/Deporte.php';
 include '../../model/DeporteConsulta.php';
 include '../../model/Enfermedad.php';
 include '../../model/EnfermedadConsulta.php';
+include '../../model/TipoTituloProfesional.php';
+include '../../model/TipoTituloProfesionalConsulta.php';
 include '../../controller/NacionControlador.php';
 include '../../controller/CtrEstadoCivil.php';
 include '../../controller/CtrLugarExpedicion.php';
@@ -38,6 +40,7 @@ include '../../controller/AfpControlador.php';
 include '../../controller/CargoControlador.php';
 include '../../controller/DeporteControlador.php';
 include '../../controller/EnfermedadControlador.php';
+include '../../controller/TipoTituloProfesionalControlador.php';
 
 $conexion = new Conexion();
 
@@ -76,6 +79,9 @@ $listaDeportes = $deporte->listar();
 
 $enfermedad = new EnfermedadControlador($conexion);
 $listaEnfermedades = $enfermedad->listar();
+
+$tipoTituloProfesional = new TipoTituloProfesionalControlador($conexion);
+$listaTipoTituloProfesional = $tipoTituloProfesional->listar();
 
 ?>
 <div id="contenidoAll">
@@ -859,14 +865,14 @@ $listaEnfermedades = $enfermedad->listar();
                               <div class="tab-pane fade" id="HojaVida">
                                 <div class="thumbnail">
 
-                                  <div class="panel with-nav-tabs panel-info">
+                                  <div class="panel with-nav-tabs panel-warning">
                                     <div class="panel-heading" >
                                       <ul class="nav nav-tabs" >
                                           <li class="active" id="CursosLI"><a style="color:white" href="#Cursos" data-toggle="tab" >Cursos</a></li>
                                           <li id="TitulosLI"><a style="color:white" href="#Titulos" data-toggle="tab">Titulos</a></li>
                                     </div>
                                   </div>
-                                  <div class="panel-body" style="display: block;">
+                                  <div class="panel-body" style="display: block; background:rgba(245, 229, 219, 0.76)" >
                                     <div class="tab-content">
                                       <div class="tab-pane fade in active" id="Cursos">
                                         <form id="CursosFrm">
@@ -882,18 +888,135 @@ $listaEnfermedades = $enfermedad->listar();
                                             </div>
                                             <div class="col-xs-12 col-sm-6 col-md-4">
                                               <div class="form-group">
-                                                <label>Nombre Institucion</label>
+                                                <label>Curso Estudiado</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <input type="text" class="form-control" name="nombreInstitucionCursos" id="nombreInstitucionCursos">
+                                                  <input type="text" class="form-control" name="cursoEstudiado" id="cursoEstudiado">
                                                 </div>
                                               </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-4"></div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Año de Estudio</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                                  <input type="text" class="form-control" name="anhoEstudioCuso" id="anhoEstudioCuso">
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                              <div class="form-group">
+                                                <label>Religion Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
+                                                  <input type="text" class="form-control" name="religionInstCurso" id="religionInstCurso">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                              <div class="form-group">
+                                                <label>Respaldo Curso (IMG)</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-file-image-o"></i></span>
+                                                  <input type="file" class="form-control" name="respaldoCursos" id="respaldoCursos">
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <input type="hidden" name="datos" value="1">
+                                          <input type="hidden" name="ciPersonaCurso" id="ciPersonaCurso" value="1">
+                                          <div class="pull-right">
+                                            <button type="submit" class="btn btn-success" name="guardar"><i class="fa fa-send"></i>Añadir</button>
                                           </div>
                                         </form>
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="mensajeCursosPersonal"></div>
+                                        </div>
                                       </div>
-                                      <div class="tab-pane fade" id="Titulos"></div>
+                                      <div class="tab-pane fade" id="Titulos">
+                                        <form id="TiulosFrm">
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Nombre Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <input type="text" class="form-control" name="nombreInstitucionTitulos" id="nombreInstitucionTitulos">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Curso Profesional Estudiado</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <input type="text" class="form-control" name="cursoProfesionalEstudiado" id="cursoProfesionalEstudiado">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Tipo de Tiulo</label>
+                                                <div class="input-group selector">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <select class="selectpicker form-control" name="tipoTituloProfesional" id="tipoTituloProfesional">
+                                                    <?php foreach ($listaTipoTituloProfesional as $listaTipoTP): ?>
+                                                      <option value="<?php echo $listaTipoTP->IdTipoTituloProfesional; ?>"><?php echo $listaTipoTP->NombreTipoTitulo; ?></option>
+                                                    <?php endforeach; ?>
+                                                  </select>
+                                                </div>
+                                                <div class="input-group selector-mobile">
+                                                  <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <select class="form-control" name="tipoTituloProfesional" id="tipoTituloProfesional">
+                                                    <?php foreach ($listaTipoTituloProfesional as $listaTipoTP): ?>
+                                                      <option value="<?php echo $listaTipoTP->IdTipoTituloProfesional; ?>"><?php echo $listaTipoTP->NombreTipoTitulo; ?></option>
+                                                    <?php endforeach; ?>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Religion Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
+                                                  <input type="text" class="form-control" name="religionInstTitulo" id="religionInstTitulo">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Tiempo de Estudio</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                                  <input type="text" class="form-control" name="anhoEstudioTitulo" id="anhoEstudioTitulo">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Respaldo Curso (IMG)</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-file-image-o"></i></span>
+                                                  <input type="file" class="form-control" name="respaldoTitulo" id="respaldoTitulo">
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <input type="hidden" name="datos" value="1">
+                                          <input type="hidden" name="ciPersonaTitulo" id="ciPersonaTitulo" value="1">
+                                          <div class="pull-right">
+                                            <button type="submit" class="btn btn-success" name="guardar"><i class="fa fa-send"></i>Añadir</button>
+                                          </div>
+                                        </form>
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="mensajeTitulosPersonal"></div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
 

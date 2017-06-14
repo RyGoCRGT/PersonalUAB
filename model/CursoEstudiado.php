@@ -13,6 +13,7 @@ class CursoEstudiado
 
   function __construct()
   {
+    $this->IdCursoEstudiado = null;
   }
 
   public function __set($atributo, $value)
