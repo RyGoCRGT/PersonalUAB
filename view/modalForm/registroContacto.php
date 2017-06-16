@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <form action="index.php?modo=registrarContacto" method="post">
+      <form action="index.php?modo=contactoInsertar" method="post">
 
         <div class="modal-header">
           <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -49,6 +49,14 @@
                   <input id="apellidoMaternoRef" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoRef">
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Telefono</label>
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
+              <input id="telefonoReferencia" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefonoReferencia">
             </div>
           </div>
 

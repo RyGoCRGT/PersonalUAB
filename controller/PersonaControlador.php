@@ -66,6 +66,39 @@ class PersonaControlador
     }
   }
 
+  public function listarPersona()
+  {
+    $consulta = new PersonaConsulta($this->Conexion);
+    $listaPersona = $consulta->listaPersona();
+    $listArray = array();
+    $i = 0;
+    foreach ($listaPersona as $listaP) {
+      $persona = new Persona();
+      $persona->IdPersona = $listaP['idPersona'];
+      $persona->PrimerNombre = $listaP['primerNombre'];
+      $persona->SegundoNombre = $listaP['segundoNombre'];
+      $persona->ApellidoPaterno = $listaP['apellidoPaterno'];
+      $persona->ApellidoMaterno = $listaP['apellidoMaterno'];
+      //telefono
+      $consultaTel = new TelefonoConsulta($this->Conexion);
+      $listaTelefono = $consultaTel->listaNumeroPersona($listaP['idPersona']);
+      $c = 0;
+      $listArrayTelefonos = array();
+      foreach ($listaTelefono as $listaT) {
+          $telefono=new Telefono();
+          $telefono->NumeroTelefono=$listaT['numeroTelefono'];
+          // echo   $persona->PrimerNombre ;
+          // echo   $telefono->NumeroTelefono;
+          $listArrayTelefonos[$c]=$telefono;
+          $c++;
+      }
+      $persona->ListaTelefonos=$listArrayTelefonos;
+      $listArray[$i] = $persona;
+      $i++;
+    }
+    return $listArray;
+  }
+
 }
 
 ?>

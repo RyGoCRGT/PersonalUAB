@@ -20,7 +20,7 @@
 <script src="../libs/js/pace.min.js"></script>
 
 <script src="../libs/js/table.js"></script>
-
+<script src="../libs/js/enviarPersonaUsuario.js"></script>
 <script src="../libs/js/enviarPersona.js"></script>
 <script src="../libs/js/enviarPersonal.js"></script>
 <script src="../libs/js/enviarConyugue.js"></script>

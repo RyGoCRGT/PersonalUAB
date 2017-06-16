@@ -262,7 +262,7 @@ class CtrMenuAdmin
 
         $consulta = new PersonaConsulta($conexion);
 
-        $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/personal/";
+        $target_path = "/wamp/www/PersonalUAB/view/libs/multimedia/img/personal/";
         $target_path = $target_path . basename( $_FILES["fotoPersonal"]["name"]);
 
         $a=move_uploaded_file($_FILES["fotoPersonal"]["tmp_name"], $target_path);
@@ -346,17 +346,47 @@ class CtrMenuAdmin
         include 'footer.php';
         break;
 
-      case 'registrarContacto':
-      if (isset($_POST['datos'])) {
-        include '../model/conexion.php';
-        include '../model/persona.php';
-        $con = new Conexion();
-      }else {
-        echo "Campos Vacios";
+      case 'contactoInsertar':
+      if (isset($_POST['datos']))
+      {
+        $ci = $_POST['primerNombreRef'].$_POST['apellidoPaternoRef'];
+        include '../../model/conexion.php';
+        include '../../model/Persona.php';
+        include '../../model/PersonaConsulta.php';
+        include '../../model/Telefono.php';
+        include '../../model/TelefonoConsulta.php';
+        include '../../controller/PersonaControlador.php';
+        include '../../controller/TelefonoControlador.php';
+
+        $conexion = new Conexion();
+        $persona = new Persona();
+        $persona->PrimerNombre = ucwords(strtolower($_POST['primerNombreRef']));
+        $persona->SegundoNombre = ucwords(strtolower($_POST['segundoNombreRef']));
+        $persona->ApellidoPaterno = ucwords(strtolower($_POST['apellidoPaternoRef']));
+        $persona->ApellidoMaterno = ucwords(strtolower($_POST['apellidoMaternoRef']));
+        $persona->CI = strtoupper($ci);
+
+        $personaManejador = new PersonaControlador($conexion);
+        $personaManejador->crear($persona);
+
+        $consulta = new PersonaConsulta($conexion);
+
+        $idReferenciaPersona = $consulta->obtenerIdPersona($persona->CI);//obteniendo id de persona referencia de personal
+
+        // telefono
+        $telefono = new Telefono();
+        $telefono->IdPersona = $idReferenciaPersona['idPersona'];
+        $telefono->NumeroTelefono = $_POST['telefonoReferencia'];
+        $telefonoManejador = new TelefonoControlador($conexion);
+        $telefonoManejador->crear($telefono);
+
+        echo "<p style='color:green'>Guardado</p>";
+      }
+      else
+      {
+        echo "<p style='color:red'>Error al Enviar Formulario</p>";
       }
       break;
-
-        break;
 
       case 'salir':
           session_start();
