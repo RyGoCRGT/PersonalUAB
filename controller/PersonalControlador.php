@@ -17,8 +17,8 @@ class PersonalControlador
 
       $this->Conexion->beginTransaction();
 
-      $query = "INSERT INTO personal (idPersonal, idPersona, idNacion, idTipoPersonal, idCarrera, direccion, email, idCiudad, idReligion, fechaBautizmo, idSeguro, numeroSeguro, idAfp, numeroAfp, numeroLibretaMilitar, numeroPasaporte, tipoSangre, hobby, lecturaPreferencial, fechaIngreso, rutaFoto)
-                VALUES (:idPersonal, :idPersona, :idNacion, :idTipoPersonal, :idCarrera, :direccion, :email, :idCiudad, :idReligion, :fechaBautizmo, :idSeguro, :numeroSeguro, :idAfp, :numeroAfp, :numeroLibretaMilitar, :numeroPasaporte, :tipoSangre, :hobby, :lecturaPreferencial, :fechaIngreso, :rutaFoto)";
+      $query = "INSERT INTO personal (idPersonal, idPersona, idNacion, idTipoPersonal, idCarrera, direccion, email, idCiudad, idReligion, fechaBautizmo, idSeguro, numeroSeguro, idAfp, numeroAfp, numeroLibretaMilitar, numeroPasaporte, tipoSangre, hobby, lecturaPreferencial, numeroRegistroProfesional, fechaIngreso, rutaFoto)
+                VALUES (:idPersonal, :idPersona, :idNacion, :idTipoPersonal, :idCarrera, :direccion, :email, :idCiudad, :idReligion, :fechaBautizmo, :idSeguro, :numeroSeguro, :idAfp, :numeroAfp, :numeroLibretaMilitar, :numeroPasaporte, :tipoSangre, :hobby, :lecturaPreferencial, :numeroRegistroProfesional, :fechaIngreso, :rutaFoto)";
 
       $stmtPersonal = $this->Conexion->prepare($query);
 
@@ -41,6 +41,7 @@ class PersonalControlador
       $stmtPersonal->bindValue(':tipoSangre', $personal->TipoSangre);
       $stmtPersonal->bindValue(':hobby', $personal->Hobby);
       $stmtPersonal->bindValue(':lecturaPreferencial', $personal->LecturaPreferencial);
+      $stmtPersonal->bindValue(':numeroRegistroProfesional', $personal->NumeroRegistroProfesional);
       $stmtPersonal->bindValue(':fechaIngreso', $personal->FechaIngreso);
       $stmtPersonal->bindValue(':rutaFoto', $personal->Ruta);
 
@@ -61,8 +62,110 @@ class PersonalControlador
 
   public function ver($id)
   {
-    $consulta = new PersonaConsulta($this->Conexion);
-    //$consulta->    
+    $consulta = new PersonalConsulta($this->Conexion);
+    $datos = $consulta->datosPersonal($id);
+
+    $personal = new Personal();
+
+    $persona = new Persona();
+
+    $persona->IdPersona = $datos['idPersona'];
+
+    $consultaTele = new PersonaConsulta($this->Conexion);
+    $listaTelefonos = $consultaTele->listaTelefonos($persona->IdPersona);
+
+    foreach ($listaTelefonos as $listT)
+    {
+      $persona->setListaTelefonos($listT['numeroTelefono']);
+    }
+
+    $persona->PrimerNombre = $datos['primerNombre'];
+    $persona->SegundoNombre = $datos['segundoNombre'];
+    $persona->ApellidoPaterno = $datos['apellidoPaterno'];
+    $persona->ApellidoMaterno = $datos['apellidoMaterno'];
+    $persona->CI = $datos['CI'];
+    $persona->LugarExpedicion = $datos['nombreLugarExpedicion'];
+    $persona->FechaNacimiento = $datos['fechaNacimiento'];
+    $persona->Sexo = $datos['sexo'];
+    $persona->EstadoCivil = $datos['nombreEstadoCivil'];
+
+    $personal->IdPersonal = $datos['idPersonal'];
+    $personal->IdPersona = $persona;
+    $personal->IdNacion = $datos['nombreNacion'];
+    $personal->IdTipoPersonal = $datos['nombreTipoPersonal'];
+    $personal->IdCarrera = $datos['nombreCarrera'];
+    $personal->Direccion = $datos['direccion'];
+    $personal->Email = $datos['email'];
+    $personal->IdCiudadNacimiento = $datos['nombreCiudad'];
+    $personal->IdReligion = $datos['nombreReligion'];
+    $personal->FechaBautizmo = $datos['fechaBautizmo'];
+    $personal->IdSeguro = $datos['nombreSeguro'];
+    $personal->NumeroSeguro = $datos['numeroSeguro'];
+    $personal->IdAfp = $datos['nombreAfp'];
+    $personal->NumeroAfp = $datos['numeroAfp'];
+    $personal->NumeroLibretaMilitar = $datos['numeroLibretaMilitar'];
+    $personal->NumeroPasaporte = $datos['numeroPasaporte'];
+    $personal->TipoSangre = $datos['tipoSangre'];
+    $personal->Hobby = $datos['hobby'];
+    $personal->LecturaPreferencial = $datos['lecturaPreferencial'];
+    $personal->NumeroRegistroProfesional = $datos['numeroRegistroProfesional'];
+    $personal->FechaIngreso = $datos['fechaIngreso'];
+    $personal->Ruta = $datos['rutaFoto'];
+
+    $personalConyugueManejador = new ConyuguePersonalControlador($this->Conexion);
+    $personalConyugue = $personalConyugueManejador->ver($personal->IdPersonal);
+
+    $personalHijosManejador = new HijosPersonalControlador($this->Conexion);
+    $personalHijos = $personalHijosManejador->verHijos($personal->IdPersonal);
+
+    $personalReferenciaManejador = new ReferenciaPersonalControlador($this->Conexion);
+    $personalReferencia = $personalReferenciaManejador->ver($personal->IdPersonal);
+
+    $cusosPersonalManejador = new CursoEstudiadoControlador($this->Conexion);
+    $listaCursosPersonal = $cusosPersonalManejador->listarPer($personal->IdPersonal);
+
+    $titulosPersonalManejador = new TituloProfesionalControlador($this->Conexion);
+    $listaTitulosPersonal = $titulosPersonalManejador->listarPer($personal->IdPersonal);
+
+    $personal->C_HijosLista = $personalHijos;
+
+    $personal->C_Conyugue = $personalConyugue;
+
+    $personal->C_Referencia = $personalReferencia;
+
+    $personal->ListaCursos = $listaCursosPersonal;
+
+    $personal->ListaTitulos = $listaTitulosPersonal;
+
+    $listaCargos = $consulta->cargosPersonal($personal->IdPersonal);
+    $listaEnfermedades = $consulta->enfermedadesPersonal($personal->IdPersonal);
+    $listaDeportes = $consulta->deportesPersonal($personal->IdPersonal);
+
+    foreach ($listaCargos as $listaC)
+    {
+      $cargo = new Cargo();
+      $cargo->IdCargo = $listaC['idCargo'];
+      $cargo->NombreCargo = $listaC['nombreCargo'];
+      $personal->setListaCargos($cargo);
+    }
+
+    foreach ($listaEnfermedades as $listaE)
+    {
+      $enfermedad = new Enfermedad();
+      $enfermedad->IdEnfermedad = $listaE['idEnfermedad'];
+      $enfermedad->NombreEnfermedad = $listaE['nombreEnfermedad'];
+      $personal->setListaEnfermedades($enfermedad);
+    }
+
+    foreach ($listaDeportes as $listaD)
+    {
+      $deporte = new Deporte();
+      $deporte->IdDeporte = $listaD['idDeporte'];
+      $deporte->NombreDeporte = $listaD['nombreDeporte'];
+      $personal->setListaDeportes($deporte);
+    }
+
+    return $personal;
   }
 
   public function agregarCargo($personal, $cargo)

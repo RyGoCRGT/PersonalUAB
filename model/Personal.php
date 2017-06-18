@@ -22,12 +22,20 @@ class Personal
   private $TipoSangre;
   private $Hobby;
   private $LecturaPreferencial;
+  private $NumeroRegistroProfesional;
   private $FechaIngreso;
   private $Ruta;
+
+  private $C_Conyugue;
+  private $C_HijosLista;
+  private $C_Referencia;
 
   private $ListaEnfermedades;
   private $ListaDeportes;
   private $ListaCargos;
+
+  private $ListaCursos;
+  private $ListaTitulos;
 
   function __construct()
   {
@@ -38,6 +46,13 @@ class Personal
     $this->NumeroLibretaMilitar = null;
     $this->NumeroPasaporte = null;
     $this->Ruta =  null;
+    $this->NumeroRegistroProfesional = null;
+    $this->C_HijosLista = array();
+    $this->ListaEnfermedades = array();
+    $this->ListaDeportes = array();
+    $this->ListaCargos = array();
+    $this->ListaCursos = array();
+    $this->ListaTitulos = array();
   }
 
   public function __set($atributo, $value)
@@ -64,6 +79,22 @@ class Personal
     }
 
   }
+
+  public function getC_HijosLista(){ return $this->C_HijosLista; }
+  public function setC_HijosLista($value){ $this->C_HijosLista[] = $value; }
+
+  public function getListaEnfermedades(){ return $this->ListaEnfermedades; }
+  public function setListaEnfermedades($value){ $this->ListaEnfermedades[] = $value; }
+
+  public function getListaDeportes(){ return $this->ListaDeportes; }
+  public function setListaDeportes($value){ $this->ListaDeportes[] = $value; }
+
+  public function getListaCargos(){ return $this->ListaCargos; }
+  public function setListaCargos($value){ $this->ListaCargos[] = $value; }
+
+  public function setListaCursos($value){ $this->ListaCursos[] = $value; }
+
+  public function setListaTitulos($value){ $this->ListaTitulos[] = $value; }
 
 }
 

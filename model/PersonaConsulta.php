@@ -30,10 +30,22 @@ class PersonaConsulta
 
   public function obtenerIdPersona($ci)
   {
-    $consulta = $this->Conexion->prepare('SELECT idPersona FROM persona where CI=:ci');
+    $consulta = $this->Conexion->prepare('SELECT * FROM persona where CI=:ci');
     $consulta->bindParam(':ci', $ci);
     $consulta->execute();
     $registro = $consulta->fetch();
+    return $registro;
+  }
+
+  public function listaTelefonos($id)
+  {
+    $query = "SELECT *
+              FROM telefono
+              WHERE idPersona = :idPersona";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindParam(':idPersona', $id);
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
     return $registro;
   }
 

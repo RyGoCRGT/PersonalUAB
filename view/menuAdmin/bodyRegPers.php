@@ -518,6 +518,14 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                         </div>
 
                                         <div class="form-group">
+                                          <label>Numero de Registro Profesional</label>
+                                          <div class="input-group" >
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-sort-numeric-asc"></i></span>
+                                            <input id="numeroRegProfesional" type="text" class="form-control" placeholder="Numero de Registro Profesional:" name="numeroRegProfesional">
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group">
                                           <label>Lectura Preferencial</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
@@ -1044,7 +1052,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
       </div>
       <div class="modal-body">
         <div class="contenidoDetalle" id="contenidoDetalle">
-          
+
         </div>
       </div>
       <div class="modal-footer">

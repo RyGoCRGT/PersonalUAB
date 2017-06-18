@@ -24,7 +24,6 @@ function enviarDatosPersona() {
       $("#telefono").attr("disabled", "disabled");
       $(".sexo").attr("disabled", "disabled");
 
-
       $("#mesajePersona").html(info);
       $("#GeneralLI").removeClass('active');
       $("#PersonalLI").addClass('active');

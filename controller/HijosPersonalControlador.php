@@ -35,6 +35,35 @@ class HijosPersonalControlador
     }
   }
 
+  public function verHijos($idPersonal)
+  {
+    $consultaHijo = new HijosPersonalConsulta($this->Conexion);
+    $datosHijos = $consultaHijo->datosHijo($idPersonal);
+    //var_dump($datosHijos);
+    $listaHijos = array();
+    $i = 0;
+
+    foreach ($datosHijos as $datos)
+    {
+      $persona = new Persona();
+      $persona->IdPersona = $datos['idPersona'];
+      $persona->PrimerNombre = $datos['primerNombre'];
+      $persona->SegundoNombre = $datos['segundoNombre'];
+      $persona->ApellidoPaterno = $datos['apellidoPaterno'];
+      $persona->ApellidoMaterno = $datos['apellidoMaterno'];
+      $persona->FechaNacimiento = $datos['fechaNacimiento'];
+
+      $hijosPersonal = new HijosPersonal();
+      $hijosPersonal->IdHijosPersonal = $datos['idHijosPersonal'];
+      $hijosPersonal->IdPersonal = $datos['idPersonal'];
+      $hijosPersonal->IdPersona = $persona;
+      $listaHijos[$i] = $hijosPersonal;
+      $i++;
+    }
+
+    return $listaHijos;
+  }
+
 }
 
 ?>
