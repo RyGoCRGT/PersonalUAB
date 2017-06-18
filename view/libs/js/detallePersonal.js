@@ -12,11 +12,10 @@ function verDatosPersonal() {
     $.ajax({
       "method" : "POST",
       "url" : "index.php?modo=verPersonal",
-      "data" : data,
-      contentType: false,
-      processData: false
+      "data" : data
     }).done( function(info) {
 
+      $('#contenidoDetalle').html(info);
 
     });
   });

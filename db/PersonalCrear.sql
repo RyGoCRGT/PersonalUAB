@@ -106,6 +106,7 @@ CREATE TABLE personal(
 	tipoSangre varchar(10) null,
 	hobby varchar(70) null,
 	lecturaPreferencial varchar(100) null,
+	numeroRegistroProfesional varchar(50) null,
 	fechaIngreso date not null,
 	rutaFoto varchar(200) null,
 	FOREIGN KEY (idPersona) REFERENCES persona (idPersona) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -212,5 +213,16 @@ CREATE TABLE cargoPersonal(
 	idCargo int not null,
 	idPersonal int not null,
 	FOREIGN KEY (idCargo) REFERENCES cargo (idCargo) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE experienciaLaboral(
+	idExperienciaLaboral int not null auto_increment primary key,
+	idPersonal int not null,
+	nombreInstitucion varchar(100) not null,
+	cargoResponsabilidad varchar(100) not null,
+	aniosDeServicio int not null,
+	religionInstitucion varchar(50) null,
+	motivoRetiro varchar(100) null,
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE
 );

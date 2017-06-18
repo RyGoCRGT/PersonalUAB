@@ -66,7 +66,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="index.php?modo=directorio"><i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span> <span class="fa arrow"></span></a>
+                        <a href="index.php?modo=directorio"><i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span></a>
 
                     </li>
                     <li>

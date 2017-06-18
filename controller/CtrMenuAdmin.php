@@ -162,26 +162,53 @@ class CtrMenuAdmin
         {
           include '../../model/conexion.php';
           include '../../model/Persona.php';
+          include '../../model/Cargo.php';
+          include '../../model/Enfermedad.php';
+          include '../../model/Deporte.php';
           include '../../model/Personal.php';
           include '../../model/PersonaConsulta.php';
           include '../../model/PersonalConsulta.php';
           include '../../model/ReferenciaPersonal.php';
+          include '../../model/ReferenciaPersonalConsulta.php';
           include '../../model/ConyuguePersonal.php';
+          include '../../model/ConyuguePersonalConsulta.php';
+          include '../../model/CursoEstudiado.php';
+          include '../../model/CursoEstudiadoConsulta.php';
           include '../../model/HijosPersonal.php';
+          include '../../model/HijosPersonalConsulta.php';
           include '../../model/Telefono.php';
           include '../../model/TelefonoConsulta.php';
+          include '../../model/TituloProfesional.php';
+          include '../../model/TituloProfesionalConsulta.php';
           include '../../controller/PersonaControlador.php';
+          include '../../controller/PersonalControlador.php';
           include '../../controller/ReferenciaPersonalControlador.php';
           include '../../controller/TelefonoControlador.php';
+          include '../../controller/ConyuguePersonalControlador.php';
+          include '../../controller/HijosPersonalControlador.php';
+          include '../../controller/CursoEstudiadoControlador.php';
+          include '../../controller/TituloProfesionalControlador.php';
 
           $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
 
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonalDetalle']);
+          // $idPersona = $consulta->obtenerIdPersona(7548743);
+          //
+          // $consul = new PersonalConsulta($conexion);
+          //
+          // $idPersonal = $consul->datosPersonal($idPersona['idPersona']);// COMEMTAR
 
+          $personalManejador = new PersonalControlador($conexion);
+
+          $personal = $personalManejador->ver($idPersona['idPersona']);
+
+          include 'modalDetallePersonal.php';
 
         }
         else
         {
-          echo "<p style='color:red'>Error al ver Formulario</p>";
+          echo "<p style='color:red'>Error al ver Formulario Detalle</p>";
         }
         break;
 
@@ -377,7 +404,7 @@ class CtrMenuAdmin
           $telefonoManejador = new TelefonoControlador($conexion);
           $telefonoManejador->crear($telefono);
 
-          echo "<p style='color:green'>Gurdado Exitoso</p>";
+          echo "<p style='color:green'>Guardado Exitoso</p>";
 
         }
         else
@@ -427,6 +454,7 @@ class CtrMenuAdmin
         $personal->TipoSangre = $_POST['tipoSangre'];
         $personal->Hobby = $_POST['hobby'];
         $personal->LecturaPreferencial = $_POST['lecturaP'];
+        $personal->NumeroRegistroProfesional = $_POST['numeroRegProfesional'];
         $personal->FechaIngreso = $_POST['fechaIngres'];
         $personal->Ruta = $target_path;
 
