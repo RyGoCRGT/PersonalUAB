@@ -16,6 +16,12 @@ class CtrMenuAdmin
 
     switch ($this->Modo) {
 
+      case 'listaPersonal':
+      include 'header.php';
+      include 'bodylistPers.php';
+      include 'footer.php';
+        break;
+
       case 'regPersonal':
         include 'header.php';
         include 'bodyRegPers.php';
