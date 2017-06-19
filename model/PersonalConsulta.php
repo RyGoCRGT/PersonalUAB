@@ -141,6 +141,29 @@ class PersonalConsulta
     return $registro;
   }
 
+  public function listaPersonal()
+  {
+    $query = "SELECT
+                p.idPersona,
+                p.primerNombre,
+                p.segundoNombre,
+                p.apellidoPaterno,
+                p.apellidoMaterno,
+                p.CI,
+                p.fechaNacimiento,
+                p.sexo,
+                pl.idpersonal
+              FROM
+                personal pl,
+                persona p
+              WHERE
+                p.idPersona=pl.idPersona";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    return $registro;
+  }
+
 }
 
 ?>

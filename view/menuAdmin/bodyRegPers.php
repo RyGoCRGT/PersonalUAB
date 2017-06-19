@@ -1056,9 +1056,14 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
         </div>
       </div>
       <div class="modal-footer">
-        <a id="exportarFormularioPDF" class="btn btn-danger">Exportar PDF <i class="fa fa-file-pdf-o"></i></a>
-        <a id="exportarFormularioEXCEL" class="btn btn-success">Exportar EXCEL <i class="fa fa-file-excel-o"></i></a>
-        <a id="exportarFormularioWORD" class="btn btn-primary">Exportar WORD <i class="fa fa-file-word-o"></i></a>
+        <div class="pull-left">
+          <a id="exportarFormularioPDF" class="btn btn-danger btn-sm">Exportar PDF <i class="fa fa-file-pdf-o"></i></a>
+          <a id="exportarFormularioEXCEL" class="btn btn-success btn-sm">Exportar EXCEL <i class="fa fa-file-excel-o"></i></a>
+          <a id="exportarFormularioWORD" class="btn btn-primary btn-sm">Exportar WORD <i class="fa fa-file-word-o"></i></a>
+        </div>
+        <div class="pull-right">
+          <a href="index.php?modo=listaPersonal" class="btn btn-success btn-lg">LISTO <i class="fa fa-check"></i></a>
+        </div>
       </div>
     </div>
   </div>

@@ -55,7 +55,7 @@
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Personal</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="active"><a href="index.php?modo=regPersonal">Nuevo</a></li>
-                            <li ><a href="#">Lista</a></li>
+                            <li ><a href="index.php?modo=listaPersonal">Lista</a></li>
                         </ul>
                     </li>
                     <li>
