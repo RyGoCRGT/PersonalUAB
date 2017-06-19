@@ -16,7 +16,9 @@ function verDatosPersonal() {
     }).done( function(info) {
 
       $('#contenidoDetalle').html(info);
-
+      $("#exportarFormularioPDF").attr("href", "formularioLlenoPDF.php?datos=1&ciPersonalDetalle="+ci);
+      $("#exportarFormularioWORD").attr("href", "formularioLlenoWORD.php?datos=1&ciPersonalDetalle="+ci);
+      $("#exportarFormularioEXCEL").attr("href", "formularioLlenoEXCEL.php?datos=1&ciPersonalDetalle="+ci);
     });
   });
 
