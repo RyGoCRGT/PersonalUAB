@@ -73,7 +73,13 @@ $i = 1;
                                   <td><?php echo "{$personal->IdPersona->PrimerNombre} {$personal->IdPersona->SegundoNombre} {$personal->IdPersona->ApellidoPaterno} {$personal->IdPersona->ApellidoMaterno}"; ?></td>
                                   <td class="text-left"><?php echo $personal->IdPersona->CI ?></td>
                                   <td class="text-left"><?php echo $personal->IdPersona->Sexo ?></td>
-                                  <td><a href="#" class="btn btn-danger"><i class="fa fa-eye"></i></a></td>
+                                  <td>
+                                    <form class="detallePersonalVER">
+                                      <input type="hidden" name="datos" value="1">
+                                      <input type="hidden" name="ciPersonalDetalle" class="ci"  value="<?php echo $personal->IdPersona->CI ?>">
+                                      <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalView"><i class="fa fa-eye"></i></button>
+                                    </form>
+                                  </td>
                                   <td><a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                                 </tr>
                               <?php $i++; endforeach; ?>
@@ -94,4 +100,31 @@ $i = 1;
 
 
 
+</div>
+
+
+<div class="modal fade" id="modalView"  aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title text-center"> <i class="fa fa-user"></i> Personal-UAB</h3>
+      </div>
+      <div class="modal-body">
+        <div class="contenidoDetalleVER">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-left">
+          <a class="btn btn-danger btn-sm exportarFormularioPDFVER">Exportar PDF <i class="fa fa-file-pdf-o"></i></a>
+          <a class="btn btn-success btn-sm exportarFormularioEXCELVER">Exportar EXCEL <i class="fa fa-file-excel-o"></i></a>
+          <a class="btn btn-primary btn-sm exportarFormularioWORDVER">Exportar WORD <i class="fa fa-file-word-o"></i></a>
+        </div>
+        <div class="pull-right">
+          <a href="index.php?modo=listaPersonal" class="btn btn-success btn-lg">LISTO <i class="fa fa-check"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
