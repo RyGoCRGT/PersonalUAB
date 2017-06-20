@@ -1,3 +1,15 @@
+<?php
+include '../../model/conexion.php';
+include '../../model/Telefono.php';
+include '../../model/TelefonoConsulta.php';
+include '../../model/persona.php';
+include '../../model/PersonaConsulta.php';
+include '../../controller/PersonaControlador.php';
+$con=new Conexion ();
+$personaControlador=new PersonaControlador($con);
+$listaPersona=$personaControlador->listarPersona();
+
+ ?>
 <div id="contenidoAll">
 
   <div class="row  border-bottom white-bg dashboard-header">
@@ -14,7 +26,7 @@
             <div class="ibox-content forum-post-container">
                 <div class="forum-post-info">
                   <div class="pull-right">
-                    <a href="#RegistroContacto" data-toggle="modal" class="clickable filter btn btn-success">Añadir Contacto <i class="fa fa-plus" data-toggle="tooltip" title="Añadir nuevo Contacto"></i></a>
+                    <a href="#RegistroContacto" data-toggle="modal" class="clickable filter btn btn-success">Añadir Contacto <i class="fa fa-user-plus" data-toggle="tooltip" title="Añadir nuevo Contacto"></i></a>
                     <!-- <span class="clickable filter btn btn-info" data-toggle="tooltip" title="Click aqui para buscar un Producto" data-container="body">
                       <i class="fa fa-search"></i>
                     </span> -->
@@ -53,42 +65,21 @@
 
                       <tbody class="text-center">
 
-                          <tr>
-                            <td>1</td>
-                            <td>Rodrigo Poma Mollo</td>
-                            <td><a href="#ver" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
-                            <td><a href="#editar" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
-                            <!-- <td>
-                              <form  id="dardeBajaProd">
-                                <input type="hidden" name="id" value="">
-                                <button type="submit" name="dabaja" class="btn btn-success efec"><i class="fa fa-toggle-on"></i></button>
-                              </form>
-                            </td> -->
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Luis Poma Mollo</td>
-                            <td><a href="#ver" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
-                            <td><a href="#editar" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
-                            <!-- <td>
-                              <form  id="dardeBajaProd">
-                                <input type="hidden" name="id" value="">
-                                <button type="submit" name="dabaja" class="btn btn-success efec"><i class="fa fa-toggle-on"></i></button>
-                              </form>
-                            </td> -->
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Pedro Poma Mollo</td>
-                            <td><a href="#ver" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
-                            <td><a href="#editar" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
-                            <!-- <td>
-                              <form  id="dardeBajaProd">
-                                <input type="hidden" name="id" value="">
-                                <button type="submit" name="dabaja" class="btn btn-success efec"><i class="fa fa-toggle-on"></i></button>
-                              </form>
-                            </td> -->
-                          </tr>
+                        <?php
+                      $i = 1;
+                            foreach ($listaPersona as $listaP): ?>
+                        <tr>
+                          <td><?php echo $i++; ?></td>
+                          <td><?php echo ucwords(strtolower($listaP->PrimerNombre))." ".ucwords(strtolower($listaP->ApellidoPaterno))." ".ucwords(strtolower($listaP->ApellidoMaterno)); ?></td>
+                          <td><a href="#ver<?php echo $listaP->IdPersona;?>" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
+                          <td><a href="#editar" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
+
+                        </tr>
+
+                      <?php
+                        include '../modalForm/verContacto.php';
+
+                        endforeach; ?>
 
                       </tbody>
                     </table>
@@ -104,5 +95,5 @@
 </div>
 <?php
   include '../modalForm/registroContacto.php';
-  include '../modalForm/verContacto.php';
+
 ?>

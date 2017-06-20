@@ -16,151 +16,10 @@ class CtrMenuAdmin
 
     switch ($this->Modo) {
 
-      case 'listaPersonal':
-      include 'header.php';
-      include 'bodylistPers.php';
-      include 'footer.php';
-        break;
-
       case 'regPersonal':
         include 'header.php';
         include 'bodyRegPers.php';
         include 'footer.php';
-        break;
-
-      case 'personalCursos':
-        if (isset($_POST['datos']))
-        {
-          include '../../model/conexion.php';
-          include '../../model/PersonaConsulta.php';
-          include '../../model/PersonalConsulta.php';
-          include '../../model/CursoEstudiado.php';
-          include '../../model/CursoEstudiadoConsulta.php';
-          include '../../controller/CursoEstudiadoControlador.php';
-          $conexion = new Conexion();
-          $consulta = new PersonaConsulta($conexion);
-
-          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonaCurso']);
-
-          $consul = new PersonalConsulta($conexion);
-
-          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
-
-          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
-          $target_path = $target_path . basename( $_FILES["respaldoCursos"]["name"]);
-
-          $a=move_uploaded_file($_FILES["respaldoCursos"]["tmp_name"], $target_path);
-
-          $cursoEstudiado = new CursoEstudiado();
-
-          $cursoEstudiado->IdPersonal = $idPersonal['idPersonal'];
-          $cursoEstudiado->NombreInstitucion = $_POST['nombreInstitucionCursos'];
-          $cursoEstudiado->CursoEstudiado = $_POST['cursoEstudiado'];
-          $cursoEstudiado->AnhoEstudio = $_POST['anhoEstudioCuso'];
-          $cursoEstudiado->ReligionInstitucion = $_POST['religionInstCurso'];
-          $cursoEstudiado->RespaldoTituloPDF = $target_path;
-
-          $cursoEstudiadoManejador = new CursoEstudiadoControlador($conexion);
-          $cursoEstudiadoManejador->crear($cursoEstudiado);
-
-          $listaCursoEstudiado = $cursoEstudiadoManejador->listarPer($cursoEstudiado->IdPersonal);
-          $i = 0;
-          ?>
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Curso</th>
-                  <th>Institucion</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($listaCursoEstudiado as $listaCE): $i++;?>
-                  <tr>
-                    <td><?php echo $i; ?></td>
-                    <td><?php echo $listaCE->CursoEstudiado; ?></td>
-                    <td><?php echo $listaCE->NombreInstitucion; ?></td>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
-          <?php
-
-        }
-        else
-        {
-          echo "<p style='color:red'>Error al ver Formulario</p>";
-        }
-        break;
-
-      case 'personalTitulos':
-        if (isset($_POST['datos']))
-        {
-          include '../../model/conexion.php';
-          include '../../model/PersonaConsulta.php';
-          include '../../model/PersonalConsulta.php';
-          include '../../model/TituloProfesional.php';
-          include '../../model/TituloProfesionalConsulta.php';
-          include '../../controller/TituloProfesionalControlador.php';
-          $conexion = new Conexion();
-          $consulta = new PersonaConsulta($conexion);
-
-          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonaTitulo']);
-
-          $consul = new PersonalConsulta($conexion);
-
-          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
-
-          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
-          $target_path = $target_path . basename( $_FILES["respaldoTitulo"]["name"]);
-
-          $a=move_uploaded_file($_FILES["respaldoTitulo"]["tmp_name"], $target_path);
-
-          $tituloProfesional = new TituloProfesional();
-
-          $tituloProfesional->IdTipoTituloProfesional = $_POST['tipoTituloProfesional'];
-          $tituloProfesional->IdPersonal = $idPersonal['idPersonal'];
-          $tituloProfesional->NombreInstitucion = $_POST['nombreInstitucionTitulos'];
-          $tituloProfesional->CursoProfesionalEstudiado = $_POST['cursoProfesionalEstudiado'];
-          $tituloProfesional->TiempoEstudio = $_POST['anhoEstudioTitulo'];
-          $tituloProfesional->ReligionInstitucion = $_POST['religionInstTitulo'];
-          $tituloProfesional->RespaldoTituloPDF = $target_path;
-
-          $tituloProfesionalManejador = new TituloProfesionalControlador($conexion);
-          $tituloProfesionalManejador->crear($tituloProfesional);
-
-          $listaTituloProfesional = $tituloProfesionalManejador->listarPer($tituloProfesional->IdPersonal);
-          $i = 0;
-          ?>
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Curso</th>
-                  <th>Institucion</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($listaTituloProfesional as $listaTP): $i++;?>
-                  <tr>
-                    <td><?php echo $i; ?></td>
-                    <td><?php echo $listaTP->CursoProfesionalEstudiado; ?></td>
-                    <td><?php echo $listaTP->NombreInstitucion; ?></td>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
-          <?php
-
-        }
-        else
-        {
-          echo "<p style='color:red'>Error al ver Formulario</p>";
-        }
         break;
 
       case 'verPersonal':
@@ -168,53 +27,26 @@ class CtrMenuAdmin
         {
           include '../../model/conexion.php';
           include '../../model/Persona.php';
-          include '../../model/Cargo.php';
-          include '../../model/Enfermedad.php';
-          include '../../model/Deporte.php';
           include '../../model/Personal.php';
           include '../../model/PersonaConsulta.php';
           include '../../model/PersonalConsulta.php';
           include '../../model/ReferenciaPersonal.php';
-          include '../../model/ReferenciaPersonalConsulta.php';
           include '../../model/ConyuguePersonal.php';
-          include '../../model/ConyuguePersonalConsulta.php';
-          include '../../model/CursoEstudiado.php';
-          include '../../model/CursoEstudiadoConsulta.php';
           include '../../model/HijosPersonal.php';
-          include '../../model/HijosPersonalConsulta.php';
           include '../../model/Telefono.php';
           include '../../model/TelefonoConsulta.php';
-          include '../../model/TituloProfesional.php';
-          include '../../model/TituloProfesionalConsulta.php';
           include '../../controller/PersonaControlador.php';
-          include '../../controller/PersonalControlador.php';
           include '../../controller/ReferenciaPersonalControlador.php';
           include '../../controller/TelefonoControlador.php';
-          include '../../controller/ConyuguePersonalControlador.php';
-          include '../../controller/HijosPersonalControlador.php';
-          include '../../controller/CursoEstudiadoControlador.php';
-          include '../../controller/TituloProfesionalControlador.php';
 
           $conexion = new Conexion();
-          $consulta = new PersonaConsulta($conexion);
 
-          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonalDetalle']);
-          // $idPersona = $consulta->obtenerIdPersona(7548743);
-          //
-          // $consul = new PersonalConsulta($conexion);
-          //
-          // $idPersonal = $consul->datosPersonal($idPersona['idPersona']);// COMEMTAR
 
-          $personalManejador = new PersonalControlador($conexion);
-
-          $personal = $personalManejador->ver($idPersona['idPersona']);
-
-          include 'modalDetallePersonal.php';
 
         }
         else
         {
-          echo "<p style='color:red'>Error al ver Formulario Detalle</p>";
+          echo "<p style='color:red'>Error al ver Formulario</p>";
         }
         break;
 
@@ -410,7 +242,7 @@ class CtrMenuAdmin
           $telefonoManejador = new TelefonoControlador($conexion);
           $telefonoManejador->crear($telefono);
 
-          echo "<p style='color:green'>Guardado Exitoso</p>";
+          echo "<p style='color:green'>Gurdado Exitoso</p>";
 
         }
         else
@@ -460,7 +292,6 @@ class CtrMenuAdmin
         $personal->TipoSangre = $_POST['tipoSangre'];
         $personal->Hobby = $_POST['hobby'];
         $personal->LecturaPreferencial = $_POST['lecturaP'];
-        $personal->NumeroRegistroProfesional = $_POST['numeroRegProfesional'];
         $personal->FechaIngreso = $_POST['fechaIngres'];
         $personal->Ruta = $target_path;
 
@@ -500,6 +331,7 @@ class CtrMenuAdmin
       case 'usuarioInsertar':
       if (isset($_POST['datos']))
       {
+        echo "Entre..";
         include '../../model/conexion.php';
         include '../../model/Persona.php';
         include '../../model/PersonaConsulta.php';
@@ -507,14 +339,16 @@ class CtrMenuAdmin
         include '../../controller/UsuarioControlador.php';
         $conexion = new Conexion();
         $consulta = new PersonaConsulta($conexion);
+        echo "Pase la consula y conexion";
         $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
 
         $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
         $usuario->IdUsuario = null;
-        $usuario->TipoUsuario = $_POST['tipoUsuario']+0;
+        $usuario->TipoUsuario = $_POST['tipoUsuario'];
         $usuario->Estado = 1;
         $usuario->Borrado = 0;
-        $usuario->IdPersona=$idP['idPersona']+0;
+        $usuario->IdPersona=$idP;
+        echo "llene el Usuario";
         $usuarioManejador = new UsuarioControlador($conexion);
         $usuarioManejador->crear($usuario);
 

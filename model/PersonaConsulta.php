@@ -36,6 +36,13 @@ class PersonaConsulta
     $registro = $consulta->fetch();
     return $registro;
   }
+  public function listaPersona()
+  {
+    $consulta = $this->Conexion->prepare('SELECT * FROM persona');
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    return $registro;
+  }
 
   public function listaTelefonos($id)
   {

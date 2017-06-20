@@ -28,8 +28,7 @@
 <script src="../libs/js/enviarHijo.js"></script>
 <script src="../libs/js/enviarReferencia.js"></script>
 <script src="../libs/js/detallePersonal.js"></script>
-<script src="../libs/js/guardarCursoEstudiado.js"></script>
-<script src="../libs/js/guardarTituloProfesional.js"></script>
+
 
 <script>
 $('.datepicker').datepicker({

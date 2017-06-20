@@ -1,4 +1,4 @@
-<div class="modal fade" id="ver">
+<div class="modal fade" id="ver<?php echo $listaP->IdPersona;?>">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -9,30 +9,33 @@
           <strong><h2 class="modal-title"><i class="fa fa-eye"></i> VER <i class="fa fa-arrow-right"></i> Contacto</h2></strong>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <label>Nombre Completo</label>
-            <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon2" style="background:#2b79d4; color:white"><i class="fa fa-user"></i></span>
-              <input id="primerNombre" type="text" class="form-control" placeholder=" " aria-describedby="sizing-addon2" name="primerNombre" required>
+
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="well well-sm">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <img src="../libs/multimedia/img/design/avatar.png" alt="" class="img-rounded img-responsive" />
+                            </div>
+                            <div class="col-sm-6 col-md-8">
+                              <strong><h4 style="color:green"><i class="fa fa-user"></i> Nombre Completo</h4></strong>
+                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaP->PrimerNombre." ".$listaP->ApellidoPaterno." ".$listaP->ApellidoMaterno; ?></h4>
+                              <strong><h4 style="color:green"><i class="fa fa-id-card-o"></i> Cargo</h4></strong>
+                              <strong><h4 style="color:green"><i class="fa fa-phone"></i> Telefono(s)</h4></strong>
+                              <?php
+                              foreach ($listaP->ListaTelefonos as $listaT) {
+                               ?>
+                                <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaT->NumeroTelefono; ?></h4>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-
-          <div class="form-group">
-            <label>Telefono</label>
-            <div class="input-group">
-              <span class="input-group-addon" id="sizing-addon2" style="background:green; color:white"><i class="fa fa-phone"></i></span>
-              <input id="telefono" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefono">
-            </div>
-          </div>
-
-          <input type="hidden" name="datos" value="1">
-
         </div>
         <div class="modal-footer">
-          <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancelar <i class="fa fa-times-circle"></i></button>
-          <button type="reset" value="Reset" name="reset" class="btn btn-default">Limpiar <span class="fa fa-refresh"></span></button>
-          <button type="submit" class="btn btn-success">Guardar <i class="fa fa-check-circle"></i></button>
+          <button data-dismiss="modal" class="btn btn-success"><i class="fa fa-arrow-circle-left"></i> Volver</button>
         </div>
 
       </form>
