@@ -873,14 +873,14 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                               <div class="tab-pane fade" id="HojaVida">
                                 <div class="thumbnail">
 
-                                  <div class="panel with-nav-tabs panel-warning">
+                                  <div class="panel with-nav-tabs panel-primary">
                                     <div class="panel-heading" >
                                       <ul class="nav nav-tabs" >
                                           <li class="active" id="CursosLI"><a style="color:white" href="#Cursos" data-toggle="tab" >Cursos</a></li>
                                           <li id="TitulosLI"><a style="color:white" href="#Titulos" data-toggle="tab">Titulos</a></li>
                                     </div>
                                   </div>
-                                  <div class="panel-body" style="display: block; background:rgba(245, 229, 219, 0.76)" >
+                                  <div class="panel-body" style="display: block; background:rgba(84, 217, 246, 0.28)" >
                                     <div class="tab-content">
                                       <div class="tab-pane fade in active" id="Cursos">
                                         <form id="CursosFrm">
