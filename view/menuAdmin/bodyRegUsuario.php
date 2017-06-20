@@ -206,7 +206,7 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                   <div class="text-center">
                                     <h3>Usuario</h3>
                                   </div>
-                                  <form id="frmUsuario">
+                                  <form id="frmUsuario1">
 
                                     <div class="row">
                                       <div class="col-sm-1 col-md-2"></div>
@@ -216,7 +216,7 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                           <label>Tipo Usuario</label>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal">
+                                            <select class="selectpicker form-control" name="tipoUsuario" id="tipoUsuario">
                                               <?php foreach ($listaTipoUsuario as $listaTU): ?>
                                                 <option value="<?php echo $listaTU->IdTipoUsuario; ?>"><?php echo $listaTU->NombreTipoUsuario; ?></option>
                                               <?php endforeach; ?>
@@ -224,7 +224,7 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                           </div>
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="form-control" name="tipoPersonal" id="tipoPersonal">
+                                            <select class="form-control" name="tipoUsuario" id="tipoUsuario">
                                               <?php foreach ($listaTipoUsuario as $listaTU): ?>
                                                 <option value="<?php echo $listaTU->IdTipoUsuario; ?>"><?php echo $listaTU->NombreTipoUsuario; ?></option>
                                               <?php endforeach; ?>
@@ -247,7 +247,10 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                             <input id="contrasena" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="contrasena">
                                           </div>
                                         </div>
+                                        <div id="mensajeUsu"></div>
 
+
+                                        <input type="hidden" name="ciPersona" id="ciPerson" value="1">
                                         <input type="hidden" name="datos" value="1">
 
                                         <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>

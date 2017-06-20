@@ -1,27 +1,14 @@
-<?php
-$fecha=date( "d/m/y");
-?>
 <div id="contenidoAll">
 
   <div class="row  border-bottom white-bg dashboard-header">
 
-      <div class="col-sm-3 col-md-9">
+      <div class="col-sm-3">
           <h2>Bienvenido </h2>
           <small>Al sistema de control de personal UAB.</small>
 
       </div>
-        <!-- <button type="button" class="btn btn-primary btn-lg btn3d"> -->
-          <div class="col-sm-3 col-md-3" style="background:#d5dce4" >
-
-        <div class="text-center">
-          <h2><?php echo $fecha; ?> </h2>
-          <h3> FECHA <i class="fa fa-calendar"></i></h3>
-        </div>
-      </div>
-      <!-- </button> -->
 
   </div>
-
 
   <div class="row">
     <div class="col-lg-6">
@@ -35,7 +22,7 @@ $fecha=date( "d/m/y");
                         <img src="../libs/multimedia/img/design/uab.png" class="img-circle img-responsive" alt="image">
                         <div class="author-info">
                             <strong>Posts:</strong> 542<br/>
-                            <strong>Fecha:</strong> <?php echo $fecha; ?><br/>
+                            <strong>Fecha:</strong> April 11.2017<br/>
                         </div>
                     </a>
                     <div class="media-body">

@@ -28,14 +28,15 @@ class TelefonoConsulta
     }
   }
   public function listaNumeroPersona($id)
-  {
-    $query="SELECT * FROM telefono WHERE idPersona=:idPer";
-    $consulta=$this->Conexion->prepare($query);
-    $consulta->bindParam(':idPer',$id);
-    $consulta->execute();
-    $registro=$consulta->fetchAll();
-    return $registro;
-  }
+{
+  $query="SELECT * FROM telefono WHERE idPersona=:idPer";
+  $consulta=$this->Conexion->prepare($query);
+  $consulta->bindParam(':idPer',$id);
+  $consulta->execute();
+  $registro=$consulta->fetchAll();
+  return $registro;
+}
+
 
 }
 

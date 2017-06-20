@@ -331,6 +331,7 @@ class CtrMenuAdmin
       case 'usuarioInsertar':
       if (isset($_POST['datos']))
       {
+        echo "Entre..";
         include '../../model/conexion.php';
         include '../../model/Persona.php';
         include '../../model/PersonaConsulta.php';
@@ -338,14 +339,16 @@ class CtrMenuAdmin
         include '../../controller/UsuarioControlador.php';
         $conexion = new Conexion();
         $consulta = new PersonaConsulta($conexion);
+        echo "Pase la consula y conexion";
         $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
 
         $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
         $usuario->IdUsuario = null;
-        $usuario->TipoUsuario = $_POST['tipoUsuario']+0;
+        $usuario->TipoUsuario = $_POST['tipoUsuario'];
         $usuario->Estado = 1;
         $usuario->Borrado = 0;
-        $usuario->IdPersona=$idP['idPersona']+0;
+        $usuario->IdPersona=$idP;
+        echo "llene el Usuario";
         $usuarioManejador = new UsuarioControlador($conexion);
         $usuarioManejador->crear($usuario);
 

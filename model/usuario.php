@@ -4,6 +4,7 @@
   {
 
     private $IdUsuario;
+    private $IdPersona;
     private $Usuario;
     private $Contrasena;
     private $Estado;
@@ -16,6 +17,7 @@
     {
       $this->Usuario = $user;
       $this->Contrasena = $pass;
+      $this->IdUsuario = null;
     }
 
     public function __set($atributo, $value)
