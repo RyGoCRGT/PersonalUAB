@@ -112,7 +112,8 @@ $i = 1;
       </div>
       <div class="modal-body">
         <div class="contenidoDetalleVER">
-
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only">Cargando...</span>
         </div>
       </div>
       <div class="modal-footer">
