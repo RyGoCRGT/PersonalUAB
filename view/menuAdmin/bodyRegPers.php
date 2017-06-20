@@ -1052,7 +1052,8 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
       </div>
       <div class="modal-body">
         <div class="contenidoDetalle" id="contenidoDetalle">
-
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only">Cargando...</span>
         </div>
       </div>
       <div class="modal-footer">
