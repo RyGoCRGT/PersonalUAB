@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<meritos>
+	<categoria>
+		<nombre>Titulo merito</nombre>
+		<puntaje>12</puntaje>
+		<merito>
+			<nombre>Titulo merito</nombre>
+			<puntaje>132</puntaje>
+		</merito>
+		<merito>
+			<nombre>Titulo merito1</nombre>
+			<puntaje>124</puntaje>
+		</merito>
+		<merito>
+			<nombre>Titulo merito2</nombre>
+			<puntaje>152</puntaje>
+		</merito>
+	</categoria>
+	<categoria>
+		<nombre>Titulo mcerito3</nombre>
+		<puntaje>12</puntaje>
+		<merito>
+			<nombre>Titulo me3rito</nombre>
+			<puntaje>132</puntaje>
+		</merito>
+		<merito>
+			<nombre>Tituslo merito1</nombre>
+			<puntaje>124</puntaje>
+		</merito>
+		<merito>
+			<nombre>Titulo merito2</nombre>
+			<puntaje>1352</puntaje>
+		</merito>
+	</categoria>
+	<categoria>
+		<nombre>Titulo merito4</nombre>
+		<puntaje>12</puntaje>
+		<merito>
+			<nombre>Titulo merito</nombre>
+			<puntaje>132a</puntaje>
+		</merito>
+		<merito>
+			<nombre>Titulo merito1</nombre>
+			<puntaje>12d4</puntaje>
+		</merito>
+		<merito>
+			<nombre>Titulo merito2</nombre>
+			<puntaje>15c2</puntaje>
+		</merito>
+	</categoria>
+</meritos>

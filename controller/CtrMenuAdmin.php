@@ -587,6 +587,231 @@ class CtrMenuAdmin
       }
       break;
 
+      //llamando el formulario de Tabla de Calificacion de Meritos
+
+      case 'NuevaTablaMeritos':
+            include 'header.php';
+            include 'bodyRegistrarTablaMeritosDocenteProfesor.php';
+            include 'footer.php';
+      break;
+
+      case 'RegistrarNuevaTablaMeritos':
+        if (isset($_POST['datos']))
+        {  
+          include '../../model/conexion.php';
+          include '../../model/TablaMeritosDocenteProfesor.php';
+          include '../../model/TablaMeritosDocenteProfesorConsulta.php';
+          include '../../model/EstructuraMeritos.php';
+          include '../../model/EstructuraMeritosConsulta.php';
+
+          $conexion = new Conexion();
+
+          $tablaMeritos = new TablaMeritosDocenteProfesor();
+          $tablaMeritos->IdTablaMeritosDocenteProfesor = null;
+          
+          $tablaMeritos->Version = strtoupper($_POST['version']);
+          
+          $tablaMeritos->TipoMerito = $_POST['tipoMerito'];
+          
+          $tablaMeritos->FechaCreacion = $_POST['fechaCreacion'];
+          
+          $tablaMeritos->Activo = $_POST['activo'];
+
+          $tablaMeritosConsulta = new  TablaMeritosDocenteProfesorConsulta($conexion);
+
+          if($_POST['activo'] == '1'){
+            //verificando si existe una tabla de Merito activa juntamente con el tipo de de merito docente/profesor
+            //ya que solamente puede existir una activa y las otras no
+            $resultadoSiExisteTablaMeritoActivoPorTipoMerito = $tablaMeritosConsulta->existeMeritoActivoPorTipoMerito($_POST['activo'],$_POST['tipoMerito']);
+
+            if($resultadoSiExisteTablaMeritoActivoPorTipoMerito){
+                  echo "<p style='color:red'>Existe una Tabla de Meritos Activa para el tipo: ".$_POST['tipoMerito']." </p>";
+            }else{
+
+                      $idTablaMerito = $tablaMeritosConsulta->crear($tablaMeritos);
+                      //echo "$idTablaMerito" . $idTablaMerito;
+                      $archivoXml = $_FILES["archivo"]["tmp_name"];
+                      $xmlData = simplexml_load_file($archivoXml);//parseando el archivo XML
+                      // Crear tabla merito docentes
+                      $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
+                      foreach ($xmlData->categoria as $categoria):
+                        $nombre=$categoria->nombre;//este es del archivo XML
+                        $puntaje=$categoria->puntaje;  //este es del archivo XML
+                        $objCategoria = new EstructuraMeritos();
+                        $objCategoria->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                        $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria 
+                        $objCategoria->NombreMerito = $nombre;
+                        $objCategoria->PuntajeMerito = $puntaje;
+                        $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);        
+                        //La categoria tiene "meritos" , y ahora se va a iterar sus meritos       
+                        foreach ($categoria->merito as $merito):
+                          $nombre=$merito->nombre;
+                          $puntaje=$merito->puntaje;
+                           
+                          $objMerito = new EstructuraMeritos();
+                          $objMerito->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                          //Aqui se tiene el id de la categoria primaria
+                          $objMerito->IdEstructuraMeritoPrimario = $idCategoria;
+                          $objMerito->NombreMerito = $nombre;
+                          $objMerito->PuntajeMerito = $puntaje;
+                          $objMeritoDocenteConsulta->crear($objMerito);                
+                        endforeach;
+                      endforeach;
+                      //Recuperando la estructura  las categorias con sus estructuras
+                      //Los UL y LI se puede cambiar por tablas
+                      $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritos($idTablaMerito);
+
+                      echo "<table border = 1>";
+                      $contador = 1;
+                      foreach ($meritos as $categoria):
+                        echo "<tr>
+                                  <td>".$contador.".-</td>
+                                  <td colspan='2'><strong>".$categoria->NombreMerito." (".$categoria->PuntajeMerito." puntos)</strong></td>
+                              </tr>";
+                              $subcontador = 1;
+                        foreach ($categoria->SubMeritos as $merito):
+                          echo "  <tr>
+                                    <td>".$contador.".".$subcontador."</td>
+                                    <td>".$merito->NombreMerito."</td>
+                                    <td>".$merito->PuntajeMerito."</td>
+                                  </tr>
+
+                        ";
+                          $subcontador++;
+                          endforeach;
+                        $contador++;
+                      endforeach;
+                      echo "</table>";
+                      
+                      echo "<p style='color:green'>Guardado Exitoso</p>";
+            }
+          }else{
+
+                $idTablaMerito = $tablaMeritosConsulta->crear($tablaMeritos);
+                //echo "$idTablaMerito" . $idTablaMerito;
+                $archivoXml = $_FILES["archivo"]["tmp_name"];
+                $xmlData = simplexml_load_file($archivoXml);//parseando el archivo XML
+                // Crear tabla merito docentes
+                $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
+                foreach ($xmlData->categoria as $categoria):
+                  $nombre=$categoria->nombre;//este es del archivo XML
+                  $puntaje=$categoria->puntaje;  //este es del archivo XML
+                  $objCategoria = new EstructuraMeritos();
+                  $objCategoria->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                  $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria 
+                  $objCategoria->NombreMerito = $nombre;
+                  $objCategoria->PuntajeMerito = $puntaje;
+                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);        
+                  //La categoria tiene "meritos" , y ahora se va a iterar sus meritos       
+                  foreach ($categoria->merito as $merito):
+                    $nombre=$merito->nombre;
+                    $puntaje=$merito->puntaje;
+                     
+                    $objMerito = new EstructuraMeritos();
+                    $objMerito->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                    //Aqui se tiene el id de la categoria primaria
+                    $objMerito->IdEstructuraMeritoPrimario = $idCategoria;
+                    $objMerito->NombreMerito = $nombre;
+                    $objMerito->PuntajeMerito = $puntaje;
+                    $objMeritoDocenteConsulta->crear($objMerito);                
+                  endforeach;
+                endforeach;
+                //Recuperando la estructura  las categorias con sus estructuras
+                //Los UL y LI se puede cambiar por tablas
+                $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritos($idTablaMerito);
+
+                echo "<table border = 1>";
+                $contador = 1;
+                foreach ($meritos as $categoria):
+                  echo "<tr>
+                            <td>".$contador.".-</td>
+                            <td colspan='2'><strong>".$categoria->NombreMerito." (".$categoria->PuntajeMerito." puntos)</strong></td>
+                        </tr>";
+                        $subcontador = 1;
+                  foreach ($categoria->SubMeritos as $merito):
+                    echo "  <tr>
+                              <td>".$contador.".".$subcontador."</td>
+                              <td>".$merito->NombreMerito."</td>
+                              <td>".$merito->PuntajeMerito."</td>
+                            </tr>
+
+                  ";
+                    $subcontador++;
+                    endforeach;
+                  $contador++;
+                endforeach;
+                echo "</table>";
+                
+                echo "<p style='color:green'>Guardado Exitoso</p>";
+          }
+        }
+        else
+        {
+          echo "<p style='color: red'> Por favor llene el Formulario Nueva Tabla de Meritos </p>";
+        }
+
+
+      break;
+      
+      case 'tablaCalificacionMeritosDocente':
+            include 'header.php';
+            include 'bodyRegistrarTablaCalificacionMeritosDocente.php';
+            include 'footer.php';
+      break;
+
+      //registro de meritos
+      case 'registrarMeritoDocente':
+          echo "llegue";
+            if(isset($_FILES["archivo"]["type"]))
+            {               
+                include '../../model/conexion.php';
+                include '../../model/MeritosDocente.php';
+                include '../../model/MeritosDocenteConsulta.php';
+
+                $conexion = new Conexion();
+                $xml = $_FILES["archivo"]["tmp_name"];
+                $xmlData = simplexml_load_file($xml);
+                // Crear tabla merito docentes
+
+                $tablaMeritos = new TablaMeritosDocenteProfesor();
+                
+
+                foreach ($xmlData->categoria as $categoria):
+                  $nombre=$categoria->nombre;
+                  $puntaje=$categoria->puntaje;
+
+                  $objMeritoDocenteConsulta = new MeritosDocenteConsulta($conexion);
+                  $objCategoria = new MeritosDocente();
+                  $objCategoria->IdMeritoDocente = null;
+                  $objCategoria->IdMeritoDocentePrimario = null;
+                  $objCategoria->NombreMerito = $nombre;
+                  $objCategoria->PuntajeMerito = $puntaje;
+                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);                
+                  foreach ($categoria->merito as $merito):
+                    $nombre=$merito->nombre;
+                    $puntaje=$merito->puntaje;
+
+                    $objMerito = new MeritosDocente();
+                    $objMerito->IdMeritoDocente = null;
+                    $objMerito->IdMeritoDocentePrimario = $idCategoria;
+                    $objMerito->NombreMerito = $nombre;
+                    $objMerito->PuntajeMerito = $puntaje;
+                  endforeach;
+                endforeach;
+
+                if($exitoRegistrarMerito){
+                  echo "El merito fue registrado correctamente";
+                }else{
+                  echo "Error al registrar el merito";
+                }
+
+
+            }else{
+
+              echo "Debe lllenar los campos";
+            }
+      break;
+
       case 'salir':
           session_start();
           session_destroy();

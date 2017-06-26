@@ -76,6 +76,15 @@
                             <li ><a href="#">Calendario</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label">Tabla de Calificación de Méritos Docente </span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="index.php?modo=NuevaTablaMeritos">Nuevo</a></li>
+                            <li class="active"><a href="index.php?modo=tablaCalificacionMeritosDocente">Tabla de Calificación de Méritos Docente</a></li>
+                            <li ><a href="#">Calendario</a></li>
+
+                        </ul>
+                    </li>
 
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span><span class="fa arrow"></span></a>

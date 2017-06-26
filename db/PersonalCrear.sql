@@ -226,3 +226,47 @@ CREATE TABLE experienciaLaboral(
 	motivoRetiro varchar(100) null,
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+-- Tabla de Calificacion de Meritos tanto para docente y profesor
+CREATE TABLE tablaMeritosDocenteProfesor(
+	idTablaMeritoDocenteProfesor int not null auto_increment primary key,
+	version varchar(12) not null,
+	tipoMerito varchar(20) not null, -- docente/profesor
+	fechaCreacion date not null,
+	activo bool not null	
+);
+
+CREATE TABLE personalTablaMeritosDocenteProfesor(
+	idPersonal int not null,
+	idTablaMeritoDocenteProfesor int not null,
+	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idTablaMeritoDocenteProfesor) REFERENCES tablaMeritosDocenteProfesor (idTablaMeritoDocenteProfesor) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- tabla reflexiva 
+CREATE TABLE estructuraMeritos(
+	idEstructuraMerito int not null auto_increment primary key,
+	idTablaMeritoDocenteProfesor int not null,
+	idEstructuraMeritoPrimario int default null, -- cuando el merito es primario el valor se registrara con NULL, pero si es un SUB-Merito entonces se registrara el codigo del merito PRIMARIO.   
+	nombreMerito varchar(300) not null,
+	puntajeMerito int not null,
+	FOREIGN KEY(idTablaMeritoDocenteProfesor) REFERENCES tablaMeritosDocenteProfesor (idTablaMeritoDocenteProfesor) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idEstructuraMeritoPrimario) REFERENCES estructuraMeritos (idEstructuraMerito) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+CREATE TABLE evaluacionMeritosDocenteProfesor(
+	idPersonal int not null,
+	idEstructuraMerito int not null,
+	puntajeMerito int not null,
+	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idEstructuraMerito) REFERENCES estructuraMeritos (idEstructuraMerito) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+
+
+
+
+
+

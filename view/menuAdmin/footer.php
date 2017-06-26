@@ -30,6 +30,7 @@
 <script src="../libs/js/detallePersonal.js"></script>
 <script src="../libs/js/guardarCursoEstudiado.js"></script>
 <script src="../libs/js/guardarTituloProfesional.js"></script>
+<script src="../libs/js/registrarNuevaTablaMerito.js"></script>
 
 <script>
 $('.datepicker').datepicker({
