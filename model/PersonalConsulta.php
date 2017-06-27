@@ -164,6 +164,28 @@ class PersonalConsulta
     return $registro;
   }
 
+  public function existePersonal($id)
+  {
+    $query = "SELECT
+                idPersonal, idPersona
+              FROM
+                personal
+              WHERE
+                idPersona = :id";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindParam(':id', $id);
+    $consulta->execute();
+    $registro = $consulta->fetch();
+    if ($registro)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
 }
 
 ?>

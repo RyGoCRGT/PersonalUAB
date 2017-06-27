@@ -12,17 +12,17 @@ class UsuarioControlador
   public function crear($usuario)
   {
       try {
-        var_dump($usuario);
+        //var_dump($usuario);
         $this->Conexion->beginTransaction();
 
-        $query = "INSERT INTO usuario (idUsuario,idPersona,idTipoUsuario,usuario,contrasena,estado,borrado)
-                  VALUES (:idUsuario,:idPersona,:idTipoUsuario,:usuario,:contrasena,:estado,:borrado)";
+        $query = "INSERT INTO usuario (idUsuario, idPersona, idTipoUsuario, usuario, contrasena, estado, borrado)
+                  VALUES (:idUsuario, :idPersona, 3, :usuario, :contrasena, :estado, :borrado)";
 
         $valUsuario = $this->Conexion->prepare($query);
 
         $valUsuario->bindValue(':idUsuario', $usuario->IdUsuario);
         $valUsuario->bindValue(':idPersona', $usuario->IdPersona);
-        $valUsuario->bindValue(':idTipoUsuario', $usuario->IdTipoUsuario);
+        // $valUsuario->bindValue(':tipoUsuario', $usuario->IdTipoUsuario);
         $valUsuario->bindValue(':usuario', $usuario->Usuario);
         $valUsuario->bindValue(':contrasena', $usuario->Contrasena);
         $valUsuario->bindValue(':estado', $usuario->Estado);
@@ -33,7 +33,7 @@ class UsuarioControlador
 
         $this->Conexion->commit();
 
-        var_dump($valUsuario);
+        //var_dump($valUsuario);
 
 
       } catch (PDOException $e) {
