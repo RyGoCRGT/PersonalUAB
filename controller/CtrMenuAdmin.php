@@ -430,7 +430,7 @@ class CtrMenuAdmin
 
         $consulta = new PersonaConsulta($conexion);
 
-        $target_path = "/wamp/www/PersonalUAB/view/libs/multimedia/img/personal/";
+        $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/personal/";
         $target_path = $target_path . basename( $_FILES["fotoPersonal"]["name"]);
 
         $a=move_uploaded_file($_FILES["fotoPersonal"]["tmp_name"], $target_path);
@@ -511,10 +511,10 @@ class CtrMenuAdmin
 
         $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
         $usuario->IdUsuario = null;
-        $usuario->TipoUsuario = $_POST['tipoUsuario']+0;
+        $usuario->TipoUsuario = $_POST['tipoUsuario'];
         $usuario->Estado = 1;
         $usuario->Borrado = 0;
-        $usuario->IdPersona=$idP['idPersona']+0;
+        $usuario->IdPersona = $idP['idPersona'];
         $usuarioManejador = new UsuarioControlador($conexion);
         $usuarioManejador->crear($usuario);
 
