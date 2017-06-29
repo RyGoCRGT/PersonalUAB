@@ -138,6 +138,17 @@
                         <tr>
                           <td><strong>Email: </strong><?php echo $personal->Email ?></td>
                         </tr>
+                        <?php if ($personal->IdCargo == null): ?>
+                          <tr>
+                            <td><strong>Carrera: </strong><?php echo $personal->IdCarrera ?></td>
+                            <td></td>
+                          </tr>
+                        <?php else: ?>
+                          <tr>
+                            <td><strong>Cargo: </strong><?php echo $personal->IdCargo ?></td>
+                            <td></td>
+                          </tr>
+                        <?php endif; ?>
                         <tr>
                           <td><strong>Nombres y Apellidos del Conyugue: </strong><?php echo "{$personal->C_Conyugue->IdPersona->PrimerNombre} {$personal->C_Conyugue->IdPersona->SegundoNombre} {$personal->C_Conyugue->IdPersona->ApellidoPaterno} {$personal->C_Conyugue->IdPersona->ApellidoMaterno} " ?></td>
                         </tr>

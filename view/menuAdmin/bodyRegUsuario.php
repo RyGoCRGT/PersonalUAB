@@ -215,7 +215,7 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                         <div class="form-group">
                                           <label>Tipo Usuario</label>
                                           <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="selectpicker form-control" name="tipoUsuario" id="tipoUsuario">
                                               <?php foreach ($listaTipoUsuario as $listaTU): ?>
                                                 <option value="<?php echo $listaTU->IdTipoUsuario; ?>"><?php echo $listaTU->NombreTipoUsuario; ?></option>
@@ -223,7 +223,7 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                             </select>
                                           </div>
                                           <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="form-control" name="tipoUsuario" id="tipoUsuario">
                                               <?php foreach ($listaTipoUsuario as $listaTU): ?>
                                                 <option value="<?php echo $listaTU->IdTipoUsuario; ?>"><?php echo $listaTU->NombreTipoUsuario; ?></option>
@@ -235,16 +235,16 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                         <div class="form-group">
                                           <label>Nombre de Usuario</label>
                                           <div class="input-group">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                            <input id="nombreUsuario" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="nombreUsuario" required>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                            <input id="nombreUsuario" type="text" class="form-control" placeholder="Usuario: " aria-describedby="sizing-addon2" name="nombreUsuario" required>
                                           </div>
                                         </div>
 
                                         <div class="form-group">
                                           <label>Contraseña</label>
                                           <div class="input-group">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-lock"></i></span>
-                                            <input id="contrasena" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="contrasena">
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-lock"></i></span>
+                                            <input id="contrasena" type="text" class="form-control" placeholder="Contraseña: " aria-describedby="sizing-addon2" name="contrasena">
                                           </div>
                                         </div>
                                         <div id="mensajeUsu"></div>
@@ -253,9 +253,9 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                         <input type="hidden" name="ciPersona" id="ciPerson" value="1">
                                         <input type="hidden" name="datos" value="1">
 
-                                        <button type="button" name="cancelar" class="btn btn-default btn-lg">Cancelar</button>
-                                        <button type="reset" name="limpiar" class="btn btn-warning btn-lg">Editar</button>
-                                        <button type="submit" name="guardar" class="btn btn-success btn-lg">Listo</button>
+                                        <div class="pull-right">
+                                          <button type="submit" name="guardar" class="btn btn-success ">Listo</button>
+                                        </div>
 
                                         <br><br>
 
