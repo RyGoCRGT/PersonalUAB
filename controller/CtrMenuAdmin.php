@@ -52,6 +52,12 @@ class CtrMenuAdmin
         }
         break;
 
+      case 'listaUsuario':
+      include 'header.php';
+      include 'bodylistaUsuario.php';
+      include 'footer.php';
+        break;
+
       case 'regPersonal':
         include 'header.php';
         include 'bodyRegPers.php';

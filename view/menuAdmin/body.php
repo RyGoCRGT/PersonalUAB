@@ -1,5 +1,5 @@
 <?php
-$fecha=date( "d/m/y");
+$fecha=date( "d/m/Y");
 ?>
 <div id="contenidoAll">
 
