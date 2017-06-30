@@ -1,8 +1,6 @@
 <?php
-include '../../model/conexion.php';
-$conexion = new Conexion();
 
-$fecha=date("Y-m-d");
+$fecha=date("Y/m/d");
 
 ?>
 
@@ -28,9 +26,7 @@ $fecha=date("Y-m-d");
                     <div class="panel with-nav-tabs panel-info">
                         <div class="panel-heading" style="background:rgb(26, 74, 101)">
                             <ul class="nav nav-tabs" >
-                                <li id="TablaMeritosDocenteLI"><a style="color:white" href="#HojaVida" data-toggle="tab">Tabla de Calificación de Méritos</a>
-                                </li>
-                                <li id="EstructuraMeritos"><a style="color:white" href="#Personal" data-toggle="tab">Meritos</a></li>
+                                <li id="TablaMeritosDocenteLI"><a style="color:white" href="#HojaVida" data-toggle="tab">Tabla de Calificación de Méritos</a></li>
                             </ul>
                         </div>
 
@@ -46,29 +42,36 @@ $fecha=date("Y-m-d");
                                         <div class="col-sm-1 col-md-2"></div>
 
                                         <div class="col-sm-10 col-md-8">
+
                                           <div class="form-group">
-                                                <input id="fechaCreacion" type="text" class="form-control"  aria-describedby="sizing-addon2" name="fechaCreacion" value = <?php echo $fecha; ?>>
+                                            <label>Fecha de Creacion</label>
+                                            <div class="input-group" >
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                              <input id="fechaCreacion" type="text" class="form-control datepicker"  data-date-format="yyyy/mm/dd" aria-describedby="sizing-addon2" name="fechaCreacion" readonly="true" value = <?php echo $fecha; ?> placeholder="Fecha de Creacion:  AAAA/MM/DD">
+                                            </div>
                                           </div>
 
                                           <div class="form-group">
-                                                <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                <input id="version" type="text" class="form-control" placeholder="Version de la Tabla de Meritos: " aria-describedby="sizing-addon2" name="version" required>
+                                            <label>Version</label>
+                                            <div class="input-group">
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                              <input id="version" type="text" class="form-control" placeholder="Version de la Tabla de Meritos: " aria-describedby="sizing-addon2" name="version" required>
+                                            </div>
                                           </div>
-                                        <div class="form-group">
-                                          <label>Tipo Mérito</label>
-                                          <div class="input-group" >
-                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
-                                            <select class="selectpicker form-control" name="tipoMerito" id="tipoMerito">
-                                              <option value="Docente">Docente</option>
-                                              <option value="Profesor">Profesor</option>
-                                            </select>
+
+                                          <div class="form-group">
+                                            <label>Tipo Mérito</label>
+                                            <div class="input-group" >
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
+                                              <select class="selectpicker form-control" name="tipoMerito" id="tipoMerito">
+                                                <option value="Docente">Docente</option>
+                                                <option value="Profesor">Profesor</option>
+                                              </select>
+                                            </div>
                                           </div>
-                                        </div>
 
                                         <div class="form-group" data-toggle="buttons">
-                                            <label class="btn btn-danger"> <i class="fa fa-venus-mars"></i> Activo: </label>
+                                            <label class="btn btn-danger"> <i class="fa fa-dot-circle-o"></i> Estado Inicial: </label>
                                             <label class="btn btn-info btn-outline activo">
                                                 <input type="radio" class="" name="activo" value="1" checked><i class="">  Activo</i>
                                             </label>
@@ -76,20 +79,20 @@ $fecha=date("Y-m-d");
                                                 <input type="radio" class="" name="activo" value="0"><i class="">  Inactivo</i>
                                             </label>
                                          </div>
-                                         <div class="form-group">
-                                            <label class="btn btn-danger"> <i class="fa fa-venus-mars"></i> Xml: </label>
-                                            <input type="file" name="archivo" id="archivo" required />
+                                         <div class="exportarArchivo">
+                                            <input type="file" name="archivo" class="exportarArchivoFile" required />
                                          </div>
-                                          <div class="form-group">
-                                                <input type="hidden" name="datos" value="1">
-                                                <div id="mesajePersona"></div>
-                                                <div class="pull-right">
-                                                      <button type="submit" name="guardarTablaMerito" id="guardartablaMerito" class="btn btn-primary">Grabar</button>
-                                                </div>
-                                                <br><br>
-                                          </div>
-                                          <div class="col-sm-1 col-md-2"></div>
-                                        </div>
+                                         <div class="nameFileImg"></div>
+
+                                         <input type="hidden" name="datos" value="1">
+                                         <div id="mesajePersona"></div>
+                                         <div class="pull-right">
+                                           <button type="submit" name="guardarTablaMerito" id="guardartablaMerito" class="btn btn-primary">Grabar</button>
+                                         </div>
+                                         <br><br>
+
+                                         <div class="col-sm-1 col-md-2"></div>
+                                      </div>
                                     </form>
                                 </div><!-- end  <div class="thumbnail">-- >
                               </div> <!--<div class="tab-pane fade in active" id="General">-->
@@ -103,4 +106,24 @@ $fecha=date("Y-m-d");
 </div>
 
 
-
+<div class="modal fade" id="contenidoTablaMeritosModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title text-center"> <i class="fa fa-user"></i> Tabla de Meritos</h3>
+      </div>
+      <div class="modal-body">
+        <div class="contenidoTablaMeritos" id="contenidoTablaMeritos">
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only">Cargando...</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-right">
+          <a href="index.php?modo=NuevaTablaMeritos" class="btn btn-success btn-lg">LISTO <i class="fa fa-check"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

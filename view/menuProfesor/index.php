@@ -3,15 +3,22 @@ session_start();
 include '../../controller/CtrMenuProfesor.php';
 if ($_SESSION['usuario'])
 {
-  if (isset($_GET['modo']))
+  if ($_SESSION['idTipoUsuario'] == 4)
   {
-    $admin = new CtrMenuAdmin($_GET['modo']);
-    $admin->Menu();
+    if (isset($_GET['modo']))
+    {
+      $admin = new CtrMenuAdmin($_GET['modo']);
+      $admin->Menu();
+    }
+    else
+    {
+      $admin = new CtrMenuAdmin("default");
+      $admin->Menu();
+    }
   }
   else
   {
-    $admin = new CtrMenuAdmin("default");
-    $admin->Menu();
+    header("Location: ../../index.php");
   }
 }
 else

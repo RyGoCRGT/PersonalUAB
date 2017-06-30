@@ -12,7 +12,7 @@
       <div class="text-center">
         <h4>UNIVERSIDAD ADVENTISTA DE BOLIVIA</h4>
         <br>
-        <h4>JEFATURA PERSONAL</h4>
+        <h4>GESTION DEL TALENTO HUMANO</h4>
         <br><br>
         <h1><strong>FICHA PERSONAL</strong></h1>
       </div>
@@ -29,6 +29,7 @@
       <div class="table-responsive">
         <table class="table table-hover">
           <tbody>
+            <div><strong>DATOS GENERALES</strong></div><br>
             <tr>
               <td> <strong>Apellidos y Nombres: </strong> <?php echo " {$personal->IdPersona->ApellidoPaterno} {$personal->IdPersona->ApellidoMaterno} {$personal->IdPersona->PrimerNombre} {$personal->IdPersona->SegundoNombre}" ?></td>
               <td></td>
@@ -68,6 +69,17 @@
               <td><strong>Email: </strong><?php echo $personal->Email ?></td>
               <td></td>
             </tr>
+            <?php if ($personal->IdCargo == null): ?>
+              <tr>
+                <td><strong>Carrera: </strong><?php echo $personal->IdCarrera ?></td>
+                <td></td>
+              </tr>
+            <?php else: ?>
+              <tr>
+                <td><strong>Cargo: </strong><?php echo $personal->IdCargo ?></td>
+                <td></td>
+              </tr>
+            <?php endif; ?>
             <tr>
               <td><strong>Nombres y Apellidos del Conyugue: </strong><?php echo "{$personal->C_Conyugue->IdPersona->PrimerNombre} {$personal->C_Conyugue->IdPersona->SegundoNombre} {$personal->C_Conyugue->IdPersona->ApellidoPaterno} {$personal->C_Conyugue->IdPersona->ApellidoMaterno} " ?></td>
               <td><strong>Fecha de Nacimiento: </strong><?php echo $personal->C_Conyugue->IdPersona->FechaNacimiento ?></td>

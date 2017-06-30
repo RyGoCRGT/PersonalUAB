@@ -11,41 +11,58 @@ class UsuarioControlador
 
   public function crear($usuario)
   {
-      try {
-        //var_dump($usuario);
-        $this->Conexion->beginTransaction();
+    $consulta =  new UsuarioConsulta($this->Conexion);
+    $existe  = $consulta->dataUser($usuario->Usuario);
+    if (!$existe)
+    {
+      $vinculacion = $consulta->existeUsuarioVinculado($usuario->IdPersona);
+      if ($vinculacion==false)
+      {
+        try {
 
-        $query = "INSERT INTO usuario (idUsuario, idPersona, idTipoUsuario, usuario, contrasena, estado, borrado)
-                  VALUES (:idUsuario, :idPersona, 3, :usuario, :contrasena, :estado, :borrado)";
+            $this->Conexion->beginTransaction();
 
-        $valUsuario = $this->Conexion->prepare($query);
+            $query = "INSERT INTO usuario (idUsuario, idPersona, idTipoUsuario, usuario, contrasena, estado, borrado)
+                      VALUES (:idUsuario, :idPersona, :tipoUsuario, :usuario, :contrasena, :estado, :borrado)";
 
-        $valUsuario->bindValue(':idUsuario', $usuario->IdUsuario);
-        $valUsuario->bindValue(':idPersona', $usuario->IdPersona);
-        // $valUsuario->bindValue(':tipoUsuario', $usuario->IdTipoUsuario);
-        $valUsuario->bindValue(':usuario', $usuario->Usuario);
-        $valUsuario->bindValue(':contrasena', $usuario->Contrasena);
-        $valUsuario->bindValue(':estado', $usuario->Estado);
-        $valUsuario->bindValue(':borrado', $usuario->Borrado);
+            $valUsuario = $this->Conexion->prepare($query);
 
-
-        $valUsuario->execute();
-
-        $this->Conexion->commit();
-
-        //var_dump($valUsuario);
+            $valUsuario->bindValue(':idUsuario', $usuario->IdUsuario);
+            $valUsuario->bindValue(':idPersona', $usuario->IdPersona);
+            $valUsuario->bindValue(':tipoUsuario', $usuario->TipoUsuario);
+            $valUsuario->bindValue(':usuario', $usuario->Usuario);
+            $valUsuario->bindValue(':contrasena', $usuario->Contrasena);
+            $valUsuario->bindValue(':estado', $usuario->Estado);
+            $valUsuario->bindValue(':borrado', $usuario->Borrado);
 
 
-      } catch (PDOException $e) {
+            $valUsuario->execute();
 
-        $this->Conexion->rollBack();
+            $this->Conexion->commit();
 
-        echo "Error al Registrar";
+            echo "<p style='color:green'>Guardado Exitoso</p>";
 
+          } catch (PDOException $e) {
+
+            $this->Conexion->rollBack();
+
+            echo "<p style='color:red'>Error al Registrar</p>";
+
+          }
+      }
+      else
+      {
+        echo "<p style='color:red'>Este Persona ya tiene una Cuenta de Usuario</p>";
       }
 
     }
+    else
+    {
+        echo "<p style='color:red'>Error Nombre de Usuario Existente </p>";
+    }
 
   }
+
+}
 
 ?>

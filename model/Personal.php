@@ -8,6 +8,7 @@ class Personal
   private $IdNacion;
   private $IdTipoPersonal;
   private $IdCarrera;
+  private $IdCargo;
   private $Direccion;
   private $Email;
   private $IdCiudadNacimiento;
@@ -36,11 +37,13 @@ class Personal
 
   private $ListaCursos;
   private $ListaTitulos;
+  private $ListaExperinciaLaboral;
 
   function __construct()
   {
     $this->IdPersonal = null;
     $this->IdCarrera = null;
+    $this->IdCargo = null;
     $this->IdReligion = null;
     $this->FechaBautizmo = null;
     $this->NumeroLibretaMilitar = null;
@@ -53,6 +56,7 @@ class Personal
     $this->ListaCargos = array();
     $this->ListaCursos = array();
     $this->ListaTitulos = array();
+    $this->ListaExperinciaLaboral = array();
   }
 
   public function __set($atributo, $value)
@@ -95,6 +99,8 @@ class Personal
   public function setListaCursos($value){ $this->ListaCursos[] = $value; }
 
   public function setListaTitulos($value){ $this->ListaTitulos[] = $value; }
+
+  public function setListaExperinciaLaboral($value){ $this->ListaExperinciaLaboral[] = $value; }
 
 }
 

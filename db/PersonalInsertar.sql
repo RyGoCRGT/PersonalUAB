@@ -87,6 +87,10 @@ INSERT INTO cargo VALUE(null, "Profesor");
 INSERT INTO cargo VALUE(null, "Secretaria");
 INSERT INTO cargo VALUE(null, "Secretario Academico");
 
+INSERT INTO cargoPersona VALUE(null, "Jardinero");
+INSERT INTO cargoPersona VALUE(null, "Contador");
+INSERT INTO cargoPersona VALUE(null, "Capellan");
+
 INSERT INTO enfermedad VALUE(null, "Rinitis");
 INSERT INTO enfermedad VALUE(null, "Asma");
 INSERT INTO enfermedad VALUE(null, "Urticaria");

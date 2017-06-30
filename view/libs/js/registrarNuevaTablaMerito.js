@@ -12,13 +12,24 @@ function registrarNuevaTablaMeritos() {
       async: false,
       contentType: false,
       cache: false,
-      processData:false, 
+      processData:false,
     }).done( function(info) {
-      $("#mesajePersona").html(info);
-      /*$('html,body').animate({
-        scrollTop: $("#wrapper").offset().top
-      }, 1000);
-      */
+      var resp = info.length;
+      if (resp>150)
+      {
+        $("#contenidoTablaMeritos").html(info);
+        $('body').addClass("modal-open");
+        $('body').css("padding-right", "16px");
+        $("#contenidoTablaMeritosModal").addClass("in");
+        $("#contenidoTablaMeritosModal").css("display", "block");
+        $("#contenidoTablaMeritosModal").css("padding-right", "16px");
+        $("#fondoModal").addClass("modal-backdrop fade in"); 
+      }
+      else
+      {
+        $("#mesajePersona").html(info);
+      }
+
     });
 
   });
