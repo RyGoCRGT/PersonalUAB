@@ -12,7 +12,7 @@ class TipoUsuarioConsulta
 
   public function listaTipoUsuario()
   {
-    $query = "SELECT * FROM tipoUsuario";
+    $query = "SELECT * FROM tipoUsuario where idTipoUsuario != 1";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();

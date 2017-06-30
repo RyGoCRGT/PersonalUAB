@@ -55,7 +55,7 @@
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Personal</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="active"><a href="index.php?modo=regPersonal">Nuevo</a></li>
-                            <li ><a href="#">Lista</a></li>
+                            <li ><a href="index.php?modo=listaPersonal">Lista</a></li>
                         </ul>
                     </li>
                     <li>
@@ -66,7 +66,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="index.php?modo=directorio"><i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span> <span class="fa arrow"></span></a>
+                        <a href="index.php?modo=directorio"><i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span></a>
 
                     </li>
                     <li>
@@ -74,6 +74,15 @@
                         <ul class="nav nav-second-level">
                             <li class="active"><a href="index.php?modo=cumplePersonal">Cumpleañeros</a></li>
                             <li ><a href="#">Calendario</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label">Tabla de Calificación de Méritos Docente </span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="index.php?modo=NuevaTablaMeritos">Nuevo</a></li>
+                            <li class="active"><a href="index.php?modo=tablaCalificacionMeritosDocente">Tabla de Calificación de Méritos Docente</a></li>
+                            <li ><a href="#">Calendario</a></li>
+
                         </ul>
                     </li>
 

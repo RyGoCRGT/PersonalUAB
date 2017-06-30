@@ -3,7 +3,7 @@
 class TituloProfesional
 {
 
-  private $TituloProfesional;
+  private $IdTituloProfesional;
   private $IdTipoTituloProfesional;
   private $IdPersonal;
   private $NombreInstitucion;
@@ -14,6 +14,7 @@ class TituloProfesional
 
   function __construct()
   {
+    $this->IdTituloProfesional = null;
   }
 
   public function __set($atributo, $value)

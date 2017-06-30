@@ -87,6 +87,10 @@ INSERT INTO cargo VALUE(null, "Profesor");
 INSERT INTO cargo VALUE(null, "Secretaria");
 INSERT INTO cargo VALUE(null, "Secretario Academico");
 
+INSERT INTO cargoPersona VALUE(null, "Jardinero");
+INSERT INTO cargoPersona VALUE(null, "Contador");
+INSERT INTO cargoPersona VALUE(null, "Capellan");
+
 INSERT INTO enfermedad VALUE(null, "Rinitis");
 INSERT INTO enfermedad VALUE(null, "Asma");
 INSERT INTO enfermedad VALUE(null, "Urticaria");
@@ -104,3 +108,8 @@ INSERT INTO deporte VALUE(null, "Ajedrez");
 INSERT INTO deporte VALUE(null, "Fisicoculturismo");
 INSERT INTO deporte VALUE(null, "Rugby");
 INSERT INTO deporte VALUE(null, "Futbol Americano");
+
+INSERT INTO tipoTituloProfesional VALUE(null, "Licenciatura");
+INSERT INTO tipoTituloProfesional VALUE(null, "Diplomado");
+INSERT INTO tipoTituloProfesional VALUE(null, "Maestria");
+INSERT INTO tipoTituloProfesional VALUE(null, "Doctorado");

@@ -16,10 +16,201 @@ class CtrMenuAdmin
 
     switch ($this->Modo) {
 
+      case 'listaPersonal':
+        include 'header.php';
+        include 'bodylistPers.php';
+        include 'footer.php';
+        break;
+
+      case 'puntuarMeritoPersonal':
+        if (isset($_POST['idPersonal']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/EvaluacionMeritosDocenteProfesor.php';
+          include '../../model/EvaluacionMeritosDocenteProfesorConsulta.php';
+          include '../../controller/EvaluacionMeritosDocenteProfesorControlador.php';
+          $conexion =  new Conexion();
+          $evaluacionMeritos = new EvaluacionMeritosDocenteProfesorControlador($conexion);
+          $evaluacionMeritos->crear();
+        }
+        else
+        {
+          # code...
+        }
+        break;
+
+      case 'evaluacionMeritos':
+        if (isset($_POST['datos']))
+        {
+          include 'header.php';
+          include 'bodyEvaluacionMeritos.php';
+          include 'footer.php';
+        }
+        else
+        {
+          header("Location: index.php?modo=listaPersonal");
+        }
+        break;
+
       case 'regPersonal':
         include 'header.php';
         include 'bodyRegPers.php';
         include 'footer.php';
+        break;
+
+      case 'personalELab':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/ExperienciaLaboral.php';
+          include '../../model/ExperienciaLaboralConsulta.php';
+          include '../../controller/ExperienciaLaboralControlador.php';
+          $conexion = new Conexion();
+
+          $manejadorExperencia = new ExperienciaLaboralControlador($conexion);
+          $manejadorExperencia->crear();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario</p>";
+        }
+        break;
+
+      case 'personalCursos':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/CursoEstudiado.php';
+          include '../../model/CursoEstudiadoConsulta.php';
+          include '../../controller/CursoEstudiadoControlador.php';
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonaCurso']);
+
+          $consul = new PersonalConsulta($conexion);
+
+          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+
+          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
+          $target_path = $target_path . basename( $_FILES["respaldoCursos"]["name"]);
+
+          $a=move_uploaded_file($_FILES["respaldoCursos"]["tmp_name"], $target_path);
+
+          $cursoEstudiado = new CursoEstudiado();
+
+          $cursoEstudiado->IdPersonal = $idPersonal['idPersonal'];
+          $cursoEstudiado->NombreInstitucion = $_POST['nombreInstitucionCursos'];
+          $cursoEstudiado->CursoEstudiado = $_POST['cursoEstudiado'];
+          $cursoEstudiado->AnhoEstudio = $_POST['anhoEstudioCuso'];
+          $cursoEstudiado->ReligionInstitucion = $_POST['religionInstCurso'];
+          $cursoEstudiado->RespaldoTituloPDF = $target_path;
+
+          $cursoEstudiadoManejador = new CursoEstudiadoControlador($conexion);
+          $cursoEstudiadoManejador->crear($cursoEstudiado);
+
+          $listaCursoEstudiado = $cursoEstudiadoManejador->listarPer($cursoEstudiado->IdPersonal);
+          $i = 0;
+          ?>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Curso</th>
+                  <th>Institucion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($listaCursoEstudiado as $listaCE): $i++;?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $listaCE->CursoEstudiado; ?></td>
+                    <td><?php echo $listaCE->NombreInstitucion; ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+          <?php
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario</p>";
+        }
+        break;
+
+      case 'personalTitulos':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/TituloProfesional.php';
+          include '../../model/TituloProfesionalConsulta.php';
+          include '../../controller/TituloProfesionalControlador.php';
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonaTitulo']);
+
+          $consul = new PersonalConsulta($conexion);
+
+          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+
+          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
+          $target_path = $target_path . basename( $_FILES["respaldoTitulo"]["name"]);
+
+          $a=move_uploaded_file($_FILES["respaldoTitulo"]["tmp_name"], $target_path);
+
+          $tituloProfesional = new TituloProfesional();
+
+          $tituloProfesional->IdTipoTituloProfesional = $_POST['tipoTituloProfesional'];
+          $tituloProfesional->IdPersonal = $idPersonal['idPersonal'];
+          $tituloProfesional->NombreInstitucion = $_POST['nombreInstitucionTitulos'];
+          $tituloProfesional->CursoProfesionalEstudiado = $_POST['cursoProfesionalEstudiado'];
+          $tituloProfesional->TiempoEstudio = $_POST['anhoEstudioTitulo'];
+          $tituloProfesional->ReligionInstitucion = $_POST['religionInstTitulo'];
+          $tituloProfesional->RespaldoTituloPDF = $target_path;
+
+          $tituloProfesionalManejador = new TituloProfesionalControlador($conexion);
+          $tituloProfesionalManejador->crear($tituloProfesional);
+
+          $listaTituloProfesional = $tituloProfesionalManejador->listarPer($tituloProfesional->IdPersonal);
+          $i = 0;
+          ?>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Curso</th>
+                  <th>Institucion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($listaTituloProfesional as $listaTP): $i++;?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $listaTP->CursoProfesionalEstudiado; ?></td>
+                    <td><?php echo $listaTP->NombreInstitucion; ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+          <?php
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario</p>";
+        }
         break;
 
       case 'verPersonal':
@@ -27,26 +218,56 @@ class CtrMenuAdmin
         {
           include '../../model/conexion.php';
           include '../../model/Persona.php';
+          include '../../model/Cargo.php';
+          include '../../model/Enfermedad.php';
+          include '../../model/Deporte.php';
           include '../../model/Personal.php';
           include '../../model/PersonaConsulta.php';
           include '../../model/PersonalConsulta.php';
           include '../../model/ReferenciaPersonal.php';
+          include '../../model/ReferenciaPersonalConsulta.php';
           include '../../model/ConyuguePersonal.php';
+          include '../../model/ConyuguePersonalConsulta.php';
+          include '../../model/CursoEstudiado.php';
+          include '../../model/CursoEstudiadoConsulta.php';
           include '../../model/HijosPersonal.php';
+          include '../../model/HijosPersonalConsulta.php';
           include '../../model/Telefono.php';
           include '../../model/TelefonoConsulta.php';
+          include '../../model/TituloProfesional.php';
+          include '../../model/TituloProfesionalConsulta.php';
+          include '../../model/ExperienciaLaboral.php';
+          include '../../model/ExperienciaLaboralConsulta.php';
           include '../../controller/PersonaControlador.php';
+          include '../../controller/PersonalControlador.php';
           include '../../controller/ReferenciaPersonalControlador.php';
           include '../../controller/TelefonoControlador.php';
+          include '../../controller/ConyuguePersonalControlador.php';
+          include '../../controller/HijosPersonalControlador.php';
+          include '../../controller/CursoEstudiadoControlador.php';
+          include '../../controller/TituloProfesionalControlador.php';
+          include '../../controller/ExperienciaLaboralControlador.php';
 
           $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
 
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonalDetalle']);
+          // $idPersona = $consulta->obtenerIdPersona(7548743);
+          //
+          // $consul = new PersonalConsulta($conexion);
+          //
+          // $idPersonal = $consul->datosPersonal($idPersona['idPersona']);// COMEMTAR
 
+          $personalManejador = new PersonalControlador($conexion);
+
+          $personal = $personalManejador->ver($idPersona['idPersona']);
+
+          include 'modalDetallePersonal.php';
 
         }
         else
         {
-          echo "<p style='color:red'>Error al ver Formulario</p>";
+          echo "<p style='color:red'>Error al ver Formulario Detalle</p>";
         }
         break;
 
@@ -242,7 +463,7 @@ class CtrMenuAdmin
           $telefonoManejador = new TelefonoControlador($conexion);
           $telefonoManejador->crear($telefono);
 
-          echo "<p style='color:green'>Gurdado Exitoso</p>";
+          echo "<p style='color:green'>Guardado Exitoso</p>";
 
         }
         else
@@ -262,7 +483,7 @@ class CtrMenuAdmin
 
         $consulta = new PersonaConsulta($conexion);
 
-        $target_path = "/wamp/www/PersonalUAB/view/libs/multimedia/img/personal/";
+        $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/personal/";
         $target_path = $target_path . basename( $_FILES["fotoPersonal"]["name"]);
 
         $a=move_uploaded_file($_FILES["fotoPersonal"]["tmp_name"], $target_path);
@@ -278,6 +499,7 @@ class CtrMenuAdmin
         $personal->IdNacion = $_POST['nacionalidad'];
         $personal->IdTipoPersonal = $_POST['tipoPersonal'];
         $personal->IdCarrera = $_POST['carrera'];
+        $personal->IdCargo = $_POST['cargoPersonal'];
         $personal->Direccion = $_POST['direccion'];
         $personal->Email = $_POST['email'];
         $personal->IdCiudadNacimiento = $_POST['ciudad'];
@@ -292,6 +514,7 @@ class CtrMenuAdmin
         $personal->TipoSangre = $_POST['tipoSangre'];
         $personal->Hobby = $_POST['hobby'];
         $personal->LecturaPreferencial = $_POST['lecturaP'];
+        $personal->NumeroRegistroProfesional = $_POST['numeroRegProfesional'];
         $personal->FechaIngreso = $_POST['fechaIngres'];
         $personal->Ruta = $target_path;
 
@@ -335,6 +558,7 @@ class CtrMenuAdmin
         include '../../model/Persona.php';
         include '../../model/PersonaConsulta.php';
         include '../../model/usuario.php';
+        include '../../model/usuarioConsulta.php';
         include '../../controller/UsuarioControlador.php';
         $conexion = new Conexion();
         $consulta = new PersonaConsulta($conexion);
@@ -342,14 +566,12 @@ class CtrMenuAdmin
 
         $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
         $usuario->IdUsuario = null;
-        $usuario->TipoUsuario = $_POST['tipoUsuario']+0;
+        $usuario->TipoUsuario = $_POST['tipoUsuario'];
         $usuario->Estado = 1;
         $usuario->Borrado = 0;
-        $usuario->IdPersona=$idP['idPersona']+0;
+        $usuario->IdPersona = $idP['idPersona'];
         $usuarioManejador = new UsuarioControlador($conexion);
         $usuarioManejador->crear($usuario);
-
-        echo "<p style='color:green'>Gurdado Exitoso</p>";
 
       }
       else
@@ -416,6 +638,237 @@ class CtrMenuAdmin
       {
         echo "<p style='color:red'>Error al Enviar Formulario</p>";
       }
+      break;
+
+      //llamando el formulario de Tabla de Calificacion de Meritos
+
+      case 'NuevaTablaMeritos':
+            include 'header.php';
+            include 'bodyRegistrarTablaMeritosDocenteProfesor.php';
+            include 'footer.php';
+      break;
+
+      case 'RegistrarNuevaTablaMeritos':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/TablaMeritosDocenteProfesor.php';
+          include '../../model/TablaMeritosDocenteProfesorConsulta.php';
+          include '../../model/EstructuraMeritos.php';
+          include '../../model/EstructuraMeritosConsulta.php';
+
+          $conexion = new Conexion();
+
+          $tablaMeritos = new TablaMeritosDocenteProfesor();
+          $tablaMeritos->IdTablaMeritosDocenteProfesor = null;
+
+          $tablaMeritos->Version = strtoupper($_POST['version']);
+
+          $tablaMeritos->TipoMerito = $_POST['tipoMerito'];
+
+          $tablaMeritos->FechaCreacion = $_POST['fechaCreacion'];
+
+          $tablaMeritos->Activo = $_POST['activo'];
+
+          $tablaMeritosConsulta = new  TablaMeritosDocenteProfesorConsulta($conexion);
+
+          if($_POST['activo'] == '1'){
+            //verificando si existe una tabla de Merito activa juntamente con el tipo de de merito docente/profesor
+            //ya que solamente puede existir una activa y las otras no
+            $resultadoSiExisteTablaMeritoActivoPorTipoMerito = $tablaMeritosConsulta->existeMeritoActivoPorTipoMerito($_POST['activo'],$_POST['tipoMerito']);
+
+            if($resultadoSiExisteTablaMeritoActivoPorTipoMerito){
+                  echo "<p style='color:red'>Existe una Tabla de Meritos Activa para el tipo: ".$_POST['tipoMerito']." </p>";
+            }else{
+
+                      $idTablaMerito = $tablaMeritosConsulta->crear($tablaMeritos);
+                      //echo "$idTablaMerito" . $idTablaMerito;
+                      $archivoXml = $_FILES["archivo"]["tmp_name"];
+                      $xmlData = simplexml_load_file($archivoXml);//parseando el archivo XML
+                      // Crear tabla merito docentes
+                      $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
+                      foreach ($xmlData->categoria as $categoria):
+                        $nombre=$categoria->nombre;//este es del archivo XML
+                        $puntaje=$categoria->puntaje;  //este es del archivo XML
+                        $objCategoria = new EstructuraMeritos();
+                        $objCategoria->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                        $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria
+                        $objCategoria->NombreMerito = $nombre;
+                        $objCategoria->PuntajeMerito = $puntaje;
+                        $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
+                        //La categoria tiene "meritos" , y ahora se va a iterar sus meritos
+                        foreach ($categoria->merito as $merito):
+                          $nombre=$merito->nombre;
+                          $puntaje=$merito->puntaje;
+
+                          $objMerito = new EstructuraMeritos();
+                          $objMerito->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                          //Aqui se tiene el id de la categoria primaria
+                          $objMerito->IdEstructuraMeritoPrimario = $idCategoria;
+                          $objMerito->NombreMerito = $nombre;
+                          $objMerito->PuntajeMerito = $puntaje;
+                          $objMeritoDocenteConsulta->crear($objMerito);
+                        endforeach;
+                      endforeach;
+                      //Recuperando la estructura  las categorias con sus estructuras
+                      //Los UL y LI se puede cambiar por tablas
+                      $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritos($idTablaMerito);
+
+                      echo "<table class='table table-hover' border = 1>";
+                      $contador = 1;
+                      foreach ($meritos as $categoria):
+                        echo "<thead>
+                              <tr>
+                                  <th>".$contador.".-</th>
+                                  <th colspan='2'><strong>".$categoria->NombreMerito." (".$categoria->PuntajeMerito." puntos)</strong></th>
+                              </tr>
+                              </thead>";
+                              $subcontador = 1;
+                        foreach ($categoria->SubMeritos as $merito):
+                          echo "<tbody>
+                                  <tr>
+                                    <td>".$contador.".".$subcontador."</td>
+                                    <td>".$merito->NombreMerito."</td>
+                                    <td>".$merito->PuntajeMerito."</td>
+                                  </tr>
+                                </tbody>
+                        ";
+                          $subcontador++;
+                          endforeach;
+                        $contador++;
+                      endforeach;
+                      echo "</table>";
+
+                      echo "<p style='color:green'>Guardado Exitoso</p>";
+            }
+          }else{
+
+                $idTablaMerito = $tablaMeritosConsulta->crear($tablaMeritos);
+                //echo "$idTablaMerito" . $idTablaMerito;
+                $archivoXml = $_FILES["archivo"]["tmp_name"];
+                $xmlData = simplexml_load_file($archivoXml);//parseando el archivo XML
+                // Crear tabla merito docentes
+                $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
+                foreach ($xmlData->categoria as $categoria):
+                  $nombre=$categoria->nombre;//este es del archivo XML
+                  $puntaje=$categoria->puntaje;  //este es del archivo XML
+                  $objCategoria = new EstructuraMeritos();
+                  $objCategoria->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                  $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria
+                  $objCategoria->NombreMerito = $nombre;
+                  $objCategoria->PuntajeMerito = $puntaje;
+                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
+                  //La categoria tiene "meritos" , y ahora se va a iterar sus meritos
+                  foreach ($categoria->merito as $merito):
+                    $nombre=$merito->nombre;
+                    $puntaje=$merito->puntaje;
+
+                    $objMerito = new EstructuraMeritos();
+                    $objMerito->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                    //Aqui se tiene el id de la categoria primaria
+                    $objMerito->IdEstructuraMeritoPrimario = $idCategoria;
+                    $objMerito->NombreMerito = $nombre;
+                    $objMerito->PuntajeMerito = $puntaje;
+                    $objMeritoDocenteConsulta->crear($objMerito);
+                  endforeach;
+                endforeach;
+                //Recuperando la estructura  las categorias con sus estructuras
+                //Los UL y LI se puede cambiar por tablas
+                $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritos($idTablaMerito);
+
+                echo "<table class='table table-hover' border = 1>";
+                $contador = 1;
+                foreach ($meritos as $categoria):
+                  echo "<thead>
+                        <tr>
+                            <th>".$contador.".-</th>
+                            <th><strong>".$categoria->NombreMerito." (".$categoria->PuntajeMerito." puntos)</strong></th>
+                        </tr>
+                        </thead>";
+                        $subcontador = 1;
+                  foreach ($categoria->SubMeritos as $merito):
+                    echo "<tbody>
+                            <tr>
+                              <td>".$contador.".".$subcontador."</td>
+                              <td>".$merito->NombreMerito."</td>
+                              <td>".$merito->PuntajeMerito."</td>
+                            </tr>
+                          </tbody>
+                  ";
+                    $subcontador++;
+                    endforeach;
+                  $contador++;
+                endforeach;
+                echo "</table>";
+
+                echo "<p style='color:green'>Guardado Exitoso</p>";
+          }
+        }
+        else
+        {
+          echo "<p style='color: red'> Por favor llene el Formulario Nueva Tabla de Meritos </p>";
+        }
+
+
+      break;
+
+      case 'tablaCalificacionMeritosDocente':
+            include 'header.php';
+            //include 'bodyRegistrarTablaCalificacionMeritosDocente.php';
+            include 'footer.php';
+      break;
+
+      //registro de meritos
+      case 'registrarMeritoDocente':
+          echo "llegue";
+            if(isset($_FILES["archivo"]["type"]))
+            {
+                include '../../model/conexion.php';
+                include '../../model/MeritosDocente.php';
+                include '../../model/MeritosDocenteConsulta.php';
+
+                $conexion = new Conexion();
+                $xml = $_FILES["archivo"]["tmp_name"];
+                $xmlData = simplexml_load_file($xml);
+                // Crear tabla merito docentes
+
+                $tablaMeritos = new TablaMeritosDocenteProfesor();
+
+
+                foreach ($xmlData->categoria as $categoria):
+                  $nombre=$categoria->nombre;
+                  $puntaje=$categoria->puntaje;
+
+                  $objMeritoDocenteConsulta = new MeritosDocenteConsulta($conexion);
+                  $objCategoria = new MeritosDocente();
+                  $objCategoria->IdMeritoDocente = null;
+                  $objCategoria->IdMeritoDocentePrimario = null;
+                  $objCategoria->NombreMerito = $nombre;
+                  $objCategoria->PuntajeMerito = $puntaje;
+                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
+                  foreach ($categoria->merito as $merito):
+                    $nombre=$merito->nombre;
+                    $puntaje=$merito->puntaje;
+
+                    $objMerito = new MeritosDocente();
+                    $objMerito->IdMeritoDocente = null;
+                    $objMerito->IdMeritoDocentePrimario = $idCategoria;
+                    $objMerito->NombreMerito = $nombre;
+                    $objMerito->PuntajeMerito = $puntaje;
+                  endforeach;
+                endforeach;
+
+                if($exitoRegistrarMerito){
+                  echo "El merito fue registrado correctamente";
+                }else{
+                  echo "Error al registrar el merito";
+                }
+
+
+            }else{
+
+              echo "Debe lllenar los campos";
+            }
       break;
 
       case 'salir':

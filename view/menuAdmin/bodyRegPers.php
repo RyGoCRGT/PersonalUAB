@@ -22,10 +22,14 @@ include '../../model/Afp.php';
 include '../../model/AfpConsulta.php';
 include '../../model/Cargo.php';
 include '../../model/CargoConsulta.php';
+include '../../model/CargoPersona.php';
+include '../../model/CargoPersonaConsulta.php';
 include '../../model/Deporte.php';
 include '../../model/DeporteConsulta.php';
 include '../../model/Enfermedad.php';
 include '../../model/EnfermedadConsulta.php';
+include '../../model/TipoTituloProfesional.php';
+include '../../model/TipoTituloProfesionalConsulta.php';
 include '../../controller/NacionControlador.php';
 include '../../controller/CtrEstadoCivil.php';
 include '../../controller/CtrLugarExpedicion.php';
@@ -36,8 +40,10 @@ include '../../controller/ReligionControlador.php';
 include '../../controller/SeguroControlador.php';
 include '../../controller/AfpControlador.php';
 include '../../controller/CargoControlador.php';
+include '../../controller/CargoPersonaControlador.php';
 include '../../controller/DeporteControlador.php';
 include '../../controller/EnfermedadControlador.php';
+include '../../controller/TipoTituloProfesionalControlador.php';
 
 $conexion = new Conexion();
 
@@ -71,11 +77,17 @@ $listaAfps = $afp->listar();
 $cargo = new CargoControlador($conexion);
 $listaCargos = $cargo->listar();
 
+$cargoPersona = new CargoPersonaControlador($conexion);
+$listaCargosPersona = $cargoPersona->listar();
+
 $deporte = new DeporteControlador($conexion);
 $listaDeportes = $deporte->listar();
 
 $enfermedad = new EnfermedadControlador($conexion);
 $listaEnfermedades = $enfermedad->listar();
+
+$tipoTituloProfesional = new TipoTituloProfesionalControlador($conexion);
+$listaTipoTituloProfesional = $tipoTituloProfesional->listar();
 
 ?>
 <div id="contenidoAll">
@@ -181,6 +193,7 @@ $listaEnfermedades = $enfermedad->listar();
                                             <div class="input-group selector-mobile">
                                               <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
                                               <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI">
+                                                <option value="" disabled selected hidden>Seleccione Lugar de Expedicion CI</option>
                                                 <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                                                   <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
                                                 <?php endforeach; ?>
@@ -219,6 +232,7 @@ $listaEnfermedades = $enfermedad->listar();
                                            <div class="input-group selector-mobile">
                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
                                              <select class="form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil">
+                                               <option value="" disabled selected hidden>Seleccionar Estado Civil</option>
                                                <?php foreach ($listaEstadoCivil as $listaEC): ?>
                                                  <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
                                                <?php endforeach; ?>
@@ -286,7 +300,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <label>Nacionalidad</label>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                            <select class="selectpicker form-control" name="nacionalidad" id="nacionalidad">
+                                            <select class="selectpicker form-control" name="nacionalidad" id="nacionalidad" title="Seleccione Nacionalidad">
                                               <?php foreach ($listaNaciones as $listaN): ?>
                                                 <option value="<?php echo $listaN->IdNacion; ?>"><?php echo $listaN->NombreNacion; ?></option>
                                               <?php endforeach; ?>
@@ -295,6 +309,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="form-control" name="nacionalidad" id="nacionalidad">
+                                              <option value="" disabled selected hidden>Seleccione Nacionalidad</option>
                                               <?php foreach ($listaNaciones as $listaN): ?>
                                                 <option value="<?php echo $listaN->IdNacion; ?>"><?php echo $listaN->NombreNacion; ?></option>
                                               <?php endforeach; ?>
@@ -306,7 +321,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <label>Tipo Personal</label>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal">
+                                            <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal" title="Selecciona Tipo de Personal">
                                               <?php foreach ($listaTipoPersonal as $listaTP): ?>
                                                 <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
                                               <?php endforeach; ?>
@@ -315,6 +330,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="form-control" name="tipoPersonal" id="tipoPersonal">
+                                              <option value="" disabled selected hidden>Selecciona Tipo de Personal</option>
                                               <?php foreach ($listaTipoPersonal as $listaTP): ?>
                                                 <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
                                               <?php endforeach; ?>
@@ -322,11 +338,11 @@ $listaEnfermedades = $enfermedad->listar();
                                           </div>
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group" id="carreraPersonalSelect">
                                           <label>Facultad Carrera</label>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="selectpicker form-control show-tick" name="carrera" id="carrera" data-container="body">
+                                            <select class="selectpicker form-control show-tick" name="carrera" id="carrera" title="Seleccione Carrera" data-container="body">
                                               <?php foreach ($listaFacultadCarrera as $listaFC): ?>
                                                 <optgroup label="<?php echo $listaFC->NombreFacultad ?>">
                                                 <?php foreach ($listaFC->getListaCarreras() as $listaCa): ?>
@@ -339,12 +355,34 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
                                             <select class="form-control" name="carrera" id="carrera">
+                                              <option value="" disabled selected hidden>Seleccione Carrera</option>
                                               <?php foreach ($listaFacultadCarrera as $listaFC): ?>
                                                 <optgroup label="<?php echo $listaFC->NombreFacultad ?>">
                                                 <?php foreach ($listaFC->getListaCarreras() as $listaCa): ?>
                                                   <option value="<?php echo $listaCa->IdCarrera; ?>"><?php echo $listaCa->NombreCarrera; ?></option>
                                                 <?php endforeach; ?>
                                                 </optgroup>
+                                              <?php endforeach; ?>
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group" id="cargoPersonalSelect">
+                                          <label>Cargo</label>
+                                          <div class="input-group selector">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
+                                            <select class="selectpicker form-control" name="cargoPersonal" id="cargoPersonal" title="Seleccione Cargo">
+                                              <?php foreach ($listaCargosPersona as $listaC): ?>
+                                                <option value="<?php echo $listaC->IdCargoPersona; ?>"><?php echo $listaC->NombreCargoPersona; ?></option>
+                                              <?php endforeach; ?>
+                                            </select>
+                                          </div>
+                                          <div class="input-group selector-mobile">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
+                                            <select class="form-control" name="cargoPersonal" id="cargoPersonal">
+                                              <option value="" disabled selected hidden>Seleccione Cargo</option>
+                                              <?php foreach ($listaCargosPersona as $listaC): ?>
+                                                <option value="<?php echo $listaC->IdCargoPersona; ?>"><?php echo $listaC->NombreCargoPersona; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
@@ -367,18 +405,19 @@ $listaEnfermedades = $enfermedad->listar();
                                         </div>
 
                                         <div class="form-group">
-                                          <label>Ciudad Nacimiento</label>
+                                          <label>Ciudad Nacimiento </label>&nbsp; &nbsp; &nbsp; &nbsp;<a><i class="text-success fa fa-plus-circle"></i></a>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                            <select class="selectpicker form-control" name="ciudad" id="ciudad">
+                                            <select class="selectpicker form-control" name="ciudad" id="ciudad" title="Seleccione Ciudad de Nacimiento">
                                               <?php foreach ($listaCiudades as $listaC): ?>
                                                 <option value="<?php echo $listaC->IdCiudad; ?>"><?php echo $listaC->NombreCiudad; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
                                           <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
                                             <select class="form-control" name="ciudad" id="ciudad">
+                                              <option value="" disabled selected hidden>Seleccione Ciudad de Nacimiento</option>
                                               <?php foreach ($listaCiudades as $listaC): ?>
                                                 <option value="<?php echo $listaC->IdCiudad; ?>"><?php echo $listaC->NombreCiudad; ?></option>
                                               <?php endforeach; ?>
@@ -390,7 +429,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <label>Religion</label>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="selectpicker form-control" name="religion" id="religion">
+                                            <select class="selectpicker form-control" name="religion" id="religion" title="Seleccione Religion">
                                               <?php foreach ($listaReligion as $listaR): ?>
                                                 <option value="<?php echo $listaR->IdReligion; ?>"><?php echo $listaR->NombreReligion; ?></option>
                                               <?php endforeach; ?>
@@ -399,6 +438,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="form-control" name="religion" id="religion">
+                                              <option value="" disabled selected hidden>Seleccione Religion</option>
                                               <?php foreach ($listaReligion as $listaR): ?>
                                                 <option value="<?php echo $listaR->IdReligion; ?>"><?php echo $listaR->NombreReligion; ?></option>
                                               <?php endforeach; ?>
@@ -415,10 +455,10 @@ $listaEnfermedades = $enfermedad->listar();
                                         </div>
 
                                         <div class="form-group">
-                                          <label>Seguro</label>
+                                          <label>Seguro: Empresa Aseguradora de Salud</label>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="selectpicker form-control" name="seguro" id="seguro">
+                                            <select class="selectpicker form-control" name="seguro" id="seguro" title="Seleccione Empresa Aseguradora">
                                               <?php foreach ($listaSeguros as $listaS): ?>
                                                 <option value="<?php echo $listaS->IdSeguro; ?>"><?php echo $listaS->NombreSeguro; ?></option>
                                               <?php endforeach; ?>
@@ -427,6 +467,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="form-control" name="seguro" id="seguro">
+                                              <option value="" disabled selected hidden>Seleccione Empresa Aseguradora</option>
                                               <?php foreach ($listaSeguros as $listaS): ?>
                                                 <option value="<?php echo $listaS->IdSeguro; ?>"><?php echo $listaS->NombreSeguro; ?></option>
                                               <?php endforeach; ?>
@@ -446,7 +487,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <label>AFP</label>
                                           <div class="input-group selector">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="selectpicker form-control" name="afp" id="afp">
+                                            <select class="selectpicker form-control" name="afp" id="afp" title="Seleccione AFP">
                                               <?php foreach ($listaAfps as $listaA): ?>
                                                 <option value="<?php echo $listaA->IdAfp; ?>"><?php echo $listaA->NombreAfp; ?></option>
                                               <?php endforeach; ?>
@@ -455,6 +496,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <select class="form-control" name="afp" id="afp">
+                                              <option value="" disabled selected hidden>Seleccione AFP</option>
                                               <?php foreach ($listaAfps as $listaA): ?>
                                                 <option value="<?php echo $listaA->IdAfp; ?>"><?php echo $listaA->NombreAfp; ?></option>
                                               <?php endforeach; ?>
@@ -490,7 +532,7 @@ $listaEnfermedades = $enfermedad->listar();
                                           <label>Tipo Sangre</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
-                                            <select class="selectpicker form-control" name="tipoSangre" id="tipoSangre">
+                                            <select class="selectpicker form-control" name="tipoSangre" id="tipoSangre" title="Tipo de Sangre">
                                               <option value="ORH+">ORH+</option>
                                               <option value="ORH-">ORH-</option>
                                               <option value="AB+">AB+</option>
@@ -508,6 +550,14 @@ $listaEnfermedades = $enfermedad->listar();
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
                                             <input id="hobby" type="text" class="form-control" placeholder="Hobby:" name="hobby">
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label>Numero de Registro Profesional</label>
+                                          <div class="input-group" >
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-sort-numeric-asc"></i></span>
+                                            <input id="numeroRegProfesional" type="text" class="form-control" placeholder="Numero de Registro Profesional:" name="numeroRegProfesional">
                                           </div>
                                         </div>
 
@@ -530,7 +580,7 @@ $listaEnfermedades = $enfermedad->listar();
                                         <div class="row">
                                           <div class="col-xs-12 col-sm-12 col-md-4">
                                             <div class="form-group">
-                                              <label>Cargos</label>
+                                              <label>Cargos/Roles</label>
                                               <div class="input-group">
                                                 <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
                                                 <select class="selectpicker form-control" data-width="150px" multiple name="cargos[]" id="cargos">
@@ -857,16 +907,17 @@ $listaEnfermedades = $enfermedad->listar();
                                 </div>
                               </div>
                               <div class="tab-pane fade" id="HojaVida">
-                                <div class="thumbnail">
+                                <div class="thumbnail"  style="background: rgb(222, 224, 226)">
 
-                                  <div class="panel with-nav-tabs panel-info">
+                                  <div class="panel with-nav-tabs panel-primary">
                                     <div class="panel-heading" >
                                       <ul class="nav nav-tabs" >
                                           <li class="active" id="CursosLI"><a style="color:white" href="#Cursos" data-toggle="tab" >Cursos</a></li>
                                           <li id="TitulosLI"><a style="color:white" href="#Titulos" data-toggle="tab">Titulos</a></li>
+                                          <li id="ExperienciaLaboralLI"><a style="color:white" href="#ExperienciaLaboral" data-toggle="tab">Experincia Laboral</a></li>
                                     </div>
                                   </div>
-                                  <div class="panel-body" style="display: block;">
+                                  <div class="panel-body" style="display: block; background:white">
                                     <div class="tab-content">
                                       <div class="tab-pane fade in active" id="Cursos">
                                         <form id="CursosFrm">
@@ -882,18 +933,197 @@ $listaEnfermedades = $enfermedad->listar();
                                             </div>
                                             <div class="col-xs-12 col-sm-6 col-md-4">
                                               <div class="form-group">
-                                                <label>Nombre Institucion</label>
+                                                <label>Curso Estudiado</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <input type="text" class="form-control" name="nombreInstitucionCursos" id="nombreInstitucionCursos">
+                                                  <input type="text" class="form-control" name="cursoEstudiado" id="cursoEstudiado">
                                                 </div>
                                               </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-4"></div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Año de Estudio</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                                  <input type="text" class="form-control" name="anhoEstudioCuso" id="anhoEstudioCuso">
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                              <div class="form-group">
+                                                <label>Religion Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
+                                                  <input type="text" class="form-control" name="religionInstCurso" id="religionInstCurso">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                              <div class="form-group ">
+                                                <label>Respaldo Curso (IMAGEN *jpg *png)</label>
+                                                <div class="input-group exportarArchivo">
+                                                  <input type="file" class="form-control exportarArchivoFile" name="respaldoCursos" id="respaldoCursos">
+                                                </div>
+                                                <div class="nameFileImg"></div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <input type="hidden" name="datos" value="1">
+                                          <input type="hidden" name="ciPersonaCurso" id="ciPersonaCurso" value="1">
+                                          <div class="pull-right">
+                                            <button type="submit" class="btn btn-success" name="guardar"><i class="fa fa-send"></i>Añadir</button>
                                           </div>
                                         </form>
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="mensajeCursosPersonal"></div>
+                                        </div>
                                       </div>
-                                      <div class="tab-pane fade" id="Titulos"></div>
+                                      <div class="tab-pane fade" id="Titulos">
+                                        <form id="TiulosFrm">
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Nombre Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <input type="text" class="form-control" name="nombreInstitucionTitulos" id="nombreInstitucionTitulos">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Curso Profesional Estudiado</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <input type="text" class="form-control" name="cursoProfesionalEstudiado" id="cursoProfesionalEstudiado">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Tipo de Tiulo</label>
+                                                <div class="input-group selector">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <select class="selectpicker form-control" name="tipoTituloProfesional" id="tipoTituloProfesional">
+                                                    <?php foreach ($listaTipoTituloProfesional as $listaTipoTP): ?>
+                                                      <option value="<?php echo $listaTipoTP->IdTipoTituloProfesional; ?>"><?php echo $listaTipoTP->NombreTipoTitulo; ?></option>
+                                                    <?php endforeach; ?>
+                                                  </select>
+                                                </div>
+                                                <div class="input-group selector-mobile">
+                                                  <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <select class="form-control" name="tipoTituloProfesional" id="tipoTituloProfesional">
+                                                    <?php foreach ($listaTipoTituloProfesional as $listaTipoTP): ?>
+                                                      <option value="<?php echo $listaTipoTP->IdTipoTituloProfesional; ?>"><?php echo $listaTipoTP->NombreTipoTitulo; ?></option>
+                                                    <?php endforeach; ?>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Religion Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
+                                                  <input type="text" class="form-control" name="religionInstTitulo" id="religionInstTitulo">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Tiempo de Estudio</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                                  <input type="text" class="form-control" name="anhoEstudioTitulo" id="anhoEstudioTitulo">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Respaldo Titulo Profesional (IMAGEN *jpg *png)</label>
+                                                <div class="input-group exportarArchivo">
+                                                  <input type="file" class="form-control exportarArchivoFile" name="respaldoTitulo" id="respaldoTitulo">
+                                                </div>
+                                                <div class="nameFileImg"></div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <input type="hidden" name="datos" value="1">
+                                          <input type="hidden" name="ciPersonaTitulo" id="ciPersonaTitulo" value="1">
+                                          <div class="pull-right">
+                                            <button type="submit" class="btn btn-success" name="guardar"><i class="fa fa-send"></i>Añadir</button>
+                                          </div>
+                                        </form>
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="mensajeTitulosPersonal"></div>
+                                        </div>
+                                      </div>
+
+                                      <div class="tab-pane fade" id="ExperienciaLaboral">
+                                        <form id="ExperienciaLaboralFrm">
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Nombre Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <input type="text" class="form-control" name="nombreInstitucionEL" id="nombreInstitucionEL">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Cargo/Responsabilidad</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                                                  <input type="text" class="form-control" name="cargoResponsabilidadEL" id="cargoResponsabilidadEL">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                              <div class="form-group">
+                                                <label>Años de Servicio</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                                                  <input type="text" class="form-control" name="anhoServicioEL" id="anhoServicioEL">
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                              <div class="form-group">
+                                                <label>Religion Institucion</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
+                                                  <input type="text" class="form-control" name="religionInstEL" id="religionInstEL">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                              <div class="form-group">
+                                                <label>Motivo de Retiro</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
+                                                  <input type="text" class="form-control" name="motivoRetiroEL" id="motivoRetiroEL">
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <input type="hidden" name="datos" value="1">
+                                          <input type="hidden" name="ciPersonEL" id="ciPersonEL" value="1">
+                                          <div class="pull-right">
+                                            <button type="submit" class="btn btn-success" name="guardar"><i class="fa fa-send"></i>Añadir</button>
+                                          </div>
+                                        </form>
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="mensajeELaboralPersonal"></div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
 
@@ -912,4 +1142,29 @@ $listaEnfermedades = $enfermedad->listar();
 
 </div>
 
-<?php include 'modalDetallePersonal.php'; ?>
+<div class="modal fade bs-example-modal-lg in"  aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title text-center"> <i class="fa fa-user"></i> Personal-UAB</h3>
+      </div>
+      <div class="modal-body">
+        <div class="contenidoDetalle" id="contenidoDetalle">
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only">Cargando...</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-left">
+          <a id="exportarFormularioPDF" class="btn btn-danger btn-sm">Exportar PDF <i class="fa fa-file-pdf-o"></i></a>
+          <a id="exportarFormularioEXCEL" class="btn btn-success btn-sm">Exportar EXCEL <i class="fa fa-file-excel-o"></i></a>
+          <a id="exportarFormularioWORD" class="btn btn-primary btn-sm">Exportar WORD <i class="fa fa-file-word-o"></i></a>
+        </div>
+        <div class="pull-right">
+          <a href="index.php?modo=listaPersonal" class="btn btn-success btn-lg">LISTO <i class="fa fa-check"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

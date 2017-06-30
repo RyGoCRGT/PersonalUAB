@@ -28,7 +28,15 @@
 <script src="../libs/js/enviarHijo.js"></script>
 <script src="../libs/js/enviarReferencia.js"></script>
 <script src="../libs/js/detallePersonal.js"></script>
-
+<script src="../libs/js/guardarCursoEstudiado.js"></script>
+<script src="../libs/js/guardarTituloProfesional.js"></script>
+<script src="../libs/js/guardarExperienciaLaboral.js"></script>
+<script src="../libs/js/registrarNuevaTablaMerito.js"></script>
+<script src="../libs/js/imagenesLoad.js"></script>
+<script src="../libs/js/cambioCargoFacultad.js"></script>
+<script src="../libs/js/autosuma.js"></script>
+<script src="../libs/js/controlMeritos.js"></script>
+<script src="../libs/js/guardarCalificacion.js"></script>
 
 <script>
 $('.datepicker').datepicker({
@@ -36,21 +44,6 @@ $('.datepicker').datepicker({
   language: "ES"
 });
 $('#listoAll').hide();
-</script>
-<script>
-  $(function () {
-    $('#fotoPersonal').change( function(){
-      console.log(this.files);
-      var reader = new FileReader();
-
-      reader.onload = function (image) {
-        $('#repuestaFoto').attr('src', image.target.result);
-        $('#repuesta').addClass('well');
-      }
-
-      reader.readAsDataURL(this.files[0]);
-    });
-  });
 </script>
 <script>
 $(document).ready(function($){
@@ -77,5 +70,6 @@ $(".btn-pref .btn").click(function () {
 });
 });
 </script>
+<div id="fondoModal"></div>
 </body>
 </html>
