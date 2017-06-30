@@ -31,7 +31,8 @@ class UsuarioConsulta
     $consulta->execute();
     $registro = $consulta->fetchAll();
     return $registro;
-
+  }
+  
   public function existeUsuarioVinculado($id)
   {
     $query = "SELECT * FROM usuario WHERE idPersona = :id";
