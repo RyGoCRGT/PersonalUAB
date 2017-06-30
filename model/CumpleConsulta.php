@@ -14,6 +14,7 @@ class CumpleConsulta
 
   public function listaDeCumples($mes)
   {
+
     $query = "SELECT pl.rutaFoto,pl.email,p.primerNombre,p.apellidoPaterno,p.apellidoMaterno,p.fechaNacimiento,tp.nombreTipoPersonal
               FROM personal pl, persona p, tipoPersonal tp
               WHERE pl.idPersona=p.idPersona
