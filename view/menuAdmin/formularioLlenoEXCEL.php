@@ -14,6 +14,8 @@
       include '../../model/PersonalConsulta.php';
       include '../../model/ReferenciaPersonal.php';
       include '../../model/ReferenciaPersonalConsulta.php';
+      include '../../model/ExperienciaLaboral.php';
+      include '../../model/ExperienciaLaboralConsulta.php';
       include '../../model/ConyuguePersonal.php';
       include '../../model/ConyuguePersonalConsulta.php';
       include '../../model/CursoEstudiado.php';
@@ -32,6 +34,7 @@
       include '../../controller/HijosPersonalControlador.php';
       include '../../controller/CursoEstudiadoControlador.php';
       include '../../controller/TituloProfesionalControlador.php';
+      include '../../controller/ExperienciaLaboralControlador.php';
 
       $conexion = new Conexion();
       $consulta = new PersonaConsulta($conexion);

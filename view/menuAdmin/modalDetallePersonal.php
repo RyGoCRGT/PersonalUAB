@@ -12,7 +12,7 @@
       <div class="text-center">
         <h4>UNIVERSIDAD ADVENTISTA DE BOLIVIA</h4>
         <br>
-        <h4>JEFATURA PERSONAL</h4>
+        <h4>GESTION DEL TALENTO HUMANO</h4>
         <br><br>
         <h1><strong>FICHA PERSONAL</strong></h1>
       </div>

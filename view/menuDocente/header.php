@@ -52,10 +52,7 @@
                       </div>
                   </li>
                   <li>
-                      <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Personal</span> <span class="fa arrow"></span></a>
-                      <ul class="nav nav-second-level">
-                          <li class="active"><a href="index.php?modo=regPersonal">Nuevo</a></li>
-                      </ul>
+                      <a href="index.php?modo=regPersonal"><i class="fa fa-th-large"></i> <span class="nav-label">Datos</span> </a>
                   </li>
 
                   <li>
@@ -63,13 +60,6 @@
                       <ul class="nav nav-second-level">
                           <li class="active"><a href="index.php?modo=cumplePersonal">Cumpleañeros</a></li>
                           <li ><a href="#">Calendario</a></li>
-                      </ul>
-                  </li>
-
-                  <li>
-                      <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span><span class="fa arrow"></span></a>
-                      <ul class="nav nav-second-level">
-                          <li><a href="#">Curriculum</a></li>
                       </ul>
                   </li>
 
