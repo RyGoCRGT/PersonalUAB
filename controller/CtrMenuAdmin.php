@@ -22,6 +22,12 @@ class CtrMenuAdmin
       include 'footer.php';
         break;
 
+      case 'listaUsuario':
+      include 'header.php';
+      include 'bodylistaUsuario.php';
+      include 'footer.php';
+        break;
+
       case 'regPersonal':
         include 'header.php';
         include 'bodyRegPers.php';
@@ -597,7 +603,7 @@ class CtrMenuAdmin
 
       case 'RegistrarNuevaTablaMeritos':
         if (isset($_POST['datos']))
-        {  
+        {
           include '../../model/conexion.php';
           include '../../model/TablaMeritosDocenteProfesor.php';
           include '../../model/TablaMeritosDocenteProfesorConsulta.php';
@@ -608,13 +614,13 @@ class CtrMenuAdmin
 
           $tablaMeritos = new TablaMeritosDocenteProfesor();
           $tablaMeritos->IdTablaMeritosDocenteProfesor = null;
-          
+
           $tablaMeritos->Version = strtoupper($_POST['version']);
-          
+
           $tablaMeritos->TipoMerito = $_POST['tipoMerito'];
-          
+
           $tablaMeritos->FechaCreacion = $_POST['fechaCreacion'];
-          
+
           $tablaMeritos->Activo = $_POST['activo'];
 
           $tablaMeritosConsulta = new  TablaMeritosDocenteProfesorConsulta($conexion);
@@ -639,22 +645,22 @@ class CtrMenuAdmin
                         $puntaje=$categoria->puntaje;  //este es del archivo XML
                         $objCategoria = new EstructuraMeritos();
                         $objCategoria->IdTablaMeritoDocenteProfesor = $idTablaMerito;
-                        $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria 
+                        $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria
                         $objCategoria->NombreMerito = $nombre;
                         $objCategoria->PuntajeMerito = $puntaje;
-                        $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);        
-                        //La categoria tiene "meritos" , y ahora se va a iterar sus meritos       
+                        $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
+                        //La categoria tiene "meritos" , y ahora se va a iterar sus meritos
                         foreach ($categoria->merito as $merito):
                           $nombre=$merito->nombre;
                           $puntaje=$merito->puntaje;
-                           
+
                           $objMerito = new EstructuraMeritos();
                           $objMerito->IdTablaMeritoDocenteProfesor = $idTablaMerito;
                           //Aqui se tiene el id de la categoria primaria
                           $objMerito->IdEstructuraMeritoPrimario = $idCategoria;
                           $objMerito->NombreMerito = $nombre;
                           $objMerito->PuntajeMerito = $puntaje;
-                          $objMeritoDocenteConsulta->crear($objMerito);                
+                          $objMeritoDocenteConsulta->crear($objMerito);
                         endforeach;
                       endforeach;
                       //Recuperando la estructura  las categorias con sus estructuras
@@ -682,7 +688,7 @@ class CtrMenuAdmin
                         $contador++;
                       endforeach;
                       echo "</table>";
-                      
+
                       echo "<p style='color:green'>Guardado Exitoso</p>";
             }
           }else{
@@ -698,22 +704,22 @@ class CtrMenuAdmin
                   $puntaje=$categoria->puntaje;  //este es del archivo XML
                   $objCategoria = new EstructuraMeritos();
                   $objCategoria->IdTablaMeritoDocenteProfesor = $idTablaMerito;
-                  $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria 
+                  $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria
                   $objCategoria->NombreMerito = $nombre;
                   $objCategoria->PuntajeMerito = $puntaje;
-                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);        
-                  //La categoria tiene "meritos" , y ahora se va a iterar sus meritos       
+                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
+                  //La categoria tiene "meritos" , y ahora se va a iterar sus meritos
                   foreach ($categoria->merito as $merito):
                     $nombre=$merito->nombre;
                     $puntaje=$merito->puntaje;
-                     
+
                     $objMerito = new EstructuraMeritos();
                     $objMerito->IdTablaMeritoDocenteProfesor = $idTablaMerito;
                     //Aqui se tiene el id de la categoria primaria
                     $objMerito->IdEstructuraMeritoPrimario = $idCategoria;
                     $objMerito->NombreMerito = $nombre;
                     $objMerito->PuntajeMerito = $puntaje;
-                    $objMeritoDocenteConsulta->crear($objMerito);                
+                    $objMeritoDocenteConsulta->crear($objMerito);
                   endforeach;
                 endforeach;
                 //Recuperando la estructura  las categorias con sus estructuras
@@ -741,7 +747,7 @@ class CtrMenuAdmin
                   $contador++;
                 endforeach;
                 echo "</table>";
-                
+
                 echo "<p style='color:green'>Guardado Exitoso</p>";
           }
         }
@@ -752,7 +758,7 @@ class CtrMenuAdmin
 
 
       break;
-      
+
       case 'tablaCalificacionMeritosDocente':
             include 'header.php';
             include 'bodyRegistrarTablaCalificacionMeritosDocente.php';
@@ -763,7 +769,7 @@ class CtrMenuAdmin
       case 'registrarMeritoDocente':
           echo "llegue";
             if(isset($_FILES["archivo"]["type"]))
-            {               
+            {
                 include '../../model/conexion.php';
                 include '../../model/MeritosDocente.php';
                 include '../../model/MeritosDocenteConsulta.php';
@@ -774,7 +780,7 @@ class CtrMenuAdmin
                 // Crear tabla merito docentes
 
                 $tablaMeritos = new TablaMeritosDocenteProfesor();
-                
+
 
                 foreach ($xmlData->categoria as $categoria):
                   $nombre=$categoria->nombre;
@@ -786,7 +792,7 @@ class CtrMenuAdmin
                   $objCategoria->IdMeritoDocentePrimario = null;
                   $objCategoria->NombreMerito = $nombre;
                   $objCategoria->PuntajeMerito = $puntaje;
-                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);                
+                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
                   foreach ($categoria->merito as $merito):
                     $nombre=$merito->nombre;
                     $puntaje=$merito->puntaje;

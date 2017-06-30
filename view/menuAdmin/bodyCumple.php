@@ -1,6 +1,6 @@
 <?php
 setlocale(LC_TIME, "es_ES");
-$mes=date( "m");
+$mes=07;
 include '../../model/conexion.php';
 include '../../model/CumpleConsulta.php';
 $conexion = new Conexion();
@@ -45,7 +45,8 @@ $listaCumples=$cumpleMes->listaDeCumples($mes);
                                     </div>
                                     <div class="col-md-3">
                                       <div class="media-body update-card-body" >
-                                        <h4 class="media-heading" style="color:black"><?php echo $listaC['primerNombre']." ".$listaC['apellidoPaterno']." ".$listaC['apellidoMaterno'] ?></h4>
+                                        <h4 class="media-heading" style="color:black"><?php echo $listaC['nombreTipoPersonal'];?></h4>
+                                        <h3 class="media-heading" style="color:black"><?php echo $listaC['primerNombre']." ".$listaC['apellidoPaterno']." ".$listaC['apellidoMaterno'] ?></h3>
                                         <p><strong>E-mail: </strong><?php echo $listaC['email'];?></p>
                                       </div>
                                     </div>
