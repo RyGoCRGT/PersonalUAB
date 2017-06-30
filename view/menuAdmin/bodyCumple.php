@@ -1,3 +1,13 @@
+<?php
+setlocale(LC_TIME, "es_ES");
+$mes=07;
+include '../../model/conexion.php';
+include '../../model/CumpleConsulta.php';
+$conexion = new Conexion();
+$cumpleMes=new CumpleConsulta($conexion);
+$listaCumples=$cumpleMes->listaDeCumples($mes);
+
+ ?>
 <div id="contenidoAll">
 
   <div class="row  border-bottom white-bg dashboard-header">
@@ -19,10 +29,15 @@
                 <div class="panel panel-primary">
 <!-- cumple dia -->
 
+<?php foreach ($listaCumples as $listaC ):
+  $date = date_create($listaC['fechaNacimiento']);
+
+  ?>
+
                   <div class="row" >
                     <div class="col-md-12" id="home-box" >
                             <ul class="list-group" style="background:#73eb91">
-                              <li class="list-group-item" style="color:#05300b"><strong><h4>MARTES, 13 DE JUNIO</h2></strong></li>
+                              <li class="list-group-item" style="color:#05300b"><strong><h4><?php echo date_format($date, 'M-d'); ?></h2></strong></li>
                                 <div class="col-md-6" >
                                   <div class="media block-update-card" style="background:#bbf2d9">
                                     <div class="col-md-3">
@@ -30,21 +45,9 @@
                                     </div>
                                     <div class="col-md-3">
                                       <div class="media-body update-card-body" >
-                                        <h4 class="media-heading" style="color:black">Mario Chura</h4>
-                                        <p>Secretario de la Facultad de Ingenieria</p>
-                                      </div>
-                                    </div>
-                                   </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="media block-update-card" style="background:#bbf2d9">
-                                    <div class="col-md-3">
-                                      <img class="media-object update-card-MDimentions" src="../libs/multimedia/img/design/user-6.png" alt="...">
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="media-body update-card-body">
-                                        <h4 class="media-heading" style="color:black">Mario Chura</h4>
-                                        <p>Secretario de la Facultad de Ingenieria</p>
+                                        <h4 class="media-heading" style="color:black"><?php echo $listaC['nombreTipoPersonal'];?></h4>
+                                        <h3 class="media-heading" style="color:black"><?php echo $listaC['primerNombre']." ".$listaC['apellidoPaterno']." ".$listaC['apellidoMaterno'] ?></h3>
+                                        <p><strong>E-mail: </strong><?php echo $listaC['email'];?></p>
                                       </div>
                                     </div>
                                    </div>
@@ -52,105 +55,10 @@
                               </ul>
                     </div>
                   </div>
-                  <div class="row" >
-                    <div class="col-md-12" id="home-box" >
-                            <ul class="list-group" style="background:#73eb91">
-                              <li class="list-group-item" style="color:#05300b"><strong><h4>MARTES, 13 DE JUNIO</h2></strong></li>
-                                <div class="col-md-6" >
-                                  <div class="media block-update-card" style="background:#bbf2d9">
-                                    <div class="col-md-3">
-                                      <img class="media-object update-card-MDimentions" src="../libs/multimedia/img/design/user-6.png" alt="...">
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="media-body update-card-body" >
-                                        <h4 class="media-heading" style="color:black">Mario Chura</h4>
-                                        <p>Secretario de la Facultad de Ingenieria</p>
-                                      </div>
-                                    </div>
-                                   </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="media block-update-card" style="background:#bbf2d9">
-                                    <div class="col-md-3">
-                                      <img class="media-object update-card-MDimentions" src="../libs/multimedia/img/design/user-6.png" alt="...">
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="media-body update-card-body">
-                                        <h4 class="media-heading" style="color:black">Mario Chura</h4>
-                                        <p>Secretario de la Facultad de Ingenieria</p>
-                                      </div>
-                                    </div>
-                                   </div>
-                                </div>
-                              </ul>
-                    </div>
-                  </div>
-                  <div class="row" >
-                    <div class="col-md-12" id="home-box" >
-                            <ul class="list-group" style="background:#73eb91">
-                              <li class="list-group-item" style="color:#05300b"><strong><h4>MARTES, 13 DE JUNIO</h2></strong></li>
-                                <div class="col-md-6" >
-                                  <div class="media block-update-card" style="background:#bbf2d9">
-                                    <div class="col-md-3">
-                                      <img class="media-object update-card-MDimentions" src="../libs/multimedia/img/design/user-6.png" alt="...">
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="media-body update-card-body" >
-                                        <h4 class="media-heading" style="color:black">Mario Chura</h4>
-                                        <p>Secretario de la Facultad de Ingenieria</p>
-                                      </div>
-                                    </div>
-                                   </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="media block-update-card" style="background:#bbf2d9">
-                                    <div class="col-md-3">
-                                      <img class="media-object update-card-MDimentions" src="../libs/multimedia/img/design/user-6.png" alt="...">
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="media-body update-card-body">
-                                        <h4 class="media-heading" style="color:black">Mario Chura</h4>
-                                        <p>Secretario de la Facultad de Ingenieria</p>
-                                      </div>
-                                    </div>
-                                   </div>
-                                </div>
-                              </ul>
-                    </div>
-                  </div>
-                  <div class="row" >
-                    <div class="col-md-12" id="home-box" >
-                            <ul class="list-group" style="background:#73eb91">
-                              <li class="list-group-item" style="color:#05300b"><strong><h4>MARTES, 13 DE JUNIO</h2></strong></li>
-                                <div class="col-md-6" >
-                                  <div class="media block-update-card" style="background:#bbf2d9">
-                                    <div class="col-md-3">
-                                      <img class="media-object update-card-MDimentions" src="../libs/multimedia/img/design/user-6.png" alt="...">
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="media-body update-card-body" >
-                                        <h4 class="media-heading" style="color:black">Mario Chura</h4>
-                                        <p>Secretario de la Facultad de Ingenieria</p>
-                                      </div>
-                                    </div>
-                                   </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="media block-update-card" style="background:#bbf2d9">
-                                    <div class="col-md-3">
-                                      <img class="media-object update-card-MDimentions" src="../libs/multimedia/img/design/user-6.png" alt="...">
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="media-body update-card-body">
-                                        <h4 class="media-heading" style="color:black">Mario Chura</h4>
-                                        <p>Secretario de la Facultad de Ingenieria</p>
-                                      </div>
-                                    </div>
-                                   </div>
-                                </div>
-                              </ul>
-                    </div>
-                  </div>
+
+                <?php endforeach; ?>
+
+
 
                 </div>
             </div>
