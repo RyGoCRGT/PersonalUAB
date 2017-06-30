@@ -14,6 +14,8 @@
       include '../../model/PersonalConsulta.php';
       include '../../model/ReferenciaPersonal.php';
       include '../../model/ReferenciaPersonalConsulta.php';
+      include '../../model/ExperienciaLaboral.php';
+      include '../../model/ExperienciaLaboralConsulta.php';
       include '../../model/ConyuguePersonal.php';
       include '../../model/ConyuguePersonalConsulta.php';
       include '../../model/CursoEstudiado.php';
@@ -32,6 +34,7 @@
       include '../../controller/HijosPersonalControlador.php';
       include '../../controller/CursoEstudiadoControlador.php';
       include '../../controller/TituloProfesionalControlador.php';
+      include '../../controller/ExperienciaLaboralControlador.php';
 
       $conexion = new Conexion();
       $consulta = new PersonaConsulta($conexion);
@@ -135,6 +138,17 @@
                           <td><strong>Email: </strong><?php echo $personal->Email ?></td>
                           <td></td>
                         </tr>
+                        <?php if ($personal->IdCargo == null): ?>
+                          <tr>
+                            <td><strong>Carrera: </strong><?php echo $personal->IdCarrera ?></td>
+                            <td></td>
+                          </tr>
+                        <?php else: ?>
+                          <tr>
+                            <td><strong>Cargo: </strong><?php echo $personal->IdCargo ?></td>
+                            <td></td>
+                          </tr>
+                        <?php endif; ?>
                         <tr>
                           <td><strong>Nombres y Apellidos del Conyugue: </strong><?php echo "{$personal->C_Conyugue->IdPersona->PrimerNombre} {$personal->C_Conyugue->IdPersona->SegundoNombre} {$personal->C_Conyugue->IdPersona->ApellidoPaterno} {$personal->C_Conyugue->IdPersona->ApellidoMaterno} " ?></td>
                           <td><strong>Fecha de Nacimiento: </strong><?php echo $personal->C_Conyugue->IdPersona->FechaNacimiento ?></td>

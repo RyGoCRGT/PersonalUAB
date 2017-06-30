@@ -86,12 +86,23 @@ CREATE TABLE religion(
 	nombreReligion varchar(70) not null
 );
 
+CREATE TABLE cargo(
+	idCargo int not null auto_increment primary key,
+	nombreCargo varchar(100) not null
+);
+
+CREATE TABLE cargoPersona(
+	idCargoPersona int not null auto_increment primary key,
+	nombreCargoPersona varchar(100) not null
+);
+
 CREATE TABLE personal(
 	idPersonal int not null auto_increment primary key,
 	idPersona int not null,
 	idNacion int not null,
 	idTipoPersonal int null,
 	idCarrera int null,
+	idCargoPersona int null,
 	direccion varchar(100) not null,
 	email varchar(50) null,
 	idCiudad int not null,
@@ -109,6 +120,7 @@ CREATE TABLE personal(
 	numeroRegistroProfesional varchar(50) null,
 	fechaIngreso date not null,
 	rutaFoto varchar(200) null,
+	FOREIGN KEY (idCargoPersona) REFERENCES cargoPersona (idCargoPersona) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idPersona) REFERENCES persona (idPersona) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idNacion) REFERENCES nacion (idNacion) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idSeguro) REFERENCES seguro (idSeguro) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -204,11 +216,6 @@ CREATE TABLE cursoEstudiado(
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE cargo(
-	idCargo int not null auto_increment primary key,
-	nombreCargo varchar(100) not null
-);
-
 CREATE TABLE cargoPersonal(
 	idCargo int not null,
 	idPersonal int not null,
@@ -233,7 +240,7 @@ CREATE TABLE tablaMeritosDocenteProfesor(
 	version varchar(12) not null,
 	tipoMerito varchar(20) not null, -- docente/profesor
 	fechaCreacion date not null,
-	activo bool not null	
+	activo bool not null
 );
 
 CREATE TABLE personalTablaMeritosDocenteProfesor(
@@ -243,11 +250,11 @@ CREATE TABLE personalTablaMeritosDocenteProfesor(
 	FOREIGN KEY (idTablaMeritoDocenteProfesor) REFERENCES tablaMeritosDocenteProfesor (idTablaMeritoDocenteProfesor) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- tabla reflexiva 
+-- tabla reflexiva
 CREATE TABLE estructuraMeritos(
 	idEstructuraMerito int not null auto_increment primary key,
 	idTablaMeritoDocenteProfesor int not null,
-	idEstructuraMeritoPrimario int default null, -- cuando el merito es primario el valor se registrara con NULL, pero si es un SUB-Merito entonces se registrara el codigo del merito PRIMARIO.   
+	idEstructuraMeritoPrimario int default null, -- cuando el merito es primario el valor se registrara con NULL, pero si es un SUB-Merito entonces se registrara el codigo del merito PRIMARIO.
 	nombreMerito varchar(300) not null,
 	puntajeMerito int not null,
 	FOREIGN KEY(idTablaMeritoDocenteProfesor) REFERENCES tablaMeritosDocenteProfesor (idTablaMeritoDocenteProfesor) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -262,11 +269,3 @@ CREATE TABLE evaluacionMeritosDocenteProfesor(
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idEstructuraMerito) REFERENCES estructuraMeritos (idEstructuraMerito) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
-
-
-
-
-
-
-

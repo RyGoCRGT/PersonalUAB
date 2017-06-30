@@ -1,18 +1,18 @@
 <?php
 
-class TipoUsuarioConsulta
+class CargoPersonaConsulta
 {
 
   private $Conexion;
 
   function __construct($con)
   {
-    $this->Conexion =  $con;
+    $this->Conexion = $con;
   }
 
-  public function listaTipoUsuario()
+  public function listaCargos()
   {
-    $query = "SELECT * FROM tipoUsuario where idTipoUsuario != 1";
+    $query = "SELECT * FROM cargoPersona ORDER BY nombreCargoPersona";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();
