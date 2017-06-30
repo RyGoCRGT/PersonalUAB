@@ -12,11 +12,8 @@ function enviarDatos() {
       "url" : "index.php?modo=CampLlenos",
       "data" : frm
     }).done( function(info) {
-      $("#mensaje").addClass("well");
-      $("#mensaje").html(info);
-      var datito = $("#mensaje").text();
-      console.log( datito );
-      switch (datito) {
+      $("#mensaje").html("");
+      switch (info) {
         case '1':
           window.location.href = "view/menuAdmin/";
           break;
@@ -34,7 +31,16 @@ function enviarDatos() {
           break;
 
         default:
-
+          $("#mensaje").addClass("alert");
+          $("#mensaje").addClass("alert-danger");
+          $("#mensaje").addClass("alert-dismissable");
+          $("#mensaje").append(info);
+          parpa();
+          function parpa() {
+             $('#mensaje').fadeIn(500).delay(250).fadeOut(300, parpa)
+             setTimeout("$('#mensaje').stop(true,true).css('opacity', 1)", 4000);
+          }
+          break;
       }
 
     });

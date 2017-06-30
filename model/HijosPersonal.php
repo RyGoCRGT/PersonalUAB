@@ -9,6 +9,7 @@ class HijosPersonal
 
   function __construct()
   {
+    $this->IdHijosPersonal = null;
   }
 
   public function __set($atributo, $value)

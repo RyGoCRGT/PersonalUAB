@@ -6,8 +6,11 @@ class Facultad
   private $IdFacultad;
   private $NombreFacultad;
 
+  private $ListaCarreras;
+
   function __construct()
   {
+    $ListaCarreras = array();
   }
 
   public function __set($atributo, $value)
@@ -34,6 +37,9 @@ class Facultad
     }
 
   }
+
+  public function getListaCarreras(){ return $this->ListaCarreras; }
+  public function setListaCarreras( $value ){ $this->ListaCarreras[] = $value; }
 
 }
 

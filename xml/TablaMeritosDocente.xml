@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<meritos>
+	<categoria>
+		<nombre>FORMACIÓN ACADÉMICA Y PROFESIONAL</nombre>
+		<puntaje>50</puntaje>
+		<merito>
+			<nombre>Título Profesional de Licenciatura</nombre>
+			<puntaje>10</puntaje>
+		</merito>
+		<merito>
+			<nombre>Diplomado en Educación Superior</nombre>
+			<puntaje>5</puntaje>
+		</merito>
+		<merito>
+			<nombre>Maestría o Especialidad en el Área de Salud</nombre>
+			<puntaje>15</puntaje>
+		</merito>
+		<merito>
+			<nombre>Doctorado</nombre>
+			<puntaje>20</puntaje>
+		</merito>
+	</categoria>
+	<categoria>
+		<nombre>TRABAJOS E INVESTIGACIONES</nombre>
+		<puntaje>10</puntaje>
+		<merito>
+			<nombre>Por cada trabajo científico original, ensayo o artículo publicado en revistas indexadas, 3 puntos hasta un máximo de dos trabajos</nombre>
+			<puntaje>6</puntaje>
+		</merito>
+		<merito>
+			<nombre>Por cada trabajo científico original, ensayo o artículo publicado en revistas no indexadas, 2 puntos hasta un máximo de dos trabajos.</nombre>
+			<puntaje>4</puntaje>
+		</merito>
+	</categoria>
+	<categoria>
+		<nombre>EXPERIENCIA LABORAL</nombre>
+		<puntaje>15</puntaje>
+		<merito>
+			<nombre>Por cada año de servicio en la docencia universitaria y/o profesional en el área, 3 puntos hasta un máximo de cinco años</nombre>
+			<puntaje>15</puntaje>
+		</merito>
+	</categoria>
+	<categoria>
+		<nombre>PRODUCCIÓN INTELECTUAL</nombre>
+		<puntaje>9</puntaje>
+		<merito>
+			<nombre>LIBROS - Por cada libro publicado, 5 puntos hasta un máximo de uno.</nombre>
+			<puntaje>5</puntaje>
+		</merito>
+		<merito>
+			<nombre>TEXTOS, DOSSIERS, MANUALES, GUÍAS DIDÁCTICAS, PROTOCOLOS - Por cada publicación 2 puntos hasta un máximo de dos.</nombre>
+			<puntaje>4</puntaje>
+		</merito>
+	</categoria>
+	<categoria>
+		<nombre>CONGRESOS, SEMINARIOS, CONVENCIONES Y OTROS - Por cada participación en congresos nacionales y/o extranjeros, hasta un máximo de dos participaciones en los últimos dos años. en calidad de:</nombre>
+		<puntaje>8</puntaje>
+		<merito>
+			<nombre>Asistente</nombre>
+			<puntaje>1</puntaje>
+		</merito>
+		<merito>
+			<nombre>Disertante</nombre>
+			<puntaje>6</puntaje>
+		</merito>
+	</categoria>
+	<categoria>
+		<nombre>FORMACIÓN ESPECIALIZADA</nombre>
+		<puntaje>8</puntaje>
+		<merito>
+			<nombre>Diplomados</nombre>
+			<puntaje>4</puntaje>
+		</merito>
+		<merito>
+			<nombre>Otros cursos (dos puntos hasta un máximo de 2)</nombre>
+			<puntaje>4</puntaje>
+		</merito>
+	</categoria>
+</meritos>

@@ -18,7 +18,7 @@ class SesionUsuario
     $_SESSION['estado'] = $this->Usuario->Estado;
     $_SESSION['borrado'] = $this->Usuario->Borrado;
     $_SESSION['idPersona'] = $this->Usuario->C_Persona;
-
+    $_SESSION['idTipoUsuario'] = $this->Usuario->TipoUsuario;
   }
 
 
