@@ -34,7 +34,7 @@ class EstructuraMeritosConsulta
 
             $this->Conexion->beginTransaction();
 
-            $query = "INSERT INTO estructuraMeritos (idTablaMeritoDocenteProfesor, idEstructuraMeritoPrimario, nombreMerito, puntajeMerito)  
+            $query = "INSERT INTO estructuraMeritos (idTablaMeritoDocenteProfesor, idEstructuraMeritoPrimario, nombreMerito, puntajeMerito)
                       VALUES (:idTablaMeritoDocenteProfesor, :idEstructuraMeritoPrimario, :nombreMerito, :puntajeMerito)";
 
             $stmtPersona = $this->Conexion->prepare($query);
@@ -85,7 +85,7 @@ class EstructuraMeritosConsulta
       if($estructuraMerito->IdEstructuraMeritoPrimario == null) {
         $estructuraMerito->SubMeritos = array();
         $listaCategorias["[".$estructuraMerito->IdEstructuraMerito."]"] = $estructuraMerito;
-        
+
       } else {
         $categoriaMerito = $listaCategorias["[".$estructuraMerito->IdEstructuraMeritoPrimario."]"];
         $categoriaMerito->anadirSubMerito($estructuraMerito);
@@ -95,6 +95,39 @@ class EstructuraMeritosConsulta
     return $listaCategorias;
   }
 
+  public function listaEstructuraMeritosSegunPersonal($tipo)
+  {
+    $query = 'SELECT *
+              FROM estructuraMeritos e, tablameritosdocenteprofesor t
+              where t.idTablaMeritoDocenteProfesor = e.idTablaMeritoDocenteProfesor
+              AND tipoMerito = :tipo';
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindParam(':tipo', $tipo);
+    $consulta->execute();
+    $meritos = $consulta->fetchAll();
+    $listaCategorias = array();
+    foreach ($meritos as $merito)
+    {
+      $estructuraMerito = EstructuraMeritos::instancia($merito);
+
+        /*$estructuraMerito = new EstructuraMeritos();
+        $estructuraMerito->IdEstructuraMerito = $merito["idEstructuraMerito"];
+        $estructuraMerito->IdTablaMeritoDocenteProfesor = $merito["idTablaMeritoDocenteProfesor"];
+        $estructuraMerito->IdEstructuraMeritoPrimario = $merito["idEstructuraMeritoPrimario"];
+        $estructuraMerito->NombreMerito = $merito["nombreMerito"];
+        $estructuraMerito->PuntajeMerito = $merito["puntajeMerito"];*/
+      if($estructuraMerito->IdEstructuraMeritoPrimario == null) {
+        $estructuraMerito->SubMeritos = array();
+        $listaCategorias["[".$estructuraMerito->IdEstructuraMerito."]"] = $estructuraMerito;
+
+      } else {
+        $categoriaMerito = $listaCategorias["[".$estructuraMerito->IdEstructuraMeritoPrimario."]"];
+        $categoriaMerito->anadirSubMerito($estructuraMerito);
+      }
+    }
+
+    return $listaCategorias;
+  }
 
 }
 

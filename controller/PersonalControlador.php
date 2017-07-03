@@ -12,52 +12,70 @@ class PersonalControlador
 
   public function crear($personal)
   {
-    try
+    $consulta = new PersonalConsulta($this->Conexion);
+    if ($consulta->existePersonal($personal->IdPersona) == false)
     {
+      if ($personal->IdCargo == "")
+      {
+        $personal->IdCargo = null;
+      }
+      if ($personal->IdCarrera == "")
+      {
+        $personal->IdCarrera = null;
+      }
+      try
+      {
 
-      $this->Conexion->beginTransaction();
+        $this->Conexion->beginTransaction();
+        //var_dump($personal);
+        $query = "INSERT INTO personal (idPersonal, idPersona, idNacion, idTipoPersonal, idCarrera, idCargoPersona, direccion, email, idCiudad, idReligion, fechaBautizmo, idSeguro, numeroSeguro, idAfp, numeroAfp, numeroLibretaMilitar, numeroPasaporte, tipoSangre, hobby, lecturaPreferencial, numeroRegistroProfesional, fechaIngreso, rutaFoto)
+                  VALUES (:idPersonal, :idPersona, :idNacion, :idTipoPersonal, :idCarrera, :idCargo, :direccion, :email, :idCiudad, :idReligion, :fechaBautizmo, :idSeguro, :numeroSeguro, :idAfp, :numeroAfp, :numeroLibretaMilitar, :numeroPasaporte, :tipoSangre, :hobby, :lecturaPreferencial, :numeroRegistroProfesional, :fechaIngreso, :rutaFoto)";
 
-      $query = "INSERT INTO personal (idPersonal, idPersona, idNacion, idTipoPersonal, idCarrera, direccion, email, idCiudad, idReligion, fechaBautizmo, idSeguro, numeroSeguro, idAfp, numeroAfp, numeroLibretaMilitar, numeroPasaporte, tipoSangre, hobby, lecturaPreferencial, numeroRegistroProfesional, fechaIngreso, rutaFoto)
-                VALUES (:idPersonal, :idPersona, :idNacion, :idTipoPersonal, :idCarrera, :direccion, :email, :idCiudad, :idReligion, :fechaBautizmo, :idSeguro, :numeroSeguro, :idAfp, :numeroAfp, :numeroLibretaMilitar, :numeroPasaporte, :tipoSangre, :hobby, :lecturaPreferencial, :numeroRegistroProfesional, :fechaIngreso, :rutaFoto)";
+        $stmtPersonal = $this->Conexion->prepare($query);
 
-      $stmtPersonal = $this->Conexion->prepare($query);
+        $stmtPersonal->bindValue(':idPersonal', $personal->IdPersonal);
+        $stmtPersonal->bindValue(':idPersona', $personal->IdPersona);
+        $stmtPersonal->bindValue(':idNacion', $personal->IdNacion);
+        $stmtPersonal->bindValue(':idTipoPersonal', $personal->IdTipoPersonal);
+        $stmtPersonal->bindValue(':idCarrera', $personal->IdCarrera);
+        $stmtPersonal->bindValue(':idCargo', $personal->IdCargo);
+        $stmtPersonal->bindValue(':direccion', $personal->Direccion);
+        $stmtPersonal->bindValue(':email', $personal->Email);
+        $stmtPersonal->bindValue(':idCiudad', $personal->IdCiudadNacimiento);
+        $stmtPersonal->bindValue(':idReligion', $personal->IdReligion);
+        $stmtPersonal->bindValue(':fechaBautizmo', $personal->FechaBautizmo);
+        $stmtPersonal->bindValue(':idSeguro', $personal->IdSeguro);
+        $stmtPersonal->bindValue(':numeroSeguro', $personal->NumeroSeguro);
+        $stmtPersonal->bindValue(':idAfp', $personal->IdAfp);
+        $stmtPersonal->bindValue(':numeroAfp', $personal->NumeroAfp);
+        $stmtPersonal->bindValue(':numeroLibretaMilitar', $personal->NumeroLibretaMilitar);
+        $stmtPersonal->bindValue(':numeroPasaporte', $personal->NumeroPasaporte);
+        $stmtPersonal->bindValue(':tipoSangre', $personal->TipoSangre);
+        $stmtPersonal->bindValue(':hobby', $personal->Hobby);
+        $stmtPersonal->bindValue(':lecturaPreferencial', $personal->LecturaPreferencial);
+        $stmtPersonal->bindValue(':numeroRegistroProfesional', $personal->NumeroRegistroProfesional);
+        $stmtPersonal->bindValue(':fechaIngreso', $personal->FechaIngreso);
+        $stmtPersonal->bindValue(':rutaFoto', $personal->Ruta);
 
-      $stmtPersonal->bindValue(':idPersonal', $personal->IdPersonal);
-      $stmtPersonal->bindValue(':idPersona', $personal->IdPersona);
-      $stmtPersonal->bindValue(':idNacion', $personal->IdNacion);
-      $stmtPersonal->bindValue(':idTipoPersonal', $personal->IdTipoPersonal);
-      $stmtPersonal->bindValue(':idCarrera', $personal->IdCarrera);
-      $stmtPersonal->bindValue(':direccion', $personal->Direccion);
-      $stmtPersonal->bindValue(':email', $personal->Email);
-      $stmtPersonal->bindValue(':idCiudad', $personal->IdCiudadNacimiento);
-      $stmtPersonal->bindValue(':idReligion', $personal->IdReligion);
-      $stmtPersonal->bindValue(':fechaBautizmo', $personal->FechaBautizmo);
-      $stmtPersonal->bindValue(':idSeguro', $personal->IdSeguro);
-      $stmtPersonal->bindValue(':numeroSeguro', $personal->NumeroSeguro);
-      $stmtPersonal->bindValue(':idAfp', $personal->IdAfp);
-      $stmtPersonal->bindValue(':numeroAfp', $personal->NumeroAfp);
-      $stmtPersonal->bindValue(':numeroLibretaMilitar', $personal->NumeroLibretaMilitar);
-      $stmtPersonal->bindValue(':numeroPasaporte', $personal->NumeroPasaporte);
-      $stmtPersonal->bindValue(':tipoSangre', $personal->TipoSangre);
-      $stmtPersonal->bindValue(':hobby', $personal->Hobby);
-      $stmtPersonal->bindValue(':lecturaPreferencial', $personal->LecturaPreferencial);
-      $stmtPersonal->bindValue(':numeroRegistroProfesional', $personal->NumeroRegistroProfesional);
-      $stmtPersonal->bindValue(':fechaIngreso', $personal->FechaIngreso);
-      $stmtPersonal->bindValue(':rutaFoto', $personal->Ruta);
+        $stmtPersonal->execute();
 
-      $stmtPersonal->execute();
+        $this->Conexion->commit();
 
-      $this->Conexion->commit();
+      }
+      catch (PDOException $e)
+      {
 
+        $this->Conexion->rollBack();
+
+        echo "Error al Registrar";
+
+      }
     }
-    catch (PDOException $e)
+    else
     {
-
-      $this->Conexion->rollBack();
-
-      echo "Error al Registrar";
-
+      echo "<p>Error Personal Existente</p>";
     }
+
   }
 
   public function ver($id)
@@ -94,6 +112,7 @@ class PersonalControlador
     $personal->IdNacion = $datos['nombreNacion'];
     $personal->IdTipoPersonal = $datos['nombreTipoPersonal'];
     $personal->IdCarrera = $datos['nombreCarrera'];
+    $personal->IdCargo = $datos['nombreCargoPersona'];
     $personal->Direccion = $datos['direccion'];
     $personal->Email = $datos['email'];
     $personal->IdCiudadNacimiento = $datos['nombreCiudad'];
@@ -127,6 +146,9 @@ class PersonalControlador
     $titulosPersonalManejador = new TituloProfesionalControlador($this->Conexion);
     $listaTitulosPersonal = $titulosPersonalManejador->listarPer($personal->IdPersonal);
 
+    $experienciaLaboral = new ExperienciaLaboralControlador($this->Conexion);
+    $listaExperienciaPersonal = $experienciaLaboral->listarPer($personal->IdPersonal);
+
     $personal->C_HijosLista = $personalHijos;
 
     $personal->C_Conyugue = $personalConyugue;
@@ -136,6 +158,8 @@ class PersonalControlador
     $personal->ListaCursos = $listaCursosPersonal;
 
     $personal->ListaTitulos = $listaTitulosPersonal;
+
+    $personal->ListaExperinciaLaboral = $listaExperienciaPersonal;
 
     $listaCargos = $consulta->cargosPersonal($personal->IdPersonal);
     $listaEnfermedades = $consulta->enfermedadesPersonal($personal->IdPersonal);
@@ -167,6 +191,8 @@ class PersonalControlador
 
     return $personal;
   }
+
+
 
   public function agregarCargo($personal, $cargo)
   {
@@ -273,9 +299,11 @@ class PersonalControlador
       $persona->Sexo = $listaP['sexo'];
 
       $personal = new Personal();
-      $personal->IdPersonal = $listaP['idpersonal'];
+      $personal->IdPersonal = $listaP['idPersonal'];
       $personal->IdPersona = $persona;
-      
+      $personal->IdCarrera = $listaP['idCarrera'];
+      $personal->IdCargo = $listaP['idCargoPersona'];
+
       $listArrayPersonal[$i] = $personal;
       $i++;
     }

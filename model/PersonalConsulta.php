@@ -32,6 +32,7 @@ class PersonalConsulta
               tp.nombreTipoPersonal,
 
               c.nombreCarrera,
+              cp.nombreCargoPersona,
 
               pl.direccion,
               pl.email,
@@ -72,11 +73,11 @@ class PersonalConsulta
 
               ec.nombreEstadoCivil
 
-              FROM personal pl,
+              FROM (personal as pl LEFT JOIN carrera as c ON pl.idCarrera = c.idCarrera)
+                   LEFT JOIN cargoPersona cp ON cp.idCargoPersona = pl.idCargoPersona,
                    persona p,
                    nacion n,
                    tipoPersonal tp,
-                   carrera c,
                    ciudad ci,
                    religion r,
                    seguro s,
@@ -88,7 +89,6 @@ class PersonalConsulta
               AND s.idSeguro = pl.idSeguro
               AND r.idReligion = pl.idReligion
               AND ci.idCiudad = pl.idCiudad
-              AND c.idCarrera = pl.idCarrera
               AND tp.idTipoPersonal = pl.idTipoPersonal
               AND n.idNacion = pl.idNacion
               AND pl.idPersona = p.idPersona
@@ -152,7 +152,9 @@ class PersonalConsulta
                 p.CI,
                 p.fechaNacimiento,
                 p.sexo,
-                pl.idpersonal
+                pl.idPersonal,
+                pl.idCarrera,
+                pl.idCargoPersona
               FROM
                 personal pl,
                 persona p
@@ -162,6 +164,28 @@ class PersonalConsulta
     $consulta->execute();
     $registro = $consulta->fetchAll();
     return $registro;
+  }
+
+  public function existePersonal($id)
+  {
+    $query = "SELECT
+                idPersonal, idPersona
+              FROM
+                personal
+              WHERE
+                idPersona = :id";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindParam(':id', $id);
+    $consulta->execute();
+    $registro = $consulta->fetch();
+    if ($registro)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 
 }

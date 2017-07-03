@@ -51,9 +51,9 @@ $i = 1;
                                   <th class="text-center">#</th>
                                   <th class="text-center">Nombre Completo</th>
                                   <th class="text-center">CI</th>
-                                  <th class="text-center">Sexo</th>
-                                  <th class="text-center">Ver</th>
-                                  <th class="text-center">Editar</th>
+                                  <th class="text-right">Cargo</th>
+                                  <th class="text-right">Ver</th>
+                                  <th class="text-center"> Mas Opciones</th>
                                 </tr>
                               </thead>
                             </table>
@@ -72,15 +72,110 @@ $i = 1;
                                   <td><?php echo $i ?></td>
                                   <td><?php echo "{$personal->IdPersona->PrimerNombre} {$personal->IdPersona->SegundoNombre} {$personal->IdPersona->ApellidoPaterno} {$personal->IdPersona->ApellidoMaterno}"; ?></td>
                                   <td class="text-left"><?php echo $personal->IdPersona->CI ?></td>
-                                  <td class="text-left"><?php echo $personal->IdPersona->Sexo ?></td>
-                                  <td>
-                                    <form class="detallePersonalVER">
-                                      <input type="hidden" name="datos" value="1">
-                                      <input type="hidden" name="ciPersonalDetalle" class="ci"  value="<?php echo $personal->IdPersona->CI ?>">
-                                      <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalView"><i class="fa fa-eye"></i></button>
-                                    </form>
-                                  </td>
-                                  <td><a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                                  <?php if ($personal->IdCarrera == null): ?>
+                                    <?php if ($personal->IdCargo == null): ?>
+                                      <td class="text-left">Profesor</td>
+                                      <td class="text-left">
+                                        <form class="detallePersonalVER">
+                                          <input type="hidden" name="datos" value="1">
+                                          <input type="hidden" name="ciPersonalDetalle" class="ci"  value="<?php echo $personal->IdPersona->CI ?>">
+                                          <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalView"><i class="fa fa-eye"></i></button>
+                                        </form>
+                                      </td>
+                                      <td class="text-left">      <!--<a href="index.php?modo=evaluarMeritos" class="btn btn-gear"></a> -->
+                                        <div class="btn-group pull-xs-right">
+                                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                          </button>
+                                          <ul class="dropdown-menu pull-right">
+                                            <li class="disabled"><a href="#">Opciones</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li>
+                                              <form class="evaluarPersonal" action="index.php?modo=evaluacionMeritos" method="post">
+                                                <input type="hidden" name="datos" value="1">
+                                                <input type="hidden" name="ciPersonalMeritos" class="ciMeritos"  value="<?php echo $personal->IdPersona->CI ?>">
+                                                &nbsp;&nbsp;&nbsp;<button type="submit" class="dropdown-item btn btn-primary"><i class="fa fa-check-square-o"></i>&nbsp;Evaluar Meritos</button>
+                                              </form>
+                                            </li>
+                                            <br>
+                                            <li>
+                                              <form class="darDeBajaPersonal">
+                                                <input type="hidden" name="ciPersonalDBAja" class="ciDBAja"  value="<?php echo $personal->IdPersona->CI ?>">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="dropdown-item btn btn-success"><i class="fa fa-toggle-on"></i>&nbsp;Dar de Baja</button>
+                                              </form>
+                                            </li>
+                                            <br>
+                                          </ul>
+                                        </div>
+                                      </td>
+                                    <?php else: ?>
+                                      <td class="text-left">Personal</td>
+                                      <td class="text-left">
+                                        <form class="detallePersonalVER">
+                                          <input type="hidden" name="datos" value="1">
+                                          <input type="hidden" name="ciPersonalDetalle" class="ci"  value="<?php echo $personal->IdPersona->CI ?>">
+                                          <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalView"><i class="fa fa-eye"></i></button>
+                                        </form>
+                                      </td>
+                                      <td class="text-left">      <!--<a href="index.php?modo=evaluarMeritos" class="btn btn-gear"></a> -->
+                                        <div class="btn-group pull-xs-right">
+                                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                          </button>
+                                          <ul class="dropdown-menu pull-right">
+                                            <li class="disabled"><a href="#">Opciones</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <br>
+                                            <li>
+                                              <form class="darDeBajaPersonal">
+                                                <input type="hidden" name="ciPersonalDBAja" class="ciDBAja"  value="<?php echo $personal->IdPersona->CI ?>">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="dropdown-item btn btn-success"><i class="fa fa-toggle-on"></i>&nbsp;Dar de Baja</button>
+                                              </form>
+                                            </li>
+                                            <br>
+                                          </ul>
+                                        </div>
+                                      </td>
+                                    <?php endif; ?>
+                                  <?php else: ?>
+                                    <td class="text-left">Docente</td>
+                                    <td class="text-left">
+                                      <form class="detallePersonalVER">
+                                        <input type="hidden" name="datos" value="1">
+                                        <input type="hidden" name="ciPersonalDetalle" class="ci"  value="<?php echo $personal->IdPersona->CI ?>">
+                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalView"><i class="fa fa-eye"></i></button>
+                                      </form>
+                                    </td>
+                                    <td class="text-left">      <!--<a href="index.php?modo=evaluarMeritos" class="btn btn-gear"></a> -->
+                                      <div class="btn-group pull-xs-right">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <i class="fa fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                          <li class="disabled"><a href="#">Opciones</a></li>
+                                          <li role="separator" class="divider"></li>
+                                          <li>
+                                            <form class="evaluarPersonal" action="index.php?modo=evaluacionMeritos" method="post">
+                                              <input type="hidden" name="datos" value="1">
+                                              <input type="hidden" name="tipoPersonal" value="Docente">
+                                              <input type="hidden" name="ciPersonalMeritos" class="ciMeritos"  value="<?php echo $personal->IdPersona->CI ?>">
+                                              &nbsp;&nbsp;&nbsp;<button type="submit" class="dropdown-item btn btn-primary"><i class="fa fa-check-square-o"></i>&nbsp;Evaluar Meritos</button>
+                                            </form>
+                                          </li>
+                                          <br>
+                                          <li>
+                                            <form class="darDeBajaPersonal">
+                                              <input type="hidden" name="ciPersonalDBAja" class="ciDBAja"  value="<?php echo $personal->IdPersona->CI ?>">
+                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="dropdown-item btn btn-success"><i class="fa fa-toggle-on"></i>&nbsp;Dar de Baja</button>
+                                            </form>
+                                          </li>
+                                          <br>
+                                        </ul>
+                                      </div>
+                                    </td>
+                                  <?php endif; ?>
+                                  <!-- <td class="text-left"><?php //echo $personal->IdPersona->Sexo ?></td> -->
+
                                 </tr>
                               <?php $i++; endforeach; ?>
 
