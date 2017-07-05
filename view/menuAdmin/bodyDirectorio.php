@@ -26,15 +26,68 @@ $listaPersona=$personaControlador->listarPersona();
             <div class="ibox-content forum-post-container">
                 <div class="forum-post-info">
                   <div class="pull-right">
-                    <a href="#RegistroContacto" data-toggle="modal" class="clickable filter btn btn-success">Añadir Contacto <i class="fa fa-user-plus" data-toggle="tooltip" title="Añadir nuevo Contacto"></i></a>
-                    <!-- <span class="clickable filter btn btn-info" data-toggle="tooltip" title="Click aqui para buscar un Producto" data-container="body">
-                      <i class="fa fa-search"></i>
-                    </span> -->
+                    <!-- <a href="#RegistroContacto" data-toggle="modal" class="clickable filter btn btn-success">Añadir Contacto <i class="fa fa-user-plus" data-toggle="tooltip" title="Añadir nuevo Contacto"></i></a> -->
+
+                    <div class="btn-group">
+                      <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" title="Añadir nuevo Contacto"><i class="fa fa-user-plus" data-toggle="tooltip" ></i> Añadir Contacto <span class="caret"></span></button>
+
+                        <ul class="dropdown-menu" style="background:#8bd298">
+                          <li><a href="#RegistroContacto" style="color:black;" data-toggle="modal">opc1</a></li>
+                        </ul>
+                      </div>
+
+
                   </div>
                   <h4><span class="text-navy"><i class="fa fa-phone-square"></i> Directorio </span> /<span class="text-muted">Contactos</span></h4>
                 </div>
 
 
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label>Departamentos</label>
+                      <div class="input-group selector">
+                        <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                        <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
+                          <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                            <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <div class="input-group selector-mobile">
+                        <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                        <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
+                          <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                            <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                      <div class="form-group">
+                        <label>Tipo de Contacto</label>
+                        <div class="input-group selector">
+                          <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                          <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
+                            <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                              <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                        <div class="input-group selector-mobile">
+                          <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                          <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
+                            <?php foreach ($listaLugarExpedicion as $listaLE): ?>
+                              <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="panel panel-primary">
                   <div class="input-group">
@@ -51,6 +104,8 @@ $listaPersona=$personaControlador->listarPersona();
                           <tr>
                             <th class="text-center">#</th>
                             <th class="text-center">Nombre Completo</th>
+                            <th class="text-center">Responsabilidad</th>
+
                             <th class="text-center">Ver</th>
                             <th class="text-center">Editar</th>
                           </tr>
