@@ -65,10 +65,17 @@
                             <li ><a href="index.php?modo=listaUsuario">Lista</a></li>
                         </ul>
                     </li>
+                    <!--Lista de Directorios-->    
                     <li>
-                        <a href="index.php?modo=directorio"><i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span></a>
-
+                        <a href="index.php?modo=directorio">
+                        <i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span>
+                        </a>
+                        <!--Lista de Directorios-->
+                        <ul class="nav nav-second-level">
+                             <li ><a href="index.php?modo=listaDirectorio">Lista</a></li>
+                        </ul>
                     </li>
+
                     <li>
                         <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label">Otros</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
