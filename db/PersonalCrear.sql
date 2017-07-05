@@ -198,7 +198,7 @@ CREATE TABLE tituloProfesional(
 	idPersonal int not null,
 	nombreInstitucion varchar(100) not null,
 	cursoProfesionalEstudiado varchar(100) not null,
-	tiempoEstudio int not null,
+	tiempoEstudio float(8,2) not null,
 	religionInstitucion varchar(50) null,
 	respaldoTituloPDF varchar(200) null,
 	FOREIGN KEY (idTipoTituloProfesional) REFERENCES tipoTituloProfesional (idTipoTituloProfesional) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -228,7 +228,7 @@ CREATE TABLE experienciaLaboral(
 	idPersonal int not null,
 	nombreInstitucion varchar(100) not null,
 	cargoResponsabilidad varchar(100) not null,
-	aniosDeServicio int not null,
+	aniosDeServicio float(8,2) not null,
 	religionInstitucion varchar(50) null,
 	motivoRetiro varchar(100) null,
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE
@@ -266,6 +266,7 @@ CREATE TABLE evaluacionMeritosDocenteProfesor(
 	idPersonal int not null,
 	idEstructuraMerito int not null,
 	puntajeMerito int not null,
+	evaluacionOficial bool not null,
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idEstructuraMerito) REFERENCES estructuraMeritos (idEstructuraMerito) ON UPDATE CASCADE ON DELETE CASCADE
 );

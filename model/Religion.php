@@ -9,6 +9,7 @@ class Religion
   function __construct($name)
   {
     $this->NombreReligion = $name;
+    $this->IdReligion = null;
   }
 
   public function __set($atributo, $value)

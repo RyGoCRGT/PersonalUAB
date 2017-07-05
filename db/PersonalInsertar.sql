@@ -80,16 +80,18 @@ INSERT INTO afp VALUE(null, "FUTURO DE BOIVIA S.A. AFP");
 INSERT INTO afp VALUE(null, "AFP PREVINCION");
 INSERT INTO afp VALUE(null, "AFP FUTURO");
 
-INSERT INTO cargo VALUE(null, "Decano");
-INSERT INTO cargo VALUE(null, "Vice-Decano");
 INSERT INTO cargo VALUE(null, "Docente");
 INSERT INTO cargo VALUE(null, "Profesor");
 INSERT INTO cargo VALUE(null, "Secretaria");
-INSERT INTO cargo VALUE(null, "Secretario Academico");
 
+INSERT INTO cargoPersona VALUE(null, "Rector");
+INSERT INTO cargoPersona VALUE(null, "Decano");
+INSERT INTO cargoPersona VALUE(null, "Vice-Decano");
+INSERT INTO cargoPersona VALUE(null, "Secretario Academico");
 INSERT INTO cargoPersona VALUE(null, "Jardinero");
 INSERT INTO cargoPersona VALUE(null, "Contador");
 INSERT INTO cargoPersona VALUE(null, "Capellan");
+INSERT INTO cargoPersona VALUE(null, "Secretario Academico");
 
 INSERT INTO enfermedad VALUE(null, "Rinitis");
 INSERT INTO enfermedad VALUE(null, "Asma");

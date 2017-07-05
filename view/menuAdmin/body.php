@@ -7,7 +7,7 @@ $fecha=date( "d/m/Y");
 
       <div class="col-sm-3 col-md-9">
           <h2>Bienvenido </h2>
-          <small>Al sistema de control de personal UAB.</small>
+          <small>Al sistema de control de Personal UAB.</small>
 
       </div>
         <!-- <button type="button" class="btn btn-primary btn-lg btn3d"> -->

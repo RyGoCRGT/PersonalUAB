@@ -23,6 +23,8 @@ include '../../model/EstructuraMeritos.php';
 include '../../model/EstructuraMeritosConsulta.php';
 include '../../model/ExperienciaLaboral.php';
 include '../../model/ExperienciaLaboralConsulta.php';
+include '../../model/EvaluacionMeritosDocenteProfesor.php';
+include '../../model/EvaluacionMeritosDocenteProfesorConsulta.php';
 include '../../controller/PersonaControlador.php';
 include '../../controller/PersonalControlador.php';
 include '../../controller/ReferenciaPersonalControlador.php';
@@ -32,6 +34,7 @@ include '../../controller/HijosPersonalControlador.php';
 include '../../controller/CursoEstudiadoControlador.php';
 include '../../controller/TituloProfesionalControlador.php';
 include '../../controller/ExperienciaLaboralControlador.php';
+include '../../controller/EvaluacionMeritosDocenteProfesorControlador.php';
 
 $conexion = new Conexion();
 $consulta = new PersonaConsulta($conexion);
@@ -44,6 +47,9 @@ $personal = $personalManejador->ver($idPersona['idPersona']);
 
 $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
 $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritosSegunPersonal($_POST['tipoPersonal']);
+
+$evaluacionManejador = new EvaluacionMeritosDocenteProfesorControlador($conexion);
+$evaluacion = $evaluacionManejador->listaEvalucionPersonal($personal->IdPersonal);
 
 ?>
 <div class="container" id="contenidoAll">
@@ -77,15 +83,28 @@ $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritosSegunPersonal($_POST
                     </tr>
                   </thead>
 
-                  <?php $subcontador = 1; foreach ($categoria->SubMeritos as $merito): ?>
-
+                  <?php $subcontador = 1; foreach ($categoria->SubMeritos as $merito):
+                     $encontrado = false; ?>
                     <tbody>
                       <tr>
                         <td><?php echo "{$contador}.{$subcontador}" ?></td>
                         <td><?php echo $merito->NombreMerito ?></td>
                         <td><?php echo $merito->PuntajeMerito ?></td>
                         <input type="hidden" class="idMerito" name="idMerito[]" value="<?php echo $merito->IdEstructuraMerito ?>">
-                        <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="0"></td>
+                        <?php foreach ($evaluacion as $eval): ?>
+                          <?php if ($eval->IdEstructuraMerito == $merito->IdEstructuraMerito): ?>
+                            <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="<?php echo $eval->PuntajeMerito ?>"></td>
+                            <?php $encontrado = true;
+                            break;
+                           endif; ?>
+                        <?php endforeach;
+                        if ($encontrado == false) {
+                          ?>
+                          <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="0"></td>
+                          <?php
+                        }
+                        ?>
+
                       </tr>
                     </tbody>
 

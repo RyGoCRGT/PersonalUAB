@@ -15,6 +15,9 @@ function enviarDatosPersonalReferencia() {
       "data" : frm
     }).done( function(info) {
       $("#mensajeFrmReferencia").html(info);
+      $('.inputReferBk').attr("disabled", "disabled");
+      $('#referenciaContent').click();
+      $('#referenciaTittle').css('border-color', 'rgb(41, 176, 13)');
     });
   });
 }
