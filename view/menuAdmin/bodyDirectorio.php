@@ -5,8 +5,9 @@ include '../../model/TelefonoConsulta.php';
 include '../../model/persona.php';
 include '../../model/PersonaConsulta.php';
 include '../../controller/PersonaControlador.php';
+
 $con=new Conexion ();
-$personaControlador=new PersonaControlador($con);
+$personaControlador = new PersonaControlador($con);
 $listaPersona=$personaControlador->listarPersona();
 
  ?>
