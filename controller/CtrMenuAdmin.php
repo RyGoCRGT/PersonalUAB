@@ -876,12 +876,20 @@ class CtrMenuAdmin
               echo "Debe lllenar los campos";
             }
       break;
+      
+      case 'listaDirectorio':
+        include 'header.php';
+        include 'bodyListaDirectorio.php';
+        include 'footer.php';
+      break;
+
 
       case 'salir':
           session_start();
           session_destroy();
           header("Location: ../../index.php");
           break;
+
 
       default:
 
