@@ -15,10 +15,11 @@ class Contacto
   private $fechaNacimiento;
   private $interno;
   private $voip;
-  private $cumpleanios;
   private $emailInstitucional;
   private $emailPersonal;
-
+  // atributos
+  private $nombreTipoEmpleado;
+  private $nombreResponsabilidad;
 
   function __construct()
   {

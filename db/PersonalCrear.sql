@@ -279,7 +279,7 @@ CREATE TABLE tipodepartamentocontacto(
 );
 
 
-CREATE TABLE departamentocontato(
+CREATE TABLE departamentocontacto(
 	idDepartamentoContacto int not null auto_increment primary key,
 	idTipoDepartamentoContacto int not null,
 	nombre varchar(150) not null,
@@ -297,7 +297,7 @@ CREATE TABLE fax(
 	idDepartamentoContacto int not null,
 	numero varchar(15) not null,
 	prefijo varchar(10) null,
-	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontato (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontacto (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -307,7 +307,7 @@ CREATE TABLE telefonoDepartamento(
 	tipoTelefono varchar(15) not null,
 	numero varchar(15) not null,
 	prefijo varchar(10) null,
-	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontato (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontacto (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE tipoEmpleado(
@@ -336,7 +336,7 @@ CREATE TABLE contacto(
 	voip varchar(10),
 	emailInstitucional varchar(50) not null,
 	emailPersonal varchar(50) null,
-	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontato (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontacto (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idTipoEmpleado) REFERENCES tipoEmpleado (idTipoEmpleado) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idResponsabilidad) REFERENCES responsabilidad (idResponsabilidad) ON UPDATE CASCADE ON DELETE CASCADE
 );

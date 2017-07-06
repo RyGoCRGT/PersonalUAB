@@ -1,6 +1,45 @@
 <?php
-
 $fecha=date("Y/m/d");
+
+include '../../model/conexion.php';
+
+include '../../model/Fax.php';
+include '../../model/FaxConsulta.php';
+include '../../model/TelefonoDepartamento.php';
+include '../../model/TelefonoDepartamentoConsulta.php';
+include '../../model/DepartamentoContacto.php';
+include '../../model/DepartamentoContactoConsulta.php';
+include '../../model/Contacto.php';
+include '../../model/ContactoConsulta.php';
+include '../../model/TelefonoContacto.php';
+include '../../model/TelefonoContactoConsulta.php';
+
+include '../../controller/FaxControlador.php';
+include '../../controller/TelefonoDepartamentoControlador.php';
+include '../../controller/DepartamentoContactoControlador.php';
+include '../../controller/ContactoControlador.php';
+include '../../controller/TelefonoContactoControlador.php';
+
+
+$conexion = new Conexion();
+
+//Recuperar datos del departamento
+$departamentoContacto = new DepartamentoContactoControlador($conexion);
+
+//enviando el ID del Tipo Departamento Contacto UB=1
+$datosDepartamento = $departamentoContacto->datosDepartamentoContacto(1);
+
+$telefonosDepartamento = new TelefonoDepartamentoControlador($conexion);
+$listaTelefonosDepartamento = $telefonosDepartamento->listaTelefonoDepartamento($datosDepartamento['idDepartamentoContacto']);
+
+$faxDepartamento = new FaxControlador($conexion);
+$listaFaxDepartamento = $faxDepartamento->listaFaxDepartamento($datosDepartamento['idDepartamentoContacto']);
+
+// recuperar datos para el contacto
+$contactoControlador = new ContactoControlador($conexion);
+$listaDeContactosPorDepartamento = $contactoControlador->listaDeContactosPorDepartamento($datosDepartamento['idDepartamentoContacto']); 
+
+$telefonoContactoControlador = new TelefonoContactoControlador($conexion);
 
 ?>
 
@@ -23,7 +62,7 @@ $fecha=date("Y/m/d");
                 </div>
 
                 <div>
-                    <!--Primer TAB -->
+                    <!--Primer TAB  UB -->
                     <div class="panel with-nav-tabs panel-info">
                         <div class="panel-heading" style="background:rgb(26, 74, 101)">
                             <ul class="nav nav-tabs" >
@@ -36,7 +75,7 @@ $fecha=date("Y/m/d");
                               <div class="tab-pane fade in active" id="registrarMerito">
                                 <div class="thumbnail">
                                     <div class="text-center">
-                                      <h3>Lista de Contactos</h3>
+                                      <h3><?php echo$datosDepartamento['nombre'];?></h3>
                                     </div>
                                     <form id="frmListaContactosUB" method="post" enctype="multipart/form-data">
                                       <div class="row">
@@ -45,53 +84,109 @@ $fecha=date("Y/m/d");
                                         <div class="col-sm-10 col-md-8">
 
                                           <div class="form-group">
-                                          
-                                            <label>Fecha de Creacion</label>
-                                            <div class="input-group" >
-                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                              <input id="fechaCreacion" type="text" class="form-control datepicker"  data-date-format="yyyy/mm/dd" aria-describedby="sizing-addon2" name="fechaCreacion" readonly="true" value = <?php echo $fecha; ?> placeholder="Fecha de Creacion:  AAAA/MM/DD">
-                                            </div>
+                                            <table class="table table-hover table-bordered">
+                                              <tr>
+                                                <td><label>Dirección:</label></td>
+                                                <td><?php echo $datosDepartamento["direccion"];?></td>
+                                                <td><label>Web:</label></td>
+                                                <td><?php echo $datosDepartamento["direccionWeb"];?></td>
+                                              </tr>
+                                              <tr>
+                                                <td><label>Teléfono:</label></td>
+                                                <td>
+                                                    <?php
+                                                      $i = 0;
+                                                      foreach ($listaTelefonosDepartamento as $regTelfDpto): $i++;
+
+                                                      ?>
+                                                      <label><?php echo $regTelfDpto->numero; ?></label>
+                                                          
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <td><label>Casilla Postal:</label></td>
+                                                <td><?php echo $datosDepartamento["casillaPostal"];?></td>
+                                              </tr>
+                                              <tr>
+                                                <td><label>Fax:</label></td>
+                                                <td>
+                                                   <?php
+                                                      $i = 0;
+                                                      foreach ($listaFaxDepartamento as $regFaxDpto): $i++;
+                                                      ?>
+                                                      <label><?php echo $regFaxDpto->numero; ?></label>
+                                                          
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <td><label>E-Mail</label></td>
+                                                <td><?php echo $datosDepartamento["email"];?></td>
+                                              </tr>
+                                            </table>
                                           </div>
 
                                           <div class="form-group">
-                                            <label>Version</label>
-                                            <div class="input-group">
-                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                              <input id="version" type="text" class="form-control" placeholder="Version de la Tabla de Meritos: " aria-describedby="sizing-addon2" name="version" required>
-                                            </div>
+                                                <table class="table table-hover table-bordered">
+                                                  <thead>
+                                                    <tr>
+                                                        <th>TIPO EMPLEADO</th>
+                                                        <th>NOMBRE COMPLETO</th>
+                                                        <th>RESPONSABILIDAD</th>
+                                                        <th>INTERNO</th>
+                                                        <th>VOIP</th>
+                                                        <th>CELULAR</th>
+                                                        <th>DOMICILIO</th>
+                                                        <th>CUMPLEAÑOS</th>
+                                                        <th>CORREO ELECTRÓNICO</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <?php
+                                                        $i = 0;
+                                                        foreach ($listaDeContactosPorDepartamento as $registroContacto): $i++;
+                                                      ?>
+                                                        
+                                                    <tr>
+                                                        <TD><?php echo $registroContacto->nombreTipoEmpleado?></TD>
+                                                        
+                                                        <td>
+                                                            <?php 
+                                                              if($registroContacto->sexo == 'M'){
+                                                              echo $registroContacto->apellidoPaterno.' '.$registroContacto->apellidoMaterno.' '.$registroContacto->primerNombre.' '.$registroContacto->segundoNombre; 
+                                                              }else{
+                                                                   
+                                                                  echo $registroContacto->apellidoPaterno.' '.$registroContacto->primerNombre;  
+
+                                                                }
+                                                              
+                                                            ?>
+                                                        </td>
+                                                        <td><?php echo $registroContacto->nombreResponsabilidad?></td>
+                                                        <td><?php echo $registroContacto->interno ?></td>
+                                                        <td><?php echo $registroContacto->voip ?></td>
+                                                        <?php 
+                                                            $listaTelefonoContacto = $telefonoContactoControlador->listarTelefonoContacto($registroContacto->idContacto);
+                                                            $i = 0;
+                                                            foreach ($listaTelefonoContacto as $registroTelefono): $i++;
+                                                                if($registroTelefono->tipoTelefono == 'Celular'){
+                                                        ?>
+                                                                    <td><?php echo $registroTelefono->numero.'<BR>' ?></td>
+                                                        <?php             
+                                                                }else{
+                                                        ?>          
+                                                                    <td><?php echo $registroTelefono->numero.'<BR>' ?></td>
+                                                        <?php 
+                                                                      }
+                                                            endforeach; 
+                                                        ?>
+                                                        <td><?php echo $registroContacto->fechaNacimiento ?></td>
+                                                        <td><?php echo $registroContacto->emailInstitucional.'<BR>'.$registroContacto->emailPersonal
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php endforeach; ?>
+                                                  </tbody>
+                                                </table>
                                           </div>
 
-                                          <div class="form-group">
-                                            <label>Tipo Mérito</label>
-                                            <div class="input-group" >
-                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
-                                              <select class="selectpicker form-control" name="tipoMerito" id="tipoMerito">
-                                                <option value="Docente">Docente</option>
-                                                <option value="Profesor">Profesor</option>
-                                              </select>
-                                            </div>
-                                          </div>
-
-                                        <div class="form-group" data-toggle="buttons">
-                                            <label class="btn btn-danger"> <i class="fa fa-dot-circle-o"></i> Estado Inicial: </label>
-                                            <label class="btn btn-info btn-outline activo">
-                                                <input type="radio" class="" name="activo" value="1" checked><i class="">  Activo</i>
-                                            </label>
-                                            <label class="btn btn-info btn-outline activo">
-                                                <input type="radio" class="" name="activo" value="0"><i class="">  Inactivo</i>
-                                            </label>
-                                         </div>
-                                         <div class="exportarArchivo">
-                                            <input type="file" name="archivo" class="exportarArchivoFile" required />
-                                         </div>
-                                         <div class="nameFileImg"></div>
-
-                                         <input type="hidden" name="datos" value="1">
-                                         <div id="mesajePersona"></div>
-                                         <div class="pull-right">
-                                           <button type="submit" name="guardarTablaMerito" id="guardartablaMerito" class="btn btn-primary">Grabar</button>
-                                         </div>
-                                         <br><br>
 
                                          <div class="col-sm-1 col-md-2"></div>
                                       </div>
@@ -111,28 +206,6 @@ $fecha=date("Y/m/d");
 
 
 
-<!--Otro DIV-->
-<div class="modal fade" id="contenidoTablaMeritosModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 class="modal-title text-center"> <i class="fa fa-user"></i> Tabla de Meritos</h3>
-      </div>
-      <div class="modal-body">
-        <div class="contenidoTablaMeritos" id="contenidoTablaMeritos">
-          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-          <span class="sr-only">Cargando...</span>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <div class="pull-right">
-          <a href="index.php?modo=NuevaTablaMeritos" class="btn btn-success btn-lg">LISTO <i class="fa fa-check"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 

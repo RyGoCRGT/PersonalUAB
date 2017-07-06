@@ -8,10 +8,10 @@ class TelefonoDepartamento
   private $numero;
   private $prefijo;
 
-
   function __construct()
   {
   }
+
 
   public function __set($atributo, $value)
   {
@@ -37,5 +37,6 @@ class TelefonoDepartamento
     }
 
   }
+
 }
 ?>

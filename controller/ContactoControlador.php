@@ -10,39 +10,38 @@ class ContactoControlador
     $this->Conexion = $con;
   }
 
-
-  public function listar()
+  public function listaDeContactosPorDepartamento($idDepartamentoContacto)
   {
-    $consulta = new PersonalConsulta($this->Conexion);
+      $consulta = new ContactoConsulta($this->Conexion);
+      $listaContactosDpto = $consulta-> listaDeContactosPorDepartamento($idDepartamentoContacto);
+      $arregloContactosDpto = array();
+      $i = 0;
+      foreach ($listaContactosDpto as $registroContacto) {
+        $contacto = new Contacto();
+               
+        $contacto->nombreTipoEmpleado = $registroContacto['tipoempleado'];
+        $contacto->nombreResponsabilidad = $registroContacto['responsabilidad'];
+        $contacto->idContacto = $registroContacto['idContacto'];
+        $contacto->apellidoPaterno = $registroContacto['apellidoPaterno'];
+        $contacto->apellidoMaterno = $registroContacto['apellidoMaterno'];
+        $contacto->apellidoCasada = $registroContacto['apellidoCasada'];
+        $contacto->primerNombre = $registroContacto['primerNombre'];
+        $contacto->segundoNombre = $registroContacto['segundoNombre'];
+        $contacto->interno = $registroContacto['interno'];
+        $contacto->voip = $registroContacto['voip'];
+        $contacto->fechaNacimiento = $registroContacto['fechaNacimiento'];
+        $contacto->sexo = $registroContacto['sexo'];
+        $contacto->emailPersonal = $registroContacto['emailPersonal'];
+        $contacto->emailInstitucional = $registroContacto['emailInstitucional'];
 
-    $listaPersonal = $consulta->listaPersonal();
+        $arregloContactosDpto[$i] = $contacto;
+        $i++;
+      }
+      return $arregloContactosDpto;
+  }//end function
 
-    $listArrayPersonal = array();
-    
-    $i = 0;
-    foreach ($listaPersonal as $listaP) {
-      $persona = new Persona();
-      $persona->IdPersona = $listaP['idPersona'];
-      $persona->PrimerNombre = $listaP['primerNombre'];
-      $persona->SegundoNombre = $listaP['segundoNombre'];
-      $persona->ApellidoPaterno = $listaP['apellidoPaterno'];
-      $persona->ApellidoMaterno = $listaP['apellidoMaterno'];
-      $persona->CI = $listaP['CI'];
-      $persona->FechaNacimiento = $listaP['fechaNacimiento'];
-      $persona->Sexo = $listaP['sexo'];
 
-      $personal = new Personal();
-      $personal->IdPersonal = $listaP['idPersonal'];
-      $personal->IdPersona = $persona;
-      $personal->IdCarrera = $listaP['idCarrera'];
-      $personal->IdCargo = $listaP['idCargoPersona'];
 
-      $listArrayPersonal[$i] = $personal;
-      $i++;
-    }
-    return $listArrayPersonal;
-  }
-
-  }
+}//end class
 
 ?>
