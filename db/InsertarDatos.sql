@@ -659,5 +659,98 @@ INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,pri
 INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (1,2,344,'Gilvia','','Vivas','','Choque','F','1969-12-31','238','','gilvia.vivas@adventistas.org.bo','');
 
 
+-- contacto IATEC
+
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'David','','Blanco','','','M','2015-09-06','','','david.blanco@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Rodrigo','','Calderón','','','M','2015-10-26','','','rodrigo.calderon@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Jhony','','Calle','','','M','2015-12-12','','','jhony.calle@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Orlando','','Cari','','','M','2015-04-01','','','orlando.cari@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Samuel','','Cari','','','M','1990-04-15','','','samuel.cari@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Ronny','','Castillo','','','M','2015-04-12','','','rony.castillo@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Héctor','','Copa','','','M','1982-09-21','','','hector.copa@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,295,'Josias','','Giménez','','','M','1985-01-18','','','josias.gimenez@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Cristhian','','Jiménez','','','M','2015-04-02','','','cristhian.jimenez@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Jonathan','','Jiménez','','','M','2015-09-04','','','jonathan.jimenez@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Denner','','Llanos','','','M','2015-07-24','','','denner.llanos@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,94,'Roberto','','Ontiveros','','','M','2015-04-12','','','roberto.ontiveros@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Abel','','Ortiz','','','M','2015-10-08','','','abel.ortiz@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Moisés','','Rodríguez','','','M','2015-03-12','','','moises.rodriguez@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Alex','','Salazar','','','M','2015-06-01','','','alex.salazar@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Amed','','Tancara','','','M','2015-08-30','','','amed.tancara@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Adalid','','Flores','','','M','1990-03-27','','','adalid.flores@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Marco antonio','','Aguilar','','','M','1989-10-21','','','marco.aguilar@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Luis fernando','','Poma','','','M','1992-04-26','','','luis.poma@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Osvaldo','','Rodriguez','','','M','1988-07-31','','','osvaldo.rodriguez@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Ronald','','Luna','','','M','1990-12-09','','','ronald.luna@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Isabel','Rosmery','Barja','','','F','1991-12-01','','','rosmery.barja@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Héctor','','Vélez','','','M','2015-03-01','','','hector.velez@adventistas.org','');
+INSERT INTO contacto(idDepartamentoContacto,idTipoEmpleado,idResponsabilidad,primerNombre,segundoNombre,apellidoPaterno,apellidoMaterno,apellidoCasada,sexo,fechaNacimiento,interno,voip,emailInstitucional,emailPersonal) VALUES (2,3,280,'Judith','','Villanueva','','','F','2015-09-27','','','judith.villanueva@adventistas.org','');
+
+
+-- TelefonoContacto
+-- telefonos UB
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (1,'Celular','722-37470');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (2,'Celular','722-37033');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (3,'Celular','722-37003');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (4,'Celular','722-37771');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (5,'Celular','722-37020');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (6,'Celular','722-37025');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (7,'Celular','717-37675');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (8,'Celular','722-37702');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (9,'Celular','716-04909');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (10,'Celular','722-72735');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (11,'Celular','721-37708');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (12,'Celular','670-04392');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (13,'Celular','716-55867');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (14,'Celular','727-05999');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (15,'Celular','722-37461');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (16,'Celular','717-30407');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (17,'Celular','717-37656');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (18,'Celular','722-37500');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (19,'Celular','717-29923');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (20,'Celular','722-37779');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (21,'Celular','722-37473');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (22,'','');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (23,'Celular','722-37214');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (24,'Celular','722-37261');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (25,'Celular','707-20297');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (26,'Celular','674-07668');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (27,'Celular','722-02108');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (28,'Celular','717-90796');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (29,'Celular','717-90793');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (30,'Celular','717-30432');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (31,'Celular','722-37778');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (32,'Celular','722-37211');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (33,'Celular','717-37204');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (34,'Celular','717-30409');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (35,'Celular','722-39935');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (36,'Celular','722-00008');
+-- telefonos IATEC
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (37,'Celular','717-37502');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (38,'Celular','722-37465');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (39,'Celular','722-37251');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (40,'Celular','722-37742');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (41,'Celular','974-30390');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (42,'Celular','722-37743');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (43,'Celular','678-44833');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (44,'Celular','717-31778');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (45,'Celular','722-37468');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (46,'Celular','722-37718');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (47,'Celular','722-37502');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (48,'Celular','721-37118');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (49,'Celular','722-37464');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (50,'Celular','714-40460');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (51,'Celular','717-37221');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (52,'Celular','722-37467');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (53,'Celular','717-37367');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (54,'Celular','717-29655');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (55,'Celular','717-31390');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (56,'Celular','717-31386');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (57,'Celular','717-31275');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (58,'Celular','717-31398');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (59,'Celular','717-37776');
+INSERT INTO telefonocontacto(idContacto,tipoTelefono,numero) VALUES (60,'Celular','722-37501');
+
+
 
 
