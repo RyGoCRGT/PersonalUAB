@@ -31,7 +31,7 @@ class ReligionControlador
     if ($existe == false)
     {
       $religion = new Religion("");
-      $religion->NombreReligion = ucwords(strtolower($_POST['religionNew']));
+      $religion->NombreReligion = strtoupper($_POST['religionNew']);
       $exito = $manageReligion->save($religion);
       if ($exito == true)
       {

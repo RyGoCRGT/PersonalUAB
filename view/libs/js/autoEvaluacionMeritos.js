@@ -4,18 +4,10 @@ $(document).ready(function () {
 
 function clickTabMeritos()
 {
-  $("#autoEvMeritos").on("click", function(e) {
+  $("#autoEvMeritos").click(function(e) {
     e.preventDefault();
-    var tipo = $('#tipoPersonal').val();
-    if (tipo == '1')
-    {
-      tipo = "Docente";
-    }
-    else {
-      if (tipo == '2') {
-        tipo = "Profesor";
-      }
-    }
+    var tipo = $('#tipoPersonal option:selected').html();
+    console.log(tipo);
     var ci = $('#ciNit').val();
     $.ajax({
       "method" : "POST",

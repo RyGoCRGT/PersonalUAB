@@ -36,7 +36,7 @@ class CiudadControlador
     if ($existe == false)
     {
       $ciudad = new Ciudad("");
-      $ciudad->NombreCiudad = ucwords(strtolower($_POST['ciudadNew']));
+      $ciudad->NombreCiudad = strtoupper($_POST['ciudadNew']);
       $exito = $manageCiudad->save($ciudad);
       // var_dump($ciudad);
       if ($exito == true)

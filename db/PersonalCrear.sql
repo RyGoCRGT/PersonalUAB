@@ -120,6 +120,7 @@ CREATE TABLE personal(
 	numeroRegistroProfesional varchar(50) null,
 	fechaIngreso date not null,
 	rutaFoto varchar(200) null,
+	estado bool not null,
 	FOREIGN KEY (idCargoPersona) REFERENCES cargoPersona (idCargoPersona) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idPersona) REFERENCES persona (idPersona) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idNacion) REFERENCES nacion (idNacion) ON UPDATE CASCADE ON DELETE CASCADE,

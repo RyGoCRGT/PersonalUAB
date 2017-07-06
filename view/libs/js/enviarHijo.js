@@ -36,6 +36,5 @@ function nuevoHijo()
   $('#nuevoHijoPers').click(function () {
     $('.inputHijoBk').removeAttr('disabled');
     $('.inputHijoBk').val('');
-    $('#mensajeFrmHijo').html("");
   });
 }

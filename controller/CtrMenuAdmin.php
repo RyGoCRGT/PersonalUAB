@@ -103,7 +103,8 @@ class CtrMenuAdmin
           $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
 
           $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
-          $target_path = $target_path . basename( $_FILES["respaldoCursos"]["name"]);
+          $target_path = $target_path . basename( "curso-".$_POST['cursoEstudiado']."-{$_POST['anhoEstudioCuso']}-".$_POST['nombreInstitucionCursos']."-".strtoupper($_POST['ciPersonaCurso']).".jpg");
+
 
           $a=move_uploaded_file($_FILES["respaldoCursos"]["tmp_name"], $target_path);
 
@@ -170,7 +171,7 @@ class CtrMenuAdmin
           $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
 
           $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
-          $target_path = $target_path . basename( $_FILES["respaldoTitulo"]["name"]);
+          $target_path = $target_path . basename( "titulo-".$_POST['cursoProfesionalEstudiado']."-{$_POST['nombreInstitucionTitulos']}-".$_POST['tipoTituloProfesional']."-".strtoupper($_POST['ciPersonaTitulo']).".jpg");
 
           $a=move_uploaded_file($_FILES["respaldoTitulo"]["tmp_name"], $target_path);
 
@@ -195,7 +196,7 @@ class CtrMenuAdmin
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Curso</th>
+                  <th>Curso Profesional</th>
                   <th>Institucion</th>
                 </tr>
               </thead>
@@ -344,6 +345,7 @@ class CtrMenuAdmin
           include '../../model/PersonaConsulta.php';
           include '../../model/PersonalConsulta.php';
           include '../../model/HijosPersonal.php';
+          include '../../model/HijosPersonalConsulta.php';
           include '../../controller/PersonaControlador.php';
           include '../../controller/HijosPersonalControlador.php';
 
@@ -375,6 +377,31 @@ class CtrMenuAdmin
 
           $hijoPersonalManejador = new HijosPersonalControlador($conexion);
           $hijoPersonalManejador->crear($hijoPersonal);
+
+          $listaHijos = $hijoPersonalManejador->verHijos($idPersonal['idPersonal']);
+
+          ?>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <td>Nombres</td>
+                  <td>Apellidos</td>
+                  <td>Fecha Nacimiento</td>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($listaHijos as $hijo): ?>
+                  <tr>
+                    <td><?php echo "{$hijo->IdPersona->PrimerNombre} {$hijo->IdPersona->SegundoNombre}" ?></td>
+                    <td><?php echo "{$hijo->IdPersona->ApellidoPaterno} {$hijo->IdPersona->ApellidoMaterno}" ?></td>
+                    <td><?php echo "{$hijo->IdPersona->FechaNacimiento}" ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+          <?php
 
           echo "<p style='color:green'>Guardado</p>";
         }
@@ -529,184 +556,192 @@ class CtrMenuAdmin
         $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
         $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritosSegunPersonal($_POST['tipoPersonal']);
 
-        $evaluacionManejador = new EvaluacionMeritosDocenteProfesorControlador($conexion);
-        $evaluacion = $evaluacionManejador->listaAutoEvalucionPersonal($personal->IdPersonal);
+        if ($meritos)
+        {
+          $evaluacionManejador = new EvaluacionMeritosDocenteProfesorControlador($conexion);
+          $evaluacion = $evaluacionManejador->listaAutoEvalucionPersonal($personal->IdPersonal);
 
-        ?>
-        <div class="row">
-          <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Tabla de Meritos</h3>
-              </div>
-              <div class="panel-body">
-                <form id="guardarAutoCalificacion">
-                  <div class="table-responsive">
-                    <table class="table table-hover table-bordered">
-
-                      <?php $contador = 1; foreach ($meritos as $categoria): ?>
-
-                        <thead>
-                          <tr>
-                            <th><?php echo $contador ?></th>
-                            <th style="max-width:300px"><?php echo "{$categoria->NombreMerito} ({$categoria->PuntajeMerito} puntos)" ?></th>
-                            <th></th>
-                            <th></th>
-                          </tr>
-                        </thead>
-
-                        <?php $subcontador = 1; foreach ($categoria->SubMeritos as $merito):
-                           $encontrado = false; ?>
-                          <tbody>
-                            <tr>
-                              <td><?php echo "{$contador}.{$subcontador}" ?></td>
-                              <td><?php echo $merito->NombreMerito ?></td>
-                              <td><?php echo $merito->PuntajeMerito ?></td>
-                              <input type="hidden" class="idMerito" name="idMerito[]" value="<?php echo $merito->IdEstructuraMerito ?>">
-                              <?php foreach ($evaluacion as $eval): ?>
-                                <?php if ($eval->IdEstructuraMerito == $merito->IdEstructuraMerito): ?>
-                                  <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="<?php echo $eval->PuntajeMerito ?>"></td>
-                                  <?php $encontrado = true;
-                                  break;
-                                 endif; ?>
-                              <?php endforeach;
-                              if ($encontrado == false) {
-                                ?>
-                                <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="0"></td>
-                                <?php
-                              }
-                              ?>
-
-                            </tr>
-                          </tbody>
-
-                        <?php $subcontador++; endforeach; ?>
-
-                      <?php $contador++; endforeach; ?>
-                    </table>
-                    <div class="pull-right">
-                      <strong>Total Puntos Meritos: </strong> <input type="text" class="form-control puntajeTotal" id="puntajeTotal" name="puntajeTotal" value="0" readonly>
-                    </div>
-                    <input type="hidden" name="idPersonal" value="<?php echo $personal->IdPersonal ?>">
-                    <br><br><br><br>
-                    <div class="pull-right">
-                      <button type="submit" class="btn btn-success btn-lg" name="guardar">Guardar Evaluacion <i class="fa fa-paper-plane"></i></button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Hoja de Vida Personal</h3>
-              </div>
-              <div class="panel-body">
-                <?php $i = 1; ?>
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                      <div class="table-responsive">
-                        <table class="table table-hover table-bordered table-center">
-                          <thead>
-                            <tr>
-                              <th></th>
-                              <th>#</th>
-                              <th>Nombre Curso</th>
-                              <th>Institucion</th>
-                              <th>Religion Institucion</th>
-                              <th>Año de Estudio</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <div class="text-center"><strong>CURSOS ESTUDIADOS</strong></div><br>
-                            <?php foreach ($personal->ListaCursos as $cursos): ?>
-                              <tr class="action">
-                                <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
-                                <td><?php echo $i ?></td>
-                                <td class="text-center"><?php echo $cursos->CursoEstudiado ?></td>
-                                <td class="text-center"><?php echo $cursos->NombreInstitucion ?></td>
-                                <td class="text-center"><?php echo $cursos->ReligionInstitucion ?></td>
-                                <td class="text-center"><?php echo $cursos->AnhoEstudio ?></td>
-                              </tr>
-                            <?php $i++; endforeach; ?>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                <?php $i = 1; ?>
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                      <div class="table-responsive">
-                        <table class="table table-hover table-bordered table-center">
-                          <thead>
-                            <tr>
-                              <th></th>
-                              <th>#</th>
-                              <th>Nombre Titulo</th>
-                              <th>Institucion</th>
-                              <th>Religion Institucion</th>
-                              <th>Tiempo de Estudio(Años)</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <div class="text-center"><strong>TITULOS QUE POSEE</strong></div><br>
-                            <?php foreach ($personal->ListaTitulos as $titulos): ?>
-                              <tr class="action">
-                                <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
-                                <td><?php echo $i ?></td>
-                                <td class="text-center"><?php echo $titulos->CursoProfesionalEstudiado ?></td>
-                                <td class="text-center"><?php echo $titulos->NombreInstitucion ?></td>
-                                <td class="text-center"><?php echo $titulos->ReligionInstitucion ?></td>
-                                <td class="text-center"><?php echo $titulos->TiempoEstudio ?></td>
-                              </tr>
-                            <?php $i++; endforeach; ?>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                <?php $i = 1; ?>
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-12">
+          ?>
+          <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Tabla de Meritos</h3>
+                </div>
+                <div class="panel-body">
+                  <form id="guardarAutoCalificacion">
                     <div class="table-responsive">
                       <table class="table table-hover table-bordered">
-                        <thead>
-                          <tr>
-                            <th></th>
-                            <th>#</th>
-                            <th>Cargo/Responsabilidad</th>
-                            <th>Institucion</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <div class="text-center"><strong>Experiencia Laboral</strong></div><br>
-                          <?php foreach ($personal->ListaExperinciaLaboral as $listaE): ?>
-                            <tr class="action">
-                              <td><input type="checkbox" class="control" name="control[]" value="1"></td>
-                              <td><?php echo $i; ?></td>
-                              <td><?php echo $listaE->CargoResponsabilidad; ?></td>
-                              <td><?php echo $listaE->NombreInstitucion; ?></td>
+
+                        <?php $contador = 1; foreach ($meritos as $categoria): ?>
+
+                          <thead>
+                            <tr>
+                              <th><?php echo $contador ?></th>
+                              <th style="max-width:300px"><?php echo "{$categoria->NombreMerito} ({$categoria->PuntajeMerito} puntos)" ?></th>
+                              <th></th>
+                              <th></th>
                             </tr>
-                          <?php $i++; endforeach; ?>
-                        </tbody>
+                          </thead>
+
+                          <?php $subcontador = 1; foreach ($categoria->SubMeritos as $merito):
+                             $encontrado = false; ?>
+                            <tbody>
+                              <tr>
+                                <td><?php echo "{$contador}.{$subcontador}" ?></td>
+                                <td><?php echo $merito->NombreMerito ?></td>
+                                <td><?php echo $merito->PuntajeMerito ?></td>
+                                <input type="hidden" class="idMerito" name="idMerito[]" value="<?php echo $merito->IdEstructuraMerito ?>">
+                                <?php foreach ($evaluacion as $eval): ?>
+                                  <?php if ($eval->IdEstructuraMerito == $merito->IdEstructuraMerito): ?>
+                                    <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="<?php echo $eval->PuntajeMerito ?>"></td>
+                                    <?php $encontrado = true;
+                                    break;
+                                   endif; ?>
+                                <?php endforeach;
+                                if ($encontrado == false) {
+                                  ?>
+                                  <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="0"></td>
+                                  <?php
+                                }
+                                ?>
+
+                              </tr>
+                            </tbody>
+
+                          <?php $subcontador++; endforeach; ?>
+
+                        <?php $contador++; endforeach; ?>
                       </table>
+                      <div class="pull-right">
+                        <strong>Total Puntos Meritos: </strong> <input type="text" class="form-control puntajeTotal" id="puntajeTotal" name="puntajeTotal" value="0" readonly>
+                      </div>
+                      <input type="hidden" name="idPersonal" value="<?php echo $personal->IdPersonal ?>">
+                      <br><br><br><br>
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-success btn-lg" name="guardar">Guardar Evaluacion <i class="fa fa-paper-plane"></i></button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Hoja de Vida Personal</h3>
+                </div>
+                <div class="panel-body">
+                  <?php $i = 1; ?>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="table-responsive">
+                          <table class="table table-hover table-bordered table-center">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>#</th>
+                                <th>Nombre Curso</th>
+                                <th>Institucion</th>
+                                <th>Religion Institucion</th>
+                                <th>Año de Estudio</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <div class="text-center"><strong>CURSOS ESTUDIADOS</strong></div><br>
+                              <?php foreach ($personal->ListaCursos as $cursos): ?>
+                                <tr class="action">
+                                  <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
+                                  <td><?php echo $i ?></td>
+                                  <td class="text-center"><?php echo $cursos->CursoEstudiado ?></td>
+                                  <td class="text-center"><?php echo $cursos->NombreInstitucion ?></td>
+                                  <td class="text-center"><?php echo $cursos->ReligionInstitucion ?></td>
+                                  <td class="text-center"><?php echo $cursos->AnhoEstudio ?></td>
+                                </tr>
+                              <?php $i++; endforeach; ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  <?php $i = 1; ?>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="table-responsive">
+                          <table class="table table-hover table-bordered table-center">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>#</th>
+                                <th>Nombre Titulo</th>
+                                <th>Institucion</th>
+                                <th>Religion Institucion</th>
+                                <th>Tiempo de Estudio(Años)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <div class="text-center"><strong>TITULOS QUE POSEE</strong></div><br>
+                              <?php foreach ($personal->ListaTitulos as $titulos): ?>
+                                <tr class="action">
+                                  <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
+                                  <td><?php echo $i ?></td>
+                                  <td class="text-center"><?php echo $titulos->CursoProfesionalEstudiado ?></td>
+                                  <td class="text-center"><?php echo $titulos->NombreInstitucion ?></td>
+                                  <td class="text-center"><?php echo $titulos->ReligionInstitucion ?></td>
+                                  <td class="text-center"><?php echo $titulos->TiempoEstudio ?></td>
+                                </tr>
+                              <?php $i++; endforeach; ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  <?php $i = 1; ?>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                      <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>#</th>
+                              <th>Cargo/Responsabilidad</th>
+                              <th>Institucion</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <div class="text-center"><strong>Experiencia Laboral</strong></div><br>
+                            <?php foreach ($personal->ListaExperinciaLaboral as $listaE): ?>
+                              <tr class="action">
+                                <td><input type="checkbox" class="control" name="control[]" value="1"></td>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $listaE->CargoResponsabilidad; ?></td>
+                                <td><?php echo $listaE->NombreInstitucion; ?></td>
+                              </tr>
+                            <?php $i++; endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="mensajeCalificacion" id="mensajeCalificacion">
+          <div class="mensajeCalificacion" id="mensajeCalificacion">
 
-        </div>
-        <script src="../libs/js/controlMeritos.js"></script>
-        <script src="../libs/js/guardarCalificacion.js"></script>
-        <script src="../libs/js/autosuma.js"></script>
-        <?php
+          </div>
+          <script src="../libs/js/controlMeritos.js"></script>
+          <script src="../libs/js/guardarCalificacion.js"></script>
+          <script src="../libs/js/autosuma.js"></script>
+          <?php
+        }
+        else
+        {
+          echo "<div class='text-center' style='color:red'><h2><strong>No existe Evaluacíon Asignada</strong></h2></div>";
+        }
+
         break;
 
       case 'puntuarAutoMeritoPersonal':
@@ -739,12 +774,12 @@ class CtrMenuAdmin
           $consulta = new PersonaConsulta($conexion);
 
           $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/personal/";
-          $target_path = $target_path . basename( $_FILES["fotoPersonal"]["name"]);
+          $target_path = $target_path . basename("img".strtoupper($_POST['ciPersona']).".jpg");
 
           $a=move_uploaded_file($_FILES["fotoPersonal"]["tmp_name"], $target_path);
 
-          // echo "Arg1: " . $_FILES["fotoPersonal"]["tmp_name"] . "<br>";
-          // echo "Arg2: " . $target_path . "<br>";
+           //echo "Arg1: " . $_FILES["fotoPersonal"]["tmp_name"] . "<br>";
+           //echo "Arg2: " . $_FILES["fotoPersonal"]["name"] . "<br>";
           // echo "Cantidad Movida: " . $a . "<br>";
 
           $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
@@ -1177,16 +1212,127 @@ class CtrMenuAdmin
         break;
 
       case 'addNewReligion':
-      if ($_POST)
-      {
-        include '../../model/conexion.php';
-        include '../../model/Religion.php';
-        include '../../model/ReligionConsulta.php';
-        include '../../controller/ReligionControlador.php';
-        $conexion = new Conexion();
-        $religion = new ReligionControlador($conexion);
-        $religion->crear();
-      }
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Religion.php';
+          include '../../model/ReligionConsulta.php';
+          include '../../controller/ReligionControlador.php';
+          $conexion = new Conexion();
+          $religion = new ReligionControlador($conexion);
+          $religion->crear();
+        }
+        break;
+
+      case 'addNewSeguro':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Seguro.php';
+          include '../../model/SeguroConsulta.php';
+          include '../../controller/SeguroControlador.php';
+          $conexion = new Conexion();
+          $seguro = new SeguroControlador($conexion);
+          $seguro->crear();
+        }
+        break;
+
+      case 'addNewAfp':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Afp.php';
+          include '../../model/AfpConsulta.php';
+          include '../../controller/AfpControlador.php';
+          $conexion = new Conexion();
+          $afp = new AfpControlador($conexion);
+          $afp->crear();
+        }
+        break;
+
+      case 'addNewEnfermedad':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Enfermedad.php';
+          include '../../model/EnfermedadConsulta.php';
+          include '../../controller/EnfermedadControlador.php';
+          $conexion = new Conexion();
+          $enfermedad = new EnfermedadControlador($conexion);
+          $enfermedad->crear();
+        }
+        break;
+
+      case 'addNewDeporte':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Deporte.php';
+          include '../../model/DeporteConsulta.php';
+          include '../../controller/DeporteControlador.php';
+          $conexion = new Conexion();
+          $deporte = new DeporteControlador($conexion);
+          $deporte->crear();
+        }
+        break;
+
+      case 'darDeBajaPersonal':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/usuario.php';
+          include '../../model/usuarioConsulta.php';
+          include '../../controller/PersonalControlador.php';
+          $conexion = new Conexion();
+          $personalManejdor = new PersonalControlador($conexion);
+          $personalManejdor->darBeBaja();
+          header("Location: index.php?modo=listaPersonal");
+        }
+        else
+        {
+          header("Location: index.php");
+        }
+        break;
+
+      case 'habilitarPersonal':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/usuario.php';
+          include '../../model/usuarioConsulta.php';
+          include '../../controller/PersonalControlador.php';
+          $conexion = new Conexion();
+          $personalManejdor = new PersonalControlador($conexion);
+          $personalManejdor->habilitar();
+          header("Location: index.php?modo=listaPersonal");
+        }
+        else
+        {
+          header("Location: index.php");
+        }
+        break;
+
+      case 'editarPersonal':
+        if ($_POST)
+        {
+
+          include 'header.php';
+          include 'bodyEditarPersonal.php';
+          include 'footer.php';
+
+        }
+        else
+        {
+          header("Location: index.php?modo=listaPersonal");
+        }
         break;
 
       default:

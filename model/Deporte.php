@@ -8,6 +8,7 @@ class Deporte
 
   function __construct()
   {
+    $this->IdDeporte = null;
   }
 
   public function __set($atributo, $value)

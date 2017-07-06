@@ -26,6 +26,7 @@ class Personal
   private $NumeroRegistroProfesional;
   private $FechaIngreso;
   private $Ruta;
+  private $Estado;
 
   private $C_Conyugue;
   private $C_HijosLista;
@@ -62,6 +63,7 @@ class Personal
     $this->ListaExperinciaLaboral = array();
     $this->C_EvaluacionMeritos = array();
     $this->C_AutoEvaluacionMeritos = array();
+    $this->Estado = 1;
   }
 
   public function __set($atributo, $value)

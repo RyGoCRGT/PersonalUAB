@@ -91,3 +91,11 @@ $fecha=date( "d/m/Y");
 </div>
 
 </div>
+
+<!-- <div class="container">
+  <h2>Responsive Embed</h2>
+  <p>Create a responsive video and scale it nicely to the parent element with an 16:9 aspect ratio</p>
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" src="../libs/comercial.pdf"></iframe>
+  </div>
+</div> -->

@@ -117,17 +117,18 @@ $listaTipoUsuario = $tipoUsuario->listar();
                                           <div class="col-xs-12 col-sm-12 col-md-6">
                                             <div class="form-group">
                                               <label>Lugar de Expedicion CI/NIT</label>
-                                              <div class="input-group selector">
-                                                <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                                                <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
+                                              <div class="input-group selector lugarExpedicionNew">
+                                                <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><a class="btn btn-xs btn-default lugarExpedicionAdd" data-toggle="modal" data-target="#addNewLugExpedi"><i class="fa fa-address-card"></i></a></span>
+                                                <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI" required>
                                                   <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                                                     <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
                                                   <?php endforeach; ?>
                                                 </select>
                                               </div>
-                                              <div class="input-group selector-mobile">
-                                                <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                                                <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
+                                              <div class="input-group selector-mobile lugarExpedicionNew">
+                                                <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><a class="btn btn-xs btn-default lugarExpedicionAdd" data-toggle="modal" data-target="#addNewLugExpedi"><i class="fa fa-address-card"></i></a></span>
+                                                <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI" required>
+                                                  <option value="" disabled selected hidden>Seleccione Lugar de Expedicion CI</option>
                                                   <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                                                     <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
                                                   <?php endforeach; ?>
@@ -280,4 +281,34 @@ $listaTipoUsuario = $tipoUsuario->listar();
     </div>
 </div>
 
+</div>
+
+<div class="modal fade" id="addNewLugExpedi">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewLugExpediForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar Lugar de Expedicion</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Lugar de Expedicion CI/NIT</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-address-card"></i></span>
+              <input type="text" name="expedicionNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddLugEx"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

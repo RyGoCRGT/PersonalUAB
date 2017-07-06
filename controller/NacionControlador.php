@@ -33,7 +33,7 @@ class NacionControlador
     if ($existe == false)
     {
       $nacion = new Nacion();
-      $nacion->NombreNacion = ucwords(strtolower($_POST['nacionalidadNew']));
+      $nacion->NombreNacion = strtoupper($_POST['nacionalidadNew']);
       $exito = $manageNacionalidad->save($nacion);
       if ($exito == true)
       {

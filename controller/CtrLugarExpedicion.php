@@ -31,7 +31,7 @@ class CtrLugarExpedicion
     $existe = $manageLugExp->existeLugarExpedicion($_POST['expedicionNew']);
     if ($existe == false)
     {
-      $lugarExpedicion = new LugarExpedicion(ucwords(strtolower($_POST['expedicionNew'])));
+      $lugarExpedicion = new LugarExpedicion(strtoupper($_POST['expedicionNew']));
       $exito = $manageLugExp->save($lugarExpedicion);
       if ($exito == true)
       {

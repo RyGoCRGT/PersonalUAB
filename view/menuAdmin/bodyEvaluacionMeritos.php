@@ -48,178 +48,182 @@ $personal = $personalManejador->ver($idPersona['idPersona']);
 $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
 $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritosSegunPersonal($_POST['tipoPersonal']);
 
-$evaluacionManejador = new EvaluacionMeritosDocenteProfesorControlador($conexion);
-$evaluacion = $evaluacionManejador->listaEvalucionPersonal($personal->IdPersonal);
+if ($meritos)
+{
 
-?>
-<div class="container" id="contenidoAll">
-  <div class="row  border-bottom white-bg dashboard-header">
+  $evaluacionManejador = new EvaluacionMeritosDocenteProfesorControlador($conexion);
+  $evaluacion = $evaluacionManejador->listaEvalucionPersonal($personal->IdPersonal);
 
-      <div class="col-sm-3">
-          <h2>Personal-UAB </h2>
-      </div>
+  ?>
+  <div class="container" id="contenidoAll">
+    <div class="row  border-bottom white-bg dashboard-header">
 
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Tabla de Meritos</h3>
+        <div class="col-sm-3">
+            <h2>Personal-UAB </h2>
         </div>
-        <div class="panel-body">
-          <form id="guardarCalificacion">
-            <div class="table-responsive">
-              <table class="table table-hover table-bordered">
 
-                <?php $contador = 1; foreach ($meritos as $categoria): ?>
-
-                  <thead>
-                    <tr>
-                      <th><?php echo $contador ?></th>
-                      <th style="max-width:300px"><?php echo "{$categoria->NombreMerito} ({$categoria->PuntajeMerito} puntos)" ?></th>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
-
-                  <?php $subcontador = 1; foreach ($categoria->SubMeritos as $merito):
-                     $encontrado = false; ?>
-                    <tbody>
-                      <tr>
-                        <td><?php echo "{$contador}.{$subcontador}" ?></td>
-                        <td><?php echo $merito->NombreMerito ?></td>
-                        <td><?php echo $merito->PuntajeMerito ?></td>
-                        <input type="hidden" class="idMerito" name="idMerito[]" value="<?php echo $merito->IdEstructuraMerito ?>">
-                        <?php foreach ($evaluacion as $eval): ?>
-                          <?php if ($eval->IdEstructuraMerito == $merito->IdEstructuraMerito): ?>
-                            <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="<?php echo $eval->PuntajeMerito ?>"></td>
-                            <?php $encontrado = true;
-                            break;
-                           endif; ?>
-                        <?php endforeach;
-                        if ($encontrado == false) {
-                          ?>
-                          <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="0"></td>
-                          <?php
-                        }
-                        ?>
-
-                      </tr>
-                    </tbody>
-
-                  <?php $subcontador++; endforeach; ?>
-
-                <?php $contador++; endforeach; ?>
-              </table>
-              <div class="pull-right">
-                <strong>Total Puntos Meritos: </strong> <input type="text" class="form-control puntajeTotal" id="puntajeTotal" name="puntajeTotal" value="0" readonly>
-              </div>
-              <input type="hidden" name="idPersonal" value="<?php echo $personal->IdPersonal ?>">
-              <br><br><br><br>
-              <div class="pull-right">
-                <button type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#respuestaModal" name="guardar">Guardar Evaluacion <i class="fa fa-paper-plane"></i></button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
-    <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Hoja de Vida Personal</h3>
-        </div>
-        <div class="panel-body">
-          <?php $i = 1; ?>
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="table-responsive">
-                  <table class="table table-hover table-bordered table-center">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>#</th>
-                        <th>Nombre Curso</th>
-                        <th>Institucion</th>
-                        <th>Religion Institucion</th>
-                        <th>Año de Estudio</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <div class="text-center"><strong>CURSOS ESTUDIADOS</strong></div><br>
-                      <?php foreach ($personal->ListaCursos as $cursos): ?>
-                        <tr class="action">
-                          <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
-                          <td><?php echo $i ?></td>
-                          <td class="text-center"><?php echo $cursos->CursoEstudiado ?></td>
-                          <td class="text-center"><?php echo $cursos->NombreInstitucion ?></td>
-                          <td class="text-center"><?php echo $cursos->ReligionInstitucion ?></td>
-                          <td class="text-center"><?php echo $cursos->AnhoEstudio ?></td>
-                        </tr>
-                      <?php $i++; endforeach; ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          <?php $i = 1; ?>
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="table-responsive">
-                  <table class="table table-hover table-bordered table-center">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>#</th>
-                        <th>Nombre Titulo</th>
-                        <th>Institucion</th>
-                        <th>Religion Institucion</th>
-                        <th>Tiempo de Estudio(Años)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <div class="text-center"><strong>TITULOS QUE POSEE</strong></div><br>
-                      <?php foreach ($personal->ListaTitulos as $titulos): ?>
-                        <tr class="action">
-                          <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
-                          <td><?php echo $i ?></td>
-                          <td class="text-center"><?php echo $titulos->CursoProfesionalEstudiado ?></td>
-                          <td class="text-center"><?php echo $titulos->NombreInstitucion ?></td>
-                          <td class="text-center"><?php echo $titulos->ReligionInstitucion ?></td>
-                          <td class="text-center"><?php echo $titulos->TiempoEstudio ?></td>
-                        </tr>
-                      <?php $i++; endforeach; ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          <?php $i = 1; ?>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+    <hr>
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Tabla de Meritos</h3>
+          </div>
+          <div class="panel-body">
+            <form id="guardarCalificacion">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>#</th>
-                      <th>Cargo/Responsabilidad</th>
-                      <th>Institucion</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <div class="text-center"><strong>Experiencia Laboral</strong></div><br>
-                    <?php foreach ($personal->ListaExperinciaLaboral as $listaE): ?>
-                      <tr class="action">
-                        <td><input type="checkbox" class="control" name="control[]" value="1"></td>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $listaE->CargoResponsabilidad; ?></td>
-                        <td><?php echo $listaE->NombreInstitucion; ?></td>
+
+                  <?php $contador = 1; foreach ($meritos as $categoria): ?>
+
+                    <thead>
+                      <tr>
+                        <th><?php echo $contador ?></th>
+                        <th style="max-width:300px"><?php echo "{$categoria->NombreMerito} ({$categoria->PuntajeMerito} puntos)" ?></th>
+                        <th></th>
+                        <th></th>
                       </tr>
-                    <?php $i++; endforeach; ?>
-                  </tbody>
+                    </thead>
+
+                    <?php $subcontador = 1; foreach ($categoria->SubMeritos as $merito):
+                       $encontrado = false; ?>
+                      <tbody>
+                        <tr>
+                          <td><?php echo "{$contador}.{$subcontador}" ?></td>
+                          <td><?php echo $merito->NombreMerito ?></td>
+                          <td><?php echo $merito->PuntajeMerito ?></td>
+                          <input type="hidden" class="idMerito" name="idMerito[]" value="<?php echo $merito->IdEstructuraMerito ?>">
+                          <?php foreach ($evaluacion as $eval): ?>
+                            <?php if ($eval->IdEstructuraMerito == $merito->IdEstructuraMerito): ?>
+                              <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="<?php echo $eval->PuntajeMerito ?>"></td>
+                              <?php $encontrado = true;
+                              break;
+                             endif; ?>
+                          <?php endforeach;
+                          if ($encontrado == false) {
+                            ?>
+                            <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="0"></td>
+                            <?php
+                          }
+                          ?>
+
+                        </tr>
+                      </tbody>
+
+                    <?php $subcontador++; endforeach; ?>
+
+                  <?php $contador++; endforeach; ?>
                 </table>
+                <div class="pull-right">
+                  <strong>Total Puntos Meritos: </strong> <input type="text" class="form-control puntajeTotal" id="puntajeTotal" name="puntajeTotal" value="0" readonly>
+                </div>
+                <input type="hidden" name="idPersonal" value="<?php echo $personal->IdPersonal ?>">
+                <br><br><br><br>
+                <div class="pull-right">
+                  <button type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#respuestaModal" name="guardar">Guardar Evaluacion <i class="fa fa-paper-plane"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Hoja de Vida Personal</h3>
+          </div>
+          <div class="panel-body">
+            <?php $i = 1; ?>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-center">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>#</th>
+                          <th>Nombre Curso</th>
+                          <th>Institucion</th>
+                          <th>Religion Institucion</th>
+                          <th>Año de Estudio</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <div class="text-center"><strong>CURSOS ESTUDIADOS</strong></div><br>
+                        <?php foreach ($personal->ListaCursos as $cursos): ?>
+                          <tr class="action">
+                            <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
+                            <td><?php echo $i ?></td>
+                            <td class="text-center"><?php echo $cursos->CursoEstudiado ?></td>
+                            <td class="text-center"><?php echo $cursos->NombreInstitucion ?></td>
+                            <td class="text-center"><?php echo $cursos->ReligionInstitucion ?></td>
+                            <td class="text-center"><?php echo $cursos->AnhoEstudio ?></td>
+                          </tr>
+                        <?php $i++; endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            <?php $i = 1; ?>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-center">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>#</th>
+                          <th>Nombre Titulo</th>
+                          <th>Institucion</th>
+                          <th>Religion Institucion</th>
+                          <th>Tiempo de Estudio(Años)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <div class="text-center"><strong>TITULOS QUE POSEE</strong></div><br>
+                        <?php foreach ($personal->ListaTitulos as $titulos): ?>
+                          <tr class="action">
+                            <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
+                            <td><?php echo $i ?></td>
+                            <td class="text-center"><?php echo $titulos->CursoProfesionalEstudiado ?></td>
+                            <td class="text-center"><?php echo $titulos->NombreInstitucion ?></td>
+                            <td class="text-center"><?php echo $titulos->ReligionInstitucion ?></td>
+                            <td class="text-center"><?php echo $titulos->TiempoEstudio ?></td>
+                          </tr>
+                        <?php $i++; endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            <?php $i = 1; ?>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="table-responsive">
+                  <table class="table table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>#</th>
+                        <th>Cargo/Responsabilidad</th>
+                        <th>Institucion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <div class="text-center"><strong>Experiencia Laboral</strong></div><br>
+                      <?php foreach ($personal->ListaExperinciaLaboral as $listaE): ?>
+                        <tr class="action">
+                          <td><input type="checkbox" class="control" name="control[]" value="1"></td>
+                          <td><?php echo $i; ?></td>
+                          <td><?php echo $listaE->CargoResponsabilidad; ?></td>
+                          <td><?php echo $listaE->NombreInstitucion; ?></td>
+                        </tr>
+                      <?php $i++; endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -227,7 +231,20 @@ $evaluacion = $evaluacionManejador->listaEvalucionPersonal($personal->IdPersonal
       </div>
     </div>
   </div>
-</div>
+  <?php
+}
+else
+{
+  echo "<div class='text-center' style='color:red'><h2><strong>No existe Evaluacíon Asignada</strong></h2></div>";
+  ?>
+  <script type="text/javascript">
+     setTimeout("location.href = 'index.php?modo=listaPersonal';", 1500);
+  </script>
+  <?php
+}
+
+?>
+
 
 <div class="modal fade" id="respuestaModal">
   <div class="modal-dialog" >

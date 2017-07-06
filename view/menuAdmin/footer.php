@@ -42,6 +42,10 @@
 <script src="../libs/js/addNacionalidad.js"></script>
 <script src="../libs/js/addCiudad.js"></script>
 <script src="../libs/js/addReligion.js"></script>
+<script src="../libs/js/addSeguro.js"></script>
+<script src="../libs/js/addAfp.js"></script>
+<script src="../libs/js/addEnfermedad.js"></script>
+<script src="../libs/js/addDeporte.js"></script>
 
 <div id="fondoModal"></div>
 <a href="#wrapper" class=" btn btn-primary back-to-top"><i class="fa fa-chevron-up"></i></a>
