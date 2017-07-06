@@ -76,8 +76,23 @@
                             <li ><a href="index.php?modo=listaUsuario"><i class="fa fa-list"></i>Lista</a></li>
                         </ul>
                     </li>
+                    <!--Lista de Directorios-->    
                     <li>
+<<<<<<< HEAD
                         <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Meritos</span> <span class="fa arrow"></span></a>
+=======
+                        <a href="index.php?modo=directorio">
+                        <i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span>
+                        </a>
+                        <!--Lista de Directorios-->
+                        <ul class="nav nav-second-level">
+                             <li ><a href="index.php?modo=listaDirectorio">Lista</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label">Otros</span> <span class="fa arrow"></span></a>
+>>>>>>> e984c63e799e79a7e7e6425d6fa808275b79fc7c
                         <ul class="nav nav-second-level">
                             <li><a href="index.php?modo=NuevaTablaMeritos"><i class="fa fa-plus"></i>Nuevo Tabla de Méritos</a></li>
                             <li><a href="index.php?modo=tablaCalificacionMeritosDocente"><i class="fa fa-list"></i>Lista de Tablas de Méritos</a></li>

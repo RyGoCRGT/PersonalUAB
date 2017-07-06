@@ -3,12 +3,27 @@ INSERT INTO estadoCivil VALUE( null, "Casado(a)" );
 INSERT INTO estadoCivil VALUE( null, "Viudo(a)" );
 INSERT INTO estadoCivil VALUE( null, "Divorciado(a)" );
 
+<<<<<<< HEAD
 INSERT INTO lugarExpedicion VALUE( null, "OR" );
 INSERT INTO lugarExpedicion VALUE( null, "LPZ" );
 INSERT INTO lugarExpedicion VALUE( null, "CBBA" );
 INSERT INTO lugarExpedicion VALUE( null, "SCZ" );
 INSERT INTO lugarExpedicion VALUE( null, "TRJ" );
 INSERT INTO lugarExpedicion VALUE( null, "BEN" );
+=======
+INSERT INTO lugarExpedicion VALUE( null, "Oruro" );
+INSERT INTO lugarExpedicion VALUE( null, "La Paz" );
+INSERT INTO lugarExpedicion VALUE( null, "Cochabamba" );
+INSERT INTO lugarExpedicion VALUE( null, "Santa Cruz" );
+INSERT INTO lugarExpedicion VALUE( null, "Tarija" );
+INSERT INTO lugarExpedicion VALUE( null, "Beni" );
+-- anadidos otros lugares de expedicion
+INSERT INTO lugarExpedicion VALUE( null, "Pando");
+INSERT INTO lugarExpedicion VALUE( null, "Chuquisaca");
+INSERT INTO lugarExpedicion VALUE( null, "Potosi" );
+INSERT INTO lugarExpedicion VALUE( null, "Ecuador" );
+INSERT INTO lugarExpedicion VALUE( null, "Chile" );
+>>>>>>> e984c63e799e79a7e7e6425d6fa808275b79fc7c
 
 INSERT INTO persona VALUE(null, "Rodrigo", "Luis", "Poma", "Mollo", "447457451", 2, "1995-03-20", 'M', 1);
 INSERT INTO persona VALUE(null, "Gustavo", "Angel", "Cerezo", "Mamani", "7417215", 1, "1995-03-30", 'M', 1);
@@ -82,6 +97,7 @@ INSERT INTO afp VALUE(null, "FUTURO DE BOIVIA S.A. AFP");
 INSERT INTO afp VALUE(null, "AFP PREVINCION");
 INSERT INTO afp VALUE(null, "AFP FUTURO");
 
+<<<<<<< HEAD
 INSERT INTO cargo VALUE(null, "DOCENTE");
 INSERT INTO cargo VALUE(null, "PROFESOR");
 INSERT INTO cargo VALUE(null, "SECRETARIA");
@@ -117,3 +133,38 @@ INSERT INTO tipoTituloProfesional VALUE(null, "LICENCIATURA");
 INSERT INTO tipoTituloProfesional VALUE(null, "DIPLOMADO");
 INSERT INTO tipoTituloProfesional VALUE(null, "MAESTRIA");
 INSERT INTO tipoTituloProfesional VALUE(null, "DOCTORADO");
+=======
+INSERT INTO cargo VALUE(null, "Decano");
+INSERT INTO cargo VALUE(null, "Vice-Decano");
+INSERT INTO cargo VALUE(null, "Docente");
+INSERT INTO cargo VALUE(null, "Profesor");
+INSERT INTO cargo VALUE(null, "Secretaria");
+INSERT INTO cargo VALUE(null, "Secretario Academico");
+
+INSERT INTO cargoPersona VALUE(null, "Jardinero");
+INSERT INTO cargoPersona VALUE(null, "Contador");
+INSERT INTO cargoPersona VALUE(null, "Capellan");
+
+INSERT INTO enfermedad VALUE(null, "Rinitis");
+INSERT INTO enfermedad VALUE(null, "Asma");
+INSERT INTO enfermedad VALUE(null, "Urticaria");
+INSERT INTO enfermedad VALUE(null, "Dermatitis");
+
+INSERT INTO deporte VALUE(null, "Futbol");
+INSERT INTO deporte VALUE(null, "Futbol de Salon");
+INSERT INTO deporte VALUE(null, "Volley");
+INSERT INTO deporte VALUE(null, "Basquet");
+INSERT INTO deporte VALUE(null, "Tenis");
+INSERT INTO deporte VALUE(null, "Natación");
+INSERT INTO deporte VALUE(null, "Wally");
+INSERT INTO deporte VALUE(null, "Fronton");
+INSERT INTO deporte VALUE(null, "Ajedrez");
+INSERT INTO deporte VALUE(null, "Fisicoculturismo");
+INSERT INTO deporte VALUE(null, "Rugby");
+INSERT INTO deporte VALUE(null, "Futbol Americano");
+
+INSERT INTO tipoTituloProfesional VALUE(null, "Licenciatura");
+INSERT INTO tipoTituloProfesional VALUE(null, "Diplomado");
+INSERT INTO tipoTituloProfesional VALUE(null, "Maestria");
+INSERT INTO tipoTituloProfesional VALUE(null, "Doctorado");
+>>>>>>> e984c63e799e79a7e7e6425d6fa808275b79fc7c
