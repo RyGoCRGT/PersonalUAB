@@ -1165,7 +1165,7 @@ class CtrMenuAdmin
               echo "Debe lllenar los campos";
             }
       break;
-      
+
       case 'listaDirectorio':
         include 'header.php';
         include 'bodyListaDirectorio.php';
@@ -1179,7 +1179,7 @@ class CtrMenuAdmin
           header("Location: ../../index.php");
           break;
 
-<<<<<<< HEAD
+
       case 'addNewLugarExpedicion':
         if ($_POST)
         {
@@ -1342,8 +1342,6 @@ class CtrMenuAdmin
           header("Location: index.php?modo=listaPersonal");
         }
         break;
-=======
->>>>>>> e984c63e799e79a7e7e6425d6fa808275b79fc7c
 
       default:
 
