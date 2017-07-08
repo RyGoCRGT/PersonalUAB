@@ -1,5 +1,15 @@
 <?php
 
+include '../../model/conexion.php';
+include '../../model/TipoPersonal.php';
+include '../../model/TipoPersonalConsulta.php';
+include '../../controller/TipoPersonalControlador.php';
+
+$conexion = new Conexion();
+
+$tipoPersonal = new TipoPersonalControlador($conexion);
+$listaTipoPersonal = $tipoPersonal->listar();
+
 $fecha=date("Y/m/d");
 
 ?>
@@ -64,8 +74,9 @@ $fecha=date("Y/m/d");
                                             <div class="input-group" >
                                               <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
                                               <select class="selectpicker form-control" name="tipoMerito" id="tipoMerito">
-                                                <option value="Docente">Docente</option>
-                                                <option value="Profesor">Profesor</option>
+                                                <?php foreach ($listaTipoPersonal as $listaTP): ?>
+                                                  <option value="<?php echo $listaTP->NombreTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
+                                                <?php endforeach; ?>
                                               </select>
                                             </div>
                                           </div>

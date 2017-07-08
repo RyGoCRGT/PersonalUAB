@@ -5,10 +5,11 @@ class LugarExpedicion
 
   private $IdLugarExpedicion;
   private $NombreLugarExpedicion;
-  
+
   function __construct($nombre)
   {
     $this->NombreLugarExpedicion = $nombre;
+    $this->IdLugarExpedicion = null;
   }
 
   public function __set($atributo, $value)

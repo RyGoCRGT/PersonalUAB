@@ -8,6 +8,7 @@ class Seguro
 
   function __construct()
   {
+    $this->IdSeguro = null;
   }
 
   public function __set($atributo, $value)

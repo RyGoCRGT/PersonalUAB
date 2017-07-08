@@ -2,7 +2,8 @@ $(document).ready(function () {
   enviarDatosPersonalConyugue();
 });
 
-function enviarDatosPersonalConyugue() {
+function enviarDatosPersonalConyugue()
+{
   $("#frmPersonalConyugue").on("submit", function(e) {
     e.preventDefault();
     var ci = $("#ciNit").val();
@@ -15,6 +16,9 @@ function enviarDatosPersonalConyugue() {
       "data" : frm
     }).done( function(info) {
       $("#mensajeFrmCon").html(info);
+      $('#conyugueContent').click();
+      $('#conyugueTittle').css('border-color', 'rgb(41, 176, 13)');
+      $('.personaConyugueBk').attr('disabled', 'disabled');
     });
   });
 }

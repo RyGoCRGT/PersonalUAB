@@ -49,16 +49,16 @@ class EvaluacionMeritosDocenteProfesorConsulta
 
             $this->Conexion->beginTransaction();
 
-            $query = "INSERT INTO evaluacionMeritosDocenteProfesor (idPersonal, idEstructuraMerito, puntajeMerito)
-                      VALUES (:idPersonal, :idEstructuraMerito, :puntajeMerito)";
+            $query = "INSERT INTO evaluacionMeritosDocenteProfesor (idPersonal, idEstructuraMerito, puntajeMerito, evaluacionOficial)
+                      VALUES (:idPersonal, :idEstructuraMerito, :puntajeMerito, :evaluacionOficial)";
 
             $stmtPersona = $this->Conexion->prepare($query);
 
             $stmtPersona->bindValue(':idPersonal', $evaluacionMeritos->IdPersonal);
             $stmtPersona->bindValue(':idEstructuraMerito', $evaluacionMeritos->IdEstructuraMerito);
             $stmtPersona->bindValue(':puntajeMerito', $evaluacionMeritos->PuntajeMerito);
-
-
+            $stmtPersona->bindValue(':evaluacionOficial', $evaluacionMeritos->EvaluacionOficial);
+            //var_dump($evaluacionMeritos);
             $stmtPersona->execute();
 
             $this->Conexion->commit();
@@ -79,7 +79,8 @@ class EvaluacionMeritosDocenteProfesorConsulta
     $query = "SELECT *
               FROM evaluacionmeritosdocenteprofesor
               WHERE idPersonal = :idPersonal
-              AND idEstructuraMerito = :idEstructura";
+              AND idEstructuraMerito = :idEstructura
+              AND evaluacionOficial = true";
     $consulta = $this->Conexion->prepare($query);
     $consulta->bindValue(':idPersonal', $idPersonal);
     $consulta->bindValue(':idEstructura', $idMerito);
@@ -93,6 +94,54 @@ class EvaluacionMeritosDocenteProfesorConsulta
     {
       return false;
     }
+  }
+
+  public function existeAutoEvaluacion($idPersonal, $idMerito)
+  {
+    $query = "SELECT *
+              FROM evaluacionmeritosdocenteprofesor
+              WHERE idPersonal = :idPersonal
+              AND idEstructuraMerito = :idEstructura
+              AND evaluacionOficial = false";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindValue(':idPersonal', $idPersonal);
+    $consulta->bindValue(':idEstructura', $idMerito);
+    $consulta->execute();
+    $registro = $consulta->fetch();
+    if ($registro)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public function meritosPuntajesAutoEvaluacion($idPersonal)
+  {
+    $query = "SELECT *
+              FROM evaluacionmeritosdocenteprofesor
+              WHERE idPersonal = :idPersonal
+              AND evaluacionOficial = 0";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindValue(':idPersonal', $idPersonal);
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    return $registro;
+  }
+
+  public function meritosPuntajesEvaluacion($idPersonal)
+  {
+    $query = "SELECT *
+              FROM evaluacionmeritosdocenteprofesor
+              WHERE idPersonal = :idPersonal
+              AND evaluacionOficial = 1";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindValue(':idPersonal', $idPersonal);
+    $consulta->execute();
+    $registro = $consulta->fetchAll();
+    return $registro;
   }
 
 }

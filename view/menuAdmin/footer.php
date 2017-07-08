@@ -13,8 +13,6 @@
 <script src="../libs/js/bootstrap-datepicker.min.js"></script>
 <script src="../libs/js/jquery.metisMenu.js"></script>
 
-
-
 <!-- Custom and plugin javascript -->
 <script src="../libs/js/inspinia.js"></script>
 <script src="../libs/js/pace.min.js"></script>
@@ -37,39 +35,19 @@
 <script src="../libs/js/autosuma.js"></script>
 <script src="../libs/js/controlMeritos.js"></script>
 <script src="../libs/js/guardarCalificacion.js"></script>
+<script src="../libs/js/initial.js"></script>
+<script src="../libs/js/moblieProp.js"></script>
+<script src="../libs/js/autoEvaluacionMeritos.js"></script>
+<script src="../libs/js/addLugarExpedicion.js"></script>
+<script src="../libs/js/addNacionalidad.js"></script>
+<script src="../libs/js/addCiudad.js"></script>
+<script src="../libs/js/addReligion.js"></script>
+<script src="../libs/js/addSeguro.js"></script>
+<script src="../libs/js/addAfp.js"></script>
+<script src="../libs/js/addEnfermedad.js"></script>
+<script src="../libs/js/addDeporte.js"></script>
 
-<script>
-$('.datepicker').datepicker({
-  clearBtn: true,
-  language: "ES"
-});
-$('#listoAll').hide();
-</script>
-<script>
-$(document).ready(function($){
-  $('.selector-mobile').hide("slow");
-  var ventana_ancho = $(window).width();
-  if (ventana_ancho < '1000')
-  {
-    //alert(ventana_ancho);
-    $('.selector').remove();
-    $('.selector-mobile').show("slow");
-  }
-  else
-  {
-    $('.selector-mobile').remove();
-  }
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function($) {
-$(".btn-pref .btn").click(function () {
-  $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-  // $(".tab").addClass("active"); // instead of this do the below
-  $(this).removeClass("btn-default").addClass("btn-primary");
-});
-});
-</script>
 <div id="fondoModal"></div>
+<a href="#wrapper" class=" btn btn-primary back-to-top"><i class="fa fa-chevron-up"></i></a>
 </body>
 </html>

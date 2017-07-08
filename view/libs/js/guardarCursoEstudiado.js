@@ -1,8 +1,10 @@
 $(document).ready(function () {
     enviarCursoPersonal();
+    newCurso();
 });
 
-  function enviarCursoPersonal() {
+function enviarCursoPersonal()
+{
   $("#CursosFrm").on("submit", function(e) {
     e.preventDefault();
     var ci = $("#ciNit").val();
@@ -19,8 +21,16 @@ $(document).ready(function () {
     }).done( function(info) {
 
       $('#mensajeCursosPersonal').html(info);
+      $(".inputCursoBk").attr('disabled', 'disabled');
 
     });
 
+  });
+}
+
+function newCurso() {
+  $('#newCurso').click(function () {
+    $(".inputCursoBk").removeAttr('disabled');
+    $(".inputCursoBk").val('');
   });
 }

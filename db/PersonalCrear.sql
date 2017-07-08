@@ -120,6 +120,7 @@ CREATE TABLE personal(
 	numeroRegistroProfesional varchar(50) null,
 	fechaIngreso date not null,
 	rutaFoto varchar(200) null,
+	estado bool not null,
 	FOREIGN KEY (idCargoPersona) REFERENCES cargoPersona (idCargoPersona) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idPersona) REFERENCES persona (idPersona) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idNacion) REFERENCES nacion (idNacion) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -198,7 +199,7 @@ CREATE TABLE tituloProfesional(
 	idPersonal int not null,
 	nombreInstitucion varchar(100) not null,
 	cursoProfesionalEstudiado varchar(100) not null,
-	tiempoEstudio int not null,
+	tiempoEstudio float(8,2) not null,
 	religionInstitucion varchar(50) null,
 	respaldoTituloPDF varchar(200) null,
 	FOREIGN KEY (idTipoTituloProfesional) REFERENCES tipoTituloProfesional (idTipoTituloProfesional) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -228,7 +229,7 @@ CREATE TABLE experienciaLaboral(
 	idPersonal int not null,
 	nombreInstitucion varchar(100) not null,
 	cargoResponsabilidad varchar(100) not null,
-	aniosDeServicio int not null,
+	aniosDeServicio float(8,2) not null,
 	religionInstitucion varchar(50) null,
 	motivoRetiro varchar(100) null,
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE
@@ -266,6 +267,86 @@ CREATE TABLE evaluacionMeritosDocenteProfesor(
 	idPersonal int not null,
 	idEstructuraMerito int not null,
 	puntajeMerito int not null,
+	evaluacionOficial bool not null,
 	FOREIGN KEY (idPersonal) REFERENCES personal (idPersonal) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idEstructuraMerito) REFERENCES estructuraMeritos (idEstructuraMerito) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- Contactos/directorio
+
+
+CREATE TABLE tipodepartamentocontacto(
+	idTipoDepartamentoContacto int not null auto_increment primary key,
+	nombre varchar(150) not null
+);
+
+
+CREATE TABLE departamentocontacto(
+	idDepartamentoContacto int not null auto_increment primary key,
+	idTipoDepartamentoContacto int not null,
+	nombre varchar(150) not null,
+	direccion varchar(200) not null,
+	email varchar(100) not null,
+	direccionWeb varchar(100) null,
+	casillaPostal varchar(10) null,
+	rutaLogo varchar(200) null,
+	FOREIGN KEY (idTipoDepartamentoContacto) REFERENCES tipodepartamentocontacto (idTipoDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+CREATE TABLE fax(
+	idFax int not null auto_increment primary key,
+	idDepartamentoContacto int not null,
+	numero varchar(15) not null,
+	prefijo varchar(10) null,
+	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontacto (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+CREATE TABLE telefonoDepartamento(
+	idTelefono int not null auto_increment primary key,
+	idDepartamentoContacto int not null,
+	tipoTelefono varchar(15) not null,
+	numero varchar(15) not null,
+	prefijo varchar(10) null,
+	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontacto (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE tipoEmpleado(
+	idTipoEmpleado int not null auto_increment primary key,
+	nombre varchar(100) not null
+);
+
+CREATE TABLE responsabilidad(
+	idResponsabilidad int not null auto_increment primary key,
+	nombre varchar(80) not null
+);
+
+CREATE TABLE contacto(
+	idContacto int not null auto_increment primary key,
+	idDepartamentoContacto int not null,
+	idTipoEmpleado int not null,
+	idResponsabilidad int not null,
+	primerNombre varchar(20) not null,
+	segundoNombre varchar(20) null,
+	apellidoPaterno varchar(20) not null,
+	apellidoMaterno varchar(20) null,
+	apellidoCasada varchar(20) null,
+	sexo enum('F','M') null,
+	fechaNacimiento date null,
+	interno varchar(10),
+	voip varchar(10),
+	emailInstitucional varchar(50) not null,
+	emailPersonal varchar(50) null,
+	FOREIGN KEY (idDepartamentoContacto) REFERENCES departamentocontacto (idDepartamentoContacto) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idTipoEmpleado) REFERENCES tipoEmpleado (idTipoEmpleado) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idResponsabilidad) REFERENCES responsabilidad (idResponsabilidad) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE telefonoContacto(
+	idTelefonoContacto int not null auto_increment primary key,
+	idContacto int not null,
+	tipoTelefono varchar(15) not null,
+	numero varchar(15) not null, 
+	FOREIGN KEY (idContacto) REFERENCES contacto (idContacto) ON UPDATE CASCADE ON DELETE CASCADE
 );

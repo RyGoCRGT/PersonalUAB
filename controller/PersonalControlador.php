@@ -28,8 +28,8 @@ class PersonalControlador
 
         $this->Conexion->beginTransaction();
         //var_dump($personal);
-        $query = "INSERT INTO personal (idPersonal, idPersona, idNacion, idTipoPersonal, idCarrera, idCargoPersona, direccion, email, idCiudad, idReligion, fechaBautizmo, idSeguro, numeroSeguro, idAfp, numeroAfp, numeroLibretaMilitar, numeroPasaporte, tipoSangre, hobby, lecturaPreferencial, numeroRegistroProfesional, fechaIngreso, rutaFoto)
-                  VALUES (:idPersonal, :idPersona, :idNacion, :idTipoPersonal, :idCarrera, :idCargo, :direccion, :email, :idCiudad, :idReligion, :fechaBautizmo, :idSeguro, :numeroSeguro, :idAfp, :numeroAfp, :numeroLibretaMilitar, :numeroPasaporte, :tipoSangre, :hobby, :lecturaPreferencial, :numeroRegistroProfesional, :fechaIngreso, :rutaFoto)";
+        $query = "INSERT INTO personal (idPersonal, idPersona, idNacion, idTipoPersonal, idCarrera, idCargoPersona, direccion, email, idCiudad, idReligion, fechaBautizmo, idSeguro, numeroSeguro, idAfp, numeroAfp, numeroLibretaMilitar, numeroPasaporte, tipoSangre, hobby, lecturaPreferencial, numeroRegistroProfesional, fechaIngreso, rutaFoto, estado)
+                  VALUES (:idPersonal, :idPersona, :idNacion, :idTipoPersonal, :idCarrera, :idCargo, :direccion, :email, :idCiudad, :idReligion, :fechaBautizmo, :idSeguro, :numeroSeguro, :idAfp, :numeroAfp, :numeroLibretaMilitar, :numeroPasaporte, :tipoSangre, :hobby, :lecturaPreferencial, :numeroRegistroProfesional, :fechaIngreso, :rutaFoto, 1)";
 
         $stmtPersonal = $this->Conexion->prepare($query);
 
@@ -130,6 +130,7 @@ class PersonalControlador
     $personal->NumeroRegistroProfesional = $datos['numeroRegistroProfesional'];
     $personal->FechaIngreso = $datos['fechaIngreso'];
     $personal->Ruta = $datos['rutaFoto'];
+    $personal->Estado = $datos['estado'];
 
     $personalConyugueManejador = new ConyuguePersonalControlador($this->Conexion);
     $personalConyugue = $personalConyugueManejador->ver($personal->IdPersonal);
@@ -303,11 +304,65 @@ class PersonalControlador
       $personal->IdPersona = $persona;
       $personal->IdCarrera = $listaP['idCarrera'];
       $personal->IdCargo = $listaP['idCargoPersona'];
+      $personal->IdTipoPersonal = $listaP['nombreTipoPersonal'];
+      $personal->Estado = $listaP['estado'];
 
       $listArrayPersonal[$i] = $personal;
       $i++;
     }
     return $listArrayPersonal;
+  }
+
+  public function darBeBaja()
+  {
+    $consulta = new PersonaConsulta($this->Conexion);
+    $consul = new PersonalConsulta($this->Conexion);
+    $usuarioCons = new UsuarioConsulta($this->Conexion);
+
+    $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonalDBAja']);
+    $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+    $user = $usuarioCons->obtenerUsuario($idPersona['idPersona']);
+    if ($user)
+    {
+      $usuario = new Usuario($user['usuario'], $user['contrasena']);
+      $usuario->IdUsuario = $user['idUsuario'];
+      $usuarioCons->updateDown($usuario);
+      $personal = new Personal();
+      $personal->IdPersonal = $idPersonal['idPersonal'];
+      $consul->updateDown($personal);
+    }
+    else
+    {
+      $personal = new Personal();
+      $personal->IdPersonal = $idPersonal['idPersonal'];
+      $consul->updateDown($personal);
+    }
+  }
+
+  public function habilitar()
+  {
+    $consulta = new PersonaConsulta($this->Conexion);
+    $consul = new PersonalConsulta($this->Conexion);
+    $usuarioCons = new UsuarioConsulta($this->Conexion);
+
+    $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonalDBAja']);
+    $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+    $user = $usuarioCons->obtenerUsuario($idPersona['idPersona']);
+    if ($user)
+    {
+      $usuario = new Usuario($user['usuario'], $user['contrasena']);
+      $usuario->IdUsuario = $user['idUsuario'];
+      $usuarioCons->updateUp($usuario);
+      $personal = new Personal();
+      $personal->IdPersonal = $idPersonal['idPersonal'];
+      $consul->updateUp($personal);
+    }
+    else
+    {
+      $personal = new Personal();
+      $personal->IdPersonal = $idPersonal['idPersonal'];
+      $consul->updateUp($personal);
+    }
   }
 
 }

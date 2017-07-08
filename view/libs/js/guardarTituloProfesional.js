@@ -1,8 +1,9 @@
 $(document).ready(function () {
     enviarTituloPersonal();
+    newTittle();
 });
 
-  function enviarTituloPersonal() {
+function enviarTituloPersonal() {
   $("#TiulosFrm").on("submit", function(e) {
     e.preventDefault();
     var ci = $("#ciNit").val();
@@ -19,8 +20,16 @@ $(document).ready(function () {
     }).done( function(info) {
 
       $('#mensajeTitulosPersonal').html(info);
+      $('.inputTitulosBk').attr("disabled", "disabled");
 
     });
 
+  });
+}
+
+function newTittle() {
+  $('#newTitulo').click(function () {
+    $(".inputTitulosBk").removeAttr('disabled');
+    $(".inputTitulosBk").val('');
   });
 }

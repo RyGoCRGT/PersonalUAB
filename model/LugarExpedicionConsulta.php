@@ -19,6 +19,50 @@ class LugarExpedicionConsulta
     return $registro;
   }
 
+  public function existeLugarExpedicion($name)
+  {
+    $query = "SELECT *
+              FROM lugarExpedicion
+              WHERE nombreLugarExpedicion = :name";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindValue(':name', $name);
+    $consulta->execute();
+    $registro = $consulta->fetch();
+    if ($registro)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public function save($lugarExpedicion)
+  {
+    try
+    {
+      $this->Conexion->beginTransaction();
+      $query = "INSERT INTO lugarexpedicion (idLugarExpedicion, nombreLugarExpedicion)
+                VALUES (:idLugarExpedicion, :nombreLugarExpedicion)";
+
+      $stmtLugarExped = $this->Conexion->prepare($query);
+
+      $stmtLugarExped->bindValue(':idLugarExpedicion', $lugarExpedicion->IdLugarExpedicion);
+      $stmtLugarExped->bindValue(':nombreLugarExpedicion', $lugarExpedicion->NombreLugarExpedicion);
+
+      $stmtLugarExped->execute();
+
+      $this->Conexion->commit();
+      return true;
+    }
+    catch (Exception $e)
+    {
+      $this->Conexion->rollBack();
+      return false;
+    }
+  }
+
 }
 
 ?>

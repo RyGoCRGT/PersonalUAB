@@ -29,63 +29,77 @@
 
 <body>
     <div id="wrapper">
-
-        <nav class="navbar-default navbar-static-side" role="navigation">
+        <nav class="navbar-default navbar-static-side nav-side-menu" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
+                <ul class="nav " id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element"> <span>
-                            <img alt="avatar" class="img-circle img-responsive" height="90" width="90" src="../libs/multimedia/img/design/avatar.png" />
-                             </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo ucwords($_SESSION['usuario']); ?></strong>
-                            </span> <span class="text-muted text-xs block">Opciones <b class="caret"></b></span> </span> </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="#">Perfil</a></li>
-                                <li><a href="#">Editar</a></li>
-                                <li class="divider"></li>
-                                <li><a href="index.php?modo=salir">Salir</a></li>
-                            </ul>
+                        <div class="dropdown profile-element">
+                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                              <img alt="avatar" class="img-circle img-responsive" height="90" width="90" src="../libs/multimedia/img/design/avatar.png" />
+                              <span class="block m-t-xs">
+                                <strong class="font-bold"><?php echo ucwords($_SESSION['usuario']); ?></strong>
+                              </span>
+                              <span class="text-muted text-xs block">Opciones <b class="caret"></b></span>
+                            </span>
+                          </a>
+                          <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                              <li><a href="#">Perfil</a></li>
+                              <li><a href="#">Editar</a></li>
+                              <li class="divider"></li>
+                              <li><a href="index.php?modo=salir">Salir</a></li>
+                          </ul>
                         </div>
                         <div class="logo-element">
-                          <img class="img-responsive img-circle" src="../libs/multimedia/img/design/uab.png" alt="uab" width="80" height="80">
+                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                              <img alt="avatar" class="img-circle img-responsive" height="90" width="90" src="../libs/multimedia/img/design/avatar.png" />
+                          </a>
+                          <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                              <li><a href="#">Perfil</a></li>
+                              <li><a href="#">Editar</a></li>
+                              <li class="divider"></li>
+                              <li><a href="index.php?modo=salir">Salir</a></li>
+                          </ul>
                         </div>
                     </li>
                     <li>
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Personal</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-male"></i> <span class="nav-label">Personal</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="active"><a href="index.php?modo=regPersonal">Nuevo</a></li>
-                            <li ><a href="index.php?modo=listaPersonal">Lista</a></li>
+                            <li><a href="index.php?modo=regPersonal"><i class="fa fa-plus"></i>Nuevo Personal</a></li>
+                            <li ><a href="index.php?modo=listaPersonal"><i class="fa fa-list"></i>Lista</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="glyphicon glyphicon-user"></i> <span class="nav-label">Usuario</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Usuario</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="active"><a href="index.php?modo=regUsuario">Nuevo</a></li>
-                            <li ><a href="index.php?modo=listaUsuario">Lista</a></li>
+                            <li><a href="index.php?modo=regUsuario"><i class="fa fa-plus"></i>Nuevo Usuario</a></li>
+                            <li ><a href="index.php?modo=listaUsuario"><i class="fa fa-list"></i>Lista</a></li>
                         </ul>
                     </li>
+                    <!--Lista de Directorios-->
                     <li>
-                        <a href="index.php?modo=directorio"><i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span></a>
 
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label">Otros</span> <span class="fa arrow"></span></a>
+                        <a >
+                        <i class="fa fa-address-book"></i> <span class="nav-label">Directorio</span><span class="fa arrow">
+                        </a>
+                        <!--Lista de Directorios-->
                         <ul class="nav nav-second-level">
-                            <li class="active"><a href="index.php?modo=cumplePersonal">Cumpleañeros</a></li>
-                            <li ><a href="#">Calendario</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label">Tabla de Calificación de Méritos Docente </span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="active"><a href="index.php?modo=NuevaTablaMeritos">Nuevo</a></li>
-                            <li class="active"><a href="index.php?modo=tablaCalificacionMeritosDocente">Tabla de Calificación de Méritos Docente</a></li>
-                            <li ><a href="#">Calendario</a></li>
-
+                              <li><a href="index.php?modo=directorio">Directorio</a></li>
+                             <li ><a href="index.php?modo=listaDirectorio">Lista</a></li>
                         </ul>
                     </li>
 
+                    <li>
+                        <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Meritos</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="index.php?modo=NuevaTablaMeritos"><i class="fa fa-plus"></i>Nuevo Tabla de Méritos</a></li>
+                            <li><a href="index.php?modo=tablaCalificacionMeritosDocente"><i class="fa fa-list"></i>Lista de Tablas de Méritos</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="index.php?modo=cumplePersonal"><i class="fa fa-birthday-cake"></i> <span class="nav-label">Cumpleañeros</span></a>
+                    </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -93,41 +107,23 @@
                             <li><a href="#">Proveedores</a></li>
                         </ul>
                     </li>
-
                 </ul>
-
             </div>
         </nav>
 
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <!-- <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form> -->
-        </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">Personal UAB APP.</span>
-                </li>
-
-                <li>
-                  <a href="index.php">
-                    <i class="fa fa-home"></i>Home
-                  </a>
-                </li>
-                <li>
-                    <a href="index.php?modo=salir">
-                        <i class="fa fa-sign-out"></i> Cerrar Sesion
+          <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;">
+              <div class="navbar-header">
+                  <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+              </div>
+              <ul class="nav navbar-top-links navbar-right">
+                  <li class="label-primary" >
+                    <a href="index.php" style="color: white;">
+                      <i class="fa fa-home"></i>Home
                     </a>
-                </li>
-
-            </ul>
-
-        </nav>
-        </div>
+                  </li>
+              </ul>
+            </nav>
+          </div>

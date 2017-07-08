@@ -7,7 +7,7 @@ $fecha=date( "d/m/Y");
 
       <div class="col-sm-3 col-md-9">
           <h2>Bienvenido </h2>
-          <small>Al sistema de control de personal UAB.</small>
+          <small>Al sistema de control de Personal UAB.</small>
 
       </div>
         <!-- <button type="button" class="btn btn-primary btn-lg btn3d"> -->
@@ -91,3 +91,11 @@ $fecha=date( "d/m/Y");
 </div>
 
 </div>
+
+<!-- <div class="container">
+  <h2>Responsive Embed</h2>
+  <p>Create a responsive video and scale it nicely to the parent element with an 16:9 aspect ratio</p>
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" src="../libs/comercial.pdf"></iframe>
+  </div>
+</div> -->

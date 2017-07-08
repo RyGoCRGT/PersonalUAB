@@ -8,6 +8,7 @@ class Enfermedad
 
   function __construct()
   {
+    $this->IdEnfermedad = null;
   }
 
   public function __set($atributo, $value)

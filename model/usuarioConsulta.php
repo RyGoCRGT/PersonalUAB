@@ -32,7 +32,7 @@ class UsuarioConsulta
     $registro = $consulta->fetchAll();
     return $registro;
   }
-  
+
   public function existeUsuarioVinculado($id)
   {
     $query = "SELECT * FROM usuario WHERE idPersona = :id";
@@ -49,6 +49,70 @@ class UsuarioConsulta
       return false;
     }
 
+  }
+
+  public function obtenerUsuario($id)
+  {
+    $query = "SELECT * FROM usuario WHERE idPersona = :id";
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->bindParam(':id', $id);
+    $consulta->execute();
+    $registro = $consulta->fetch();
+    return $registro;
+  }
+
+  public function updateDown($usuario)
+  {
+    try
+    {
+      $this->Conexion->beginTransaction();
+      $query = "UPDATE
+                  usuario
+                SET
+                  estado = 0
+                WHERE idUsuario = :idUsuario";
+
+      $stmtUsuario = $this->Conexion->prepare($query);
+
+      $stmtUsuario->bindValue(':idUsuario', $usuario->IdUsuario);
+
+      $stmtUsuario->execute();
+
+      $this->Conexion->commit();
+      return true;
+    }
+    catch (Exception $e)
+    {
+      $this->Conexion->rollBack();
+      return false;
+    }
+  }
+
+  public function updateUp($usuario)
+  {
+    try
+    {
+      $this->Conexion->beginTransaction();
+      $query = "UPDATE
+                  usuario
+                SET
+                  estado = 1
+                WHERE idUsuario = :idUsuario";
+
+      $stmtUsuario = $this->Conexion->prepare($query);
+
+      $stmtUsuario->bindValue(':idUsuario', $usuario->IdUsuario);
+
+      $stmtUsuario->execute();
+
+      $this->Conexion->commit();
+      return true;
+    }
+    catch (Exception $e)
+    {
+      $this->Conexion->rollBack();
+      return false;
+    }
   }
 
 }
