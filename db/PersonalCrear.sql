@@ -345,6 +345,6 @@ CREATE TABLE telefonoContacto(
 	idTelefonoContacto int not null auto_increment primary key,
 	idContacto int not null,
 	tipoTelefono varchar(15) not null,
-	numero varchar(15) not null, 
+	numero varchar(15) not null,
 	FOREIGN KEY (idContacto) REFERENCES contacto (idContacto) ON UPDATE CASCADE ON DELETE CASCADE
 );

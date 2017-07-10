@@ -113,3 +113,27 @@ INSERT INTO tipoTituloProfesional VALUE(null, "Licenciatura");
 INSERT INTO tipoTituloProfesional VALUE(null, "Diplomado");
 INSERT INTO tipoTituloProfesional VALUE(null, "Maestria");
 INSERT INTO tipoTituloProfesional VALUE(null, "Doctorado");
+
+-- DIRECTORIO
+-- tipodepartamentocontacto
+INSERT INTO tipodepartamentocontacto VALUE(null,"UB");
+INSERT INTO tipodepartamentocontacto VALUE(null,"IATec");
+INSERT INTO tipodepartamentocontacto VALUE(null,"SPA");
+
+-- departamentocontato
+INSERT INTO departamentocontato VALUE (null,1,"Union Boliviana","Av. Simón López 391 – B° Cala Cala – Cochabamba","ub@adv.og.bo","www.ub.adventistas.org","3535","logo");
+INSERT INTO departamentocontato VALUE (null,2,"INSTITUTO ADVENTISTA DE TECNOLOGÍA","Av. Simón López 391 – B° Cala Cala – Cochabamba","iatec@adv.og.bo","www.ub.adventistas.org","3535","logo");
+INSERT INTO departamentocontato VALUE (null,3,"SERVICIO DE PUBLICACIONES ADVENTISTA","Av. Simón López 391 – B° Cala Cala – Cochabamba","spa@adv.og.bo","www.adventistas.org.bo","3535","logo");
+
+-- fax
+INSERT INTO fax VALUE (null,1,"591-4","411-5753");
+
+INSERT INTO telefonoDepartamento VALUE (null,1,"Celular","411-5753","591-4");
+
+INSERT INTO tipoEmpleado VALUE (null,"Obreros de Oficina");
+
+INSERT INTO responsabilidad VALUE (null,"Evangelismo, MiP-ES, ASA");
+
+INSERT INTO contacto VALUE (null,1,1,1,"Adoniram",null,"Alomia",null,null,"F",null,"245","581011","adoniram.alomia@adventistas.org.bo",null);
+
+INSERT INTO telefonoContacto VALUE (null,1,"Celular","722-37470");

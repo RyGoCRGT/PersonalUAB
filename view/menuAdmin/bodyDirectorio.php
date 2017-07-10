@@ -1,14 +1,18 @@
 <?php
 include '../../model/conexion.php';
-include '../../model/Telefono.php';
-include '../../model/TelefonoConsulta.php';
-include '../../model/persona.php';
-include '../../model/PersonaConsulta.php';
-include '../../controller/PersonaControlador.php';
+include '../../model/DepartamentoContacto.php';
+include '../../model/DepartamentoContactoConsulta.php';
+include '../../model/TelefonoContacto.php';
+include '../../model/TelefonoContactoConsulta.php';
+include '../../model/Responsabilidad.php';
+include '../../model/ResponsabilidadConsulta.php';
+include '../../controller/DepartamentoContactoControlador.php';
+include '../../controller/TelefonoContactoControlador.php';
+include '../../controller/ResponsabilidadControlador.php';
 
 $con=new Conexion ();
-$personaControlador = new PersonaControlador($con);
-$listaPersona=$personaControlador->listarPersona();
+$departamentoControlador = new DepartamentoContactoControlador($con);
+$listaDepartamentoContacto=$departamentoControlador->listar();
 
  ?>
 <div id="contenidoAll">
@@ -29,13 +33,7 @@ $listaPersona=$personaControlador->listarPersona();
                   <div class="pull-right">
                     <!-- <a href="#RegistroContacto" data-toggle="modal" class="clickable filter btn btn-success">Añadir Contacto <i class="fa fa-user-plus" data-toggle="tooltip" title="Añadir nuevo Contacto"></i></a> -->
 
-                    <div class="btn-group">
-                      <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" title="Añadir nuevo Contacto"><i class="fa fa-user-plus" data-toggle="tooltip" ></i> Añadir Contacto <span class="caret"></span></button>
 
-                        <ul class="dropdown-menu" style="background:#8bd298">
-                          <li><a href="#RegistroContacto" style="color:black;" data-toggle="modal">opc1</a></li>
-                        </ul>
-                      </div>
 
 
                   </div>
@@ -44,23 +42,35 @@ $listaPersona=$personaControlador->listarPersona();
 
 
                 <div class="panel-heading">
+                  <div class="btn-group">
+                    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" title="Añadir nuevo Contacto"><i class="fa fa-user-plus" data-toggle="tooltip" ></i> Añadir Contacto <span class="caret"></span></button>
+
+                      <ul class="dropdown-menu" style="background:#8bd298">
+                        <?php foreach ($listaDepartamentoContacto as $listaDepCon): ?>
+                          <li><a href="#RegistroContacto<?php echo $listaDepCon->idDepartamentoContacto;  ?>" style="color:black;" data-toggle="modal"><?php echo $listaDepCon->nombre; ?></a></li>
+                        <?php
+                        include '../modalForm/registroContacto.php';
+                              endforeach; ?>
+                      </ul>
+                    </div>
+
                   <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
-                      <label>Departamentos</label>
+                      <label>Departamento Contacto</label>
                       <div class="input-group selector">
-                        <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                        <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
-                          <?php foreach ($listaLugarExpedicion as $listaLE): ?>
-                            <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                        <span class="input-group-addon" style="background: #c9e3eb; color:black" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                        <select class="selectpicker form-control" name="departamento" id="departamento" title="Departamento Contacto">
+                          <?php foreach ($listaDepartamentoContacto as $listaDepCon): ?>
+                            <option value="<?php echo $listaDepCon->idDepartamentoContacto; ?>"><?php echo $listaDepCon->nombre; ?></option>
                           <?php endforeach; ?>
                         </select>
                       </div>
                       <div class="input-group selector-mobile">
-                        <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                        <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
-                          <?php foreach ($listaLugarExpedicion as $listaLE): ?>
-                            <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
+                        <span class="input-group-addon" style="background: #c9e3eb; color:black" id="sizing-addon2"><i class="fa fa-building"></i></span>
+                        <select class="form-control" name="departamento" id="departamento" title="Departamento Contacto">
+                          <?php foreach ($listaDepartamentoContacto as $listaDepCon): ?>
+                            <option value="<?php echo $listaDepCon->idDepartamentoContacto; ?>"><?php echo $listaDepCon->nombre; ?></option>
                           <?php endforeach; ?>
                         </select>
                       </div>
@@ -70,7 +80,7 @@ $listaPersona=$personaControlador->listarPersona();
                       <div class="form-group">
                         <label>Tipo de Contacto</label>
                         <div class="input-group selector">
-                          <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                          <span class="input-group-addon" style="background: #c9e3eb; color:black" id="sizing-addon2"><i class="fa fa-users"></i></span>
                           <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
                             <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                               <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
@@ -78,7 +88,7 @@ $listaPersona=$personaControlador->listarPersona();
                           </select>
                         </div>
                         <div class="input-group selector-mobile">
-                          <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
+                          <span class="input-group-addon" style="background: #c9e3eb; color:black" id="sizing-addon2"><i class="fa fa-users"></i></span>
                           <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
                             <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                               <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
@@ -120,8 +130,7 @@ $listaPersona=$personaControlador->listarPersona();
                     <table class="table table-hover" id="dev-table" >
 
                       <tbody class="text-center">
-
-                        <?php
+                        <!-- <?php
                       $i = 1;
                             foreach ($listaPersona as $listaP): ?>
                         <tr>
@@ -135,7 +144,7 @@ $listaPersona=$personaControlador->listarPersona();
                       <?php
                         include '../modalForm/verContacto.php';
 
-                        endforeach; ?>
+                        endforeach; ?> -->
 
                       </tbody>
                     </table>
@@ -150,6 +159,5 @@ $listaPersona=$personaControlador->listarPersona();
 
 </div>
 <?php
-  include '../modalForm/registroContacto.php';
 
 ?>
