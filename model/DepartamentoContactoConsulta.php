@@ -12,7 +12,7 @@ class DepartamentoContactoConsulta
 
   public function listaDepartamentoContacto()
   {
-      $query = "SELECT * FROM departamentocontato ORDER BY nombre";
+      $query = "SELECT * FROM departamentocontacto ORDER BY nombre";
       $consulta=$this->Conexion->prepare($query);
       $consulta->execute();
       $registro=$consulta->fetchAll();

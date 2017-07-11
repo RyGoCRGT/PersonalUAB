@@ -1,5 +1,7 @@
 DROP DATABASE IF EXISTS  PersonalUAB;
-CREATE DATABASE PersonalUAB;
+CREATE DATABASE PersonalUAB 
+  DEFAULT CHARACTER SET utf8 
+  DEFAULT COLLATE utf8_general_ci;
 USE PersonalUAB;
 
 CREATE TABLE estadoCivil(
@@ -342,6 +344,7 @@ CREATE TABLE contacto(
 	FOREIGN KEY (idTipoEmpleado) REFERENCES tipoEmpleado (idTipoEmpleado) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idResponsabilidad) REFERENCES responsabilidad (idResponsabilidad) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
 
 CREATE TABLE telefonoContacto(
 	idTelefonoContacto int not null auto_increment primary key,
