@@ -20,6 +20,7 @@ include '../../controller/TelefonoContactoControlador.php';
 include '../../controller/ResponsabilidadControlador.php';
 include '../../controller/TipoEmpleadoControlador.php';
 
+
 $con=new Conexion ();
 $departamentoControlador = new DepartamentoContactoControlador($con);
 $listaDepartamentoContacto=$departamentoControlador->listar();
@@ -31,7 +32,7 @@ $tipoEmpleadoControlador=new TipoEmpleadoControlador($con);
 $listaTipoEmpleado=$tipoEmpleadoControlador->listar();
 
 $contactoControlador=new ContactoControlador($con);
-$listaContacto=$contactoControlador->listaDeContactosPorDepartamento(1);
+$listaContacto=$contactoControlador->listaDeContactosPorDepartamento($_POST['departamento']);
 
  ?>
 <div id="contenidoAll">
@@ -124,7 +125,7 @@ $listaContacto=$contactoControlador->listaDeContactosPorDepartamento(1);
                             <th class="text-center">Responsabilidad</th>
 
                             <th class="text-center">Ver</th>
-                            <!-- <th class="text-center">Editar</th> -->
+                            <th class="text-center">Editar</th>
                           </tr>
                         </thead>
                       </table>
@@ -144,12 +145,12 @@ $listaContacto=$contactoControlador->listaDeContactosPorDepartamento(1);
                           <td><?php echo ucwords(strtolower($listaC->primerNombre))." ".ucwords(strtolower($listaC->apellidoPaterno))." ".ucwords(strtolower($listaC->apellidoMaterno)); ?></td>
                           <td><?php echo ucwords(strtolower($listaC->nombreResponsabilidad)); ?></td>
                           <td><a href="#ver<?php echo $listaC->idContacto;?>" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
-                          <!-- <td><a href="#editar" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td> -->
+                          <td><a href="#editar" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
 
                         </tr>
 
                       <?php
-                        include '../modalForm/verContacto.php';
+                         include '../modalForm/verContacto.php';
 
                         endforeach; ?>
 

@@ -53,16 +53,16 @@ class CtrMenuAdmin
         break;
 
       case 'listaUsuario':
-      include 'header.php';
-      include 'bodylistaUsuario.php';
-      include 'footer.php';
-        break;
+        include 'header.php';
+        include 'bodylistaUsuario.php';
+        include 'footer.php';
+          break;
 
       case 'regPersonal':
-        include 'header.php';
-        include 'bodyRegPers.php';
-        include 'footer.php';
-        break;
+          include 'header.php';
+          include 'bodyRegPers.php';
+          include 'footer.php';
+          break;
 
       case 'personalELab':
         if (isset($_POST['datos']))
@@ -848,28 +848,28 @@ class CtrMenuAdmin
 
       case 'usuarioInsertar':
       if (isset($_POST['datos']))
-      {
-        include '../../model/conexion.php';
-        include '../../model/Persona.php';
-        include '../../model/PersonaConsulta.php';
-        include '../../model/usuario.php';
-        include '../../model/usuarioConsulta.php';
-        include '../../controller/UsuarioControlador.php';
-        $conexion = new Conexion();
-        $consulta = new PersonaConsulta($conexion);
-        $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/usuario.php';
+          include '../../model/usuarioConsulta.php';
+          include '../../controller/UsuarioControlador.php';
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+          $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
 
-        $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
-        $usuario->IdUsuario = null;
-        $usuario->TipoUsuario = $_POST['tipoUsuario'];
-        $usuario->Estado = 1;
-        $usuario->Borrado = 0;
-        $usuario->IdPersona = $idP['idPersona'];
-        $usuarioManejador = new UsuarioControlador($conexion);
-        $usuarioManejador->crear($usuario);
+          $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
+          $usuario->IdUsuario = null;
+          $usuario->TipoUsuario = $_POST['tipoUsuario'];
+          $usuario->Estado = 1;
+          $usuario->Borrado = 0;
+          $usuario->IdPersona = $idP['idPersona'];
+          $usuarioManejador = new UsuarioControlador($conexion);
+          $usuarioManejador->crear($usuario);
 
-      }
-      else
+        }
+        else
       {
         echo "<p style='color: red'> Por favor LLene el Formulario PersonalUAB/Datos Generales </p>";
       }
@@ -887,54 +887,99 @@ class CtrMenuAdmin
         include 'footer.php';
         break;
 
+
+      case 'directorioExitoso':
+        include 'header.php';
+        ?>
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-6">
+          <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong><h4><i class="fa fa-check-circle"></i>¡Exito!</h4></strong> <p>Al Registrar Contacto...</p>
+        </div>
+        </div>
+        </div>
+        <?php
+        include 'bodyDirectorio.php';
+        include 'footer.php';
+        break;
+
       case 'cumplePersonal':
         include 'header.php';
         include 'bodyCumple.php';
         include 'footer.php';
         break;
 
-      case 'contactoInsertar':
+
+      case 'registrarContacto':
       if (isset($_POST['datos']))
       {
-        $ci = $_POST['primerNombreRef'].$_POST['apellidoPaternoRef'];
         include '../../model/conexion.php';
-        include '../../model/Persona.php';
-        include '../../model/PersonaConsulta.php';
-        include '../../model/Telefono.php';
-        include '../../model/TelefonoConsulta.php';
-        include '../../controller/PersonaControlador.php';
-        include '../../controller/TelefonoControlador.php';
+        include '../../model/Contacto.php';
+        include '../../model/TelefonoContacto.php';
+        include '../../model/TelefonoContactoConsulta.php';
+        include '../../controller/ContactoControlador.php';
+        include '../../controller/TelefonoContactoControlador.php';
 
         $conexion = new Conexion();
-        $persona = new Persona();
-        $persona->PrimerNombre = ucwords(strtolower($_POST['primerNombreRef']));
-        $persona->SegundoNombre = ucwords(strtolower($_POST['segundoNombreRef']));
-        $persona->ApellidoPaterno = ucwords(strtolower($_POST['apellidoPaternoRef']));
-        $persona->ApellidoMaterno = ucwords(strtolower($_POST['apellidoMaternoRef']));
-        $persona->CI = strtoupper($ci);
+        $contacto = new Contacto();
+        $contacto->primerNombre = ucwords(strtolower($_POST['primerNombre']));
+        $contacto->segundoNombre = ucwords(strtolower($_POST['segundoNombre']));
+        $contacto->apellidoPaterno = ucwords(strtolower($_POST['apellidoPaterno']));
+        $contacto->apellidoMaterno = ucwords(strtolower($_POST['apellidoMaterno']));
+        $contacto->apellidoCasada = ucwords(strtolower($_POST['apellidoCasada']));
+        $contacto->sexo=strtoupper($_POST['sexo']);
+        $contacto->fechaNacimiento=$_POST['fechaNac'];
+        $contacto->interno=$_POST['interno'];
+        $contacto->voip=$_POST['voip'];
+        $contacto->emailInstitucional=$_POST['emailInstitucional'];
+        $contacto->emailPersonal=$_POST['emailPersonal'];
+        $contacto->idDepartamentoContacto=$_POST['emailPersonal'];
+        $contacto->idTipoEmpleado=$_POST['tipoEmpleado'];
+        $contacto->idResponsabilidad=$_POST['responsabilidad'];
+        $contacto->idDepartamentoContacto=$_POST['departamentoContacto'];
 
-        $personaManejador = new PersonaControlador($conexion);
-        $personaManejador->crear($persona);
+        $contactoControlador = new ContactoControlador($conexion);
+        $registroExitoso=$contactoControlador->crear($contacto);
+        if ($registroExitoso) {
+          $consultaTelContacto=new TelefonoContactoConsulta($conexion);
+          $idContacto=$consultaTelContacto->idContactoMax();
+          $telContactoControlador=new TelefonoContactoControlador($conexion);
+          if ($_POST['numero1']!="") {
+            $telefonoContacto1=new TelefonoContacto();
+            $telefonoContacto1->idContacto=$idContacto['id'];
+            $telefonoContacto1->tipoTelefono=$_POST['tipoTelefono1'];
+            $telefonoContacto1->numero=$_POST['numero1'];
+            $telContactoControlador->crear($telefonoContacto1);
+          }
+          if ($_POST['numero2']!="") {
+            $telefonoContacto2=new TelefonoContacto();
+            $telefonoContacto2->idContacto=$idContacto['id'];;
+            $telefonoContacto2->tipoTelefono=$_POST['tipoTelefono2'];
+            $telefonoContacto2->numero=$_POST['numero2'];
+            $telContactoControlador->crear($telefonoContacto2);
+          }
+          if ($_POST['numero3']!="") {
+            $telefonoContacto3=new TelefonoContacto();
+            $telefonoContacto3->idContacto=$idContacto['id'];;
+            $telefonoContacto3->tipoTelefono=$_POST['tipoTelefono3'];
+            $telefonoContacto3->numero=$_POST['numero3'];
+            $telContactoControlador->crear($telefonoContacto3);
+          }
 
-        $consulta = new PersonaConsulta($conexion);
-
-        $idReferenciaPersona = $consulta->obtenerIdPersona($persona->CI);//obteniendo id de persona referencia de personal
-
-        // telefono
-        $telefono = new Telefono();
-        $telefono->IdPersona = $idReferenciaPersona['idPersona'];
-        $telefono->NumeroTelefono = $_POST['telefonoReferencia'];
-        $telefonoManejador = new TelefonoControlador($conexion);
-        $telefonoManejador->crear($telefono);
-
-        echo "<p style='color:green'>Guardado</p>";
+          header("Location: index.php?modo=directorioExitoso");
+        }
+        else {
+          echo "<p style='color:red'>Entro al else</p>";
+        }
       }
       else
       {
         echo "<p style='color:red'>Error al Enviar Formulario</p>";
       }
       break;
-
       //llamando el formulario de Tabla de Calificacion de Meritos
 
       case 'NuevaTablaMeritos':
@@ -1169,6 +1214,12 @@ class CtrMenuAdmin
       case 'listaDirectorio':
         include 'header.php';
         include 'bodyListaDirectorio.php';
+        include 'footer.php';
+      break;
+
+      case 'listaDirectorioContacto':
+        include 'header.php';
+        include 'bodyListaContacto.php';
         include 'footer.php';
       break;
 

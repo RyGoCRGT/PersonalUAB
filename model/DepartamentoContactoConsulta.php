@@ -2,7 +2,6 @@
 
 class DepartamentoContactoConsulta
 {
-  
   private $Conexion;
 
   function __construct($con)
@@ -12,16 +11,19 @@ class DepartamentoContactoConsulta
 
   public function listaDepartamentoContacto()
   {
+
       $query = "SELECT * FROM departamentocontacto ORDER BY nombre";
       $consulta=$this->Conexion->prepare($query);
       $consulta->execute();
       $registro=$consulta->fetchAll();
       return $registro;
+
   }
 
+
   public function datosDepartamentoContacto($idTipoDepartamentoContacto)
-  {   
-      $query =  "SELECT dc.idDepartamentoContacto, dc.nombre, dc.direccion,dc.email, 
+  {
+      $query =  "SELECT dc.idDepartamentoContacto, dc.nombre, dc.direccion,dc.email,
                         dc.direccionWeb, dc.casillaPostal, dc.rutaLogo
                  FROM tipodepartamentocontacto tdc, departamentocontacto dc
                  WHERE dc.idTipoDepartamentoContacto = :idTipoDepartamentoContacto
@@ -38,4 +40,3 @@ class DepartamentoContactoConsulta
   }
 
 }//end class
-?>

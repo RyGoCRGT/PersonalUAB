@@ -82,6 +82,65 @@ INSERT INTO afp VALUE(null, "FUTURO DE BOIVIA S.A. AFP");
 INSERT INTO afp VALUE(null, "AFP PREVINCION");
 INSERT INTO afp VALUE(null, "AFP FUTURO");
 
+<<<<<<< HEAD
+INSERT INTO cargo VALUE(null, "Decano");
+INSERT INTO cargo VALUE(null, "Vice-Decano");
+INSERT INTO cargo VALUE(null, "Docente");
+INSERT INTO cargo VALUE(null, "Profesor");
+INSERT INTO cargo VALUE(null, "Secretaria");
+INSERT INTO cargo VALUE(null, "Secretario Academico");
+
+INSERT INTO cargoPersona VALUE(null, "Jardinero");
+INSERT INTO cargoPersona VALUE(null, "Contador");
+INSERT INTO cargoPersona VALUE(null, "Capellan");
+
+INSERT INTO enfermedad VALUE(null, "Rinitis");
+INSERT INTO enfermedad VALUE(null, "Asma");
+INSERT INTO enfermedad VALUE(null, "Urticaria");
+INSERT INTO enfermedad VALUE(null, "Dermatitis");
+
+INSERT INTO deporte VALUE(null, "Futbol");
+INSERT INTO deporte VALUE(null, "Futbol de Salon");
+INSERT INTO deporte VALUE(null, "Volley");
+INSERT INTO deporte VALUE(null, "Basquet");
+INSERT INTO deporte VALUE(null, "Tenis");
+INSERT INTO deporte VALUE(null, "Natacion");
+INSERT INTO deporte VALUE(null, "Wally");
+INSERT INTO deporte VALUE(null, "Fronton");
+INSERT INTO deporte VALUE(null, "Ajedrez");
+INSERT INTO deporte VALUE(null, "Fisicoculturismo");
+INSERT INTO deporte VALUE(null, "Rugby");
+INSERT INTO deporte VALUE(null, "Futbol Americano");
+
+INSERT INTO tipoTituloProfesional VALUE(null, "Licenciatura");
+INSERT INTO tipoTituloProfesional VALUE(null, "Diplomado");
+INSERT INTO tipoTituloProfesional VALUE(null, "Maestria");
+INSERT INTO tipoTituloProfesional VALUE(null, "Doctorado");
+
+-- DIRECTORIO
+-- tipodepartamentocontacto
+INSERT INTO tipodepartamentocontacto VALUE(null,"UB");
+INSERT INTO tipodepartamentocontacto VALUE(null,"IATec");
+INSERT INTO tipodepartamentocontacto VALUE(null,"SPA");
+
+-- departamentocontato
+INSERT INTO departamentocontato VALUE (null,1,"Union Boliviana","Av. Simón López 391 – B° Cala Cala – Cochabamba","ub@adv.og.bo","www.ub.adventistas.org","3535","logo");
+INSERT INTO departamentocontato VALUE (null,2,"INSTITUTO ADVENTISTA DE TECNOLOGÍA","Av. Simón López 391 – B° Cala Cala – Cochabamba","iatec@adv.og.bo","www.ub.adventistas.org","3535","logo");
+INSERT INTO departamentocontato VALUE (null,3,"SERVICIO DE PUBLICACIONES ADVENTISTA","Av. Simón López 391 – B° Cala Cala – Cochabamba","spa@adv.og.bo","www.adventistas.org.bo","3535","logo");
+
+-- fax
+INSERT INTO fax VALUE (null,1,"591-4","411-5753");
+
+INSERT INTO telefonoDepartamento VALUE (null,1,"Celular","411-5753","591-4");
+
+INSERT INTO tipoEmpleado VALUE (null,"Obreros de Oficina");
+
+INSERT INTO responsabilidad VALUE (null,"Evangelismo, MiP-ES, ASA");
+
+INSERT INTO contacto VALUE (null,1,1,1,"Adoniram",null,"Alomia",null,null,"F",null,"245","581011","adoniram.alomia@adventistas.org.bo",null);
+
+INSERT INTO telefonoContacto VALUE (null,1,"Celular","722-37470");
+=======
 INSERT INTO cargo VALUE(null, "DOCENTE");
 INSERT INTO cargo VALUE(null, "PROFESOR");
 INSERT INTO cargo VALUE(null, "SECRETARIA");
@@ -117,3 +176,4 @@ INSERT INTO tipoTituloProfesional VALUE(null, "LICENCIATURA");
 INSERT INTO tipoTituloProfesional VALUE(null, "DIPLOMADO");
 INSERT INTO tipoTituloProfesional VALUE(null, "MAESTRIA");
 INSERT INTO tipoTituloProfesional VALUE(null, "DOCTORADO");
+>>>>>>> f2ff51d8577b8eff956e0fc855c8b829c2e020e0

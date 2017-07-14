@@ -84,8 +84,9 @@
                         </a>
                         <!--Lista de Directorios-->
                         <ul class="nav nav-second-level">
-                              <li><a href="index.php?modo=directorio">Directorio</a></li>
-                             <li ><a href="index.php?modo=listaDirectorio">Lista</a></li>
+                            <li class="active"><a href="index.php?modo=directorio">Nuevo</a></li>
+                            <li><a href="index.php?modo=directorio">Directorio</a></li>
+                            <li ><a href="index.php?modo=listaDirectorio">Lista</a></li>
                         </ul>
                     </li>
 
@@ -96,7 +97,7 @@
                             <li><a href="index.php?modo=tablaCalificacionMeritosDocente"><i class="fa fa-list"></i>Lista de Tablas de Méritos</a></li>
                         </ul>
                     </li>
-                    
+
                     <li>
                         <a href="index.php?modo=cumplePersonal"><i class="fa fa-birthday-cake"></i> <span class="nav-label">Cumpleañeros</span></a>
                     </li>

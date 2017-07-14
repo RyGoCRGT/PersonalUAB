@@ -19,10 +19,10 @@ class ContactoConsulta
                      c.apellidoCasada,
                      c.sexo,c.interno,c.voip,c.fechaNacimiento,
                      c.emailPersonal,c.emailInstitucional
-              FROM  departamentocontacto dc, contacto c, responsabilidad r, tipoempleado te
+              FROM  departamentocontato dc, contacto c, responsabilidad r, tipoempleado te
               WHERE  dc.idDepartamentoContacto = :idDepartamentoContacto
-              AND dc.idDepartamentoContacto = c.idDepartamentoContacto 
-              AND c.idTipoEmpleado  = te.idTipoEmpleado 
+              AND dc.idDepartamentoContacto = c.idDepartamentoContacto
+              AND c.idTipoEmpleado  = te.idTipoEmpleado
               AND c.idResponsabilidad = r.idResponsabilidad
               ORDER BY tipoempleado,c.apellidoPaterno,c.apellidoMaterno,c.primerNombre,c.segundoNombre, responsabilidad
               ";

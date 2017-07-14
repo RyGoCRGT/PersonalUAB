@@ -21,8 +21,12 @@ class Contacto
   private $nombreTipoEmpleado;
   private $nombreResponsabilidad;
 
+  private $listaTelefonos;
+
   function __construct()
   {
+    $this->idContacto=null;
+    $this->listaTelefonos=array();
   }
 
   public function __set($atributo, $value)

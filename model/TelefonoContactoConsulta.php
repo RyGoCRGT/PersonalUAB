@@ -25,6 +25,18 @@ class TelefonoContactoConsulta
     return $registro;
   }
 
+  public function idContactoMax()
+  {
+    $query = "SELECT MAX(idContacto) as 'id'
+              FROM contacto
+              ";
+
+    $consulta = $this->Conexion->prepare($query);
+    $consulta->execute();
+    $registro = $consulta->fetch();
+    return $registro;
+  }
+
 
 }
 
