@@ -22,12 +22,19 @@ include '../../controller/TelefonoContactoControlador.php';
 
 
 $conexion = new Conexion();
-
 //Recuperar datos del departamento
 $departamentoContacto = new DepartamentoContactoControlador($conexion);
+$listaDeparmentos = $departamentoContacto->listaDepartamentos();
+
+if (isset($_GET['directorio']) && $_GET['directorio'] != "") {
+  $departamentoActual = $_GET['directorio'];
+} else {
+  $departamentoActual = $listaDeparmentos[0]['idDepartamentoContacto']; 
+}
+
 
 //enviando el ID del Tipo Departamento Contacto UB=1
-$datosDepartamento = $departamentoContacto->datosDepartamentoContacto(1);
+$datosDepartamento = $departamentoContacto->datosDepartamentoContacto($departamentoActual);
 
 $telefonosDepartamento = new TelefonoDepartamentoControlador($conexion);
 $listaTelefonosDepartamento = $telefonosDepartamento->listaTelefonoDepartamento($datosDepartamento['idDepartamentoContacto']);
@@ -40,7 +47,6 @@ $contactoControlador = new ContactoControlador($conexion);
 $listaDeContactosPorDepartamento = $contactoControlador->listaDeContactosPorDepartamento($datosDepartamento['idDepartamentoContacto']);
 
 $telefonoContactoControlador = new TelefonoContactoControlador($conexion);
-
 ?>
 
 <div id="contenidoAll" >
@@ -63,13 +69,16 @@ $telefonoContactoControlador = new TelefonoContactoControlador($conexion);
 
                 <div>
                     <!--Primer TAB  UB -->
-                    <div class="panel with-nav-tabs panel-info">
+                    <div class="panel with-nav-tabs panel-info">                                                         
                         <div class="panel-heading" style="background:rgb(26, 74, 101)">
                             <ul class="nav nav-tabs" >
-                                <li class="active" id="ListaContactosUBLI"><a style="color:white" href="#ListaContactosUB" data-toggle="tab">UB</a></li>
+                            <?php foreach ($listaDeparmentos as $departamento):  ?>
+                                <li class="<?php echo ($departamento['idDepartamentoContacto'] == $departamentoActual ? "active" : "" )  ?>" role="presentation" id="ListaContactosUBLI">
+                                <a style="color:white" href="index.php?modo=listaDirectorio&directorio=<?php echo $departamento['idDepartamentoContacto'] ?>"><?php echo $departamento['nombre'] ?></a>
+                                </li>
+                            <?php endforeach; ?>
                             </ul>
                         </div>
-
                         <div style="display: block;">
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="ListaContactosUB">
@@ -89,7 +98,7 @@ $telefonoContactoControlador = new TelefonoContactoControlador($conexion);
                                                   <table class="table table-hover table-bordered">
                                                     <tr>
                                                       <td><label>Dirección:</label></td>
-                                                      <td><?php echo utf8_encode($datosDepartamento["direccion"]);?></td>
+                                                      <td><?php echo $datosDepartamento["direccion"];?></td>
                                                       <td><label>Web:</label></td>
                                                       <td><?php echo utf8_encode($datosDepartamento["direccionWeb"]);?></td>
                                                     </tr>

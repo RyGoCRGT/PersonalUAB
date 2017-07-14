@@ -41,6 +41,11 @@ class DepartamentoContactoControlador
       return $datosDepartamento;
     }//end function
 
+    public function listaDepartamentos()
+    {
+      $consulta = new DepartamentoContactoConsulta($this->Conexion);
+      return $datosDepartamento = $consulta->listaDepartamentoContacto();
+    }//end function
 
 }//end class
 
