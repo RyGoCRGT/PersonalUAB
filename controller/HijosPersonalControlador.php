@@ -64,6 +64,53 @@ class HijosPersonalControlador
     return $listaHijos;
   }
 
+  public function editar()
+  {
+    $persona = new Persona();
+    $persona->IdPersona = $_POST['idPersona'];
+    $persona->PrimerNombre = ucwords(strtolower($_POST['primerNombreHij']));
+    $persona->SegundoNombre = ucwords(strtolower($_POST['segundoNombreHij']));
+    $persona->ApellidoPaterno = ucwords(strtolower($_POST['apellidoPaternoHij']));
+    $persona->ApellidoMaterno = ucwords(strtolower($_POST['apellidoMaternoHij']));
+    $persona->CI = strtoupper($_POST['ciPersonHijo'].$_POST['primerNombreHij'].$_POST['segundoNombreHij']);
+    $persona->FechaNacimiento = $_POST['fechaNacimientoHij'];
+
+    $personaManejador = new PersonaConsulta($this->Conexion);
+    $personaManejador->edit($persona);
+
+    $ListaHijos = $this->verHijos($_POST['idPersonal']);
+
+    ?>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <td>Nombres</td>
+            <td>Apellidos</td>
+            <td>Fecha Nacimiento</td>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($ListaHijos as $hijo): ?>
+            <tr style="cursor:pointer" class="dataHijo" data-toggle="modal" data-target="#editarHijo">
+              <td><?php echo "{$hijo->IdPersona->PrimerNombre} {$hijo->IdPersona->SegundoNombre}" ?></td>
+              <td><?php echo "{$hijo->IdPersona->ApellidoPaterno} {$hijo->IdPersona->ApellidoMaterno}" ?></td>
+              <td><?php echo "{$hijo->IdPersona->FechaNacimiento}" ?></td>
+              <input class="idPersona" type="hidden" name="idPersona" value="<?php echo $hijo->IdPersona->IdPersona ?>">
+              <input class="idPersona" type="hidden" name="primerNombre" value="<?php echo $hijo->IdPersona->PrimerNombre ?>">
+              <input class="idPersona" type="hidden" name="segundoNombre" value="<?php echo $hijo->IdPersona->SegundoNombre ?>">
+              <input class="idPersona" type="hidden" name="apellidoPaterno" value="<?php echo $hijo->IdPersona->ApellidoPaterno ?>">
+              <input class="idPersona" type="hidden" name="apellidoMaterno" value="<?php echo $hijo->IdPersona->ApellidoMaterno ?>">
+              <input class="idPersona" type="hidden" name="fechaNacimiento" value="<?php echo $hijo->IdPersona->FechaNacimiento ?>">
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+    <?php
+
+  }
+
 }
 
 ?>

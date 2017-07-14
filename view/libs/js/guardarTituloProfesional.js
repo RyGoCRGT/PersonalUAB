@@ -21,6 +21,7 @@ function enviarTituloPersonal() {
 
       $('#mensajeTitulosPersonal').html(info);
       $('.inputTitulosBk').attr("disabled", "disabled");
+      $('.nameFileImg').html("");
 
     });
 

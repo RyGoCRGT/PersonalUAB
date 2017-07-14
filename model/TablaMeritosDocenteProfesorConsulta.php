@@ -50,11 +50,11 @@ class TablaMeritosDocenteProfesorConsulta
 
 
   public function crear($tablaMeritosDocenteProfesor)
-  { 
+  {
     try {
             $this->Conexion->beginTransaction();
 
-            $query = "INSERT INTO tablaMeritosDocenteProfesor (idTablaMeritoDocenteProfesor, version, tipoMerito, fechaCreacion, activo)  
+            $query = "INSERT INTO tablaMeritosDocenteProfesor (idTablaMeritoDocenteProfesor, version, tipoMerito, fechaCreacion, activo)
                       VALUES (:idTablaMeritoDocenteProfesor, :version, :tipoMerito, :fechaCreacion, :activo)";
 
             $stmtPersona = $this->Conexion->prepare($query);
@@ -69,7 +69,7 @@ class TablaMeritosDocenteProfesorConsulta
             $this->Conexion->commit();
 
             $ultimoId = $this->ObtenerUltimoId();
-           
+
             return $ultimoId;
 
         } catch (PDOException $e) {
@@ -81,7 +81,7 @@ class TablaMeritosDocenteProfesorConsulta
       return null;
   }// end metodo
 
- public function ObtenerUltimoId()
+    public function ObtenerUltimoId()
     {
         $consulta = $this->Conexion->prepare('SELECT MAX(idTablaMeritoDocenteProfesor) AS idTablaMerito FROM tablaMeritosDocenteProfesor');
         $consulta->execute();
@@ -98,6 +98,59 @@ class TablaMeritosDocenteProfesorConsulta
     return $registro;
   }
 
+  public function updateDown($tabla)
+  {
+    try
+    {
+      $this->Conexion->beginTransaction();
+      $query = "UPDATE
+                  tablameritosdocenteprofesor
+                SET
+                  activo = 0
+                WHERE idTablaMeritoDocenteProfesor = :id";
+
+      $stmtUsuario = $this->Conexion->prepare($query);
+
+      $stmtUsuario->bindValue(':id', $tabla->IdTablaMeritosDocenteProfesor);
+
+      $stmtUsuario->execute();
+
+      $this->Conexion->commit();
+      return true;
+    }
+    catch (Exception $e)
+    {
+      $this->Conexion->rollBack();
+      return false;
+    }
+  }
+
+  public function updateUp($tabla)
+  {
+    try
+    {
+      $this->Conexion->beginTransaction();
+      $query = "UPDATE
+                  tablameritosdocenteprofesor
+                SET
+                  activo = 1
+                WHERE idTablaMeritoDocenteProfesor = :id";
+
+      $stmtUsuario = $this->Conexion->prepare($query);
+
+      $stmtUsuario->bindValue(':id', $tabla->IdTablaMeritosDocenteProfesor);
+
+      $stmtUsuario->execute();
+
+      $this->Conexion->commit();
+      return true;
+    }
+    catch (Exception $e)
+    {
+      $this->Conexion->rollBack();
+      return false;
+    }
+  }
 
 }
 

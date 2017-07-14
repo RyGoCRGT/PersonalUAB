@@ -7,11 +7,52 @@ $(document).ready(function($) {
     clearBtn: true,
     language: "es"
   });
+  $("#controls-left").hide();
+  $("#cursos").hide();
+  $("#titulos").hide();
   $('#listoAll').hide();
   inputNumber();
   inputLetra();
   inputNumberFloat();
+  inputfecha();
+  visorDocument();
+  $('.componentePersonal').hide();
+  cargarImagenLogo();
 });
+
+function cargarImagenLogo()
+{
+  var foto = $('#fotoPerfil').val();
+  var res = foto.split("wamp64/www/PersonalUAB/view/")[1];
+  if (foto != "") {
+    $('.img-fotoPersonal').removeAttr('src');
+    $('.img-fotoPersonal').attr('src','../'+res);
+  }
+}
+
+function visorDocument()
+{
+  $('.click-titulos').click(function () {
+    $("#controls-left").show(1500);
+    $("#controls-center").hide(1500);
+    $("#titulos").show(1500);
+    $("#cursos").hide(1500);
+  });
+  $('.click-cursos').click(function () {
+    $("#controls-left").show(1000);
+    $("#controls-center").hide(1500);
+    $("#cursos").show(1500);
+    $("#titulos").hide(1500);
+  });
+}
+
+function inputfecha()
+{
+  $('.datepicker').keypress(function (key) {
+    if (true)
+        return false;
+  });
+}
 
 function inputNumberFloat() {
   $('.solo-numero-float').on('input', function () {

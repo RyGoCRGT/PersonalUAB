@@ -91,7 +91,7 @@ class PersonalControlador
 
     $consultaTele = new PersonaConsulta($this->Conexion);
     $listaTelefonos = $consultaTele->listaTelefonos($persona->IdPersona);
-
+    // var_dump($datos);
     foreach ($listaTelefonos as $listT)
     {
       $persona->setListaTelefonos($listT['numeroTelefono']);
@@ -363,6 +363,104 @@ class PersonalControlador
       $personal->IdPersonal = $idPersonal['idPersonal'];
       $consul->updateUp($personal);
     }
+  }
+
+  public function editar()
+  {
+
+    $personalManejador = new PersonalConsulta($this->Conexion);
+
+    if ($_FILES)
+    {
+      $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/personal/";
+      $target_path = $target_path . basename("img".strtoupper($_POST['ciPersona']).".jpg");
+
+      $a=move_uploaded_file($_FILES["fotoPersonal"]["tmp_name"], $target_path);
+    }
+    else
+    {
+      $target_path = $_POST['imagenPersonal'];
+    }
+
+    $personal = new Personal();
+    $personal->IdPersonal = $_POST['idPersonal'];
+    $personal->IdPersona = $_POST['idPersona'];
+    $personal->IdNacion = $_POST['nacionalidad'];
+    $personal->IdTipoPersonal = $_POST['tipoPersonal'];
+    $personal->IdCarrera = ($_POST['carrera']=="") ? null : $_POST['carrera'];
+    $personal->IdCargo = ($_POST['cargoPersonal']=="") ? null : $_POST['cargoPersonal'];
+    $personal->Direccion = $_POST['direccion'];
+    $personal->Email = $_POST['email'];
+    $personal->IdCiudadNacimiento = ($_POST['ciudad']=="") ? null : $_POST['ciudad'];
+    $personal->IdReligion = ($_POST['religion']=="") ? null : $_POST['religion'];
+    $personal->FechaBautizmo = $_POST['fechaBau'];
+    $personal->IdSeguro = ($_POST['seguro']=="") ? null : $_POST['seguro'];
+    $personal->NumeroSeguro = $_POST['numSeguro'];
+    $personal->IdAfp = ($_POST['afp']=="") ? null : $_POST['afp'];
+    $personal->NumeroAfp = $_POST['numSeguro'];
+    $personal->NumeroLibretaMilitar = $_POST['numLibMilitar'];
+    $personal->NumeroPasaporte = $_POST['numPasaporte'];
+    $personal->TipoSangre = $_POST['tipoSangre'];
+    $personal->Hobby = $_POST['hobby'];
+    $personal->LecturaPreferencial = $_POST['lecturaP'];
+    $personal->NumeroRegistroProfesional = $_POST['numeroRegProfesional'];
+    $personal->FechaIngreso = $_POST['fechaIngres'];
+    $personal->Ruta = $target_path;
+
+    $estado = $personalManejador->edit($personal);
+
+    $id = $_POST['idPersonal'];
+
+    if (isset($_POST['cargos']))
+    {
+      $personalManejador->limpiarCargos($id);
+      foreach($_POST['cargos'] as $item)
+      {
+        $this->agregarCargo($id, $item);
+      }
+    }
+    if (isset($_POST['enfermedades']))
+    {
+      $personalManejador->limpiarEnfermedades($id);
+      foreach($_POST['enfermedades'] as $item)
+      {
+        $this->agregarEnfermedad($id, $item);
+      }
+    }
+    if (isset($_POST['deportes']))
+    {
+      $personalManejador->limpiarDeportes($id);
+      foreach($_POST['deportes'] as $item)
+      {
+        $this->agregarDeporte($id, $item);
+      }
+    }
+
+    return $estado;
+  }
+
+  public function crearPreventUsuario($idPersona)
+  {
+    $fecha=date("Y/m/d");
+
+    $personal = new Personal();
+    $personal->IdPersona = $idPersona;
+    $personal->IdNacion = 1;
+    $personal->IdTipoPersonal = $_POST['tipoUsuario'] - 2;
+    $personal->IdCarrera = $_POST['carrera'];
+    $personal->IdCargo = $_POST['cargoPersonal'];
+    $personal->Direccion = "";
+    $personal->IdCiudadNacimiento = 1;
+
+    $personal->IdCiudadNacimiento = 1;
+    $personal->IdReligion = 1;
+    $personal->IdSeguro = 1;
+    $personal->IdAfp = 1;
+
+    $personal->FechaIngreso = $fecha;
+
+    $this->crear($personal);
+
   }
 
 }

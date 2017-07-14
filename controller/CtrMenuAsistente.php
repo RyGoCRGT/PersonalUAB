@@ -1,7 +1,7 @@
 <?php
 
 
-class CtrMenuAdmin
+class CtrMenuAsistente
 {
 
   private $Modo;
@@ -16,32 +16,154 @@ class CtrMenuAdmin
 
     switch ($this->Modo) {
 
+      case 'verArchivo':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Archivo.php';
+          include '../../model/ArchivoConsulta.php';
+          include '../../controller/ArchivoControlador.php';
+
+          $conexion = new Conexion();
+
+          $archivoManejador = new ArchivoControlador($conexion);
+          $archivo = $archivoManejador->ver($_POST['id']);
+          include 'vistaDocumento.php';
+        }
+        else
+        {
+          echo "<h2><strong>Ah Ocurrido un ERROR al GUARDAR</strong></h2>";
+        }
+        break;
+
+      case 'listaPersonal':
+        include 'header.php';
+        include 'bodylistPers.php';
+        include 'footer.php';
+        break;
+
+      case 'puntuarMeritoPersonal':
+        if (isset($_POST['idPersonal']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/EvaluacionMeritosDocenteProfesor.php';
+          include '../../model/EvaluacionMeritosDocenteProfesorConsulta.php';
+          include '../../controller/EvaluacionMeritosDocenteProfesorControlador.php';
+          $conexion =  new Conexion();
+          $evaluacionMeritos = new EvaluacionMeritosDocenteProfesorControlador($conexion);
+          $evaluacionMeritos->crear();
+        }
+        else
+        {
+          echo "<p style='color:red'> Se Requere de un Personal</p>";
+        }
+        break;
+
+      case 'evaluacionMeritos':
+        if (isset($_POST['datos']))
+        {
+          include 'header.php';
+          include 'bodyEvaluacionMeritos.php';
+          include 'footer.php';
+        }
+        else
+        {
+          header("Location: index.php?modo=listaPersonal");
+        }
+        break;
+
+      case 'listaUsuario':
+        include 'header.php';
+        include 'bodylistaUsuario.php';
+        include 'footer.php';
+        break;
+
       case 'regPersonal':
         include 'header.php';
         include 'bodyRegPers.php';
         include 'footer.php';
         break;
 
-      case 'verPersonal':
+      case 'personalELab':
         if (isset($_POST['datos']))
         {
           include '../../model/conexion.php';
-          include '../../model/Persona.php';
-          include '../../model/Personal.php';
           include '../../model/PersonaConsulta.php';
           include '../../model/PersonalConsulta.php';
-          include '../../model/ReferenciaPersonal.php';
-          include '../../model/ConyuguePersonal.php';
-          include '../../model/HijosPersonal.php';
-          include '../../model/Telefono.php';
-          include '../../model/TelefonoConsulta.php';
-          include '../../controller/PersonaControlador.php';
-          include '../../controller/ReferenciaPersonalControlador.php';
-          include '../../controller/TelefonoControlador.php';
-
+          include '../../model/ExperienciaLaboral.php';
+          include '../../model/ExperienciaLaboralConsulta.php';
+          include '../../controller/ExperienciaLaboralControlador.php';
           $conexion = new Conexion();
 
+          $manejadorExperencia = new ExperienciaLaboralControlador($conexion);
+          $manejadorExperencia->crear();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario</p>";
+        }
+        break;
 
+      case 'personalCursos':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/CursoEstudiado.php';
+          include '../../model/CursoEstudiadoConsulta.php';
+          include '../../controller/CursoEstudiadoControlador.php';
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonaCurso']);
+
+          $consul = new PersonalConsulta($conexion);
+
+          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+
+          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
+          $target_path = $target_path . basename( "curso-".$_POST['cursoEstudiado']."-{$_POST['anhoEstudioCuso']}-".$_POST['nombreInstitucionCursos']."-".strtoupper($_POST['ciPersonaCurso']).".jpg");
+
+
+          $a=move_uploaded_file($_FILES["respaldoCursos"]["tmp_name"], $target_path);
+
+          $cursoEstudiado = new CursoEstudiado();
+
+          $cursoEstudiado->IdPersonal = $idPersonal['idPersonal'];
+          $cursoEstudiado->NombreInstitucion = $_POST['nombreInstitucionCursos'];
+          $cursoEstudiado->CursoEstudiado = $_POST['cursoEstudiado'];
+          $cursoEstudiado->AnhoEstudio = $_POST['anhoEstudioCuso'];
+          $cursoEstudiado->ReligionInstitucion = $_POST['religionInstCurso'];
+          $cursoEstudiado->RespaldoTituloPDF = $target_path;
+
+          $cursoEstudiadoManejador = new CursoEstudiadoControlador($conexion);
+          $cursoEstudiadoManejador->crear($cursoEstudiado);
+
+          $listaCursoEstudiado = $cursoEstudiadoManejador->listarPer($cursoEstudiado->IdPersonal);
+          $i = 0;
+          ?>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Curso</th>
+                  <th>Institucion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($listaCursoEstudiado as $listaCE): $i++;?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $listaCE->CursoEstudiado; ?></td>
+                    <td><?php echo $listaCE->NombreInstitucion; ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+          <?php
 
         }
         else
@@ -50,10 +172,163 @@ class CtrMenuAdmin
         }
         break;
 
+      case 'personalTitulos':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/TituloProfesional.php';
+          include '../../model/TituloProfesionalConsulta.php';
+          include '../../controller/TituloProfesionalControlador.php';
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonaTitulo']);
+
+          $consul = new PersonalConsulta($conexion);
+
+          $idPersonal = $consul->obtenerIdPersonal($idPersona['idPersona']);
+
+          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/respaldoPersonal/";
+          $target_path = $target_path . basename( "titulo-".$_POST['cursoProfesionalEstudiado']."-{$_POST['nombreInstitucionTitulos']}-".$_POST['tipoTituloProfesional']."-".strtoupper($_POST['ciPersonaTitulo']).".jpg");
+
+          $a=move_uploaded_file($_FILES["respaldoTitulo"]["tmp_name"], $target_path);
+
+          $tituloProfesional = new TituloProfesional();
+
+          $tituloProfesional->IdTipoTituloProfesional = $_POST['tipoTituloProfesional'];
+          $tituloProfesional->IdPersonal = $idPersonal['idPersonal'];
+          $tituloProfesional->NombreInstitucion = $_POST['nombreInstitucionTitulos'];
+          $tituloProfesional->CursoProfesionalEstudiado = $_POST['cursoProfesionalEstudiado'];
+          $tituloProfesional->TiempoEstudio = $_POST['anhoEstudioTitulo'];
+          $tituloProfesional->ReligionInstitucion = $_POST['religionInstTitulo'];
+          $tituloProfesional->RespaldoTituloPDF = $target_path;
+
+          $tituloProfesionalManejador = new TituloProfesionalControlador($conexion);
+          $tituloProfesionalManejador->crear($tituloProfesional);
+
+          $listaTituloProfesional = $tituloProfesionalManejador->listarPer($tituloProfesional->IdPersonal);
+          $i = 0;
+          ?>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Curso Profesional</th>
+                  <th>Institucion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($listaTituloProfesional as $listaTP): $i++;?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $listaTP->CursoProfesionalEstudiado; ?></td>
+                    <td><?php echo $listaTP->NombreInstitucion; ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+          <?php
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario</p>";
+        }
+        break;
+
+      case 'verPersonal':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/Cargo.php';
+          include '../../model/Enfermedad.php';
+          include '../../model/Deporte.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/ReferenciaPersonal.php';
+          include '../../model/ReferenciaPersonalConsulta.php';
+          include '../../model/ConyuguePersonal.php';
+          include '../../model/ConyuguePersonalConsulta.php';
+          include '../../model/CursoEstudiado.php';
+          include '../../model/CursoEstudiadoConsulta.php';
+          include '../../model/HijosPersonal.php';
+          include '../../model/HijosPersonalConsulta.php';
+          include '../../model/Telefono.php';
+          include '../../model/TelefonoConsulta.php';
+          include '../../model/TituloProfesional.php';
+          include '../../model/TituloProfesionalConsulta.php';
+          include '../../model/ExperienciaLaboral.php';
+          include '../../model/ExperienciaLaboralConsulta.php';
+          include '../../controller/PersonaControlador.php';
+          include '../../controller/PersonalControlador.php';
+          include '../../controller/ReferenciaPersonalControlador.php';
+          include '../../controller/TelefonoControlador.php';
+          include '../../controller/ConyuguePersonalControlador.php';
+          include '../../controller/HijosPersonalControlador.php';
+          include '../../controller/CursoEstudiadoControlador.php';
+          include '../../controller/TituloProfesionalControlador.php';
+          include '../../controller/ExperienciaLaboralControlador.php';
+
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+
+          $idPersona = $consulta->obtenerIdPersona($_POST['ciPersonalDetalle']);
+          // $idPersona = $consulta->obtenerIdPersona(7548743);
+          //
+          // $consul = new PersonalConsulta($conexion);
+          //
+          // $idPersonal = $consul->datosPersonal($idPersona['idPersona']);// COMEMTAR
+
+          $personalManejador = new PersonalControlador($conexion);
+
+          $personal = $personalManejador->ver($idPersona['idPersona']);
+
+          include 'modalDetallePersonal.php';
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al ver Formulario Detalle</p>";
+        }
+        break;
+
+        case 'personaReferenciaEditar':
+          if ($_POST)
+          {
+            include '../../model/conexion.php';
+            include '../../model/Persona.php';
+            include '../../model/PersonaConsulta.php';
+            include '../../model/PersonalConsulta.php';
+            include '../../model/ReferenciaPersonal.php';
+            include '../../model/Telefono.php';
+            include '../../model/TelefonoConsulta.php';
+            include '../../controller/PersonaControlador.php';
+            include '../../controller/ReferenciaPersonalControlador.php';
+            include '../../controller/TelefonoControlador.php';
+
+            $conexion = new Conexion();
+
+            $personaManejador = new ReferenciaPersonalControlador($conexion);
+            $personaManejador->editar();
+
+            echo "<p style='color:green'>Guardado</p>";
+          }
+          else
+          {
+            echo "<p style='color:red'>Error al Enviar Formulario</p>";
+          }
+          break;
+
       case 'personaReferenciaInsertar':
         if (isset($_POST['datos']))
         {
-          $ci = $_POST['ciPersonReferencia'].$_POST['primerNombreRef'];
+          $ci = $_POST['ciPersonReferencia'].$_POST['primerNombreRef'].$_POST['segundoNombreRef'];
           include '../../model/conexion.php';
           include '../../model/Persona.php';
           include '../../model/PersonaConsulta.php';
@@ -108,15 +383,36 @@ class CtrMenuAdmin
         }
         break;
 
+      case 'personaHijoEditar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/HijosPersonal.php';
+          include '../../model/HijosPersonalConsulta.php';
+          include '../../controller/HijosPersonalControlador.php';
+
+          $conexion = new Conexion();
+          $hijoManejador = new HijosPersonalControlador($conexion);
+          $hijoManejador->editar();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
       case 'personaHijoInsertar':
         if (isset($_POST['datos']))
         {
-          $ci = $_POST['ciPersonHijo'].$_POST['primerNombreHij'];
+          $ci = $_POST['ciPersonHijo'].$_POST['primerNombreHij'].$_POST['segundoNombreHij'];
           include '../../model/conexion.php';
           include '../../model/Persona.php';
           include '../../model/PersonaConsulta.php';
           include '../../model/PersonalConsulta.php';
           include '../../model/HijosPersonal.php';
+          include '../../model/HijosPersonalConsulta.php';
           include '../../controller/PersonaControlador.php';
           include '../../controller/HijosPersonalControlador.php';
 
@@ -149,6 +445,37 @@ class CtrMenuAdmin
           $hijoPersonalManejador = new HijosPersonalControlador($conexion);
           $hijoPersonalManejador->crear($hijoPersonal);
 
+          $listaHijos = $hijoPersonalManejador->verHijos($idPersonal['idPersonal']);
+
+          ?>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <td>Nombres</td>
+                  <td>Apellidos</td>
+                  <td>Fecha Nacimiento</td>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($listaHijos as $hijo): ?>
+                  <tr style="cursor:pointer" class="dataHijo" data-toggle="modal" data-target="#editarHijo">
+                    <td><?php echo "{$hijo->IdPersona->PrimerNombre} {$hijo->IdPersona->SegundoNombre}" ?></td>
+                    <td><?php echo "{$hijo->IdPersona->ApellidoPaterno} {$hijo->IdPersona->ApellidoMaterno}" ?></td>
+                    <td><?php echo "{$hijo->IdPersona->FechaNacimiento}" ?></td>
+                    <input class="idPersona" type="hidden" name="idPersona" value="<?php echo $hijo->IdPersona->IdPersona ?>">
+                    <input class="idPersona" type="hidden" name="primerNombre" value="<?php echo $hijo->IdPersona->PrimerNombre ?>">
+                    <input class="idPersona" type="hidden" name="segundoNombre" value="<?php echo $hijo->IdPersona->SegundoNombre ?>">
+                    <input class="idPersona" type="hidden" name="apellidoPaterno" value="<?php echo $hijo->IdPersona->ApellidoPaterno ?>">
+                    <input class="idPersona" type="hidden" name="apellidoMaterno" value="<?php echo $hijo->IdPersona->ApellidoMaterno ?>">
+                    <input class="idPersona" type="hidden" name="fechaNacimiento" value="<?php echo $hijo->IdPersona->FechaNacimiento ?>">
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+          <?php
+
           echo "<p style='color:green'>Guardado</p>";
         }
         else
@@ -160,7 +487,7 @@ class CtrMenuAdmin
       case 'personaConyugueInsertar':
         if (isset($_POST['datos']))
         {
-          $ci = $_POST['ciPersonConyu'].$_POST['primerNombreCon'];
+          $ci = $_POST['ciPersonConyu'].$_POST['primerNombreCon'].$_POST['segundoNombreCon'];
           include '../../model/conexion.php';
           include '../../model/Persona.php';
           include '../../model/PersonaConsulta.php';
@@ -177,6 +504,7 @@ class CtrMenuAdmin
           $persona->ApellidoMaterno = ucwords(strtolower($_POST['apellidoMaternoCon']));
           $persona->CI = strtoupper($ci);
           $persona->FechaNacimiento = $_POST['fechaNacimientoCon'];
+          $persona->EstadoCivil = 2;
 
           $personaManejador = new PersonaControlador($conexion);
           $personaManejador->crear($persona);
@@ -242,7 +570,7 @@ class CtrMenuAdmin
           $telefonoManejador = new TelefonoControlador($conexion);
           $telefonoManejador->crear($telefono);
 
-          echo "<p style='color:green'>Gurdado Exitoso</p>";
+          echo "<p style='color:green'>Guardado Exitoso</p>";
 
         }
         else
@@ -251,115 +579,415 @@ class CtrMenuAdmin
         }
         break;
 
-      case 'personalInsertar':
+      case 'autoEvaluarMerito':
 
         include '../../model/conexion.php';
-        include '../../model/PersonaConsulta.php';
+        include '../../model/Persona.php';
+        include '../../model/Cargo.php';
+        include '../../model/Enfermedad.php';
+        include '../../model/Deporte.php';
         include '../../model/Personal.php';
+        include '../../model/PersonaConsulta.php';
         include '../../model/PersonalConsulta.php';
+        include '../../model/ReferenciaPersonal.php';
+        include '../../model/ReferenciaPersonalConsulta.php';
+        include '../../model/ConyuguePersonal.php';
+        include '../../model/ConyuguePersonalConsulta.php';
+        include '../../model/CursoEstudiado.php';
+        include '../../model/CursoEstudiadoConsulta.php';
+        include '../../model/HijosPersonal.php';
+        include '../../model/HijosPersonalConsulta.php';
+        include '../../model/Telefono.php';
+        include '../../model/TelefonoConsulta.php';
+        include '../../model/TituloProfesional.php';
+        include '../../model/TituloProfesionalConsulta.php';
+        include '../../model/EstructuraMeritos.php';
+        include '../../model/EstructuraMeritosConsulta.php';
+        include '../../model/ExperienciaLaboral.php';
+        include '../../model/ExperienciaLaboralConsulta.php';
+        include '../../model/EvaluacionMeritosDocenteProfesor.php';
+        include '../../model/EvaluacionMeritosDocenteProfesorConsulta.php';
+        include '../../controller/PersonaControlador.php';
         include '../../controller/PersonalControlador.php';
-        $conexion = new Conexion();
+        include '../../controller/ReferenciaPersonalControlador.php';
+        include '../../controller/TelefonoControlador.php';
+        include '../../controller/ConyuguePersonalControlador.php';
+        include '../../controller/HijosPersonalControlador.php';
+        include '../../controller/CursoEstudiadoControlador.php';
+        include '../../controller/TituloProfesionalControlador.php';
+        include '../../controller/ExperienciaLaboralControlador.php';
+        include '../../controller/EvaluacionMeritosDocenteProfesorControlador.php';
 
+        $conexion = new Conexion();
         $consulta = new PersonaConsulta($conexion);
 
-        $target_path = "/wamp/www/PersonalUAB/view/libs/multimedia/img/personal/";
-        $target_path = $target_path . basename( $_FILES["fotoPersonal"]["name"]);
-
-        $a=move_uploaded_file($_FILES["fotoPersonal"]["tmp_name"], $target_path);
-
-        // echo "Arg1: " . $_FILES["fotoPersonal"]["tmp_name"] . "<br>";
-        // echo "Arg2: " . $target_path . "<br>";
-        // echo "Cantidad Movida: " . $a . "<br>";
-
-        $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
-
-        $personal = new Personal();
-        $personal->IdPersona = $idP['idPersona'];
-        $personal->IdNacion = $_POST['nacionalidad'];
-        $personal->IdTipoPersonal = $_POST['tipoPersonal'];
-        $personal->IdCarrera = $_POST['carrera'];
-        $personal->Direccion = $_POST['direccion'];
-        $personal->Email = $_POST['email'];
-        $personal->IdCiudadNacimiento = $_POST['ciudad'];
-        $personal->IdReligion = $_POST['religion'];
-        $personal->FechaBautizmo = $_POST['fechaBau'];
-        $personal->IdSeguro = $_POST['seguro'];
-        $personal->NumeroSeguro = $_POST['numSeguro'];
-        $personal->IdAfp = $_POST['afp'];
-        $personal->NumeroAfp = $_POST['numSeguro'];
-        $personal->NumeroLibretaMilitar = $_POST['numLibMilitar'];
-        $personal->NumeroPasaporte = $_POST['numPasaporte'];
-        $personal->TipoSangre = $_POST['tipoSangre'];
-        $personal->Hobby = $_POST['hobby'];
-        $personal->LecturaPreferencial = $_POST['lecturaP'];
-        $personal->FechaIngreso = $_POST['fechaIngres'];
-        $personal->Ruta = $target_path;
+        $idPersona = $consulta->obtenerIdPersona($_POST['ciNit']);
 
         $personalManejador = new PersonalControlador($conexion);
-        $personalManejador->crear($personal);
 
-        $consulta = new PersonalConsulta($conexion);
-        $idP = $consulta->obtenerIdPersonal($personal->IdPersona);
-        $id = $idP['idPersonal'];
+        $personal = $personalManejador->ver($idPersona['idPersona']);
 
-        if (isset($_POST['cargos']))
+        $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
+        $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritosSegunPersonal($_POST['tipoPersonal']);
+
+        if ($meritos)
         {
-          foreach($_POST['cargos'] as $item)
-          {
-            $personalManejador->agregarCargo($id, $item);
-          }
+          $evaluacionManejador = new EvaluacionMeritosDocenteProfesorControlador($conexion);
+          $evaluacion = $evaluacionManejador->listaAutoEvalucionPersonal($personal->IdPersonal);
+
+          ?>
+          <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Tabla de Meritos</h3>
+                </div>
+                <div class="panel-body">
+                  <form id="guardarAutoCalificacion">
+                    <div class="table-responsive">
+                      <table class="table table-hover table-bordered">
+
+                        <?php $contador = 1; foreach ($meritos as $categoria): ?>
+
+                          <thead>
+                            <tr>
+                              <th><?php echo $contador ?></th>
+                              <th style="max-width:300px"><?php echo "{$categoria->NombreMerito} ({$categoria->PuntajeMerito} puntos)" ?></th>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                          </thead>
+
+                          <?php $subcontador = 1; foreach ($categoria->SubMeritos as $merito):
+                             $encontrado = false; ?>
+                            <tbody>
+                              <tr>
+                                <td><?php echo "{$contador}.{$subcontador}" ?></td>
+                                <td><?php echo $merito->NombreMerito ?></td>
+                                <td><?php echo $merito->PuntajeMerito ?></td>
+                                <input type="hidden" class="idMerito" name="idMerito[]" value="<?php echo $merito->IdEstructuraMerito ?>">
+                                <?php foreach ($evaluacion as $eval): ?>
+                                  <?php if ($eval->IdEstructuraMerito == $merito->IdEstructuraMerito): ?>
+                                    <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="<?php echo $eval->PuntajeMerito ?>"></td>
+                                    <?php $encontrado = true;
+                                    break;
+                                   endif; ?>
+                                <?php endforeach;
+                                if ($encontrado == false) {
+                                  ?>
+                                  <td><input type="text" class="form-control puntaje" name="puntajeMerito[]" value="0"></td>
+                                  <?php
+                                }
+                                ?>
+
+                              </tr>
+                            </tbody>
+
+                          <?php $subcontador++; endforeach; ?>
+
+                        <?php $contador++; endforeach; ?>
+                      </table>
+                      <div class="pull-right">
+                        <strong>Total Puntos Meritos: </strong> <input type="text" class="form-control puntajeTotal" id="puntajeTotal" name="puntajeTotal" value="0" readonly>
+                      </div>
+                      <input type="hidden" name="idPersonal" value="<?php echo $personal->IdPersonal ?>">
+                      <br><br><br><br>
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-success btn-lg" name="guardar">Guardar Evaluacion <i class="fa fa-paper-plane"></i></button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Hoja de Vida Personal</h3>
+                </div>
+                <div class="panel-body">
+                  <?php $i = 1; ?>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="table-responsive">
+                          <table class="table table-hover table-bordered table-center">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>#</th>
+                                <th>Nombre Curso</th>
+                                <th>Institucion</th>
+                                <th>Religion Institucion</th>
+                                <th>Año de Estudio</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <div class="text-center"><strong>CURSOS ESTUDIADOS</strong></div><br>
+                              <?php foreach ($personal->ListaCursos as $cursos): ?>
+                                <tr class="action">
+                                  <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
+                                  <td><?php echo $i ?></td>
+                                  <td class="text-center"><?php echo $cursos->CursoEstudiado ?></td>
+                                  <td class="text-center"><?php echo $cursos->NombreInstitucion ?></td>
+                                  <td class="text-center"><?php echo $cursos->ReligionInstitucion ?></td>
+                                  <td class="text-center"><?php echo $cursos->AnhoEstudio ?></td>
+                                </tr>
+                              <?php $i++; endforeach; ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  <?php $i = 1; ?>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="table-responsive">
+                          <table class="table table-hover table-bordered table-center">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>#</th>
+                                <th>Nombre Titulo</th>
+                                <th>Institucion</th>
+                                <th>Religion Institucion</th>
+                                <th>Tiempo de Estudio(Años)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <div class="text-center"><strong>TITULOS QUE POSEE</strong></div><br>
+                              <?php foreach ($personal->ListaTitulos as $titulos): ?>
+                                <tr class="action">
+                                  <td><input type="checkbox" class="control"  name="control[]" value="1"></td>
+                                  <td><?php echo $i ?></td>
+                                  <td class="text-center"><?php echo $titulos->CursoProfesionalEstudiado ?></td>
+                                  <td class="text-center"><?php echo $titulos->NombreInstitucion ?></td>
+                                  <td class="text-center"><?php echo $titulos->ReligionInstitucion ?></td>
+                                  <td class="text-center"><?php echo $titulos->TiempoEstudio ?></td>
+                                </tr>
+                              <?php $i++; endforeach; ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  <?php $i = 1; ?>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                      <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>#</th>
+                              <th>Cargo/Responsabilidad</th>
+                              <th>Institucion</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <div class="text-center"><strong>Experiencia Laboral</strong></div><br>
+                            <?php foreach ($personal->ListaExperinciaLaboral as $listaE): ?>
+                              <tr class="action">
+                                <td><input type="checkbox" class="control" name="control[]" value="1"></td>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $listaE->CargoResponsabilidad; ?></td>
+                                <td><?php echo $listaE->NombreInstitucion; ?></td>
+                              </tr>
+                            <?php $i++; endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mensajeCalificacion" id="mensajeCalificacion">
+
+          </div>
+          <script src="../libs/js/controlMeritos.js"></script>
+          <script src="../libs/js/guardarCalificacion.js"></script>
+          <script src="../libs/js/autosuma.js"></script>
+          <?php
         }
-        if (isset($_POST['enfermedades']))
+        else
         {
-          foreach($_POST['enfermedades'] as $item)
-          {
-            $personalManejador->agregarEnfermedad($id, $item);
-          }
-        }
-        if (isset($_POST['deportes']))
-        {
-          foreach($_POST['deportes'] as $item)
-          {
-            $personalManejador->agregarDeporte($id, $item);
-          }
+          echo "<div class='text-center' style='color:red'><h2><strong>No existe Evaluacíon Asignada</strong></h2></div>";
         }
 
-        echo "<p style='color:green'>Guardado Exitoso</p>";
+        break;
+
+      case 'puntuarAutoMeritoPersonal':
+        if (isset($_POST['idPersonal']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/EvaluacionMeritosDocenteProfesor.php';
+          include '../../model/EvaluacionMeritosDocenteProfesorConsulta.php';
+          include '../../controller/EvaluacionMeritosDocenteProfesorControlador.php';
+          $conexion =  new Conexion();
+          $evaluacionMeritos = new EvaluacionMeritosDocenteProfesorControlador($conexion);
+          $evaluacionMeritos->crearAuto();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar</p>";
+        }
+        break;
+
+      case 'personaEditar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/Telefono.php';
+          include '../../model/TelefonoConsulta.php';
+          include '../../controller/PersonaControlador.php';
+          include '../../controller/TelefonoControlador.php';
+          $conexion = new Conexion();
+
+          $personaManejador = new PersonaControlador($conexion);
+          $respuesta = $personaManejador->editar();
+          /*
+          1. Sin Modificacion
+          2. Existe Persona
+          3. Guardado Exitoso
+          4. Error Guardar
+          */
+          echo $respuesta;
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al enviar datos</p>";
+        }
+        break;
+
+      case 'personalInsertar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../controller/PersonalControlador.php';
+          $conexion = new Conexion();
+
+          $consulta = new PersonaConsulta($conexion);
+
+          $target_path = "/wamp64/www/PersonalUAB/view/libs/multimedia/img/personal/";
+          $target_path = $target_path . basename("img".strtoupper($_POST['ciPersona']).".jpg");
+
+          $a=move_uploaded_file($_FILES["fotoPersonal"]["tmp_name"], $target_path);
+
+           //echo "Arg1: " . $_FILES["fotoPersonal"]["tmp_name"] . "<br>";
+           //echo "Arg2: " . $_FILES["fotoPersonal"]["name"] . "<br>";
+          // echo "Cantidad Movida: " . $a . "<br>";
+
+          $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
+
+          $personal = new Personal();
+          $personal->IdPersona = $idP['idPersona'];
+          $personal->IdNacion = $_POST['nacionalidad'];
+          $personal->IdTipoPersonal = $_POST['tipoPersonal'];
+          $personal->IdCarrera = $_POST['carrera'];
+          $personal->IdCargo = $_POST['cargoPersonal'];
+          $personal->Direccion = $_POST['direccion'];
+          $personal->Email = $_POST['email'];
+          $personal->IdCiudadNacimiento = $_POST['ciudad'];
+          $personal->IdReligion = $_POST['religion'];
+          $personal->FechaBautizmo = $_POST['fechaBau'];
+          $personal->IdSeguro = $_POST['seguro'];
+          $personal->NumeroSeguro = $_POST['numSeguro'];
+          $personal->IdAfp = $_POST['afp'];
+          $personal->NumeroAfp = $_POST['numSeguro'];
+          $personal->NumeroLibretaMilitar = $_POST['numLibMilitar'];
+          $personal->NumeroPasaporte = $_POST['numPasaporte'];
+          $personal->TipoSangre = $_POST['tipoSangre'];
+          $personal->Hobby = $_POST['hobby'];
+          $personal->LecturaPreferencial = $_POST['lecturaP'];
+          $personal->NumeroRegistroProfesional = $_POST['numeroRegProfesional'];
+          $personal->FechaIngreso = $_POST['fechaIngres'];
+          $personal->Ruta = $target_path;
+
+          $personalManejador = new PersonalControlador($conexion);
+          $personalManejador->crear($personal);
+
+          $consulta = new PersonalConsulta($conexion);
+          $idP = $consulta->obtenerIdPersonal($personal->IdPersona);
+          $id = $idP['idPersonal'];
+
+          if (isset($_POST['cargos']))
+          {
+            foreach($_POST['cargos'] as $item)
+            {
+              $personalManejador->agregarCargo($id, $item);
+            }
+          }
+          if (isset($_POST['enfermedades']))
+          {
+            foreach($_POST['enfermedades'] as $item)
+            {
+              $personalManejador->agregarEnfermedad($id, $item);
+            }
+          }
+          if (isset($_POST['deportes']))
+          {
+            foreach($_POST['deportes'] as $item)
+            {
+              $personalManejador->agregarDeporte($id, $item);
+            }
+          }
+
+          echo "<p style='color:green'>Guardado Exitoso</p>";
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Guardar</p>";
+        }
 
         break;
 
       case 'usuarioInsertar':
-      if (isset($_POST['datos']))
-      {
-        echo "Entre..";
-        include '../../model/conexion.php';
-        include '../../model/Persona.php';
-        include '../../model/PersonaConsulta.php';
-        include '../../model/usuario.php';
-        include '../../controller/UsuarioControlador.php';
-        $conexion = new Conexion();
-        $consulta = new PersonaConsulta($conexion);
-        echo "Pase la consula y conexion";
-        $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/usuario.php';
+          include '../../model/usuarioConsulta.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../controller/UsuarioControlador.php';
+          include '../../controller/PersonalControlador.php';
 
-        $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
-        $usuario->IdUsuario = null;
-        $usuario->TipoUsuario = $_POST['tipoUsuario'];
-        $usuario->Estado = 1;
-        $usuario->Borrado = 0;
-        $usuario->IdPersona=$idP;
-        echo "llene el Usuario";
-        $usuarioManejador = new UsuarioControlador($conexion);
-        $usuarioManejador->crear($usuario);
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+          $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
 
-        echo "<p style='color:green'>Gurdado Exitoso</p>";
+          $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
+          $usuario->IdUsuario = null;
+          $usuario->TipoUsuario = $_POST['tipoUsuario'];
+          $usuario->Estado = 1;
+          $usuario->Borrado = 0;
+          $usuario->IdPersona = $idP['idPersona'];
+          $usuarioManejador = new UsuarioControlador($conexion);
+          $usuarioManejador->crear($usuario);
 
-      }
-      else
-      {
-        echo "<p style='color: red'> Por favor LLene el Formulario PersonalUAB/Datos Generales </p>";
-      }
-      break;
+          if ($usuario->TipoUsuario != "2")
+          {
+            $personalPrevent = new PersonalControlador($conexion);
+            $personalPrevent->crearPreventUsuario($usuario->IdPersona);
+          }
+
+          echo "<p style='color:green'>Guardado Exitoso</p>";
+        }
+        else
+        {
+          echo "<p style='color: red'> Por favor LLene el Formulario PersonalUAB/Datos Generales </p>";
+        }
+        break;
 
       case 'regUsuario':
         include 'header.php';
@@ -421,11 +1049,505 @@ class CtrMenuAdmin
       }
       break;
 
+      //llamando el formulario de Tabla de Calificacion de Meritos
+
+      case 'NuevaTablaMeritos':
+            include 'header.php';
+            include 'bodyRegistrarTablaMeritosDocenteProfesor.php';
+            include 'footer.php';
+      break;
+
+      case 'RegistrarNuevaTablaMeritos':
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/TablaMeritosDocenteProfesor.php';
+          include '../../model/TablaMeritosDocenteProfesorConsulta.php';
+          include '../../model/EstructuraMeritos.php';
+          include '../../model/EstructuraMeritosConsulta.php';
+
+          $conexion = new Conexion();
+
+          $tablaMeritos = new TablaMeritosDocenteProfesor();
+          $tablaMeritos->IdTablaMeritosDocenteProfesor = null;
+
+          $tablaMeritos->Version = strtoupper($_POST['version']);
+
+          $tablaMeritos->TipoMerito = $_POST['tipoMerito'];
+
+          $tablaMeritos->FechaCreacion = $_POST['fechaCreacion'];
+
+          $tablaMeritos->Activo = $_POST['activo'];
+
+          $tablaMeritosConsulta = new  TablaMeritosDocenteProfesorConsulta($conexion);
+
+          if($_POST['activo'] == '1'){
+            //verificando si existe una tabla de Merito activa juntamente con el tipo de de merito docente/profesor
+            //ya que solamente puede existir una activa y las otras no
+            $resultadoSiExisteTablaMeritoActivoPorTipoMerito = $tablaMeritosConsulta->existeMeritoActivoPorTipoMerito($_POST['activo'],$_POST['tipoMerito']);
+
+            if($resultadoSiExisteTablaMeritoActivoPorTipoMerito){
+                  echo "<p style='color:red'>Existe una Tabla de Meritos Activa para el tipo: ".$_POST['tipoMerito']." </p>";
+            }else{
+
+                      $idTablaMerito = $tablaMeritosConsulta->crear($tablaMeritos);
+                      //echo "$idTablaMerito" . $idTablaMerito;
+                      $archivoXml = $_FILES["archivo"]["tmp_name"];
+                      $xmlData = simplexml_load_file($archivoXml);//parseando el archivo XML
+                      // Crear tabla merito docentes
+                      $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
+                      foreach ($xmlData->categoria as $categoria):
+                        $nombre=$categoria->nombre;//este es del archivo XML
+                        $puntaje=$categoria->puntaje;  //este es del archivo XML
+                        $objCategoria = new EstructuraMeritos();
+                        $objCategoria->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                        $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria
+                        $objCategoria->NombreMerito = $nombre;
+                        $objCategoria->PuntajeMerito = $puntaje;
+                        $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
+                        //La categoria tiene "meritos" , y ahora se va a iterar sus meritos
+                        foreach ($categoria->merito as $merito):
+                          $nombre=$merito->nombre;
+                          $puntaje=$merito->puntaje;
+
+                          $objMerito = new EstructuraMeritos();
+                          $objMerito->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                          //Aqui se tiene el id de la categoria primaria
+                          $objMerito->IdEstructuraMeritoPrimario = $idCategoria;
+                          $objMerito->NombreMerito = $nombre;
+                          $objMerito->PuntajeMerito = $puntaje;
+                          $objMeritoDocenteConsulta->crear($objMerito);
+                        endforeach;
+                      endforeach;
+                      //Recuperando la estructura  las categorias con sus estructuras
+                      //Los UL y LI se puede cambiar por tablas
+                      $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritos($idTablaMerito);
+
+                      echo "<table class='table table-hover' border = 1>";
+                      $contador = 1;
+                      foreach ($meritos as $categoria):
+                        echo "<thead>
+                              <tr>
+                                  <th>".$contador.".-</th>
+                                  <th colspan='2'><strong>".$categoria->NombreMerito." (".$categoria->PuntajeMerito." puntos)</strong></th>
+                              </tr>
+                              </thead>";
+                              $subcontador = 1;
+                        foreach ($categoria->SubMeritos as $merito):
+                          echo "<tbody>
+                                  <tr>
+                                    <td>".$contador.".".$subcontador."</td>
+                                    <td>".$merito->NombreMerito."</td>
+                                    <td>".$merito->PuntajeMerito."</td>
+                                  </tr>
+                                </tbody>
+                        ";
+                          $subcontador++;
+                          endforeach;
+                        $contador++;
+                      endforeach;
+                      echo "</table>";
+
+                      echo "<p style='color:green'>Guardado Exitoso</p>";
+            }
+          }else{
+
+                $idTablaMerito = $tablaMeritosConsulta->crear($tablaMeritos);
+                //echo "$idTablaMerito" . $idTablaMerito;
+                $archivoXml = $_FILES["archivo"]["tmp_name"];
+                $xmlData = simplexml_load_file($archivoXml);//parseando el archivo XML
+                // Crear tabla merito docentes
+                $objMeritoDocenteConsulta = new EstructuraMeritosConsulta($conexion);
+                foreach ($xmlData->categoria as $categoria):
+                  $nombre=$categoria->nombre;//este es del archivo XML
+                  $puntaje=$categoria->puntaje;  //este es del archivo XML
+                  $objCategoria = new EstructuraMeritos();
+                  $objCategoria->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                  $objCategoria->IdEstructuraMeritoPrimario = null;// es la categoria
+                  $objCategoria->NombreMerito = $nombre;
+                  $objCategoria->PuntajeMerito = $puntaje;
+                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
+                  //La categoria tiene "meritos" , y ahora se va a iterar sus meritos
+                  foreach ($categoria->merito as $merito):
+                    $nombre=$merito->nombre;
+                    $puntaje=$merito->puntaje;
+
+                    $objMerito = new EstructuraMeritos();
+                    $objMerito->IdTablaMeritoDocenteProfesor = $idTablaMerito;
+                    //Aqui se tiene el id de la categoria primaria
+                    $objMerito->IdEstructuraMeritoPrimario = $idCategoria;
+                    $objMerito->NombreMerito = $nombre;
+                    $objMerito->PuntajeMerito = $puntaje;
+                    $objMeritoDocenteConsulta->crear($objMerito);
+                  endforeach;
+                endforeach;
+                //Recuperando la estructura  las categorias con sus estructuras
+                //Los UL y LI se puede cambiar por tablas
+                $meritos = $objMeritoDocenteConsulta->listaEstructuraMeritos($idTablaMerito);
+
+                echo "<table class='table table-hover' border = 1>";
+                $contador = 1;
+                foreach ($meritos as $categoria):
+                  echo "<thead>
+                        <tr>
+                            <th>".$contador.".-</th>
+                            <th><strong>".$categoria->NombreMerito." (".$categoria->PuntajeMerito." puntos)</strong></th>
+                        </tr>
+                        </thead>";
+                        $subcontador = 1;
+                  foreach ($categoria->SubMeritos as $merito):
+                    echo "<tbody>
+                            <tr>
+                              <td>".$contador.".".$subcontador."</td>
+                              <td>".$merito->NombreMerito."</td>
+                              <td>".$merito->PuntajeMerito."</td>
+                            </tr>
+                          </tbody>
+                  ";
+                    $subcontador++;
+                    endforeach;
+                  $contador++;
+                endforeach;
+                echo "</table>";
+
+                echo "<p style='color:green'>Guardado Exitoso</p>";
+          }
+        }
+        else
+        {
+          echo "<p style='color: red'> Por favor llene el Formulario Nueva Tabla de Meritos </p>";
+        }
+
+
+      break;
+
+      case 'tablaCalificacionMeritosDocente':
+            include 'header.php';
+            //include 'bodyRegistrarTablaCalificacionMeritosDocente.php';
+            include 'footer.php';
+      break;
+
+      //registro de meritos
+      case 'registrarMeritoDocente':
+          echo "llegue";
+            if(isset($_FILES["archivo"]["type"]))
+            {
+                include '../../model/conexion.php';
+                include '../../model/MeritosDocente.php';
+                include '../../model/MeritosDocenteConsulta.php';
+
+                $conexion = new Conexion();
+                $xml = $_FILES["archivo"]["tmp_name"];
+                $xmlData = simplexml_load_file($xml);
+                // Crear tabla merito docentes
+
+                $tablaMeritos = new TablaMeritosDocenteProfesor();
+
+
+                foreach ($xmlData->categoria as $categoria):
+                  $nombre=$categoria->nombre;
+                  $puntaje=$categoria->puntaje;
+
+                  $objMeritoDocenteConsulta = new MeritosDocenteConsulta($conexion);
+                  $objCategoria = new MeritosDocente();
+                  $objCategoria->IdMeritoDocente = null;
+                  $objCategoria->IdMeritoDocentePrimario = null;
+                  $objCategoria->NombreMerito = $nombre;
+                  $objCategoria->PuntajeMerito = $puntaje;
+                  $idCategoria = $objMeritoDocenteConsulta->crear($objCategoria);
+                  foreach ($categoria->merito as $merito):
+                    $nombre=$merito->nombre;
+                    $puntaje=$merito->puntaje;
+
+                    $objMerito = new MeritosDocente();
+                    $objMerito->IdMeritoDocente = null;
+                    $objMerito->IdMeritoDocentePrimario = $idCategoria;
+                    $objMerito->NombreMerito = $nombre;
+                    $objMerito->PuntajeMerito = $puntaje;
+                  endforeach;
+                endforeach;
+
+                if($exitoRegistrarMerito){
+                  echo "El merito fue registrado correctamente";
+                }else{
+                  echo "Error al registrar el merito";
+                }
+
+
+            }else{
+
+              echo "Debe lllenar los campos";
+            }
+      break;
+
+      case 'listaDirectorio':
+        include 'header.php';
+        include 'bodyListaDirectorio.php';
+        include 'footer.php';
+      break;
+
+
       case 'salir':
           session_start();
           session_destroy();
           header("Location: ../../index.php");
           break;
+
+
+      case 'addNewLugarExpedicion':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/LugarExpedicion.php';
+          include '../../model/LugarExpedicionConsulta.php';
+          include '../../controller/CtrLugarExpedicion.php';
+          $conexion = new Conexion();
+          $lugarExpedicion = new CtrLugarExpedicion($conexion);
+          $lugarExpedicion->crear();
+        }
+        break;
+
+      case 'addNewNacionalidad':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Nacion.php';
+          include '../../model/NacionConsulta.php';
+          include '../../controller/NacionControlador.php';
+          $conexion = new Conexion();
+          $lugarExpedicion = new NacionControlador($conexion);
+          $lugarExpedicion->crear();
+        }
+        break;
+
+      case 'addNewCiudad':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Ciudad.php';
+          include '../../model/CiudadConsulta.php';
+          include '../../controller/CiudadControlador.php';
+          $conexion = new Conexion();
+          $ciudad = new CiudadControlador($conexion);
+          $ciudad->crear();
+        }
+        break;
+
+      case 'addNewReligion':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Religion.php';
+          include '../../model/ReligionConsulta.php';
+          include '../../controller/ReligionControlador.php';
+          $conexion = new Conexion();
+          $religion = new ReligionControlador($conexion);
+          $religion->crear();
+        }
+        break;
+
+      case 'addNewSeguro':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Seguro.php';
+          include '../../model/SeguroConsulta.php';
+          include '../../controller/SeguroControlador.php';
+          $conexion = new Conexion();
+          $seguro = new SeguroControlador($conexion);
+          $seguro->crear();
+        }
+        break;
+
+      case 'addNewAfp':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Afp.php';
+          include '../../model/AfpConsulta.php';
+          include '../../controller/AfpControlador.php';
+          $conexion = new Conexion();
+          $afp = new AfpControlador($conexion);
+          $afp->crear();
+        }
+        break;
+
+      case 'addNewEnfermedad':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Enfermedad.php';
+          include '../../model/EnfermedadConsulta.php';
+          include '../../controller/EnfermedadControlador.php';
+          $conexion = new Conexion();
+          $enfermedad = new EnfermedadControlador($conexion);
+          $enfermedad->crear();
+        }
+        break;
+
+      case 'addNewDeporte':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Deporte.php';
+          include '../../model/DeporteConsulta.php';
+          include '../../controller/DeporteControlador.php';
+          $conexion = new Conexion();
+          $deporte = new DeporteControlador($conexion);
+          $deporte->crear();
+        }
+        break;
+
+      case 'darDeBajaPersonal':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/usuario.php';
+          include '../../model/usuarioConsulta.php';
+          include '../../controller/PersonalControlador.php';
+          $conexion = new Conexion();
+          $personalManejdor = new PersonalControlador($conexion);
+          $personalManejdor->darBeBaja();
+          header("Location: index.php?modo=listaPersonal");
+        }
+        else
+        {
+          header("Location: index.php");
+        }
+        break;
+
+      case 'personalEditar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../controller/PersonalControlador.php';
+          $conexion = new Conexion();
+
+          $personalManejador = new PersonalControlador($conexion);
+          $respuesta = $personalManejador->editar();
+          echo $respuesta;
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
+      case 'personaConyugueEditar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/ConyuguePersonal.php';
+          include '../../model/ConyuguePersonalConsulta.php';
+          include '../../controller/PersonaControlador.php';
+          include '../../controller/ConyuguePersonalControlador.php';
+          $conexion = new Conexion();
+
+          $conyugueManajador = new ConyuguePersonalControlador($conexion);
+          $conyugueManajador->editar();
+          echo "<p style='color:green'>Cambio Exitoso</p>";
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
+      case 'habilitarPersonal':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/usuario.php';
+          include '../../model/usuarioConsulta.php';
+          include '../../controller/PersonalControlador.php';
+          $conexion = new Conexion();
+          $personalManejdor = new PersonalControlador($conexion);
+          $personalManejdor->habilitar();
+          header("Location: index.php?modo=listaPersonal");
+        }
+        else
+        {
+          header("Location: index.php");
+        }
+        break;
+
+      case 'telefonoAdd':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Telefono.php';
+          include '../../model/TelefonoConsulta.php';
+          include '../../controller/TelefonoControlador.php';
+          $conexion = new Conexion();
+
+          $telefonoManejador = new TelefonoControlador($conexion);
+          $telefonoManejador->crearT();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
+      case 'telefonoDelete':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Telefono.php';
+          include '../../model/TelefonoConsulta.php';
+          include '../../controller/TelefonoControlador.php';
+          $conexion = new Conexion();
+
+          $telefonoManejador = new TelefonoControlador($conexion);
+          $telefonoManejador->borrar();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
+      case 'editarPersonal':
+        if ($_POST)
+        {
+
+          include 'header.php';
+          include 'bodyEditarPersonal.php';
+          include 'footer.php';
+
+        }
+        else
+        {
+          header("Location: index.php?modo=listaPersonal");
+        }
+        break;
+
+      case 'verHojaDeVida':
+        if ($_POST)
+        {
+          include 'header.php';
+          include 'bodyHojaDeVida.php';
+          include 'footer.php';
+        }
+        else
+        {
+          header("Location: index.php?modo=listaPersonal");
+        }
+        break;
 
       default:
 

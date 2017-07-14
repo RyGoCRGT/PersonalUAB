@@ -40,7 +40,7 @@ class UsuarioControlador
 
             $this->Conexion->commit();
 
-            echo "<p style='color:green'>Guardado Exitoso</p>";
+            
 
           } catch (PDOException $e) {
 

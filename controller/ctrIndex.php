@@ -17,7 +17,15 @@ class ManagePage
     switch ($this->Modo) {
 
       case 'AccesDenied':
-        echo "acceso denegado";
+        include 'view/Index/header.php';
+        ?>
+        <div class="alert alert-warning" style="opacity:0.8; margin-top: 100px;">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Error!</strong> Acceso Denegado.
+        </div>
+        <?php
+        include 'view/Index/body.php';
+        include 'view/Index/footer.php';
         break;
 
       case 'Sesion Caducada':

@@ -15,19 +15,27 @@ function enviarDatos() {
       $("#mensaje").html("");
       switch (info) {
         case '1':
-          window.location.href = "view/menuAdmin/";
+          window.location.href = "view/Administrador/";
           break;
 
         case '2':
-          window.location.href = "view/menuAsistente/";
+          window.location.href = "view/Asistente/";
           break;
 
         case '3':
-          window.location.href = "view/menuDocente/";
+          window.location.href = "view/PersonalAcademico/";
           break;
 
         case '4':
-          window.location.href = "view/menuProfesor/";
+          window.location.href = "view/PersonalDePlanta/";
+          break;
+
+        case '5':
+          window.location.href = "view/Profesor/";
+          break;
+
+        case '6':
+          window.location.href = "view/PersonalDeServicio/";
           break;
 
         default:

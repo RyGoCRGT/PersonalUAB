@@ -16,6 +16,237 @@ class CtrMenuAdmin
 
     switch ($this->Modo) {
 
+      case 'cambiarAccesosFecha':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/ConfugurarRegistroDatos.php';
+          include '../../model/ConfugurarRegistroDatosConsulta.php';
+          include '../../controller/ConfugurarRegistroDatosControlador.php';
+
+          $conexion = new Conexion();
+
+          $config = new ConfugurarRegistroDatosControlador($conexion);
+          $config->modificar();
+
+          header("Location: index.php?modo=config");
+
+        }
+        else
+        {
+          header("Location: index.php?modo=config");
+        }
+        break;
+
+      case 'verArchivo':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Archivo.php';
+          include '../../model/ArchivoConsulta.php';
+          include '../../controller/ArchivoControlador.php';
+
+          $conexion = new Conexion();
+
+          $archivoManejador = new ArchivoControlador($conexion);
+          $archivo = $archivoManejador->ver($_POST['id']);
+          include 'vistaDocumento.php';
+        }
+        else
+        {
+          echo "<h2><strong>Ah Ocurrido un ERROR al GUARDAR</strong></h2>";
+        }
+        break;
+
+      case 'agregarDocumentoPDF':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Archivo.php';
+          include '../../model/ArchivoConsulta.php';
+          include '../../controller/ArchivoControlador.php';
+
+          $conexion = new Conexion();
+
+          $archivoManejador = new ArchivoControlador($conexion);
+          $archivoManejador->crear();
+
+          $listaArchivos = $archivoManejador->listar();
+
+          ?>
+          <?php $i = 0; foreach ($listaArchivos as $key => $value):  $i++;?>
+            <tr>
+              <td><?php echo $i ?></td>
+              <td><?php echo $value->NombreArchivo ?></td>
+              <td><?php echo $value->C_TipoArchivo ?></td>
+              <td>
+                <form class="frmDataArchiv">
+                  <input type="hidden" name="id" value="<?php echo $value->IdArchivo ?>">
+                  <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#verArchivo" name="button"><i class="fa fa-eye"></i></button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+          <?php
+
+        }
+        else
+        {
+          echo "<h2><strong>Ah Ocurrido un ERROR al GUARDAR</strong></h2>";
+        }
+        break;
+
+      case 'documentos':
+        include 'header.php';
+        include 'bodyDocumentos.php';
+        include 'footer.php';
+        break;
+
+      case 'tablaMeritoDown':
+        include '../../model/conexion.php';
+        include '../../model/TablaMeritosDocenteProfesor.php';
+        include '../../model/TablaMeritosDocenteProfesorConsulta.php';
+        $conexion = new Conexion();
+        $tabla = new TablaMeritosDocenteProfesor();
+        $tabla->IdTablaMeritosDocenteProfesor = $_POST['id'];
+        $tablaConsulta = new TablaMeritosDocenteProfesorConsulta($conexion);
+        $tablaConsulta->updateDown($tabla);
+        header('Location: index.php?modo=tablaCalificacionMeritosDocente');
+        break;
+
+      case 'tablaMeritoUp':
+        include '../../model/conexion.php';
+        include '../../model/TablaMeritosDocenteProfesor.php';
+        include '../../model/TablaMeritosDocenteProfesorConsulta.php';
+        $conexion = new Conexion();
+        $tabla = new TablaMeritosDocenteProfesor();
+        $tabla->IdTablaMeritosDocenteProfesor = $_POST['id'];
+        $tablaConsulta = new TablaMeritosDocenteProfesorConsulta($conexion);
+        $tablaConsulta->updateUp($tabla);
+        header('Location: index.php?modo=tablaCalificacionMeritosDocente');
+        break;
+
+      case 'UsuarioDown':
+        include '../../model/conexion.php';
+        include '../../model/usuario.php';
+        include '../../model/usuarioConsulta.php';
+        $conexion = new Conexion();
+        $usuario = new Usuario("","");
+        $usuario->IdUsuario = $_POST['id'];
+        $usuarioConsulta = new UsuarioConsulta($conexion);
+        $usuarioConsulta->updateDown($usuario);
+        header('Location: index.php?modo=listaUsuario');
+        break;
+
+      case 'UsuarioUp':
+        include '../../model/conexion.php';
+        include '../../model/usuario.php';
+        include '../../model/usuarioConsulta.php';
+        $conexion = new Conexion();
+        $usuario = new Usuario("","");
+        $usuario->IdUsuario = $_POST['id'];
+        $usuarioConsulta = new UsuarioConsulta($conexion);
+        $usuarioConsulta->updateUp($usuario);
+        header('Location: index.php?modo=listaUsuario');
+        break;
+
+      case 'config':
+        include 'header.php';
+        include 'bodyConfig.php';
+        include 'footer.php';
+        break;
+
+      case 'publicarNoticia':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Noticia.php';
+          include '../../model/NoticiaConsulta.php';
+          include '../../controller/NoticiaControlador.php';
+
+          $conexion = new Conexion();
+
+          $noticiaManejador = new NoticiaControlador($conexion);
+          $noticiaManejador->crear();
+
+          $listaNoticias = $noticiaManejador->listar();
+
+           foreach ($listaNoticias as $key => $noticia): ?>
+            <?php
+            list($nada,$ruta) = explode("/wamp64/www/PersonalUAB/view/", $noticia->RutaImagen);
+            ?>
+            <div class="thumbnail">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                  <div class="text-center">
+                    <h4><i><?php echo $noticia->C_TipoNoticia ?></i></h4>
+                  </div>
+                  <center><img src="‪<?php echo "../../../".$ruta ?>" class="img img-responsive img-rounded" alt="imagen" height="100%" width="100%"></center>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                  <div class="text-center">
+                        <h3><strong><?php echo $noticia->Titulo ?></strong></h3>
+                  </div>
+                  <div class="contenidoNoticia" style="height:150px;overflow-y:scroll;">
+                    <?php echo "<p>{$noticia->Contenido}</p>" ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endforeach;
+
+        }
+        else
+        {
+          echo "<h2><strong>Ah Ocurrido un ERROR al PUBLICAR</strong></h2>";
+        }
+        break;
+
+      case 'listadoPersonal':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../controller/ReportesControlador.php';
+
+          $conexion = new Conexion();
+
+          $reporte = new ReportesControlador($conexion);
+          $listaDePersonal = $reporte->listadoPersonal();
+          include '../reportes/listaPersonalRep.php';
+        }
+        else
+        {
+          echo "<p>Error al cargar REPORTE</p>";
+        }
+        break;
+
+      case 'cantidadPersonal':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../controller/ReportesControlador.php';
+
+          $conexion = new Conexion();
+
+          $reporte = new ReportesControlador($conexion);
+          $cantidadDePersonal = $reporte->cantidadPersonal();
+          echo json_encode($cantidadDePersonal);
+          // include '../reportes/cantidadPersonalRep.php';
+        }
+        else
+        {
+          echo "<p>Error al cargar REPORTE</p>";
+        }
+        break;
+
+      case 'reportes':
+        include 'header.php';
+        include 'bodyReportes.php';
+        include 'footer.php';
+        break;
+
       case 'listaPersonal':
         include 'header.php';
         include 'bodylistPers.php';
@@ -53,9 +284,9 @@ class CtrMenuAdmin
         break;
 
       case 'listaUsuario':
-      include 'header.php';
-      include 'bodylistaUsuario.php';
-      include 'footer.php';
+        include 'header.php';
+        include 'bodylistaUsuario.php';
+        include 'footer.php';
         break;
 
       case 'regPersonal':
@@ -278,10 +509,37 @@ class CtrMenuAdmin
         }
         break;
 
+        case 'personaReferenciaEditar':
+          if ($_POST)
+          {
+            include '../../model/conexion.php';
+            include '../../model/Persona.php';
+            include '../../model/PersonaConsulta.php';
+            include '../../model/PersonalConsulta.php';
+            include '../../model/ReferenciaPersonal.php';
+            include '../../model/Telefono.php';
+            include '../../model/TelefonoConsulta.php';
+            include '../../controller/PersonaControlador.php';
+            include '../../controller/ReferenciaPersonalControlador.php';
+            include '../../controller/TelefonoControlador.php';
+
+            $conexion = new Conexion();
+
+            $personaManejador = new ReferenciaPersonalControlador($conexion);
+            $personaManejador->editar();
+
+            echo "<p style='color:green'>Guardado</p>";
+          }
+          else
+          {
+            echo "<p style='color:red'>Error al Enviar Formulario</p>";
+          }
+          break;
+
       case 'personaReferenciaInsertar':
         if (isset($_POST['datos']))
         {
-          $ci = $_POST['ciPersonReferencia'].$_POST['primerNombreRef'];
+          $ci = $_POST['ciPersonReferencia'].$_POST['primerNombreRef'].$_POST['segundoNombreRef'];
           include '../../model/conexion.php';
           include '../../model/Persona.php';
           include '../../model/PersonaConsulta.php';
@@ -336,10 +594,30 @@ class CtrMenuAdmin
         }
         break;
 
+      case 'personaHijoEditar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/HijosPersonal.php';
+          include '../../model/HijosPersonalConsulta.php';
+          include '../../controller/HijosPersonalControlador.php';
+
+          $conexion = new Conexion();
+          $hijoManejador = new HijosPersonalControlador($conexion);
+          $hijoManejador->editar();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
       case 'personaHijoInsertar':
         if (isset($_POST['datos']))
         {
-          $ci = $_POST['ciPersonHijo'].$_POST['primerNombreHij'];
+          $ci = $_POST['ciPersonHijo'].$_POST['primerNombreHij'].$_POST['segundoNombreHij'];
           include '../../model/conexion.php';
           include '../../model/Persona.php';
           include '../../model/PersonaConsulta.php';
@@ -392,10 +670,16 @@ class CtrMenuAdmin
               </thead>
               <tbody>
                 <?php foreach ($listaHijos as $hijo): ?>
-                  <tr>
+                  <tr style="cursor:pointer" class="dataHijo" data-toggle="modal" data-target="#editarHijo">
                     <td><?php echo "{$hijo->IdPersona->PrimerNombre} {$hijo->IdPersona->SegundoNombre}" ?></td>
                     <td><?php echo "{$hijo->IdPersona->ApellidoPaterno} {$hijo->IdPersona->ApellidoMaterno}" ?></td>
                     <td><?php echo "{$hijo->IdPersona->FechaNacimiento}" ?></td>
+                    <input class="idPersona" type="hidden" name="idPersona" value="<?php echo $hijo->IdPersona->IdPersona ?>">
+                    <input class="idPersona" type="hidden" name="primerNombre" value="<?php echo $hijo->IdPersona->PrimerNombre ?>">
+                    <input class="idPersona" type="hidden" name="segundoNombre" value="<?php echo $hijo->IdPersona->SegundoNombre ?>">
+                    <input class="idPersona" type="hidden" name="apellidoPaterno" value="<?php echo $hijo->IdPersona->ApellidoPaterno ?>">
+                    <input class="idPersona" type="hidden" name="apellidoMaterno" value="<?php echo $hijo->IdPersona->ApellidoMaterno ?>">
+                    <input class="idPersona" type="hidden" name="fechaNacimiento" value="<?php echo $hijo->IdPersona->FechaNacimiento ?>">
                   </tr>
                 <?php endforeach; ?>
               </tbody>
@@ -414,7 +698,7 @@ class CtrMenuAdmin
       case 'personaConyugueInsertar':
         if (isset($_POST['datos']))
         {
-          $ci = $_POST['ciPersonConyu'].$_POST['primerNombreCon'];
+          $ci = $_POST['ciPersonConyu'].$_POST['primerNombreCon'].$_POST['segundoNombreCon'];
           include '../../model/conexion.php';
           include '../../model/Persona.php';
           include '../../model/PersonaConsulta.php';
@@ -431,6 +715,7 @@ class CtrMenuAdmin
           $persona->ApellidoMaterno = ucwords(strtolower($_POST['apellidoMaternoCon']));
           $persona->CI = strtoupper($ci);
           $persona->FechaNacimiento = $_POST['fechaNacimientoCon'];
+          $persona->EstadoCivil = 2;
 
           $personaManejador = new PersonaControlador($conexion);
           $personaManejador->crear($persona);
@@ -757,7 +1042,36 @@ class CtrMenuAdmin
         }
         else
         {
-          echo "hola";
+          echo "<p style='color:red'>Error al Enviar</p>";
+        }
+        break;
+
+      case 'personaEditar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/Telefono.php';
+          include '../../model/TelefonoConsulta.php';
+          include '../../controller/PersonaControlador.php';
+          include '../../controller/TelefonoControlador.php';
+          $conexion = new Conexion();
+
+          $personaManejador = new PersonaControlador($conexion);
+          $respuesta = $personaManejador->editar();
+          /*
+          1. Sin Modificacion
+          2. Existe Persona
+          3. Guardado Exitoso
+          4. Error Guardar
+          */
+          echo $respuesta;
+
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al enviar datos</p>";
         }
         break;
 
@@ -847,33 +1161,44 @@ class CtrMenuAdmin
         break;
 
       case 'usuarioInsertar':
-      if (isset($_POST['datos']))
-      {
-        include '../../model/conexion.php';
-        include '../../model/Persona.php';
-        include '../../model/PersonaConsulta.php';
-        include '../../model/usuario.php';
-        include '../../model/usuarioConsulta.php';
-        include '../../controller/UsuarioControlador.php';
-        $conexion = new Conexion();
-        $consulta = new PersonaConsulta($conexion);
-        $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
+        if (isset($_POST['datos']))
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/usuario.php';
+          include '../../model/usuarioConsulta.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../controller/UsuarioControlador.php';
+          include '../../controller/PersonalControlador.php';
 
-        $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
-        $usuario->IdUsuario = null;
-        $usuario->TipoUsuario = $_POST['tipoUsuario'];
-        $usuario->Estado = 1;
-        $usuario->Borrado = 0;
-        $usuario->IdPersona = $idP['idPersona'];
-        $usuarioManejador = new UsuarioControlador($conexion);
-        $usuarioManejador->crear($usuario);
+          $conexion = new Conexion();
+          $consulta = new PersonaConsulta($conexion);
+          $idP = $consulta->obtenerIdPersona(strtoupper($_POST['ciPersona']));
 
-      }
-      else
-      {
-        echo "<p style='color: red'> Por favor LLene el Formulario PersonalUAB/Datos Generales </p>";
-      }
-      break;
+          $usuario = new Usuario($_POST['nombreUsuario'],$_POST['contrasena']);
+          $usuario->IdUsuario = null;
+          $usuario->TipoUsuario = $_POST['tipoUsuario'];
+          $usuario->Estado = 1;
+          $usuario->Borrado = 0;
+          $usuario->IdPersona = $idP['idPersona'];
+          $usuarioManejador = new UsuarioControlador($conexion);
+          $usuarioManejador->crear($usuario);
+
+          if ($usuario->TipoUsuario != "2")
+          {
+            $personalPrevent = new PersonalControlador($conexion);
+            $personalPrevent->crearPreventUsuario($usuario->IdPersona);
+          }
+
+          echo "<p style='color:green'>Guardado Exitoso</p>";
+        }
+        else
+        {
+          echo "<p style='color: red'> Por favor LLene el Formulario PersonalUAB/Datos Generales </p>";
+        }
+        break;
 
       case 'regUsuario':
         include 'header.php';
@@ -1109,7 +1434,7 @@ class CtrMenuAdmin
 
       case 'tablaCalificacionMeritosDocente':
             include 'header.php';
-            //include 'bodyRegistrarTablaCalificacionMeritosDocente.php';
+            include 'bodyListaTablaCalificacion.php';
             include 'footer.php';
       break;
 
@@ -1190,6 +1515,41 @@ class CtrMenuAdmin
           $conexion = new Conexion();
           $lugarExpedicion = new CtrLugarExpedicion($conexion);
           $lugarExpedicion->crear();
+        }
+        break;
+
+      case 'addTipoArchivo':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/TipoArchivo.php';
+          include '../../model/TipoArchivoConsulta.php';
+          include '../../controller/TipoArchivoControlador.php';
+          $conexion = new Conexion();
+          $tipoArchivoManejador = new TipoArchivoControlador($conexion);
+          $tipoArchivoManejador->crear();
+
+          $listaTipoArchivo = $tipoArchivoManejador->listar();
+          ?>
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr class="info">
+                <th class="text-center">Nombre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($listaTipoArchivo as $key => $tipoArchivo): ?>
+                <tr>
+                  <td class="text-center"><?php echo $tipoArchivo->NombreTipoArchivo ?></td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+          <?php
+        }
+        else
+        {
+          echo "<p style='color:red'>Erro al Enviar Datos</p>";
         }
         break;
 
@@ -1306,6 +1666,49 @@ class CtrMenuAdmin
         }
         break;
 
+      case 'personalEditar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/Personal.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../controller/PersonalControlador.php';
+          $conexion = new Conexion();
+
+          $personalManejador = new PersonalControlador($conexion);
+          $respuesta = $personalManejador->editar();
+          echo $respuesta;
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
+      case 'personaConyugueEditar':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Persona.php';
+          include '../../model/PersonaConsulta.php';
+          include '../../model/PersonalConsulta.php';
+          include '../../model/ConyuguePersonal.php';
+          include '../../model/ConyuguePersonalConsulta.php';
+          include '../../controller/PersonaControlador.php';
+          include '../../controller/ConyuguePersonalControlador.php';
+          $conexion = new Conexion();
+
+          $conyugueManajador = new ConyuguePersonalControlador($conexion);
+          $conyugueManajador->editar();
+          echo "<p style='color:green'>Cambio Exitoso</p>";
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
       case 'habilitarPersonal':
         if ($_POST)
         {
@@ -1328,6 +1731,42 @@ class CtrMenuAdmin
         }
         break;
 
+      case 'telefonoAdd':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Telefono.php';
+          include '../../model/TelefonoConsulta.php';
+          include '../../controller/TelefonoControlador.php';
+          $conexion = new Conexion();
+
+          $telefonoManejador = new TelefonoControlador($conexion);
+          $telefonoManejador->crearT();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
+      case 'telefonoDelete':
+        if ($_POST)
+        {
+          include '../../model/conexion.php';
+          include '../../model/Telefono.php';
+          include '../../model/TelefonoConsulta.php';
+          include '../../controller/TelefonoControlador.php';
+          $conexion = new Conexion();
+
+          $telefonoManejador = new TelefonoControlador($conexion);
+          $telefonoManejador->borrar();
+        }
+        else
+        {
+          echo "<p style='color:red'>Error al Enviar Formulario</p>";
+        }
+        break;
+
       case 'editarPersonal':
         if ($_POST)
         {
@@ -1336,6 +1775,19 @@ class CtrMenuAdmin
           include 'bodyEditarPersonal.php';
           include 'footer.php';
 
+        }
+        else
+        {
+          header("Location: index.php?modo=listaPersonal");
+        }
+        break;
+
+      case 'verHojaDeVida':
+        if ($_POST)
+        {
+          include 'header.php';
+          include 'bodyHojaDeVida.php';
+          include 'footer.php';
         }
         else
         {

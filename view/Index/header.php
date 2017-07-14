@@ -60,5 +60,3 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
-  

@@ -63,6 +63,28 @@ class ReferenciaPersonalControlador
     return $referenciaPersonal;
   }
 
+  public function editar()
+  {
+    $persona = new Persona();
+    $persona->IdPersona = $_POST['idPersona'];
+    $persona->PrimerNombre = ucwords(strtolower($_POST['primerNombreRef']));
+    $persona->SegundoNombre = ucwords(strtolower($_POST['segundoNombreRef']));
+    $persona->ApellidoPaterno = ucwords(strtolower($_POST['apellidoPaternoRef']));
+    $persona->ApellidoMaterno = ucwords(strtolower($_POST['apellidoMaternoRef']));
+    $persona->CI = strtoupper($_POST['ciPersonReferencia'].$_POST['primerNombreRef'].$_POST['segundoNombreRef']);
+
+    $personalManejador = new PersonaConsulta($this->Conexion);
+    $personalManejador->edit($persona);
+
+    $telefono = new Telefono();
+    $telefono->IdTelefono = $_POST['telefonoAntiguo'];
+    $telefono->NumeroTelefono = $_POST['telefonoReferencia'];
+
+    $telefonoManejador = new TelefonoConsulta($this->Conexion);
+    $telefonoManejador->edit($telefono);
+
+  }
+
 }
 
 ?>

@@ -100,6 +100,63 @@ foreach ($listaPersona as $listaP) {
 return $listArray;
 }
 
+  public function editar()
+  {
+
+    $consultaPersona = new PersonaConsulta($this->Conexion);
+
+    $datosPersona = $consultaPersona->obtenerIdPersona($_POST['persona']);
+
+    if ( ($datosPersona['primerNombre'] == $_POST['primerNombre'])
+      && ($datosPersona['segundoNombre'] == $_POST['segundoNombre'])
+      && ($datosPersona['apellidoPaterno'] == $_POST['apellidoPaterno'])
+      && ($datosPersona['apellidoMaterno'] == $_POST['apellidoMaterno'])
+      && ($datosPersona['CI'] == $_POST['ciNit'])
+      && ($datosPersona['idLugarExpedicion'] == $_POST['lugarExpedicion'])
+      && ($datosPersona['fechaNacimiento'] == $_POST['fechaNac'])
+      && ($datosPersona['sexo'] == $_POST['sexo'])
+      && ($datosPersona['idEstadoCivil'] == $_POST['estadoCivil']) )
+    {
+      return "<p style='color:rgb(214, 129, 17)'>Sin Cambios</p>";
+    }
+    else
+    {
+
+      $existe = $consultaPersona->existePersonaEditar($datosPersona['idPersona'], $_POST['ciNit']);
+
+      if ($existe == false)
+      {
+        $persona = new Persona();
+        $persona->IdPersona = $datosPersona['idPersona'];
+        $persona->PrimerNombre = ucwords(strtolower($_POST['primerNombre']));
+        $persona->SegundoNombre = ucwords(strtolower($_POST['segundoNombre']));
+        $persona->ApellidoPaterno = ucwords(strtolower($_POST['apellidoPaterno']));
+        $persona->ApellidoMaterno = ucwords(strtolower($_POST['apellidoMaterno']));
+        $persona->CI = strtoupper($_POST['ciNit']);
+        $persona->LugarExpedicion = ucwords(strtolower($_POST['lugarExpedicion']));
+        $persona->FechaNacimiento = $_POST['fechaNac'];
+        $persona->Sexo = strtoupper($_POST['sexo']);
+        $persona->EstadoCivil = ucwords(strtolower($_POST['estadoCivil']));
+
+        $estadoSave = $consultaPersona->edit($persona);
+
+        if ($estadoSave ==  true)
+        {
+          return 3;
+        }
+        else
+        {
+          return 4;
+        }
+      }
+      else
+      {
+        return "<p style='color:red'>Existe Persona Con este CI</p>";
+      }
+    }
+
+  }
+
 }
 
 

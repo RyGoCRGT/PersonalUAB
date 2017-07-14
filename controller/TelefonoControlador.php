@@ -49,6 +49,87 @@ class TelefonoControlador
 
   }
 
+  public function crearT()
+  {
+
+    $telefono = new Telefono();
+    $telefono->IdPersona = $_POST['idPersona'];
+    $telefono->NumeroTelefono = $_POST['telefono'];
+
+    $consulta = new TelefonoConsulta($this->Conexion);
+    $existe = $consulta->existeTelefono($telefono->NumeroTelefono);
+
+    if ($existe == false)
+    {
+      $consulta->save($telefono);
+      $ListaTelefonos = $consulta->listaNumeroPersona($telefono->IdPersona);
+      ?>
+      <table class="table table-hover table-condensed">
+        <thead>
+          <tr class="info">
+            <th class="text-center">Numero</th>
+            <th class="text-center">Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($ListaTelefonos as $key => $telefonos): ?>
+            <tr>
+              <td class="text-center"><?php echo $telefonos['numeroTelefono'] ?></td>
+              <td class="text-center">
+                <form class="telefonoBorrar">
+                  <input type="hidden" name="telefono" value="<?php echo $telefonos['numeroTelefono'] ?>">
+                  <input type="hidden" name="idPersona" value="<?php echo $telefono->IdPersona ?>">
+                  <button type="submit" name="borrarTelefono" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+      <?php
+    }
+    else
+    {
+      echo "<p style='color:red'>Telefono Existente</p>";
+    }
+
+  }
+
+  public function borrar()
+  {
+    $telefono = new Telefono();
+    $telefono->IdPersona = $_POST['idPersona'];
+    $telefono->NumeroTelefono = $_POST['telefono'];
+
+    $consulta = new TelefonoConsulta($this->Conexion);
+    $consulta->delete($telefono);
+    $ListaTelefonos = $consulta->listaNumeroPersona($telefono->IdPersona);
+    ?>
+    <table class="table table-hover table-condensed">
+      <thead>
+        <tr class="info">
+          <th class="text-center">Numero</th>
+          <th class="text-center">Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($ListaTelefonos as $key => $telefonos): ?>
+          <tr>
+            <td class="text-center"><?php echo $telefonos['numeroTelefono'] ?></td>
+            <td class="text-center">
+              <form class="telefonoBorrar">
+                <input type="hidden" name="telefono" value="<?php echo $telefonos['numeroTelefono'] ?>">
+                <input type="hidden" name="idPersona" value="<?php echo $telefono->IdPersona ?>">
+                <button type="submit" name="borrarTelefono" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <?php
+  }
+
 }
 
 ?>

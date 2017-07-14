@@ -18,6 +18,24 @@ $(document).ready(function(){
         break;
     }
   });
+
+  $("#tipoUsuario").change(function(){
+    var tipo = $("#tipoUsuario").val();
+    //console.log(tipo);
+    switch (tipo) {
+      case '3':
+        // $('#carreraPersonalSelect').show(700);
+        $('#cargoPersonalSelect').show(700);
+        //$('#AutoEvaluacionLI').show(700);
+        break;
+      default:
+        $('#cargoPersonalSelect').hide(700);
+        // $('#carreraPersonalSelect').hide(700);
+        //$('#AutoEvaluacionLI').hide(700);
+        break;
+    }
+  });
+
   $("#cargoPersonal").change(function()
   {
     var tipo = $("#cargoPersonal").val();

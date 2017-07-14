@@ -22,6 +22,7 @@ function enviarCursoPersonal()
 
       $('#mensajeCursosPersonal').html(info);
       $(".inputCursoBk").attr('disabled', 'disabled');
+      $('.nameFileImg').html("");
 
     });
 

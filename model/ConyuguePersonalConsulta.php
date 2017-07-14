@@ -36,6 +36,39 @@ class ConyuguePersonalConsulta
     return $registro;
   }
 
+  public function edit($conyuguePersonal)
+  {
+    try
+    {
+      $this->Conexion->beginTransaction();
+
+      $query = "UPDATE
+                  conyuguepersonal
+                SET
+                  idPersona = :idPersona,
+                  idPersonal = :idPersonal,
+                  fechaMatrimonio = :fechaMatrimonio
+                WHERE
+                  idConyuguePersonal = :idConyuguePersonal";
+
+      $stmtConyuPers = $this->Conexion->prepare($query);
+
+      $stmtConyuPers->bindValue(':idConyuguePersonal', $conyuguePersonal->IdConyuguePersonal);
+      $stmtConyuPers->bindValue(':idPersona', $conyuguePersonal->IdPersona);
+      $stmtConyuPers->bindValue(':idPersonal', $conyuguePersonal->IdPersonal);
+      $stmtConyuPers->bindValue(':fechaMatrimonio', $conyuguePersonal->FechaMatrimonio);
+
+      $stmtConyuPers->execute();
+
+      $this->Conexion->commit();
+    }
+    catch (Exception $e)
+    {
+      $this->Conexion->rollBack();
+    }
+
+  }
+
 }
 
 ?>

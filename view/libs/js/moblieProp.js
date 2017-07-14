@@ -6,6 +6,7 @@ $(document).ready(function($){
     $('body').addClass('body-small');//menu mobile
     $('.selector').remove();
     $('.selector-mobile').show("slow");
+    $('.block-update-card').css('width','200px');
   }
   else
   {

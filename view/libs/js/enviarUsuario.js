@@ -8,8 +8,7 @@ function enviarDatosUsuario() {
 
     var ci = $("#ciNit").val();
     $("#ciPerson").val(ci);
-    console.log( frm );
-    console.log(ci);
+
     var frm = $(this).serialize();
     $.ajax({
       "method" : "POST",

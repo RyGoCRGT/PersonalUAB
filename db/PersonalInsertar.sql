@@ -9,6 +9,8 @@ INSERT INTO lugarExpedicion VALUE( null, "CBBA" );
 INSERT INTO lugarExpedicion VALUE( null, "SCZ" );
 INSERT INTO lugarExpedicion VALUE( null, "TRJ" );
 INSERT INTO lugarExpedicion VALUE( null, "BEN" );
+INSERT INTO lugarExpedicion VALUE( null, "PND" );
+INSERT INTO lugarExpedicion VALUE( null, "SUC" );
 
 INSERT INTO persona VALUE(null, "Rodrigo", "Luis", "Poma", "Mollo", "447457451", 2, "1995-03-20", 'M', 1);
 INSERT INTO persona VALUE(null, "Gustavo", "Angel", "Cerezo", "Mamani", "7417215", 1, "1995-03-30", 'M', 1);
@@ -32,8 +34,8 @@ INSERT INTO nacion VALUE(null, "ECUADOR");
 
 INSERT INTO tipoPersonal VALUE(null, "Personal Academico");
 INSERT INTO tipoPersonal VALUE(null, "Personal de Planta");
-INSERT INTO tipoPersonal VALUE(null, "Profesores");
-INSERT INTO tipoPersonal VALUE(null, "Personal de Servicios");
+INSERT INTO tipoPersonal VALUE(null, "Profesor");
+INSERT INTO tipoPersonal VALUE(null, "Personal de Servicio");
 
 INSERT INTO facultad VALUE(null, "INGENIERIA");
 INSERT INTO facultad VALUE(null, "SALUD");
@@ -117,3 +119,19 @@ INSERT INTO tipoTituloProfesional VALUE(null, "LICENCIATURA");
 INSERT INTO tipoTituloProfesional VALUE(null, "DIPLOMADO");
 INSERT INTO tipoTituloProfesional VALUE(null, "MAESTRIA");
 INSERT INTO tipoTituloProfesional VALUE(null, "DOCTORADO");
+
+INSERT INTO tipoNoticia VALUE(null, "Deporte");
+INSERT INTO tipoNoticia VALUE(null, "Informacion");
+INSERT INTO tipoNoticia VALUE(null, "Iglesia");
+INSERT INTO tipoNoticia VALUE(null, "Academico");
+INSERT INTO tipoNoticia VALUE(null, "Evento");
+INSERT INTO tipoNoticia VALUE(null, "Otro");
+
+INSERT INTO tipoArchivo VALUE(null, "Politicas de Empresa");
+INSERT INTO tipoArchivo VALUE(null, "Convocatoria");
+INSERT INTO tipoArchivo VALUE(null, "Oro");
+
+INSERT INTO configRegistroDatos VALUE(null, "2017-07-14", 3);
+INSERT INTO configRegistroDatos VALUE(null, "2017-07-14", 4);
+INSERT INTO configRegistroDatos VALUE(null, "2017-07-14", 5);
+INSERT INTO configRegistroDatos VALUE(null, "2017-07-14", 6);

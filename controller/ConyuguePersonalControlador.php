@@ -59,6 +59,33 @@ class ConyuguePersonalControlador
     return $conyuguePersonal;
   }
 
+  public function editar()
+  {
+    $persona = new Persona();
+    $persona->IdPersona = $_POST['idPersonConyu'];
+    $persona->PrimerNombre = ucwords(strtolower($_POST['primerNombreCon']));
+    $persona->SegundoNombre = ucwords(strtolower($_POST['segundoNombreCon']));
+    $persona->ApellidoPaterno = ucwords(strtolower($_POST['apellidoPaternoCon']));
+    $persona->ApellidoMaterno = ucwords(strtolower($_POST['apellidoMaternoCon']));
+    $persona->CI = strtoupper("{$_POST['ciPersonConyu']}{$_POST['primerNombreCon']}{$_POST['segundoNombreCon']}");
+    $persona->LugarExpedicion = null;
+    $persona->FechaNacimiento = $_POST['fechaNacimientoCon'];
+    $persona->Sexo = null;
+    $persona->EstadoCivil = 2;
+
+    $personaManejador = new PersonaConsulta($this->Conexion);
+    $personaManejador->edit($persona);
+
+    $personaConyugue = new ConyuguePersonal();
+    $personaConyugue->IdConyuguePersonal = $_POST['idConyugue'] ;
+    $personaConyugue->IdPersonal = $_POST['idPersonal'] ;
+    $personaConyugue->IdPersona = $persona->IdPersona;
+    $personaConyugue->FechaMatrimonio = $_POST['fechaBautizmoCon'];
+
+    $personaConyugueManejador = new ConyuguePersonalConsulta($this->Conexion);
+    $personaConyugueManejador->edit($personaConyugue);
+  }
+
 }
 
 ?>

@@ -23,7 +23,7 @@ CREATE TABLE persona(
 	segundoNombre varchar(20) null,
 	apellidoPaterno varchar(20) not null,
 	apellidoMaterno varchar(20) null,
-	CI varchar(40) not null,
+	CI varchar(50) not null,
 	idLugarExpedicion int null,
 	fechaNacimiento date null,
 	sexo enum('F','M') null,
@@ -347,6 +347,55 @@ CREATE TABLE telefonoContacto(
 	idTelefonoContacto int not null auto_increment primary key,
 	idContacto int not null,
 	tipoTelefono varchar(15) not null,
-	numero varchar(15) not null, 
+	numero varchar(15) not null,
 	FOREIGN KEY (idContacto) REFERENCES contacto (idContacto) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE tipoNoticia(
+	idTipoNoticia int not null auto_increment primary key,
+	nombreTipoNoticia varchar(35) not null
+);
+
+CREATE TABLE noticia(
+	idNoticia int not null auto_increment primary key,
+	idTipoNoticia int not null,
+	titulo varchar(100) not null,
+	contenido text not null,
+	idUsuario int not null,
+	especificacionUsuario int null,
+	rutaImagen varchar(200) null,
+	fechaPublicacion date not null,
+	estado bool not null,
+	FOREIGN KEY (idTipoNoticia) REFERENCES tipoNoticia (idTipoNoticia) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (especificacionUsuario) REFERENCES usuario (idUsuario) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE comentario(
+	idComentario int not null auto_increment primary key,
+	idNoticia int not null,
+	comentario varchar(100) not null,
+	idUsuario int not null,
+	FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idNoticia) REFERENCES noticia (idNoticia) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE tipoArchivo(
+	idTipoArchivo int not null auto_increment primary key,
+	nombreTipoArchivo varchar(30)
+);
+
+CREATE TABLE archivo(
+	idArchivo int not null auto_increment primary key,
+	idTipoArchivo int not null,
+	nombreArchivo varchar(50) not null,
+	archivo varchar(300) not null,
+	FOREIGN KEY (idTipoArchivo) REFERENCES tipoArchivo (idTipoArchivo) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE configRegistroDatos(
+	idConfigRegistroDatos int not null auto_increment primary key,
+	fechaLimite date not null,
+	idTipoUsuario int not null,
+	FOREIGN KEY (idTipoUsuario) REFERENCES tipoUsuario (idTipoUsuario) ON UPDATE CASCADE ON DELETE CASCADE
 );
