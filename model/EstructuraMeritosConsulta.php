@@ -100,7 +100,8 @@ class EstructuraMeritosConsulta
     $query = 'SELECT *
               FROM estructuraMeritos e, tablameritosdocenteprofesor t
               where t.idTablaMeritoDocenteProfesor = e.idTablaMeritoDocenteProfesor
-              AND tipoMerito = :tipo';
+              AND tipoMerito = :tipo
+              AND activo = 1';
     $consulta = $this->Conexion->prepare($query);
     $consulta->bindParam(':tipo', $tipo);
     $consulta->execute();

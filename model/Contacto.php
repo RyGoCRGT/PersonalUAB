@@ -15,13 +15,18 @@ class Contacto
   private $fechaNacimiento;
   private $interno;
   private $voip;
-  private $cumpleanios;
   private $emailInstitucional;
   private $emailPersonal;
+  // atributos
+  private $nombreTipoEmpleado;
+  private $nombreResponsabilidad;
 
+  private $listaTelefonos;
 
   function __construct()
   {
+    $this->idContacto=null;
+    $this->listaTelefonos=array();
   }
 
   public function __set($atributo, $value)

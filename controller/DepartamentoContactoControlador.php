@@ -1,7 +1,5 @@
 <?php
-/**
- *
- */
+
 class DepartamentoContactoControlador
 {
   private $Conexion;
@@ -35,5 +33,15 @@ class DepartamentoContactoControlador
     return $listaArrayDepContacto;
 
   }
-}
- ?>
+
+    public function datosDepartamentoContacto($idTipoDepartamentoContacto)
+    {
+      $consulta = new DepartamentoContactoConsulta($this->Conexion);
+      $datosDepartamento = $consulta->datosDepartamentoContacto($idTipoDepartamentoContacto);
+      return $datosDepartamento;
+    }//end function
+
+
+}//end class
+
+?>

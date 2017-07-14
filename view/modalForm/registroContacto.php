@@ -1,8 +1,8 @@
 <div class="modal fade" id="RegistroContacto<?php echo $listaDepCon->idDepartamentoContacto;?>">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
-      <form action="index.php?modo=contactoInsertar" method="post">
+      <form action="index.php?modo=registrarContacto" method="post">
 
         <div class="modal-header">
           <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -53,9 +53,11 @@
               </div>
             </div>
           </div>
-          <form class="" action="index.html" method="post">
+          <form action="index.php?modo=registrarContacto" method="post">
             <div class="well">
-              <h4>Ingrese Datos del Contacto</h4>
+              <div class="modal-header">
+                <h3 class="text-center"><strong>Ingrese Datos del Contacto</strong></h3>
+              </div>
 
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6">
@@ -63,18 +65,18 @@
                   <label>Tipo Empleado</label>
                   <div class="input-group selector">
                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                    <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal" title="Selecciona">
-                      <?php foreach ($listaTipoPersonal as $listaTP): ?>
-                        <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
+                    <select class="selectpicker form-control" name="tipoEmpleado" id="tipoEmpleado" title="Selecciona">
+                      <?php foreach ($listaTipoEmpleado as $listaTipoEmp): ?>
+                        <option value="<?php echo $listaTipoEmp->idTipoEmpleado; ?>"><?php echo $listaTipoEmp->nombre; ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
                   <div class="input-group selector-mobile">
                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                    <select class="form-control" name="tipoPersonal" id="tipoPersonal">
-                      <option value="" disabled selected hidden>Selecciona Tipo de Personal</option>
-                      <?php foreach ($listaTipoPersonal as $listaTP): ?>
-                        <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
+                    <select class="form-control" name="tipoEmpleado" id="tipoEmpleado">
+                      <option value="" disabled selected hidden>Selecciona Tipo Empleado</option>
+                      <?php foreach ($listaTipoEmpleado as $listaTipoEmp): ?>
+                        <option value="<?php echo $listaTipoEmp->idTipoEmpleado; ?>"><?php echo $listaTipoEmp->nombre; ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
@@ -85,18 +87,18 @@
                   <label>Responsabilidad</label>
                   <div class="input-group selector">
                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                    <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal" title="Selecciona">
-                      <?php foreach ($listaTipoPersonal as $listaTP): ?>
-                        <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
+                    <select class="selectpicker form-control" name="responsabilidad" id="responsabilidad" title="Selecciona">
+                      <?php foreach ($listaResponsabilidad as $listaResp): ?>
+                        <option value="<?php echo $listaResp->idResponsabilidad; ?>"><?php echo $listaResp->nombre; ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
                   <div class="input-group selector-mobile">
                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                    <select class="form-control" name="tipoPersonal" id="tipoPersonal">
-                      <option value="" disabled selected hidden>Selecciona Tipo de Personal</option>
-                      <?php foreach ($listaTipoPersonal as $listaTP): ?>
-                        <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
+                    <select class="form-control" name="responsabilidad" id="responsabilidad">
+                      <option value="" disabled selected hidden>Selecciona</option>
+                      <?php foreach ($listaResponsabilidad as $listaResp): ?>
+                        <option value="<?php echo $listaResp->idResponsabilidad; ?>"><?php echo $listaResp->nombre; ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
@@ -110,7 +112,7 @@
                   <label>Primer Nombre</label>
                   <div class="input-group">
                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                    <input id="primerNombreRef" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreRef" required>
+                    <input id="primerNombreRef" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombre" required>
                   </div>
                 </div>
               </div>
@@ -119,7 +121,7 @@
                   <label>Segundo Nombre</label>
                   <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                    <input id="segundoNombreRef" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreRef">
+                    <input id="segundoNombreRef" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombre">
                   </div>
                 </div>
               </div>
@@ -131,7 +133,7 @@
                   <label>Apellido Paterno</label>
                   <div class="input-group">
                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                    <input id="apellidoPaternoRef" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoRef" required>
+                    <input id="apellidoPaternoRef" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaterno" required>
                   </div>
                 </div>
               </div>
@@ -140,7 +142,7 @@
                   <label>Apellido Materno</label>
                   <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                    <input id="apellidoMaternoRef" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoRef">
+                    <input id="apellidoMaternoRef" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaterno">
                   </div>
                 </div>
               </div>
@@ -151,8 +153,8 @@
                 <div class="form-group">
                   <label>Apellido Casada</label>
                   <div class="input-group">
-                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                    <input id="apellidoPaternoRef" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoRef" required>
+                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                    <input id="apellidoCasada" type="text" class="form-control" placeholder="Apellido de Casada: " aria-describedby="sizing-addon2" name="apellidoCasada">
                   </div>
                 </div>
               </div>
@@ -160,8 +162,8 @@
                 <div class="form-group">
                   <label>Fecha de Nacimiento</label>
                   <div class="input-group" >
-                    <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                    <input id="fechaNac" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNac" required>
+                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
+                    <input id="fechaNac" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNac">
                   </div>
                 </div>
               </div>
@@ -183,7 +185,7 @@
                    <label>Interno</label>
                    <div class="input-group">
                      <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
-                     <input id="telefonoReferencia" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefonoReferencia">
+                     <input id="interno" type="text" class="form-control" placeholder="Interno " aria-describedby="sizing-addon2" name="interno">
                    </div>
                  </div>
                </div>
@@ -192,7 +194,7 @@
                    <label>Voip</label>
                    <div class="input-group">
                      <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
-                     <input id="telefonoReferencia" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefonoReferencia">
+                     <input id="voip" type="text" class="form-control" placeholder="Voip " aria-describedby="sizing-addon2" name="voip">
                    </div>
                  </div>
                </div>
@@ -203,8 +205,8 @@
                  <div class="form-group">
                    <label>Correo Institucional</label>
                    <div class="input-group">
-                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-envelope"></i></span>
-                     <input type="email" class="form-control" placeholder="E-mail: " aria-describedby="sizing-addon2" id="email" name="email" required>
+                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-envelope"></i></span>
+                     <input type="email" class="form-control" placeholder="E-mail Institucional" aria-describedby="sizing-addon2" id="emailInstitucional" name="emailInstitucional" required>
                    </div>
                  </div>
                </div>
@@ -213,13 +215,79 @@
                    <label>Correo Personal</label>
                    <div class="input-group">
                      <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-envelope"></i></span>
-                     <input type="email" class="form-control" placeholder="E-mail: " aria-describedby="sizing-addon2" id="email" name="email" required>
+                     <input type="email" class="form-control" placeholder="E-mail Personal " aria-describedby="sizing-addon2" id="email" name="emailPersonal">
                    </div>
                  </div>
                </div>
              </div>
 
+             <div class="modal-footer" style="background:#cadbeb">
+               <div class="text-center">
+                 <h3><strong>Registro de Números Telefónicos</strong></h3>
+               </div>
+               <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <center><label>Tipo Teléfono</label></center>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon2"><i><strong>1</strong></i></span>
+                        <input id="interno" type="text" class="form-control" placeholder="Tipo Teléfono" aria-describedby="sizing-addon2" name="tipoTelefono1">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <center><label>Número</label></center>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
+                        <input id="voip" type="text" class="form-control" placeholder="Número" aria-describedby="sizing-addon2" name="numero1">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                   <div class="col-xs-12 col-sm-12 col-md-6">
+                     <div class="form-group">
+                       <div class="input-group">
+                         <span class="input-group-addon" id="sizing-addon2"><i><strong>2</strong></i></span>
+                         <input id="interno" type="text" class="form-control" placeholder="Tipo Teléfono " aria-describedby="sizing-addon2" name="tipoTelefono2">
+                       </div>
+                     </div>
+                   </div>
+                   <div class="col-xs-12 col-sm-12 col-md-6">
+                     <div class="form-group">
+                       <div class="input-group">
+                         <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
+                         <input id="voip" type="text" class="form-control" placeholder="Número " aria-describedby="sizing-addon2" name="numero2">
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="sizing-addon2"><i><strong>3</strong></i></span>
+                          <input id="interno" type="text" class="form-control" placeholder="Tipo Teléfono " aria-describedby="sizing-addon2" name="tipoTelefono3">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
+                          <input id="voip" type="text" class="form-control" placeholder="Número " aria-describedby="sizing-addon2" name="numero3">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+             </div>
+
             <input type="hidden" name="datos" value="1">
+            <input type="hidden" name="departamentoContacto" value="<?php echo $listaDepCon->idDepartamentoContacto; ?>">
+
 
           </div>
           <div class="modal-footer">
@@ -229,7 +297,7 @@
           </div>
 
         </div>
-          </form>
+      </form>
 
     </div>
   </div>

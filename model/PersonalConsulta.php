@@ -58,6 +58,7 @@ class PersonalConsulta
               pl.numeroRegistroProfesional,
               pl.fechaIngreso,
               pl.rutaFoto,
+              pl.estado,
 
               p.idPersona,
               p.primerNombre,
@@ -154,12 +155,16 @@ class PersonalConsulta
                 p.sexo,
                 pl.idPersonal,
                 pl.idCarrera,
-                pl.idCargoPersona
+                pl.idCargoPersona,
+                tp.nombreTipoPersonal,
+                pl.estado
               FROM
                 personal pl,
-                persona p
+                persona p,
+                tipoPersonal tp
               WHERE
-                p.idPersona=pl.idPersona";
+                p.idPersona=pl.idPersona
+              AND pl.idTipoPersonal = tp.idTipoPersonal";
     $consulta = $this->Conexion->prepare($query);
     $consulta->execute();
     $registro = $consulta->fetchAll();
@@ -184,6 +189,60 @@ class PersonalConsulta
     }
     else
     {
+      return false;
+    }
+  }
+
+  public function updateDown($personal)
+  {
+    try
+    {
+      $this->Conexion->beginTransaction();
+      $query = "UPDATE
+                  personal
+                SET
+                  estado = 0
+                WHERE idPersonal = :idPersonal";
+
+      $stmtPersonal = $this->Conexion->prepare($query);
+
+      $stmtPersonal->bindValue(':idPersonal', $personal->IdPersonal);
+
+      $stmtPersonal->execute();
+
+      $this->Conexion->commit();
+      return true;
+    }
+    catch (Exception $e)
+    {
+      $this->Conexion->rollBack();
+      return false;
+    }
+  }
+
+  public function updateUp($personal)
+  {
+    try
+    {
+      $this->Conexion->beginTransaction();
+      $query = "UPDATE
+                  personal
+                SET
+                  estado = 1
+                WHERE idPersonal = :idPersonal";
+
+      $stmtPersonal = $this->Conexion->prepare($query);
+
+      $stmtPersonal->bindValue(':idPersonal', $personal->IdPersonal);
+
+      $stmtPersonal->execute();
+
+      $this->Conexion->commit();
+      return true;
+    }
+    catch (Exception $e)
+    {
+      $this->Conexion->rollBack();
       return false;
     }
   }

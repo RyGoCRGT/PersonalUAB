@@ -5,7 +5,8 @@ class EvaluacionMeritosDocenteProfesor
   private $IdPersonal;
   private $IdEstructuraMerito;
   private $PuntajeMerito;
-  
+  private $EvaluacionOficial;
+
   function __construct(){}
 
   public function __set($atributo, $value)

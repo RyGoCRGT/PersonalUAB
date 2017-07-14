@@ -26,6 +26,7 @@ class Personal
   private $NumeroRegistroProfesional;
   private $FechaIngreso;
   private $Ruta;
+  private $Estado;
 
   private $C_Conyugue;
   private $C_HijosLista;
@@ -38,6 +39,9 @@ class Personal
   private $ListaCursos;
   private $ListaTitulos;
   private $ListaExperinciaLaboral;
+
+  private $C_EvaluacionMeritos;
+  private $C_AutoEvaluacionMeritos;
 
   function __construct()
   {
@@ -57,6 +61,9 @@ class Personal
     $this->ListaCursos = array();
     $this->ListaTitulos = array();
     $this->ListaExperinciaLaboral = array();
+    $this->C_EvaluacionMeritos = array();
+    $this->C_AutoEvaluacionMeritos = array();
+    $this->Estado = 1;
   }
 
   public function __set($atributo, $value)
@@ -101,6 +108,9 @@ class Personal
   public function setListaTitulos($value){ $this->ListaTitulos[] = $value; }
 
   public function setListaExperinciaLaboral($value){ $this->ListaExperinciaLaboral[] = $value; }
+
+  public function setListaC_EvaluacionMeritos($value){ $this->C_EvaluacionMeritos[] = $value; }
+  public function setListaC_AutoEvaluacionMeritos($value){ $this->C_AutoEvaluacionMeritos[] = $value; }
 
 }
 

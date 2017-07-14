@@ -8,6 +8,7 @@ class Nacion
 
   function __construct()
   {
+    $this->IdNacion = null;
   }
 
   public function __set($atributo, $value)

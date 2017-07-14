@@ -6,7 +6,10 @@ class Afp
   private $IdAfp;
   private $NombreAfp;
 
-  function __construct(){}
+  function __construct()
+  {
+    $this->IdAfp = null;
+  }
 
   public function __set($atributo, $value)
   {

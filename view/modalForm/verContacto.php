@@ -1,4 +1,4 @@
-<div class="modal fade" id="ver<?php echo $listaP->IdPersona;?>">
+<div class="modal fade" id="ver<?php echo $listaC->idContacto;?>">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -14,22 +14,41 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="well well-sm">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-4">
-                                <img src="../libs/multimedia/img/design/avatar.png" alt="" class="img-rounded img-responsive" />
-                            </div>
-                            <div class="col-sm-6 col-md-8">
+                        <center><div class="row">
+                            <div class="col-sm-12 col-md-6">
                               <strong><h4 style="color:green"><i class="fa fa-user"></i> Nombre Completo</h4></strong>
-                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaP->PrimerNombre." ".$listaP->ApellidoPaterno." ".$listaP->ApellidoMaterno; ?></h4>
-                              <strong><h4 style="color:green"><i class="fa fa-id-card-o"></i> Cargo</h4></strong>
+                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaC->primerNombre." ".$listaC->apellidoPaterno." ".$listaC->apellidoMaterno; ?></h4>
+                              <strong><h4 style="color:green"><i class="fa fa-id-card-o"></i> Tipo Empleado</h4></strong>
+                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaC->nombreTipoEmpleado; ?></h4>
+                              <strong><h4 style="color:green"><i class="fa fa-id-card-o"></i> Responsabilidad</h4></strong>
+                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaC->nombreResponsabilidad; ?></h4>
+                              <strong><h4 style="color:green"><i class="fa fa-venus-mars"></i> Sexo</h4></strong>
+                              <?php if ($listaC->sexo=="M"){ ?>
+                                <h4><i class="fa fa-caret-right"></i>Masculino</h4>
+                              <?php } else{?>
+                                <h4><i class="fa fa-caret-right"></i>Femenino</h4>
+                              <?php }?>
+                              <strong><h4 style="color:green"><i class="fa fa-address-book"></i> Número Voip</h4></strong>
+                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaC->voip; ?></h4>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                              <strong><h4 style="color:green"><i class="fa fa-address-book"></i> Número Interno</h4></strong>
+                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaC->interno; ?></h4>
+
+                              <strong><h4 style="color:green"><i class="fa fa-envelope"></i> E-mail Personal</h4></strong>
+                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaC->emailPersonal; ?></h4>
+
+                              <strong><h4 style="color:green"><i class="fa fa-envelope"></i> E-mail Institucional </h4></strong>
+                              <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaC->emailInstitucional; ?></h4>
+
                               <strong><h4 style="color:green"><i class="fa fa-phone"></i> Telefono(s)</h4></strong>
                               <?php
-                              foreach ($listaP->ListaTelefonos as $listaT) {
+                              foreach ($listaC->listaTelefonos as $listaT) {
                                ?>
-                                <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaT->NumeroTelefono; ?></h4>
+                                <h4><i class="fa fa-caret-right"></i><?php echo " ".$listaT->numero; ?></h4>
                                 <?php } ?>
                             </div>
-                        </div>
+                        </div></center>
                     </div>
                 </div>
             </div>

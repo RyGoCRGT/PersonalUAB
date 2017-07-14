@@ -93,11 +93,9 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
 <div id="contenidoAll">
 
   <div class="row  border-bottom white-bg dashboard-header">
-
-      <div class="col-sm-3">
-          <h2>Personal-UAB </h2>
-      </div>
-
+    <div class="col-sm-3">
+      <h2>Personal-UAB </h2>
+    </div>
   </div>
 
   <div class="row">
@@ -124,6 +122,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                             <li id="PersonalLI"><a style="color:white" href="#Personal" data-toggle="tab">Personal-UAB</a></li>
                             <li id="FamiliaresLI"><a style="color:white" href="#Familiares" data-toggle="tab">Familiares</a></li>
                             <li id="HojaVidaLI"><a style="color:white" href="#HojaVida" data-toggle="tab">Hoja de Vida</a></li>
+                            <li id="AutoEvaluacionLI"><a id="autoEvMeritos" style="color:white" href="#AutoEvaluacion" data-toggle="tab">Auto Evaluacion de Meritos</a></li>
                         </ul>
                       </div>
                       <div class="panel-body" style="display: block;">
@@ -144,7 +143,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                             <label>Primer Nombre</label>
                                             <div class="input-group">
                                               <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                              <input id="primerNombre" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombre" required>
+                                              <input id="primerNombre" type="text" class="form-control solo-letra" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombre" required>
                                             </div>
                                           </div>
 
@@ -152,7 +151,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                             <label>Segundo Nombre</label>
                                             <div class="input-group">
                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                              <input id="segundoNombre" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombre">
+                                              <input id="segundoNombre" type="text" class="form-control solo-letra" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombre">
                                             </div>
                                           </div>
 
@@ -160,7 +159,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                             <label>Apellido Paterno</label>
                                             <div class="input-group">
                                               <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                              <input id="apellidoPaterno" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaterno" required>
+                                              <input id="apellidoPaterno" type="text" class="form-control solo-letra" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaterno" required>
                                             </div>
                                           </div>
 
@@ -168,7 +167,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                             <label>Apellido Materno</label>
                                             <div class="input-group">
                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                              <input id="apellidoMaterno" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaterno">
+                                              <input id="apellidoMaterno" type="text" class="form-control solo-letra" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaterno">
                                             </div>
                                           </div>
 
@@ -182,17 +181,17 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
 
                                           <div class="form-group">
                                             <label>Lugar de Expedicion CI/NIT</label>
-                                            <div class="input-group selector">
-                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                                              <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI">
+                                            <div class="input-group selector lugarExpedicionNew">
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><a class="btn btn-xs btn-default lugarExpedicionAdd" data-toggle="modal" data-target="#addNewLugExpedi"><i class="fa fa-address-card"></i></a></span>
+                                              <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI" required>
                                                 <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                                                   <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
                                                 <?php endforeach; ?>
                                               </select>
                                             </div>
-                                            <div class="input-group selector-mobile">
-                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-address-card"></i></span>
-                                              <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI">
+                                            <div class="input-group selector-mobile lugarExpedicionNew">
+                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><a class="btn btn-xs btn-default lugarExpedicionAdd" data-toggle="modal" data-target="#addNewLugExpedi"><i class="fa fa-address-card"></i></a></span>
+                                              <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Seleccione Lugar de Expedicion CI" required>
                                                 <option value="" disabled selected hidden>Seleccione Lugar de Expedicion CI</option>
                                                 <?php foreach ($listaLugarExpedicion as $listaLE): ?>
                                                   <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
@@ -223,7 +222,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                            <label>Estado Civil</label>
                                            <div class="input-group selector">
                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
-                                             <select class="selectpicker form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil">
+                                             <select class="selectpicker form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil" required>
                                                <?php foreach ($listaEstadoCivil as $listaEC): ?>
                                                  <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
                                                <?php endforeach; ?>
@@ -231,7 +230,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                            </div>
                                            <div class="input-group selector-mobile">
                                              <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-handshake-o"></i></span>
-                                             <select class="form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil">
+                                             <select class="form-control" name="estadoCivil" id="estadoCivil" title="Seleccionar Estado Civil" required>
                                                <option value="" disabled selected hidden>Seleccionar Estado Civil</option>
                                                <?php foreach ($listaEstadoCivil as $listaEC): ?>
                                                  <option value="<?php echo $listaEC->IdEstadoCivil; ?>"><?php echo $listaEC->NombreEstadoCivil; ?></option>
@@ -244,7 +243,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                            <label>Telefono</label>
                                            <div class="input-group">
                                              <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
-                                             <input id="telefono" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefono">
+                                             <input id="telefono" type="text" class="form-control solo-numero" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefono">
                                            </div>
                                          </div>
 
@@ -282,7 +281,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <div class="col-sm-6 col-md-6 ">
                                             <center>
                                               <div class="imgFoto">
-                                                <input id="fotoPersonal" type="file" style="opacity:0" class="form-control" name="fotoPersonal">
+                                                <input id="fotoPersonal" type="file" style="opacity:0" class="form-control personalInputCtr" name="fotoPersonal">
                                               </div>
                                             </center>
                                             <h3 class="text-center"> Examinar Imagen</h3>
@@ -298,17 +297,17 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                         </div>
                                         <div class="form-group">
                                           <label>Nacionalidad</label>
-                                          <div class="input-group selector">
-                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                            <select class="selectpicker form-control" name="nacionalidad" id="nacionalidad" title="Seleccione Nacionalidad">
+                                          <div class="input-group selector nacionalidadNew">
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewNacionalidad"><i class="fa fa-building"></i></a></span>
+                                            <select class="selectpicker form-control personalInputCtr" name="nacionalidad" id="nacionalidad" title="Seleccione Nacionalidad" required>
                                               <?php foreach ($listaNaciones as $listaN): ?>
                                                 <option value="<?php echo $listaN->IdNacion; ?>"><?php echo $listaN->NombreNacion; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
-                                          <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                            <select class="form-control" name="nacionalidad" id="nacionalidad">
+                                          <div class="input-group selector-mobile nacionalidadNew">
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewNacionalidad"><i class="fa fa-building"></i></a></span>
+                                            <select class="form-control personalInputCtr" name="nacionalidad" id="nacionalidad" required>
                                               <option value="" disabled selected hidden>Seleccione Nacionalidad</option>
                                               <?php foreach ($listaNaciones as $listaN): ?>
                                                 <option value="<?php echo $listaN->IdNacion; ?>"><?php echo $listaN->NombreNacion; ?></option>
@@ -319,20 +318,32 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
 
                                         <div class="form-group">
                                           <label>Tipo Personal</label>
-                                          <div class="input-group selector">
+                                          <div class="input-group">
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="selectpicker form-control" name="tipoPersonal" id="tipoPersonal" title="Selecciona Tipo de Personal">
+                                            <select class="selectpicker form-control personalInputCtr" name="tipoPersonal" id="tipoPersonal" title="Tipo de Personal" required>
                                               <?php foreach ($listaTipoPersonal as $listaTP): ?>
                                                 <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
+                                        </div>
+
+                                        <div class="form-group" id="cargoPersonalSelect">
+                                          <label>Cargo</label>
+                                          <div class="input-group selector">
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
+                                            <select class="selectpicker form-control personalInputCtr" name="cargoPersonal" id="cargoPersonal" title="Seleccione Cargo">
+                                              <?php foreach ($listaCargosPersona as $listaC): ?>
+                                                <option value="<?php echo $listaC->IdCargoPersona; ?>"><?php echo $listaC->NombreCargoPersona; ?></option>
+                                              <?php endforeach; ?>
+                                            </select>
+                                          </div>
                                           <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="form-control" name="tipoPersonal" id="tipoPersonal">
-                                              <option value="" disabled selected hidden>Selecciona Tipo de Personal</option>
-                                              <?php foreach ($listaTipoPersonal as $listaTP): ?>
-                                                <option value="<?php echo $listaTP->IdTipoPersonal; ?>"><?php echo $listaTP->NombreTipoPersonal; ?></option>
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
+                                            <select class="form-control personalInputCtr" name="cargoPersonal" id="cargoPersonal">
+                                              <option value="" disabled selected hidden>Seleccione Cargo</option>
+                                              <?php foreach ($listaCargosPersona as $listaC): ?>
+                                                <option value="<?php echo $listaC->IdCargoPersona; ?>"><?php echo $listaC->NombreCargoPersona; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
@@ -341,8 +352,8 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                         <div class="form-group" id="carreraPersonalSelect">
                                           <label>Facultad Carrera</label>
                                           <div class="input-group selector">
-                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="selectpicker form-control show-tick" name="carrera" id="carrera" title="Seleccione Carrera" data-container="body">
+                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
+                                            <select class="selectpicker form-control personalInputCtr show-tick" name="carrera" id="carrera" title="Seleccione Carrera" data-container="body">
                                               <?php foreach ($listaFacultadCarrera as $listaFC): ?>
                                                 <optgroup label="<?php echo $listaFC->NombreFacultad ?>">
                                                 <?php foreach ($listaFC->getListaCarreras() as $listaCa): ?>
@@ -354,7 +365,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           </div>
                                           <div class="input-group selector-mobile">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-linode"></i></span>
-                                            <select class="form-control" name="carrera" id="carrera">
+                                            <select class="form-control personalInputCtr" name="carrera" id="carrera">
                                               <option value="" disabled selected hidden>Seleccione Carrera</option>
                                               <?php foreach ($listaFacultadCarrera as $listaFC): ?>
                                                 <optgroup label="<?php echo $listaFC->NombreFacultad ?>">
@@ -367,32 +378,11 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           </div>
                                         </div>
 
-                                        <div class="form-group" id="cargoPersonalSelect">
-                                          <label>Cargo</label>
-                                          <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
-                                            <select class="selectpicker form-control" name="cargoPersonal" id="cargoPersonal" title="Seleccione Cargo">
-                                              <?php foreach ($listaCargosPersona as $listaC): ?>
-                                                <option value="<?php echo $listaC->IdCargoPersona; ?>"><?php echo $listaC->NombreCargoPersona; ?></option>
-                                              <?php endforeach; ?>
-                                            </select>
-                                          </div>
-                                          <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
-                                            <select class="form-control" name="cargoPersonal" id="cargoPersonal">
-                                              <option value="" disabled selected hidden>Seleccione Cargo</option>
-                                              <?php foreach ($listaCargosPersona as $listaC): ?>
-                                                <option value="<?php echo $listaC->IdCargoPersona; ?>"><?php echo $listaC->NombreCargoPersona; ?></option>
-                                              <?php endforeach; ?>
-                                            </select>
-                                          </div>
-                                        </div>
-
                                         <div class="form-group">
                                           <label>Direccion</label>
                                           <div class="input-group">
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-map-marker"></i></span>
-                                            <input type="text" class="form-control" placeholder="Direccion: " aria-describedby="sizing-addon2" id="direccion" name="direccion" required>
+                                            <input type="text" class="form-control personalInputCtr" placeholder="Direccion: " aria-describedby="sizing-addon2" id="direccion" name="direccion" required>
                                           </div>
                                         </div>
 
@@ -400,23 +390,23 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Correo Electronico</label>
                                           <div class="input-group">
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-envelope"></i></span>
-                                            <input type="email" class="form-control" placeholder="E-mail: " aria-describedby="sizing-addon2" id="email" name="email" required>
+                                            <input type="email" class="form-control personalInputCtr" placeholder="E-mail: " aria-describedby="sizing-addon2" id="email" name="email">
                                           </div>
                                         </div>
 
                                         <div class="form-group">
-                                          <label>Ciudad Nacimiento </label>&nbsp; &nbsp; &nbsp; &nbsp;<a><i class="text-success fa fa-plus-circle"></i></a>
-                                          <div class="input-group selector">
-                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                            <select class="selectpicker form-control" name="ciudad" id="ciudad" title="Seleccione Ciudad de Nacimiento">
+                                          <label>Ciudad Nacimiento </label>
+                                          <div class="input-group selector ciudadNew">
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewCiudad" ><i class="fa fa-building"></i></a> </span>
+                                            <select class="selectpicker form-control personalInputCtr" name="ciudad" id="ciudad" title="Seleccione Ciudad de Nacimiento" required>
                                               <?php foreach ($listaCiudades as $listaC): ?>
                                                 <option value="<?php echo $listaC->IdCiudad; ?>"><?php echo $listaC->NombreCiudad; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
-                                          <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                            <select class="form-control" name="ciudad" id="ciudad">
+                                          <div class="input-group selector-mobile ciudadNew">
+                                            <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewCiudad" ><i class="fa fa-building"></i></a> </span>
+                                            <select class="form-control personalInputCtr" name="ciudad" id="ciudad" required>
                                               <option value="" disabled selected hidden>Seleccione Ciudad de Nacimiento</option>
                                               <?php foreach ($listaCiudades as $listaC): ?>
                                                 <option value="<?php echo $listaC->IdCiudad; ?>"><?php echo $listaC->NombreCiudad; ?></option>
@@ -427,17 +417,17 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
 
                                         <div class="form-group">
                                           <label>Religion</label>
-                                          <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="selectpicker form-control" name="religion" id="religion" title="Seleccione Religion">
+                                          <div class="input-group selector religionNew">
+                                            <span class="input-group-addon" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewReligion"><i class="fa fa-cube"></i></a></span>
+                                            <select class="selectpicker form-control personalInputCtr" name="religion" id="religion" title="Seleccione Religion">
                                               <?php foreach ($listaReligion as $listaR): ?>
                                                 <option value="<?php echo $listaR->IdReligion; ?>"><?php echo $listaR->NombreReligion; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
-                                          <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="form-control" name="religion" id="religion">
+                                          <div class="input-group selector-mobile religionNew">
+                                            <span class="input-group-addon" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewReligion"><i class="fa fa-cube"></i></a></span>
+                                            <select class="form-control personalInputCtr" name="religion" id="religion">
                                               <option value="" disabled selected hidden>Seleccione Religion</option>
                                               <?php foreach ($listaReligion as $listaR): ?>
                                                 <option value="<?php echo $listaR->IdReligion; ?>"><?php echo $listaR->NombreReligion; ?></option>
@@ -450,23 +440,23 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Fecha de Bautizmo</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                            <input id="fechaBau" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Bautizmo:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaBau" required>
+                                            <input id="fechaBau" type="text" class="form-control personalInputCtr datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Bautizmo:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaBau" required>
                                           </div>
                                         </div>
 
                                         <div class="form-group">
                                           <label>Seguro: Empresa Aseguradora de Salud</label>
-                                          <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="selectpicker form-control" name="seguro" id="seguro" title="Seleccione Empresa Aseguradora">
+                                          <div class="input-group selector seguroNew">
+                                            <span class="input-group-addon" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewSeguro"><i class="fa fa-cube"></i></a> </span>
+                                            <select class="selectpicker form-control personalInputCtr" name="seguro" id="seguro" title="Seleccione Empresa Aseguradora">
                                               <?php foreach ($listaSeguros as $listaS): ?>
                                                 <option value="<?php echo $listaS->IdSeguro; ?>"><?php echo $listaS->NombreSeguro; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
-                                          <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="form-control" name="seguro" id="seguro">
+                                          <div class="input-group selector-mobile seguroNew">
+                                            <span class="input-group-addon" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewSeguro"><i class="fa fa-cube"></i></a> </span>
+                                            <select class="form-control personalInputCtr" name="seguro" id="seguro">
                                               <option value="" disabled selected hidden>Seleccione Empresa Aseguradora</option>
                                               <?php foreach ($listaSeguros as $listaS): ?>
                                                 <option value="<?php echo $listaS->IdSeguro; ?>"><?php echo $listaS->NombreSeguro; ?></option>
@@ -479,23 +469,23 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Numero de Seguro</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-sort-numeric-asc"></i></span>
-                                            <input id="numSeguro" type="text" class="form-control" placeholder="Numero de Seguro" name="numSeguro">
+                                            <input id="numSeguro" type="text" class="form-control personalInputCtr solo-numero" placeholder="Numero de Seguro" name="numSeguro">
                                           </div>
                                         </div>
 
                                         <div class="form-group">
                                           <label>AFP</label>
-                                          <div class="input-group selector">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="selectpicker form-control" name="afp" id="afp" title="Seleccione AFP">
+                                          <div class="input-group selector afpNew">
+                                            <span class="input-group-addon" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewAfp"><i class="fa fa-cube"></i></a> </span>
+                                            <select class="selectpicker form-control personalInputCtr" name="afp" id="afp" title="Seleccione AFP">
                                               <?php foreach ($listaAfps as $listaA): ?>
                                                 <option value="<?php echo $listaA->IdAfp; ?>"><?php echo $listaA->NombreAfp; ?></option>
                                               <?php endforeach; ?>
                                             </select>
                                           </div>
-                                          <div class="input-group selector-mobile">
-                                            <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <select class="form-control" name="afp" id="afp">
+                                          <div class="input-group selector-mobile afpNew">
+                                            <span class="input-group-addon" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewAfp"><i class="fa fa-cube"></i></a> </span>
+                                            <select class="form-control personalInputCtr" name="afp" id="afp">
                                               <option value="" disabled selected hidden>Seleccione AFP</option>
                                               <?php foreach ($listaAfps as $listaA): ?>
                                                 <option value="<?php echo $listaA->IdAfp; ?>"><?php echo $listaA->NombreAfp; ?></option>
@@ -508,7 +498,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Numero de AFP</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-sort-numeric-asc"></i></span>
-                                            <input id="numAfp" type="text" class="form-control" placeholder="Numero de AFP" name="numAfp">
+                                            <input id="numAfp" type="text" class="form-control personalInputCtr solo-numero" placeholder="Numero de AFP" name="numAfp">
                                           </div>
                                         </div>
 
@@ -516,7 +506,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Numero de Libreta Militar</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-sort-numeric-asc"></i></span>
-                                            <input id="numLibMilitar" type="text" class="form-control" placeholder="Numero de Libreta Familiar" name="numLibMilitar">
+                                            <input id="numLibMilitar" type="text" class="form-control personalInputCtr solo-numero" placeholder="Numero de Libreta Familiar" name="numLibMilitar">
                                           </div>
                                         </div>
 
@@ -524,7 +514,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Numero de Pasaporte</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-sort-numeric-asc"></i></span>
-                                            <input id="numPasaporte" type="text" class="form-control" placeholder="Numero de Pasaporte" name="numPasaporte">
+                                            <input id="numPasaporte" type="text" class="form-control personalInputCtr" placeholder="Numero de Pasaporte" name="numPasaporte">
                                           </div>
                                         </div>
 
@@ -532,7 +522,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Tipo Sangre</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-tumblr-square"></i></span>
-                                            <select class="selectpicker form-control" name="tipoSangre" id="tipoSangre" title="Tipo de Sangre">
+                                            <select class="selectpicker form-control personalInputCtr" name="tipoSangre" id="tipoSangre" title="Tipo de Sangre" required>
                                               <option value="ORH+">ORH+</option>
                                               <option value="ORH-">ORH-</option>
                                               <option value="AB+">AB+</option>
@@ -549,7 +539,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Hobby</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <input id="hobby" type="text" class="form-control" placeholder="Hobby:" name="hobby">
+                                            <input id="hobby" type="text" class="form-control personalInputCtr" placeholder="Hobby:" name="hobby">
                                           </div>
                                         </div>
 
@@ -557,7 +547,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Numero de Registro Profesional</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-sort-numeric-asc"></i></span>
-                                            <input id="numeroRegProfesional" type="text" class="form-control" placeholder="Numero de Registro Profesional:" name="numeroRegProfesional">
+                                            <input id="numeroRegProfesional" type="text" class="form-control personalInputCtr" placeholder="Numero de Registro Profesional:" name="numeroRegProfesional">
                                           </div>
                                         </div>
 
@@ -565,7 +555,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Lectura Preferencial</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-cube"></i></span>
-                                            <textarea name="lecturaP" style="resize:none;" id="lecturaP" class="form-control" placeholder="Lectura Preferencial:" rows="3" cols="100"></textarea>
+                                            <textarea name="lecturaP" style="resize:none;" id="lecturaP" class="form-control personalInputCtr" placeholder="Lectura Preferencial:" rows="3" cols="100"></textarea>
                                           </div>
                                         </div>
 
@@ -573,7 +563,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <label>Fecha de Ingreso UAB</label>
                                           <div class="input-group" >
                                             <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                            <input id="fechaIngres" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Ingreso UAB:  AAAA/MM/DD" name="fechaIngres" >
+                                            <input id="fechaIngres" type="text" class="form-control personalInputCtr datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Ingreso UAB:  AAAA/MM/DD" name="fechaIngres" required>
                                           </div>
                                         </div>
 
@@ -583,7 +573,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                               <label>Cargos/Roles</label>
                                               <div class="input-group">
                                                 <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-briefcase"></i></span>
-                                                <select class="selectpicker form-control" data-width="150px" multiple name="cargos[]" id="cargos">
+                                                <select class="selectpicker form-control personalInputCtr" data-width="150px" multiple name="cargos[]" id="cargos">
                                                   <?php foreach ($listaCargos as $listaC): ?>
                                                     <option value="<?php echo $listaC->IdCargo; ?>"><?php echo $listaC->NombreCargo; ?></option>
                                                   <?php endforeach; ?>
@@ -594,9 +584,9 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <div class="col-xs-12 col-sm-12 col-md-4">
                                             <div class="form-group">
                                               <label>Alergias / Enfermedades</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-medkit"></i></span>
-                                                <select class="selectpicker form-control" data-width="150px" multiple name="enfermedades[]" id="enfermedades">
+                                              <div class="input-group enfermedadNew">
+                                                <span class="input-group-addon" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewEnfermedad" ><i class="fa fa-medkit"></i></a> </span>
+                                                <select class="selectpicker form-control personalInputCtr" data-width="150px" multiple name="enfermedades[]" id="enfermedades">
                                                   <?php foreach ($listaEnfermedades as $listaE): ?>
                                                     <option value="<?php echo $listaE->IdEnfermedad; ?>"><?php echo $listaE->NombreEnfermedad; ?></option>
                                                   <?php endforeach; ?>
@@ -607,9 +597,9 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <div class="col-xs-12 col-sm-12 col-md-4">
                                             <div class="form-group">
                                               <label>Deportes</label>
-                                              <div class="input-group">
-                                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-star"></i></span>
-                                                <select class="selectpicker form-control" data-width="150px" multiple name="deportes[]" id="deportes">
+                                              <div class="input-group deporteNew">
+                                                <span class="input-group-addon" id="sizing-addon2"> <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#addNewDeporte" ><i class="fa fa-star"></i></a></span>
+                                                <select class="selectpicker form-control personalInputCtr" data-width="150px" multiple name="deportes[]" id="deportes">
                                                   <?php foreach ($listaDeportes as $listaD): ?>
                                                     <option value="<?php echo $listaD->IdDeporte; ?>"><?php echo $listaD->NombreDeporte; ?></option>
                                                   <?php endforeach; ?>
@@ -648,15 +638,15 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                       <form id="frmPersonalConyugue">
 
                                         <div class="ibox float-e-margins" >
-                                          <div class="ibox-title">
+                                          <div class="ibox-title" id="conyugueTittle">
                                               <h5>Conyugue</h5>
                                               <div class="ibox-tools">
-                                                  <a class="collapse-link">
+                                                  <a class="collapse-link" id="conyugueContent">
                                                       <i class="fa fa-chevron-up"></i>
                                                   </a>
                                               </div>
                                           </div>
-                                          <div class="ibox-content" style="background: rgba(234, 237, 245, 0.69);">
+                                          <div class="ibox-content into-panel">
 
                                             <div class="row">
                                               <div class="col-xs-12 col-sm-12 col-md-6">
@@ -664,7 +654,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Primer Nombre</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="primerNombreCon" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreCon" required>
+                                                    <input id="primerNombreCon" type="text" class="form-control personaConyugueBk solo-letra" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreCon" required>
                                                   </div>
                                                 </div>
                                               </div>
@@ -673,7 +663,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Segundo Nombre</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="segundoNombreCon" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreCon">
+                                                    <input id="segundoNombreCon" type="text" class="form-control personaConyugueBk solo-letra" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreCon">
                                                   </div>
                                                 </div>
                                               </div>
@@ -685,7 +675,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Apellido Paterno</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="apellidoPaternoCon" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoCon" required>
+                                                    <input id="apellidoPaternoCon" type="text" class="form-control personaConyugueBk solo-letra" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoCon" required>
                                                   </div>
                                                 </div>
                                               </div>
@@ -694,7 +684,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Apellido Materno</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="apellidoMaternoCon" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoCon">
+                                                    <input id="apellidoMaternoCon" type="text" class="form-control personaConyugueBk solo-letra" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoCon">
                                                   </div>
                                                 </div>
                                               </div>
@@ -706,7 +696,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Fecha de Nacimiento</label>
                                                   <div class="input-group" >
                                                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                    <input id="fechaNacimientoCon" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" name="fechaNacimientoCon" required>
+                                                    <input id="fechaNacimientoCon" type="text" class="form-control personaConyugueBk datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" name="fechaNacimientoCon" required>
                                                   </div>
                                                 </div>
                                               </div>
@@ -715,7 +705,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Fecha de Matrimanio</label>
                                                   <div class="input-group" >
                                                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                    <input id="fechaBautizmoCon" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Matrimonio:  AAAA/MM/DD" name="fechaBautizmoCon" required>
+                                                    <input id="fechaBautizmoCon" type="text" class="form-control personaConyugueBk datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Matrimonio:  AAAA/MM/DD" name="fechaBautizmoCon" required>
                                                   </div>
                                                 </div>
                                               </div>
@@ -741,16 +731,16 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                       <form id="frmPersonalHijos">
 
                                         <div class="ibox float-e-margins" >
-                                          <div class="ibox-title">
+                                          <div class="ibox-title" id="hijosTittle">
                                               <h5>Hijos</h5>
                                               <div class="ibox-tools">
-                                                  <a class="collapse-link">
+                                                  <a class="collapse-link" id="hijosContent">
                                                       <i class="fa fa-chevron-up"></i>
                                                   </a>
                                               </div>
 
                                           </div>
-                                          <div class="ibox-content" style="background: rgba(234, 237, 245, 0.69);">
+                                          <div class="ibox-content into-panel">
 
                                             <div class="row">
                                               <div class="col-xs-12 col-sm-12 col-md-6">
@@ -758,7 +748,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Primer Nombre</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="primerNombreHij" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreHij" required>
+                                                    <input id="primerNombreHij" type="text" class="form-control inputHijoBk solo-letra" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreHij" required>
                                                   </div>
                                                 </div>
                                               </div>
@@ -767,7 +757,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Segundo Nombre</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="segundoNombreHij" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreHij">
+                                                    <input id="segundoNombreHij" type="text" class="form-control inputHijoBk solo-letra" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreHij">
                                                   </div>
                                                 </div>
                                               </div>
@@ -779,7 +769,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Apellido Paterno</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="apellidoPaternoHij" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoHij" required>
+                                                    <input id="apellidoPaternoHij" type="text" class="form-control inputHijoBk solo-letra" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoHij" required>
                                                   </div>
                                                 </div>
                                               </div>
@@ -788,7 +778,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Apellido Materno</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="apellidoMaternoHij" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoHij">
+                                                    <input id="apellidoMaternoHij" type="text" class="form-control inputHijoBk solo-letra" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoHij">
                                                   </div>
                                                 </div>
                                               </div>
@@ -798,7 +788,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                               <label>Fecha de Nacimiento</label>
                                               <div class="input-group" >
                                                 <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                <input id="fechaNacimientoHij" type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNacimientoHij" required>
+                                                <input id="fechaNacimientoHij" type="text" class="form-control inputHijoBk datepicker" data-date-format="yyyy/mm/dd" readonly="true" placeholder="Fecha de Nacimiento:  AAAA/MM/DD" aria-describedby="sizing-addon2" name="fechaNacimientoHij" required>
                                               </div>
                                             </div>
 
@@ -810,7 +800,9 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                            <div class="pull-right">
                                              <button type="submit" name="guardar" class="btn btn-primary">Grabar</button>
                                            </div>
-                                           <a href="#NuevoHijo" class="btn btn-warning">Nuevo Hijo (a)</a>
+                                           <a class="btn btn-warning" id="nuevoHijoPers">Nuevo Hijo (a)</a>
+
+                                           <a class="btn btn-success" id="allhijos">Listo</a>
 
                                           </div>
                                         </div>
@@ -821,16 +813,16 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                       <form id="frmPersonalReferencia">
 
                                         <div class="ibox float-e-margins" >
-                                          <div class="ibox-title">
+                                          <div class="ibox-title" id="referenciaTittle">
                                               <h5>Referencia en caso de Emergencia</h5>
                                               <div class="ibox-tools">
-                                                  <a class="collapse-link">
+                                                  <a class="collapse-link" id="referenciaContent">
                                                       <i class="fa fa-chevron-up"></i>
                                                   </a>
                                               </div>
 
                                           </div>
-                                          <div class="ibox-content" style="background: rgba(234, 237, 245, 0.69);">
+                                          <div class="ibox-content into-panel">
 
                                             <div class="row">
                                               <div class="col-xs-12 col-sm-12 col-md-6">
@@ -838,7 +830,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Primer Nombre</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="primerNombreRef" type="text" class="form-control" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreRef" required>
+                                                    <input id="primerNombreRef" type="text" class="form-control inputReferBk solo-letra" placeholder="Primer Nombre: " aria-describedby="sizing-addon2" name="primerNombreRef" required>
                                                   </div>
                                                 </div>
                                               </div>
@@ -847,7 +839,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Segundo Nombre</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="segundoNombreRef" type="text" class="form-control" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreRef">
+                                                    <input id="segundoNombreRef" type="text" class="form-control inputReferBk solo-letra" placeholder="Segundo Nombre: " aria-describedby="sizing-addon2" name="segundoNombreRef">
                                                   </div>
                                                 </div>
                                               </div>
@@ -859,7 +851,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Apellido Paterno</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="apellidoPaternoRef" type="text" class="form-control" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoRef" required>
+                                                    <input id="apellidoPaternoRef" type="text" class="form-control inputReferBk solo-letra" placeholder="Apellido Paterno: " aria-describedby="sizing-addon2" name="apellidoPaternoRef" required>
                                                   </div>
                                                 </div>
                                               </div>
@@ -868,7 +860,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                   <label>Apellido Materno</label>
                                                   <div class="input-group">
                                                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
-                                                    <input id="apellidoMaternoRef" type="text" class="form-control" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoRef">
+                                                    <input id="apellidoMaternoRef" type="text" class="form-control inputReferBk solo-letra" placeholder="Apellido Materno: " aria-describedby="sizing-addon2" name="apellidoMaternoRef">
                                                   </div>
                                                 </div>
                                               </div>
@@ -877,8 +869,8 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                            <div class="form-group">
                                              <label>Telefono</label>
                                              <div class="input-group">
-                                               <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-phone"></i></span>
-                                               <input id="telefonoReferencia" type="text" class="form-control" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefonoReferencia">
+                                               <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-phone"></i></span>
+                                               <input id="telefonoReferencia" type="text" class="form-control inputReferBk solo-numero" placeholder="Telefono: " aria-describedby="sizing-addon2" name="telefonoReferencia" required>
                                              </div>
                                            </div>
 
@@ -927,7 +919,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Nombre Institucion</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <input type="text" class="form-control" name="nombreInstitucionCursos" id="nombreInstitucionCursos">
+                                                  <input type="text" class="form-control inputCursoBk" name="nombreInstitucionCursos" id="nombreInstitucionCursos" required>
                                                 </div>
                                               </div>
                                             </div>
@@ -936,7 +928,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Curso Estudiado</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <input type="text" class="form-control" name="cursoEstudiado" id="cursoEstudiado">
+                                                  <input type="text" class="form-control inputCursoBk" name="cursoEstudiado" id="cursoEstudiado" required>
                                                 </div>
                                               </div>
                                             </div>
@@ -945,7 +937,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Año de Estudio</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                  <input type="text" class="form-control" name="anhoEstudioCuso" id="anhoEstudioCuso">
+                                                  <input type="text" class="form-control inputCursoBk solo-numero" name="anhoEstudioCuso" id="anhoEstudioCuso" required>
                                                 </div>
                                               </div>
                                             </div>
@@ -956,7 +948,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Religion Institucion</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
-                                                  <input type="text" class="form-control" name="religionInstCurso" id="religionInstCurso">
+                                                  <input type="text" class="form-control inputCursoBk solo-letra" name="religionInstCurso" id="religionInstCurso">
                                                 </div>
                                               </div>
                                             </div>
@@ -973,6 +965,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <input type="hidden" name="datos" value="1">
                                           <input type="hidden" name="ciPersonaCurso" id="ciPersonaCurso" value="1">
                                           <div class="pull-right">
+                                            <a class="btn btn-warning" id="newCurso"><i class="fa fa-plus"></i>Nuevo</a>
                                             <button type="submit" class="btn btn-success" name="guardar"><i class="fa fa-send"></i>Añadir</button>
                                           </div>
                                         </form>
@@ -988,7 +981,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Nombre Institucion</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <input type="text" class="form-control" name="nombreInstitucionTitulos" id="nombreInstitucionTitulos">
+                                                  <input type="text" class="form-control inputTitulosBk" name="nombreInstitucionTitulos" id="nombreInstitucionTitulos">
                                                 </div>
                                               </div>
                                             </div>
@@ -997,7 +990,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Curso Profesional Estudiado</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <input type="text" class="form-control" name="cursoProfesionalEstudiado" id="cursoProfesionalEstudiado">
+                                                  <input type="text" class="form-control inputTitulosBk" name="cursoProfesionalEstudiado" id="cursoProfesionalEstudiado">
                                                 </div>
                                               </div>
                                             </div>
@@ -1006,7 +999,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Tipo de Tiulo</label>
                                                 <div class="input-group selector">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <select class="selectpicker form-control" name="tipoTituloProfesional" id="tipoTituloProfesional">
+                                                  <select class="selectpicker form-control inputTitulosBk" name="tipoTituloProfesional" id="tipoTituloProfesional">
                                                     <?php foreach ($listaTipoTituloProfesional as $listaTipoTP): ?>
                                                       <option value="<?php echo $listaTipoTP->IdTipoTituloProfesional; ?>"><?php echo $listaTipoTP->NombreTipoTitulo; ?></option>
                                                     <?php endforeach; ?>
@@ -1014,7 +1007,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 </div>
                                                 <div class="input-group selector-mobile">
                                                   <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <select class="form-control" name="tipoTituloProfesional" id="tipoTituloProfesional">
+                                                  <select class="form-control inputTitulosBk" name="tipoTituloProfesional" id="tipoTituloProfesional">
                                                     <?php foreach ($listaTipoTituloProfesional as $listaTipoTP): ?>
                                                       <option value="<?php echo $listaTipoTP->IdTipoTituloProfesional; ?>"><?php echo $listaTipoTP->NombreTipoTitulo; ?></option>
                                                     <?php endforeach; ?>
@@ -1029,7 +1022,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Religion Institucion</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
-                                                  <input type="text" class="form-control" name="religionInstTitulo" id="religionInstTitulo">
+                                                  <input type="text" class="form-control inputTitulosBk" name="religionInstTitulo" id="religionInstTitulo">
                                                 </div>
                                               </div>
                                             </div>
@@ -1038,7 +1031,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Tiempo de Estudio</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                  <input type="text" class="form-control" name="anhoEstudioTitulo" id="anhoEstudioTitulo">
+                                                  <input type="text" class="form-control inputTitulosBk solo-numero-float" name="anhoEstudioTitulo" id="anhoEstudioTitulo">
                                                 </div>
                                               </div>
                                             </div>
@@ -1055,6 +1048,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <input type="hidden" name="datos" value="1">
                                           <input type="hidden" name="ciPersonaTitulo" id="ciPersonaTitulo" value="1">
                                           <div class="pull-right">
+                                            <a class="btn btn-warning" id="newTitulo"><i class="fa fa-plus"></i>Nuevo</a>
                                             <button type="submit" class="btn btn-success" name="guardar"><i class="fa fa-send"></i>Añadir</button>
                                           </div>
                                         </form>
@@ -1071,7 +1065,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Nombre Institucion</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <input type="text" class="form-control" name="nombreInstitucionEL" id="nombreInstitucionEL">
+                                                  <input type="text" class="form-control inputELabBk" name="nombreInstitucionEL" id="nombreInstitucionEL">
                                                 </div>
                                               </div>
                                             </div>
@@ -1080,7 +1074,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Cargo/Responsabilidad</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-building"></i></span>
-                                                  <input type="text" class="form-control" name="cargoResponsabilidadEL" id="cargoResponsabilidadEL">
+                                                  <input type="text" class="form-control inputELabBk" name="cargoResponsabilidadEL" id="cargoResponsabilidadEL">
                                                 </div>
                                               </div>
                                             </div>
@@ -1089,7 +1083,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Años de Servicio</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon" style="background: red; color:white" id="sizing-addon2"><i class="fa fa-calendar"></i></span>
-                                                  <input type="text" class="form-control" name="anhoServicioEL" id="anhoServicioEL">
+                                                  <input type="text" class="form-control inputELabBk solo-numero-float" name="anhoServicioEL" id="anhoServicioEL">
                                                 </div>
                                               </div>
                                             </div>
@@ -1100,7 +1094,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Religion Institucion</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
-                                                  <input type="text" class="form-control" name="religionInstEL" id="religionInstEL">
+                                                  <input type="text" class="form-control inputELabBk" name="religionInstEL" id="religionInstEL">
                                                 </div>
                                               </div>
                                             </div>
@@ -1109,7 +1103,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                                 <label>Motivo de Retiro</label>
                                                 <div class="input-group">
                                                   <span class="input-group-addon"id="sizing-addon2"><i class="fa fa-universal-access"></i></span>
-                                                  <input type="text" class="form-control" name="motivoRetiroEL" id="motivoRetiroEL">
+                                                  <input type="text" class="form-control inputELabBk" name="motivoRetiroEL" id="motivoRetiroEL">
                                                 </div>
                                               </div>
                                             </div>
@@ -1117,6 +1111,7 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                           <input type="hidden" name="datos" value="1">
                                           <input type="hidden" name="ciPersonEL" id="ciPersonEL" value="1">
                                           <div class="pull-right">
+                                            <a class="btn btn-warning" id="newExpeLabor"><i class="fa fa-plus"></i>Nuevo</a>
                                             <button type="submit" class="btn btn-success" name="guardar"><i class="fa fa-send"></i>Añadir</button>
                                           </div>
                                         </form>
@@ -1126,7 +1121,11 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
                                       </div>
                                     </div>
                                   </div>
-
+                                </div>
+                              </div>
+                              <div class="tab-pane fade" id="AutoEvaluacion">
+                                <div class="thumbnail" id="mensajeAutoEvaluacion">
+                                </div>
                               </div>
                           </div>
                       </div>
@@ -1165,6 +1164,246 @@ $listaTipoTituloProfesional = $tipoTituloProfesional->listar();
           <a href="index.php?modo=listaPersonal" class="btn btn-success btn-lg">LISTO <i class="fa fa-check"></i></a>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addNewLugExpedi">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewLugExpediForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar Lugar de Expedicion</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Lugar de Expedicion CI/NIT</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-address-card"></i></span>
+              <input type="text" name="expedicionNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddLugEx"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addNewNacionalidad">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewNacionalidadForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar Nacionalidad</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nacionalidad</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-building"></i></span>
+              <input type="text" name="nacionalidadNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddNacionalidad"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addNewCiudad">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewCiudadForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar Ciudad de Nacimiento</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Ciudad de Nacimiento</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-building"></i></span>
+              <input type="text" name="ciudadNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddCiudad"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addNewReligion">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewReligionForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar Religion</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Religion</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-cube"></i></span>
+              <input type="text" name="religionNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddReligion"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addNewSeguro">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewSeguroForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar Seguro</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Seguro</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-cube"></i></span>
+              <input type="text" name="seguroNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddSeguro"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addNewAfp">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewAfpForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar AFP</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>AFP</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-cube"></i></span>
+              <input type="text" name="afpNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddAfp"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addNewEnfermedad">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewEnfermedadForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar Enfermedad/Alergia</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Enfermedad/Alergia</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-cube"></i></span>
+              <input type="text" name="enfermedadNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddEnfermedad"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addNewDeporte">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form id="addNewDeporteForm">
+        <div class="modal-header">
+          <button type="button" name="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center">Agregar Deporte</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Deporte</label>
+            <div class="input-group">
+              <span class="input-group-addon" style="background: red; color:white" ><i class="fa fa-cube"></i></span>
+              <input type="text" name="deporteNew" class="form-control" required>
+            </div>
+          </div>
+          <div id="respuestaAddDeporte"></div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-hidden="true">Cerrar <i class="fa fa-times-circle"></i></button>
+            <button type="reset" class="btn btn-default btn-sm">Limpiar <i class="fa fa-refresh"></i></button>
+            <button type="submit" class="btn btn-success btn-sm">Guardar <i class="fa fa-check"></i></button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

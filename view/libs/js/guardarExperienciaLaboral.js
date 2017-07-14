@@ -1,8 +1,10 @@
 $(document).ready(function () {
     enviarELaboralPersonal();
+    newExperiencia();
 });
 
-  function enviarELaboralPersonal() {
+function enviarELaboralPersonal()
+{
   $("#ExperienciaLaboralFrm").on("submit", function(e) {
     e.preventDefault();
     var ci = $("#ciNit").val();
@@ -16,8 +18,17 @@ $(document).ready(function () {
     }).done( function(info) {
 
       $('#mensajeELaboralPersonal').html(info);
+      $('.inputELabBk').attr("disabled", "disabled");
 
     });
 
+  });
+}
+
+function newExperiencia()
+{
+  $('#newExpeLabor').click(function () {
+    $(".inputELabBk").removeAttr('disabled');
+    $(".inputELabBk").val('');
   });
 }

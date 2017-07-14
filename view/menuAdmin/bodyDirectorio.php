@@ -2,17 +2,36 @@
 include '../../model/conexion.php';
 include '../../model/DepartamentoContacto.php';
 include '../../model/DepartamentoContactoConsulta.php';
-include '../../model/TelefonoContacto.php';
-include '../../model/TelefonoContactoConsulta.php';
+
 include '../../model/Responsabilidad.php';
 include '../../model/ResponsabilidadConsulta.php';
+include '../../model/TipoEmpleado.php';
+include '../../model/TipoEmpleadoConsulta.php';
+
+include '../../model/Contacto.php';
+include '../../model/ContactoConsulta.php';
+
+include '../../model/TelefonoContacto.php';
+include '../../model/TelefonoContactoConsulta.php';
+
+include '../../controller/ContactoControlador.php';
 include '../../controller/DepartamentoContactoControlador.php';
 include '../../controller/TelefonoContactoControlador.php';
 include '../../controller/ResponsabilidadControlador.php';
+include '../../controller/TipoEmpleadoControlador.php';
 
 $con=new Conexion ();
 $departamentoControlador = new DepartamentoContactoControlador($con);
 $listaDepartamentoContacto=$departamentoControlador->listar();
+
+$ResponsabilidadControlador=new ResponsabilidadControlador($con);
+$listaResponsabilidad=$ResponsabilidadControlador->listar();
+
+$tipoEmpleadoControlador=new TipoEmpleadoControlador($con);
+$listaTipoEmpleado=$tipoEmpleadoControlador->listar();
+
+$contactoControlador=new ContactoControlador($con);
+$listaContacto=$contactoControlador->listaDeContactosPorDepartamento(1);
 
  ?>
 <div id="contenidoAll">
@@ -55,6 +74,8 @@ $listaDepartamentoContacto=$departamentoControlador->listar();
                     </div>
 
                   <div class="row">
+                    <form action="index.php?modo=listaDirectorioContacto" method="post">
+
                     <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
                       <label>Departamento Contacto</label>
@@ -71,32 +92,17 @@ $listaDepartamentoContacto=$departamentoControlador->listar();
                         <select class="form-control" name="departamento" id="departamento" title="Departamento Contacto">
                           <?php foreach ($listaDepartamentoContacto as $listaDepCon): ?>
                             <option value="<?php echo $listaDepCon->idDepartamentoContacto; ?>"><?php echo $listaDepCon->nombre; ?></option>
-                          <?php endforeach; ?>
+                          <?php endforeach;
+                          ?>
                         </select>
                       </div>
                     </div>
                   </div>
                     <div class="col-xs-12 col-sm-12 col-md-6">
-                      <div class="form-group">
-                        <label>Tipo de Contacto</label>
-                        <div class="input-group selector">
-                          <span class="input-group-addon" style="background: #c9e3eb; color:black" id="sizing-addon2"><i class="fa fa-users"></i></span>
-                          <select class="selectpicker form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
-                            <?php foreach ($listaLugarExpedicion as $listaLE): ?>
-                              <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                        <div class="input-group selector-mobile">
-                          <span class="input-group-addon" style="background: #c9e3eb; color:black" id="sizing-addon2"><i class="fa fa-users"></i></span>
-                          <select class="form-control" name="lugarExpedicion" id="lugarExpedicion" title="Lugar de Expedicion CI">
-                            <?php foreach ($listaLugarExpedicion as $listaLE): ?>
-                              <option value="<?php echo $listaLE->IdLugarExpedicion; ?>"><?php echo $listaLE->NombreLugarExpedicion; ?></option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                      </div>
+                      <br>
+                      <button type="submit" class="btn btn-success">Buscar Nuevo <i class="fa fa-check-circle"></i></button>
                     </div>
+                    </form>
                   </div>
                 </div>
 
@@ -118,7 +124,7 @@ $listaDepartamentoContacto=$departamentoControlador->listar();
                             <th class="text-center">Responsabilidad</th>
 
                             <th class="text-center">Ver</th>
-                            <th class="text-center">Editar</th>
+                            <!-- <th class="text-center">Editar</th> -->
                           </tr>
                         </thead>
                       </table>
@@ -130,21 +136,22 @@ $listaDepartamentoContacto=$departamentoControlador->listar();
                     <table class="table table-hover" id="dev-table" >
 
                       <tbody class="text-center">
-                        <!-- <?php
+                        <?php
                       $i = 1;
-                            foreach ($listaPersona as $listaP): ?>
+                            foreach ($listaContacto as $listaC): ?>
                         <tr>
                           <td><?php echo $i++; ?></td>
-                          <td><?php echo ucwords(strtolower($listaP->PrimerNombre))." ".ucwords(strtolower($listaP->ApellidoPaterno))." ".ucwords(strtolower($listaP->ApellidoMaterno)); ?></td>
-                          <td><a href="#ver<?php echo $listaP->IdPersona;?>" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
-                          <td><a href="#editar" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td>
+                          <td><?php echo ucwords(strtolower($listaC->primerNombre))." ".ucwords(strtolower($listaC->apellidoPaterno))." ".ucwords(strtolower($listaC->apellidoMaterno)); ?></td>
+                          <td><?php echo ucwords(strtolower($listaC->nombreResponsabilidad)); ?></td>
+                          <td><a href="#ver<?php echo $listaC->idContacto;?>" class="btn btn-danger efec" data-toggle="modal"><i class="fa fa-eye"></i></a></td>
+                          <!-- <td><a href="#editar" class="btn btn-primary efec" data-toggle="modal"><i class="fa fa-pencil"></i></a></td> -->
 
                         </tr>
 
                       <?php
                         include '../modalForm/verContacto.php';
 
-                        endforeach; ?> -->
+                        endforeach; ?>
 
                       </tbody>
                     </table>
